@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dart_basics/dart_basics.dart' as dart_basics;
 
 void main(List<String> arguments) {
   // print('Introduce tu año de nacimiento:');
