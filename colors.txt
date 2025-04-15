@@ -1,0 +1,9 @@
+dark-blue: rgb(13, 71, 161)
+light-blue: rgb(21, 101, 192)
+text: rgb(30, 55, 90);
+success: rgb(18, 183, 106)
+warning: rgb(213, 1, 0)
+background-color: rgb(0, 171, 228);
+border-color: rgb(228 231 236 / 1);
+background-color: rgb(255 255 255 / 1);
+background-color: rgba(239, 239, 239, 0.5);
