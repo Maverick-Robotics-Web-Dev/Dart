@@ -13,13 +13,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: AppColors.background,
+        body: ImcHomeScreen(),
         appBar: AppBar(
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           title: Text('Imc Calculator'),
         ),
-        backgroundColor: AppColors.background,
-        body: ImcHomeScreen(),
       ),
     );
   }
