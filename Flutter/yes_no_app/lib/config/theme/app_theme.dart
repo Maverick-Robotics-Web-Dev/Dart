@@ -18,7 +18,7 @@ class AppTheme {
     : assert(
         selectedColorIndex >= 0 &&
             selectedColorIndex <= _colorThemes.length - 1,
-        'Colors must be between 0 and ${_colorThemes.length}',
+        'Colors must be between 0 and ${_colorThemes.length - 1}',
       );
 
   ThemeData customTheme() {
