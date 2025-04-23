@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/receive_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/send_message_bubble.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -46,7 +47,11 @@ class ChatView extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 20,
                 itemBuilder: (context, index) {
-                  return MyMessageBubble();
+                  final StatelessWidget widgetMessage =
+                      (index % 2 == 0)
+                          ? ReceiveMessageBubble()
+                          : SendMessageBubble();
+                  return widgetMessage;
                 },
               ),
             ),
