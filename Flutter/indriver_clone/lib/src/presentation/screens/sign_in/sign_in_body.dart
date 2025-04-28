@@ -86,21 +86,63 @@ class SignInBody extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    label: Text('Email'),
+                Container(
+                  margin: EdgeInsets.only(top: 52, right: 22, left: 22),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
                   ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.key),
-                    label: Text('Password'),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      label: Text('Email'),
+                      border: InputBorder.none,
+                      prefixIcon: Container(
+                        margin: EdgeInsets.only(top: 12),
+                        child: Wrap(
+                          alignment: WrapAlignment.spaceEvenly,
+                          children: [
+                            Icon(Icons.email_outlined),
+                            Container(height: 20, width: 1, color: Colors.grey),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: 34, right: 22, left: 22),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                  ),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      label: Text('Password'),
+                      border: InputBorder.none,
+                      prefixIcon: Container(
+                        margin: EdgeInsets.only(top: 12),
+                        child: Wrap(
+                          alignment: WrapAlignment.spaceEvenly,
+                          children: [
+                            Icon(Icons.lock_outline),
+                            Container(height: 20, width: 1, color: Colors.grey),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 80, right: 40, left: 40),
+                  width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -108,10 +150,33 @@ class SignInBody extends StatelessWidget {
                     ),
                     child: Text(
                       'Sign In',
-                      style: TextStyle(color: Colors.cyan),
+                      style: TextStyle(
+                        color: Colors.cyan,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'No tienes cuenta?',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(width: 12),
+                    Text(
+                      'Registrate',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 42),
               ],
             ),
           ),
