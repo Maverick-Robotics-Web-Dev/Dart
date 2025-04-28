@@ -11,6 +11,9 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SignInBody());
+    return Scaffold(
+      // backgroundColor: Color.fromRGBO(24, 181, 254, 1),
+      body: SignInBody(),
+    );
   }
 }
