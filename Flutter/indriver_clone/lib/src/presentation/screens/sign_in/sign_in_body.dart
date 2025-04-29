@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:indriver_clone/src/presentation/widgets/custom_button.dart';
+import 'package:indriver_clone/src/presentation/widgets/custom_textformfield.dart';
 
 class SignInBody extends StatelessWidget {
   const SignInBody({super.key});
@@ -10,31 +12,24 @@ class SignInBody extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: Color.fromRGBO(21, 152, 213, 1),
           padding: EdgeInsets.only(left: 12),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromRGBO(12, 38, 145, 1),
+                Color.fromRGBO(34, 156, 249, 1),
+              ],
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RotatedBox(
-                quarterTurns: 1,
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              _signInRotated(),
               SizedBox(height: 60),
-              RotatedBox(
-                quarterTurns: 1,
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-              ),
+              _signUpRotated(),
               SizedBox(height: 100),
             ],
           ),
@@ -42,7 +37,14 @@ class SignInBody extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(left: 60, bottom: 40),
           decoration: BoxDecoration(
-            color: Color.fromRGBO(24, 181, 254, 1),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromRGBO(14, 29, 166, 1),
+                Color.fromRGBO(30, 112, 227, 1),
+              ],
+            ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(36),
               bottomLeft: Radius.circular(36),
@@ -86,79 +88,47 @@ class SignInBody extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Container(
+                CustomTextFormField(
+                  text: 'Email',
+                  icon: Icons.email_outlined,
                   margin: EdgeInsets.only(top: 52, right: 22, left: 22),
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      label: Text('Email'),
-                      border: InputBorder.none,
-                      prefixIcon: Container(
-                        margin: EdgeInsets.only(top: 12),
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          children: [
-                            Icon(Icons.email_outlined),
-                            Container(height: 20, width: 1, color: Colors.grey),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
-                Container(
+                CustomTextFormField(
+                  text: 'Password',
+                  icon: Icons.lock_outline,
                   margin: EdgeInsets.only(top: 34, right: 22, left: 22),
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      label: Text('Password'),
-                      border: InputBorder.none,
-                      prefixIcon: Container(
-                        margin: EdgeInsets.only(top: 12),
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          children: [
-                            Icon(Icons.lock_outline),
-                            Container(height: 20, width: 1, color: Colors.grey),
-                          ],
-                        ),
-                      ),
-                    ),
+                ),
+                CustomButton(
+                  text: 'Sign In',
+                  fringe: EdgeInsets.only(
+                    top: 80,
+                    right: 40,
+                    left: 40,
+                    bottom: 22,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 80, right: 40, left: 40),
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 26,
+                      height: 1,
+                      color: Colors.white,
+                      margin: EdgeInsets.only(right: 6),
                     ),
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Colors.cyan,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Text(
+                      'O',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
-                  ),
+                    Container(
+                      width: 26,
+                      height: 1,
+                      color: Colors.white,
+                      margin: EdgeInsets.only(left: 6),
+                    ),
+                  ],
                 ),
-                Spacer(),
+                SizedBox(height: 22),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -182,6 +152,30 @@ class SignInBody extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  RotatedBox _signUpRotated() {
+    return RotatedBox(
+      quarterTurns: 1,
+      child: Text(
+        'Sign Up',
+        style: TextStyle(color: Colors.white, fontSize: 24),
+      ),
+    );
+  }
+
+  RotatedBox _signInRotated() {
+    return RotatedBox(
+      quarterTurns: 1,
+      child: Text(
+        'Sign In',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
