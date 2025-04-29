@@ -29,7 +29,7 @@ class SignInBody extends StatelessWidget {
             children: [
               _signInRotated(),
               SizedBox(height: 60),
-              _signUpRotated(),
+              _signUpRotated(context),
               SizedBox(height: 100),
             ],
           ),
@@ -137,11 +137,16 @@ class SignInBody extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(width: 12),
-                    Text(
-                      'Registrate',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'sign_up');
+                      },
+                      child: Text(
+                        'Registrate',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -155,12 +160,17 @@ class SignInBody extends StatelessWidget {
     );
   }
 
-  RotatedBox _signUpRotated() {
-    return RotatedBox(
-      quarterTurns: 1,
-      child: Text(
-        'Sign Up',
-        style: TextStyle(color: Colors.white, fontSize: 24),
+  Widget _signUpRotated(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'sign_up');
+      },
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: Text(
+          'Sign Up',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
       ),
     );
   }

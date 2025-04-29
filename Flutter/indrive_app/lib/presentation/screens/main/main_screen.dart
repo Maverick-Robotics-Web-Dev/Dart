@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:indriver_clone/src/presentation/screens/sign_in/sign_in_screen.dart';
-import 'package:indriver_clone/src/presentation/screens/sign_up/sign_up_screen.dart';
+import 'package:indrive_app/presentation/screens/sign_in/sign_in_screen.dart';
+import 'package:indrive_app/presentation/screens/sign_up/sign_up_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
