@@ -14,16 +14,6 @@ class SignInBody extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: Colors.black,
-          // child: Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     _signInRotated(),
-          //     SizedBox(height: 60),
-          //     _signUpRotated(context),
-          //     SizedBox(height: 100),
-          //   ],
-          // ),
         ),
         Opacity(
           opacity: 0.2,
@@ -43,157 +33,124 @@ class SignInBody extends StatelessWidget {
             'assets/img/city_background.jpg',
             fit: BoxFit.cover,
             width: double.infinity,
-            height: 280,
+            height: 200,
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 26, vertical: 16),
           child: Column(
             children: [
-              SizedBox(height: 280),
+              SizedBox(height: 220),
               Container(
                 height: 442,
-                padding: EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(22),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Lottie.asset(
-                      'assets/gifs_lottie/car_form.json',
-                      width: 200,
-                      repeat: true,
-                    ),
-                    TextFormFieldWidget(
-                      text: 'Email',
-                      icon: Icons.email_outlined,
-                      margin: EdgeInsets.only(top: 52, right: 22, left: 22),
-                    ),
-                    TextFormFieldWidget(
-                      text: 'Password',
-                      icon: Icons.lock_outline,
-                      margin: EdgeInsets.only(top: 22, right: 22, left: 22),
-                    ),
-                    ButtonWidget(
-                      text: 'Sign In',
-                      backdropColor: Colors.orange,
-                      textColor: Colors.white,
-                      fringe: EdgeInsets.only(
-                        top: 22,
-                        right: 40,
-                        left: 40,
-                        bottom: 22,
+                padding: EdgeInsets.all(20),
+                width: double.infinity,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(22),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromRGBO(128, 128, 128, 1),
+                        blurRadius: 8,
+                        spreadRadius: 8,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Lottie.asset(
+                        'assets/gifs_lottie/car_form.json',
+                        width: 200,
+                        repeat: true,
+                      ),
+                      TextFormFieldWidget(
+                        text: 'Email',
+                        icon: Icons.email_outlined,
+                        margin: EdgeInsets.only(top: 52, right: 22, left: 22),
+                        backdrop: Color.fromRGBO(224, 224, 224, 1),
+                      ),
+                      TextFormFieldWidget(
+                        text: 'Password',
+                        icon: Icons.lock_outline,
+                        margin: EdgeInsets.only(top: 22, right: 22, left: 22),
+                        backdrop: Color.fromRGBO(224, 224, 224, 1),
+                      ),
+                      ButtonWidget(
+                        text: 'Sign In',
+                        backdropColor: Colors.orange,
+                        textColor: Colors.white,
+                        fringe: EdgeInsets.only(
+                          top: 22,
+                          right: 40,
+                          left: 40,
+                          bottom: 22,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        // Container(
-        //   margin: EdgeInsets.only(left: 60, bottom: 40),
-        //   decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //       begin: Alignment.topRight,
-        //       end: Alignment.bottomLeft,
-        //       colors: [
-        //         Color.fromRGBO(14, 29, 166, 1),
-        //         Color.fromRGBO(30, 112, 227, 1),
-        //       ],
-        //     ),
-        //     borderRadius: BorderRadius.only(
-        //       topLeft: Radius.circular(36),
-        //       bottomLeft: Radius.circular(36),
-        //     ),
-        //   ),
-        //   child: Container(
-        //     margin: EdgeInsets.only(right: 26, left: 26),
-        //     child: Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         SizedBox(height: 80),
-        //         Text(
-        //           'Welcome',
-        //           style: TextStyle(
-        //             fontSize: 30,
-        //             color: Colors.white,
-        //             fontWeight: FontWeight.bold,
-        //           ),
-        //         ),
-        //         Text(
-        //           'back...',
-        //           style: TextStyle(
-        //             fontSize: 30,
-        //             color: Colors.white,
-        //             fontWeight: FontWeight.bold,
-        //           ),
-        //         ),
-        //         Text(
-        //           'Sign In',
-        //           style: TextStyle(
-        //             fontSize: 24,
-        //             color: Colors.white,
-        //             fontWeight: FontWeight.bold,
-        //           ),
-        //         ),
-        //         Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Container(
-        //               width: 26,
-        //               height: 1,
-        //               color: Colors.white,
-        //               margin: EdgeInsets.only(right: 6),
-        //             ),
-        //             Text(
-        //               'O',
-        //               style: TextStyle(color: Colors.white, fontSize: 18),
-        //             ),
-        //             Container(
-        //               width: 26,
-        //               height: 1,
-        //               color: Colors.white,
-        //               margin: EdgeInsets.only(left: 6),
-        //             ),
-        //           ],
-        //         ),
-        //         SizedBox(height: 22),
-        //         Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Text(
-        //               'No tienes cuenta?',
-        //               style: TextStyle(color: Colors.white),
-        //             ),
-        //             SizedBox(width: 12),
-        //             GestureDetector(
-        //               onTap: () {
-        //                 Navigator.pushNamed(context, 'sign_up');
-        //               },
-        //               child: Text(
-        //                 'Registrate',
-        //                 style: TextStyle(
-        //                   color: Colors.white,
-        //                   fontWeight: FontWeight.bold,
-        //                 ),
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        //         SizedBox(height: 42),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          margin: EdgeInsets.only(bottom: 114),
+          child: Text(
+            'Olvidaste tu contraseña?',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          margin: EdgeInsets.only(bottom: 70),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.4,
+                height: 1,
+                color: Colors.white,
+                margin: EdgeInsets.only(right: 10),
+              ),
+              Text('O', style: TextStyle(color: Colors.white, fontSize: 18)),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.4,
+                height: 1,
+                color: Colors.white,
+                margin: EdgeInsets.only(left: 10),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          margin: EdgeInsets.only(bottom: 30),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'No tienes cuenta?',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              SizedBox(width: 12),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, 'sign_up');
+                },
+                child: Text(
+                  'Registrate',
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

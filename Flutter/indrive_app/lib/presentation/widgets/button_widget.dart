@@ -19,6 +19,7 @@ class ButtonWidget extends StatelessWidget {
     return Container(
       margin: fringe,
       width: MediaQuery.of(context).size.width,
+      height: 46,
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(backgroundColor: backdropColor),

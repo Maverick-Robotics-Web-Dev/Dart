@@ -4,12 +4,14 @@ class TextFormFieldWidget extends StatelessWidget {
   final String text;
   final IconData icon;
   final EdgeInsetsGeometry? margin;
+  final Color? backdrop;
 
   const TextFormFieldWidget({
     super.key,
     required this.text,
     required this.icon,
     this.margin = const EdgeInsets.all(0),
+    this.backdrop = Colors.white,
   });
 
   @override
@@ -18,7 +20,7 @@ class TextFormFieldWidget extends StatelessWidget {
       margin: margin,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backdrop,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(15),
           bottomRight: Radius.circular(15),
