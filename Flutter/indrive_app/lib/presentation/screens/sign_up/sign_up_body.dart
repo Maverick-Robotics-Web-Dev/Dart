@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:indrive_app/bloc/sign_in/sign_in_bloc.dart';
-import 'package:indrive_app/bloc/sign_in/sign_in_blocevent.dart';
+import 'package:indrive_app/bloc/sign_up/sign_up_blocstate.dart';
 import 'package:indrive_app/presentation/widgets/button_widget.dart';
 import 'package:indrive_app/presentation/widgets/textformfield_widget.dart';
 import 'package:lottie/lottie.dart';
 
 class SignUpBody extends StatelessWidget {
-  const SignUpBody({super.key});
+  final SignUpBlocState signInBlocState;
+
+  const SignUpBody({super.key, required this.signInBlocState});
 
   @override
   Widget build(BuildContext context) {
