@@ -1,15 +1,17 @@
+import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
+
 abstract class SignInBlocEvent {}
 
 class SignInInitEvent extends SignInBlocEvent {}
 
 class EmailChangedEvent extends SignInBlocEvent {
-  final String email;
+  final ValidateDataBloc email;
 
   EmailChangedEvent({required this.email});
 }
 
 class PasswordChangedEvent extends SignInBlocEvent {
-  final String password;
+  final ValidateDataBloc password;
 
   PasswordChangedEvent({required this.password});
 }

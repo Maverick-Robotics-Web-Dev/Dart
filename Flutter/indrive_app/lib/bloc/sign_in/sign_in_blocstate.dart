@@ -1,16 +1,21 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
 
 class SignInBlocState extends Equatable {
-  final String email;
-  final String password;
+  final ValidateDataBloc email;
+  final ValidateDataBloc password;
   final GlobalKey<FormState>? formKey;
 
-  const SignInBlocState({this.email = '', this.password = '', this.formKey});
+  const SignInBlocState({
+    this.email = const ValidateDataBloc(error: 'Ingrese Email'),
+    this.password = const ValidateDataBloc(error: 'Ingrese Contraseña'),
+    this.formKey,
+  });
 
   SignInBlocState copyWith({
-    String? email,
-    String? password,
+    ValidateDataBloc? email,
+    ValidateDataBloc? password,
     GlobalKey<FormState>? formKey,
   }) {
     return SignInBlocState(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:indrive_app/bloc/sign_in/sign_in_bloc.dart';
+import 'package:indrive_app/bloc/sign_in/sign_in_blocevent.dart';
 import 'package:indrive_app/presentation/widgets/button_widget.dart';
 import 'package:indrive_app/presentation/widgets/textformfield_widget.dart';
 import 'package:lottie/lottie.dart';
@@ -69,39 +71,46 @@ class SignUpBody extends StatelessWidget {
                         icon: Icons.person_outline,
                         margin: EdgeInsets.only(right: 22, left: 22),
                         backdrop: Color.fromRGBO(224, 224, 224, 1),
+                        onChange: (text) {},
                       ),
                       TextFormFieldWidget(
                         text: 'Apellido',
                         icon: Icons.person_2_outlined,
                         margin: EdgeInsets.only(top: 22, right: 22, left: 22),
                         backdrop: Color.fromRGBO(224, 224, 224, 1),
+                        onChange: (text) {},
                       ),
                       TextFormFieldWidget(
                         text: 'Email',
                         icon: Icons.email_outlined,
                         margin: EdgeInsets.only(top: 22, right: 22, left: 22),
                         backdrop: Color.fromRGBO(224, 224, 224, 1),
+                        onChange: (text) {},
                       ),
                       TextFormFieldWidget(
                         text: 'Telefono',
                         icon: Icons.phone_android_outlined,
                         margin: EdgeInsets.only(top: 22, right: 22, left: 22),
                         backdrop: Color.fromRGBO(224, 224, 224, 1),
+                        onChange: (text) {},
                       ),
                       TextFormFieldWidget(
                         text: 'Contraseña',
                         icon: Icons.lock_outline,
                         margin: EdgeInsets.only(top: 22, right: 22, left: 22),
                         backdrop: Color.fromRGBO(224, 224, 224, 1),
+                        onChange: (text) {},
                       ),
                       TextFormFieldWidget(
                         text: 'Confirmar Contraseña',
                         icon: Icons.lock_outline,
                         margin: EdgeInsets.only(top: 22, right: 22, left: 22),
                         backdrop: Color.fromRGBO(224, 224, 224, 1),
+                        onChange: (text) {},
                       ),
                       ButtonWidget(
                         text: 'Sign Up',
+                        onPush: () {},
                         backdropColor: Colors.orange,
                         textColor: Colors.white,
                         fringe: EdgeInsets.only(

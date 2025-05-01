@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
+  final Function() onPush;
   final EdgeInsetsGeometry? fringe;
   final Color? backdropColor;
   final Color? textColor;
@@ -9,6 +10,7 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     super.key,
     required this.text,
+    required this.onPush,
     this.fringe = const EdgeInsets.all(0),
     this.backdropColor = Colors.white,
     this.textColor = Colors.black,
@@ -21,7 +23,9 @@ class ButtonWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 46,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          onPush();
+        },
         style: ElevatedButton.styleFrom(backgroundColor: backdropColor),
         child: Text(
           text,
