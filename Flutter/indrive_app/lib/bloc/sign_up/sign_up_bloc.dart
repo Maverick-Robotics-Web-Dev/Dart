@@ -95,7 +95,7 @@ class SignUpBloc extends Bloc<SignUpBlocEvent, SignUpBlocState> {
     });
 
     on<FormSubmitEvent>((event, emit) {
-      if (state.formKey?.currentState?.validate() ?? false) {
+      if (state.formKey!.currentState!.validate()) {
         print('Nombre: ${state.name.value}');
         print('Apellido: ${state.lastname.value}');
         print('Email: ${state.email.value}');

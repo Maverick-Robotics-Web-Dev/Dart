@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:indrive_app/bloc/sign_in/sign_in_bloc.dart';
-import 'package:indrive_app/bloc/sign_in/sign_in_blocevent.dart';
+import 'package:indrive_app/bloc/bloc_providers.dart';
 import 'package:indrive_app/presentation/screens/sign_in/sign_in_screen.dart';
 import 'package:indrive_app/presentation/screens/sign_up/sign_up_screen.dart';
 
@@ -10,8 +9,8 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInBloc()..add(SignInInitEvent()),
+    return MultiBlocProvider(
+      providers: blocProviders,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'InDriver Clone',

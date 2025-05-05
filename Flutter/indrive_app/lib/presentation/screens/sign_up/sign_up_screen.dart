@@ -18,7 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Scaffold(
         body: BlocBuilder<SignUpBloc, SignUpBlocState>(
           builder: (context, state) {
-            return SignUpBody(signInBlocState: state);
+            return SignUpBody(signUpBlocState: state);
           },
         ),
       ),
