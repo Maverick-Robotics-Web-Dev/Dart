@@ -16,6 +16,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocBuilder<SignInBloc, SignInBlocState>(
           builder: (context, state) {
             return SignInBody(signInBlocState: state);

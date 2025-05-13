@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_blocevent.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_blocstate.dart';
 import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
+import 'package:indrive_app/data/data_source/remote/services/auth_service.dart';
 
 class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
   final formKey = GlobalKey<FormState>();
+  AuthService authService = AuthService();
 
   SignInBloc() : super(SignInBlocState()) {
     on<SignInInitEvent>((event, emit) {
@@ -41,9 +43,10 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
       );
     });
 
-    on<FormSubmitEvent>((event, emit) {
+    on<FormSubmitEvent>((event, emit) async {
       print('Email: ${state.email.value}');
       print('Password: ${state.password.value}');
+      await authService.login(state.email.value, state.password.value);
     });
   }
 }
