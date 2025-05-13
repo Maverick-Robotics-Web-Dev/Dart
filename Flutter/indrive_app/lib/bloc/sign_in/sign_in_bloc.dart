@@ -46,7 +46,7 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
     on<FormSubmitEvent>((event, emit) async {
       print('Email: ${state.email.value}');
       print('Password: ${state.password.value}');
-      await authService.login(state.email.value, state.password.value);
+      await authService.signIn(state.email.value, state.password.value);
     });
   }
 }
