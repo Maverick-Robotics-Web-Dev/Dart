@@ -4,6 +4,7 @@ import 'package:indrive_app/bloc/sign_in/sign_in_blocevent.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_blocstate.dart';
 import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
 import 'package:indrive_app/data/data_source/remote/services/auth_service.dart';
+import 'package:indrive_app/domain/utils/response_resource.dart';
 
 class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
   final formKey = GlobalKey<FormState>();
@@ -46,7 +47,12 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
     on<FormSubmitEvent>((event, emit) async {
       print('Email: ${state.email.value}');
       print('Password: ${state.password.value}');
-      await authService.signIn(state.email.value, state.password.value);
+      emit(state.copyWith(response: LoadingData(), formKey: formKey));
+      ResponseResource response = await authService.signIn(
+        state.email.value,
+        state.password.value,
+      );
+      emit(state.copyWith(response: response, formKey: formKey));
     });
   }
 }
