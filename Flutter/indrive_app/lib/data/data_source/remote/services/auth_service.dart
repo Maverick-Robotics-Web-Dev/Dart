@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:indrive_app/data/api/api_config.dart';
 import 'package:indrive_app/domain/response_models/auth_response_model.dart';
 import 'package:indrive_app/domain/utils/response_resource.dart';
+import 'package:indrive_app/tools/list_to_string.dart';
 
 class AuthService {
   final _dio = Dio();
@@ -13,7 +14,7 @@ class AuthService {
     String password,
   ) async {
     try {
-      final Object body = {'email': email, 'password': password};
+      final Map<String, dynamic> body = {'email': email, 'password': password};
       final response = await _dio.post(
         // '${ApiConfig.apiIndrivePath}/auth/sign_in/',
         '${ApiConfig.apiIndriveHomePath}/auth/sign_in/',
@@ -27,7 +28,7 @@ class AuthService {
     } catch (e) {
       if (e is DioException) {
         // print('DioError: ${e.response?.data}');
-        return ErrorData(e.response?.data['msg']);
+        return ErrorData(getMessageString(e.response?.data['msg']));
       } else {
         print('Error: $e');
         return ErrorData(e.toString());
