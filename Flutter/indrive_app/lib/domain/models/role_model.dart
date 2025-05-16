@@ -1,17 +1,17 @@
-class Role {
+class RoleModel {
   final String id;
   final String name;
   final String image;
   final String route;
 
-  Role({
+  RoleModel({
     required this.id,
     required this.name,
     required this.image,
     required this.route,
   });
 
-  factory Role.fromJson(Map<String, dynamic> json) => Role(
+  factory RoleModel.fromJson(Map<String, dynamic> json) => RoleModel(
     id: json["id"],
     name: json["name"],
     image: json["image"],

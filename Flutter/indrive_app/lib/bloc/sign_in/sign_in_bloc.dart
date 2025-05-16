@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_blocevent.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_blocstate.dart';
 import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
-import 'package:indrive_app/data/data_source/remote/services/auth_service.dart';
+import 'package:indrive_app/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:indrive_app/domain/utils/response_resource.dart';
 
 class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
+  AuthUseCases authUseCases;
   final formKey = GlobalKey<FormState>();
-  AuthService authService = AuthService();
 
-  SignInBloc() : super(SignInBlocState()) {
+  SignInBloc(this.authUseCases) : super(SignInBlocState()) {
     on<SignInInitEvent>((event, emit) {
       emit(state.copyWith(formKey: formKey));
     });
@@ -48,7 +48,7 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
       print('Email: ${state.email.value}');
       print('Password: ${state.password.value}');
       emit(state.copyWith(response: LoadingData(), formKey: formKey));
-      ResponseResource response = await authService.signIn(
+      ResponseResource response = await authUseCases.signIn.run(
         state.email.value,
         state.password.value,
       );

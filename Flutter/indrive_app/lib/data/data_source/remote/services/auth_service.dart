@@ -2,14 +2,14 @@
 // import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:indrive_app/data/api/api_config.dart';
-import 'package:indrive_app/domain/response_models/auth_response_model.dart';
+import 'package:indrive_app/domain/models/auth_response_model.dart';
 import 'package:indrive_app/domain/utils/response_resource.dart';
 import 'package:indrive_app/tools/list_to_string.dart';
 
 class AuthService {
   final _dio = Dio();
 
-  Future<ResponseResource<AuthResponse>> signIn(
+  Future<ResponseResource<AuthResponseModel>> signIn(
     String email,
     String password,
   ) async {
@@ -21,7 +21,9 @@ class AuthService {
         data: body,
       );
 
-      AuthResponse authResponse = AuthResponse.fromJson(response.data);
+      AuthResponseModel authResponse = AuthResponseModel.fromJson(
+        response.data,
+      );
       print('Data: ${authResponse.toJson()}');
 
       return SuccessData(authResponse);

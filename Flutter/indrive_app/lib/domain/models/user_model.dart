@@ -1,6 +1,6 @@
 import 'package:indrive_app/domain/models/role_model.dart';
 
-class User {
+class UserModel {
   final int id;
   final String name;
   final String lastname;
@@ -8,9 +8,9 @@ class User {
   final String phone;
   final String image;
   final dynamic notificationToken;
-  final List<Role> roles;
+  final List<RoleModel> roles;
 
-  User({
+  UserModel({
     required this.id,
     required this.name,
     required this.lastname,
@@ -21,7 +21,7 @@ class User {
     required this.roles,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     id: json["id"],
     name: json["name"],
     lastname: json["lastname"],
@@ -31,8 +31,10 @@ class User {
     notificationToken: json["notification_token"],
     roles:
         json["roles"] == null
-            ? List<Role>.from(json["roles"].map((x) => Role.fromJson(x)))
-            : [],
+            ? []
+            : List<RoleModel>.from(
+              json["roles"].map((x) => RoleModel.fromJson(x)),
+            ),
   );
 
   Map<String, dynamic> toJson() => {
