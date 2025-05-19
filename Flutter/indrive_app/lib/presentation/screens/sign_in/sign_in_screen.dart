@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_bloc.dart';
 import 'package:indrive_app/bloc/sign_in/sign_in_blocstate.dart';
 import 'package:indrive_app/domain/utils/response_resource.dart';
@@ -22,6 +23,10 @@ class _SignInScreenState extends State<SignInScreen> {
           listener: (context, state) {
             final response = state.response;
             if (response is ErrorData) {
+              Fluttertoast.showToast(
+                msg: response.data,
+                toastLength: Toast.LENGTH_SHORT,
+              );
               print('Error: ${response.data}');
             } else if (response is SuccessData) {
               print('Success: ${response.data}');

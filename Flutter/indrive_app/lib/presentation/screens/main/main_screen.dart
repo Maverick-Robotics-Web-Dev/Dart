@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:indrive_app/bloc/bloc_providers.dart';
 import 'package:indrive_app/presentation/screens/sign_in/sign_in_screen.dart';
 import 'package:indrive_app/presentation/screens/sign_up/sign_up_screen.dart';
@@ -12,6 +13,7 @@ class MainScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: blocProviders,
       child: MaterialApp(
+        builder: FToastBuilder(),
         debugShowCheckedModeBanner: false,
         title: 'InDriver Clone',
         initialRoute: 'sign_in',
