@@ -1,4 +1,5 @@
 import 'package:indrive_app/domain/models/auth_response_model.dart';
+import 'package:indrive_app/domain/models/user_model.dart';
 import 'package:indrive_app/domain/utils/response_resource.dart';
 
 abstract class AuthRepository {
@@ -6,4 +7,6 @@ abstract class AuthRepository {
     String email,
     String password,
   );
+
+  Future<ResponseResource<AuthResponseModel>> signUp(UserModel userModel);
 }

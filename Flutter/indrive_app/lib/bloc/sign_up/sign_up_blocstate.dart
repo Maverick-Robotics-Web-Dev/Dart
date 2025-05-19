@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
+import 'package:indrive_app/domain/models/user_model.dart';
+import 'package:indrive_app/domain/utils/response_resource.dart';
 
 class SignUpBlocState extends Equatable {
   final ValidateDataBloc name;
@@ -9,6 +11,7 @@ class SignUpBlocState extends Equatable {
   final ValidateDataBloc phone;
   final ValidateDataBloc password;
   final ValidateDataBloc confirmPassword;
+  final ResponseResource? response;
   final GlobalKey<FormState>? formKey;
 
   const SignUpBlocState({
@@ -20,8 +23,17 @@ class SignUpBlocState extends Equatable {
     this.confirmPassword = const ValidateDataBloc(
       error: 'Confirme la contraseña',
     ),
+    this.response,
     this.formKey,
   });
+
+  toUser() => UserModel(
+    name: name.value,
+    lastname: lastname.value,
+    email: email.value,
+    phone: phone.value,
+    password: password.value,
+  );
 
   SignUpBlocState copyWith({
     ValidateDataBloc? name,
@@ -30,6 +42,7 @@ class SignUpBlocState extends Equatable {
     ValidateDataBloc? phone,
     ValidateDataBloc? password,
     ValidateDataBloc? confirmPassword,
+    ResponseResource? response,
     GlobalKey<FormState>? formKey,
   }) {
     return SignUpBlocState(
@@ -39,6 +52,7 @@ class SignUpBlocState extends Equatable {
       phone: phone ?? this.phone,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
+      response: response,
       formKey: formKey,
     );
   }
@@ -51,5 +65,6 @@ class SignUpBlocState extends Equatable {
     phone,
     password,
     confirmPassword,
+    response,
   ];
 }

@@ -25,7 +25,7 @@ class SignInBlocState extends Equatable {
     return SignInBlocState(
       email: email ?? this.email,
       password: password ?? this.password,
-      response: response ?? this.response,
+      response: response,
       formKey: formKey,
     );
   }

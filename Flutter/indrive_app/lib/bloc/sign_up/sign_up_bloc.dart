@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indrive_app/bloc/sign_up/sign_up_blocevent.dart';
 import 'package:indrive_app/bloc/sign_up/sign_up_blocstate.dart';
 import 'package:indrive_app/bloc/utils/validate_data_bloc.dart';
+import 'package:indrive_app/domain/use_cases/auth/auth_use_cases.dart';
+import 'package:indrive_app/domain/utils/response_resource.dart';
 
 class SignUpBloc extends Bloc<SignUpBlocEvent, SignUpBlocState> {
+  AuthUseCases authUseCases;
   final formKey = GlobalKey<FormState>();
 
-  SignUpBloc() : super(SignUpBlocState()) {
+  SignUpBloc(this.authUseCases) : super(SignUpBlocState()) {
     on<SignUpInitEvent>((event, emit) {
       emit(state.copyWith(formKey: formKey));
     });
@@ -94,7 +97,7 @@ class SignUpBloc extends Bloc<SignUpBlocEvent, SignUpBlocState> {
       );
     });
 
-    on<FormSubmitEvent>((event, emit) {
+    on<FormSubmitEvent>((event, emit) async {
       if (state.formKey!.currentState!.validate()) {
         print('Nombre: ${state.name.value}');
         print('Apellido: ${state.lastname.value}');
@@ -102,6 +105,11 @@ class SignUpBloc extends Bloc<SignUpBlocEvent, SignUpBlocState> {
         print('Telefono: ${state.phone.value}');
         print('Contraseña: ${state.password.value}');
         print('Confirmar Contraseña: ${state.confirmPassword.value}');
+        emit(state.copyWith(response: LoadingData(), formKey: formKey));
+        ResponseResource response = await authUseCases.signUp.run(
+          state.toUser(),
+        );
+        emit(state.copyWith(response: response, formKey: formKey));
       } else {
         print('Formulario no válido');
       }

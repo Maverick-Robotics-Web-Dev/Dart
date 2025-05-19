@@ -13,7 +13,9 @@ List<BlocProvider> blocProviders = [
             SignInBloc(locator<AuthUseCases>())..add(SignInInitEvent()),
   ),
   BlocProvider<SignUpBloc>(
-    create: (context) => SignUpBloc()..add(SignUpInitEvent()),
+    create:
+        (context) =>
+            SignUpBloc(locator<AuthUseCases>())..add(SignUpInitEvent()),
   ),
   // Add other BlocProviders here as needed
 ];
