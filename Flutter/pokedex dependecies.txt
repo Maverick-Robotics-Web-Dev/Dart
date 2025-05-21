@@ -6,3 +6,4 @@ dartz
 get it
 
 https://www.youtube.com/watch?v=AKoRKAISNLE
+https://medium.com/@semihaltin99/flutter-clean-architecture-8759ad0213dd
