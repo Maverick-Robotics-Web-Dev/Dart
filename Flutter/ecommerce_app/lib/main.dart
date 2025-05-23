@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/presentation/screens/auth/sign_in/sign_in_screen.dart';
+import 'package:ecommerce_app/features/presentation/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,10 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       initialRoute: 'sign_in',
-      routes: {'sign_in': (BuildContext context) => SignInScreen()},
+      routes: {
+        'sign_in': (BuildContext context) => SignInScreen(),
+        'sign_up': (BuildContext context) => SignUpScreen(),
+      },
     );
   }
 }

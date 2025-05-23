@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/presentation/widgets/btn_elevated_custom.dart';
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
 
@@ -37,8 +38,8 @@ class SignInScreen extends StatelessWidget {
                       'SIGN IN',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Padding(
@@ -65,18 +66,10 @@ class SignInScreen extends StatelessWidget {
                         left: 24,
                         bottom: 18,
                       ),
-                      child: ElevatedButton(
+                      child: BtnElevatedCustom(
+                        text: 'SIGN IN',
+                        backgroundColor: Colors.lime,
                         onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lime,
-                        ),
-                        child: Text(
-                          'SIGN IN',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                       ),
                     ),
                     Padding(
@@ -111,18 +104,11 @@ class SignInScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       margin: EdgeInsets.only(top: 24, right: 24, left: 24),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
-                        ),
-                        child: Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      child: BtnElevatedCustom(
+                        text: 'SIGN UP',
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'sign_up');
+                        },
                       ),
                     ),
                   ],
