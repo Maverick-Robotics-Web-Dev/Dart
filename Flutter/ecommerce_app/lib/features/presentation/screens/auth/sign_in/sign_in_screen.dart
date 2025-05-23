@@ -1,12 +1,23 @@
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/sign_in/sign_in_bloc_cubit.dart';
 import 'package:ecommerce_app/features/presentation/widgets/btn_elevated_custom.dart';
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
   @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  SignInBlocCubit? _signInBlocCubit;
+
+  @override
   Widget build(BuildContext context) {
+    _signInBlocCubit = BlocProvider.of<SignInBlocCubit>(context, listen: false);
+
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
@@ -44,17 +55,33 @@ class SignInScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: TxtFormFieldCustom(
-                        label: 'E-mail',
-                        icon: Icons.email,
+                      child: StreamBuilder(
+                        stream: _signInBlocCubit?.emailStream,
+                        builder: (context, snapshot) {
+                          return TxtFormFieldCustom(
+                            label: 'E-mail',
+                            icon: Icons.email,
+                            onChanged: (text) {
+                              _signInBlocCubit?.changeEmail(text);
+                            },
+                          );
+                        },
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: TxtFormFieldCustom(
-                        label: 'Password',
-                        icon: Icons.lock,
-                        obscureText: true,
+                      child: StreamBuilder(
+                        stream: _signInBlocCubit?.passwordStream,
+                        builder: (context, snapshot) {
+                          return TxtFormFieldCustom(
+                            label: 'Password',
+                            icon: Icons.lock,
+                            obscureText: true,
+                            onChanged: (text) {
+                              _signInBlocCubit?.changePassword(text);
+                            },
+                          );
+                        },
                       ),
                     ),
                     Container(
@@ -69,7 +96,9 @@ class SignInScreen extends StatelessWidget {
                       child: BtnElevatedCustom(
                         text: 'SIGN IN',
                         backgroundColor: Colors.lime,
-                        onPressed: () {},
+                        onPressed: () {
+                          _signInBlocCubit?.signIn();
+                        },
                       ),
                     ),
                     Padding(
