@@ -30,15 +30,26 @@ class SignUpBlocCubit extends Cubit<SignUpBlocState> {
   );
 
   void changeName(String name) {
-    _emailController.sink.add(name);
+    if (name.isNotEmpty && name.length < 2) {
+      _nameController.sink.addError('Name cannot be empty');
+    } else {
+      _nameController.sink.add(name);
+    }
   }
 
   void changeLastname(String lastname) {
-    _lastnameController.sink.add(lastname);
+    if (lastname.isNotEmpty && lastname.length < 2) {
+      _lastnameController.sink.addError('Lastname cannot be empty');
+    } else {
+      _lastnameController.sink.add(lastname);
+    }
   }
 
   void changeEmail(String email) {
-    if (!email.contains('@') || !email.contains('.')) {
+    bool emailFormatValid = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(email);
+    if (email.isNotEmpty && !emailFormatValid) {
       _emailController.sink.addError('Invalid email format');
     } else {
       _emailController.sink.add(email);
@@ -46,11 +57,15 @@ class SignUpBlocCubit extends Cubit<SignUpBlocState> {
   }
 
   void changePhone(String phone) {
-    _phoneController.sink.add(phone);
+    if (phone.isNotEmpty) {
+      _phoneController.sink.addError('Phone cannot be empty');
+    } else {
+      _phoneController.sink.add(phone);
+    }
   }
 
   void changePassword(String password) {
-    if (password.length < 8) {
+    if (password.isNotEmpty && password.length < 8) {
       _passwordController.sink.addError(
         'Password must be at least 8 characters',
       );
@@ -60,7 +75,7 @@ class SignUpBlocCubit extends Cubit<SignUpBlocState> {
   }
 
   void changeConfirmPassword(String confirmPassword) {
-    if (confirmPassword.length < 8) {
+    if (confirmPassword.isNotEmpty && confirmPassword.length < 8) {
       _confirmPaswwordController.sink.addError(
         'Password must be at least 8 characters',
       );

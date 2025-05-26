@@ -78,6 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, snapshot) {
                             return TxtFormFieldCustom(
                               label: 'Nombre',
+                              errorText: snapshot.error?.toString(),
                               icon: Icons.person,
                               onChanged: (text) {
                                 _signUpBlocCubit?.changeName(text);
@@ -93,6 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, snapshot) {
                             return TxtFormFieldCustom(
                               label: 'Apellido',
+                              errorText: snapshot.error?.toString(),
                               icon: Icons.person,
                               onChanged: (text) {
                                 _signUpBlocCubit?.changeLastname(text);
@@ -108,6 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, snapshot) {
                             return TxtFormFieldCustom(
                               label: 'E-mail',
+                              errorText: snapshot.error?.toString(),
                               icon: Icons.email,
                               onChanged: (text) {
                                 _signUpBlocCubit?.changeEmail(text);
@@ -123,6 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, snapshot) {
                             return TxtFormFieldCustom(
                               label: 'Telefono',
+                              errorText: snapshot.error?.toString(),
                               icon: Icons.smartphone,
                               onChanged: (text) {
                                 _signUpBlocCubit?.changePhone(text);
@@ -138,6 +142,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, snapshot) {
                             return TxtFormFieldCustom(
                               label: 'Contraseña',
+                              errorText: snapshot.error?.toString(),
                               icon: Icons.lock,
                               obscureText: true,
                               onChanged: (text) {
@@ -154,6 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, snapshot) {
                             return TxtFormFieldCustom(
                               label: 'Confirmar Contraseña',
+                              errorText: snapshot.error?.toString(),
                               icon: Icons.lock,
                               obscureText: true,
                               onChanged: (text) {
