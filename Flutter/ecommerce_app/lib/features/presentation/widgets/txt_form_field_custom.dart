@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class TxtFormFieldCustom extends StatelessWidget {
   final String label;
   final IconData icon;
+  final String? errorText;
   final Function(String)? onChanged;
   final bool? obscureText;
 
@@ -10,6 +11,7 @@ class TxtFormFieldCustom extends StatelessWidget {
     super.key,
     required this.label,
     required this.icon,
+    this.errorText,
     this.onChanged,
     this.obscureText,
   });
@@ -26,6 +28,7 @@ class TxtFormFieldCustom extends StatelessWidget {
       },
       decoration: InputDecoration(
         label: Text(label, style: TextStyle(color: Colors.white)),
+        errorText: errorText,
         prefixIcon: Icon(icon, color: Colors.white),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),

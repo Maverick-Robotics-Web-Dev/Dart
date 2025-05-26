@@ -3,6 +3,7 @@ import 'package:ecommerce_app/features/presentation/widgets/btn_elevated_custom.
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -13,6 +14,14 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   SignInBlocCubit? _signInBlocCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _signInBlocCubit?.diposeForm();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           return TxtFormFieldCustom(
                             label: 'E-mail',
                             icon: Icons.email,
+                            errorText: snapshot.error?.toString(),
                             onChanged: (text) {
                               _signInBlocCubit?.changeEmail(text);
                             },
@@ -77,6 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             label: 'Password',
                             icon: Icons.lock,
                             obscureText: true,
+                            errorText: snapshot.error?.toString(),
                             onChanged: (text) {
                               _signInBlocCubit?.changePassword(text);
                             },
@@ -93,11 +104,23 @@ class _SignInScreenState extends State<SignInScreen> {
                         left: 24,
                         bottom: 18,
                       ),
-                      child: BtnElevatedCustom(
-                        text: 'SIGN IN',
-                        backgroundColor: Colors.lime,
-                        onPressed: () {
-                          _signInBlocCubit?.signIn();
+                      child: StreamBuilder(
+                        stream: _signInBlocCubit?.validateForm,
+                        builder: (context, snapshot) {
+                          return BtnElevatedCustom(
+                            text: 'SIGN IN',
+                            backgroundColor: Colors.lime,
+                            onPressed: () {
+                              if (snapshot.hasData) {
+                                _signInBlocCubit?.signIn();
+                              } else {
+                                Fluttertoast.showToast(
+                                  msg: 'Form invalid',
+                                  toastLength: Toast.LENGTH_LONG,
+                                );
+                              }
+                            },
+                          );
                         },
                       ),
                     ),

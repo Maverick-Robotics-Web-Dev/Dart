@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignInBlocCubit extends Cubit<SignInBlocState> {
-  final BehaviorSubject<String> _emailController = BehaviorSubject<String>();
-  final BehaviorSubject<String> _passwordController = BehaviorSubject<String>();
+  final _emailController = BehaviorSubject<String>();
+  final _passwordController = BehaviorSubject<String>();
 
   SignInBlocCubit() : super(SignInInitialState());
 
@@ -12,7 +12,7 @@ class SignInBlocCubit extends Cubit<SignInBlocState> {
   Stream<String> get passwordStream => _passwordController.stream;
 
   void changeEmail(String email) {
-    if (!email.contains('@')) {
+    if (email.isNotEmpty && !email.contains('@') && !email.contains('.')) {
       _emailController.sink.addError('Invalid email format');
     } else {
       _emailController.sink.add(email);
@@ -20,7 +20,7 @@ class SignInBlocCubit extends Cubit<SignInBlocState> {
   }
 
   void changePassword(String password) {
-    if (password.length <= 8) {
+    if (password.isNotEmpty && password.length < 8) {
       _passwordController.sink.addError(
         'Password must be at least 8 characters',
       );

@@ -1,8 +1,9 @@
 import 'package:ecommerce_app/features/presentation/screens/auth/sign_in/sign_in_screen.dart';
 import 'package:ecommerce_app/features/presentation/screens/auth/sign_up/sign_up_screen.dart';
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/sign_in/sign_in_bloc_cubit.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,9 +14,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInBlocCubit(),
+    return MultiBlocProvider(
+      providers: blocProviders,
       child: MaterialApp(
+        builder: FToastBuilder(),
         debugShowCheckedModeBanner: false,
         title: 'E-Commerce',
         theme: ThemeData(
