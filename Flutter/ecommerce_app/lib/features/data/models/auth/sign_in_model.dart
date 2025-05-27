@@ -1,8 +1,10 @@
-import 'package:ecommerce_app/features/data/models/users/user_model.dart';
+import 'package:ecommerce_app/features/domain/entities/auth/sign_in.dart';
 
-class SignInModel {
-  final UserModel user;
-  final String token;
+class SignInModel extends SignIn {
+  SignInModel({required super.email, required super.password});
 
-  SignInModel({required this.user, required this.token});
+  factory SignInModel.fromJson(Map<String, dynamic> json) =>
+      SignInModel(email: json["email"], password: json["password"]);
+
+  Map<String, dynamic> toJson() => {"email": email, "password": password};
 }
