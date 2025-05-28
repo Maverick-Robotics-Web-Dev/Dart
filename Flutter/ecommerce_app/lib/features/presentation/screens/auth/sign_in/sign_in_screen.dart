@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/sign_in/sign_in_bloc_cubit.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_bloc_cubit.dart';
 import 'package:ecommerce_app/features/presentation/widgets/btn_elevated_custom.dart';
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';

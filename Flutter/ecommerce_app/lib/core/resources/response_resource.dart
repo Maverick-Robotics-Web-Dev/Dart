@@ -1,13 +1,16 @@
-abstract class ResponseResource<T> {}
+abstract class DataState<T> {
+  final T? data;
+  final T? error;
 
-class LoadingData extends ResponseResource {}
-
-class SuccessData<T> extends ResponseResource<T> {
-  final T data;
-  SuccessData(this.data);
+  DataState({this.data, this.error});
 }
 
-class ErrorData<T> extends ResponseResource<T> {
-  final String data;
-  ErrorData(this.data);
+class LoadingData extends DataState {}
+
+class DataSuccess<T> extends DataState<T> {
+  DataSuccess(T data) : super(data: data);
+}
+
+class DataFailed<T> extends DataState<T> {
+  DataFailed(T error) : super(error: error);
 }
