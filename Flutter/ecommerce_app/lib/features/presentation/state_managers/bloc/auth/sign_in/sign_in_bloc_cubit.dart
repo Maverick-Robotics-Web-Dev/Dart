@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/sign_in/sign_in_bloc_state.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
