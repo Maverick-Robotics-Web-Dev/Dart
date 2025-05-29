@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/config/api_config.dart';
+import 'package:ecommerce_app/core/errors/failures.dart';
+import 'package:ecommerce_app/core/tools/dynamic_to_string.dart';
 import 'package:ecommerce_app/features/data/models/auth/sign_in_response_model.dart';
 import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
 
@@ -9,11 +11,19 @@ class AuthRemoteDataSource {
   // final String _urlSignUp = '${ApiConfig.apiEcommercePath}/auth/sign_up/';
 
   Future<SignInResponseModel> signIn(SignIn signInData) async {
-    final response = await _dio.post(_urlSignIn, data: signInData);
-    final SignInResponseModel signInResponse = SignInResponseModel.fromJson(
-      response.data,
-    );
+    try {
+      final response = await _dio.post(_urlSignIn, data: signInData);
+      final SignInResponseModel signInResponse = SignInResponseModel.fromJson(
+        response.data,
+      );
 
-    return signInResponse;
+      return signInResponse;
+    } catch (e) {
+      if (e is DioException) {
+        throw ServerFailures(error: getMessageString(e.response?.data["msg"]));
+      } else {
+        throw ServerFailures(error: e.toString());
+      }
+    }
   }
 }
