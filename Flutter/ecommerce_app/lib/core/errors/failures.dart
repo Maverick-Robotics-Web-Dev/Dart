@@ -1,8 +1,12 @@
-abstract class Failure<T> {
-  final T error;
-  Failure(this.error);
+abstract class Failure {
+  final String errorMessage;
+  Failure(this.errorMessage);
 }
 
-class ServerFailures<T> extends Failure<T> {
-  ServerFailures({required T error}) : super(error);
+class DioFailure extends Failure {
+  DioFailure({required String errorMessage}) : super(errorMessage);
+}
+
+class ServerFailure extends Failure {
+  ServerFailure({required String errorMessage}) : super(errorMessage);
 }

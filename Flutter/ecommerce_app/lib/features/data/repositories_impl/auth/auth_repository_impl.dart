@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/errors/errors.dart';
 import 'package:ecommerce_app/core/errors/failures.dart';
 import 'package:ecommerce_app/features/data/data_sources/remote/auth/auth_remote_data_sources.dart';
 import 'package:ecommerce_app/features/data/models/auth/sign_in_response_model.dart';
@@ -13,8 +14,10 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final response = await dataSource.signIn(signInData);
       return Right(response);
-    } on ServerFailures catch (e) {
-      return Left(ServerFailures(error: e.toString()));
+    } on DioServerError catch (e) {
+      return Left(DioFailure(errorMessage: e.message));
+    } on ServerError catch (e) {
+      return Left(ServerFailure(errorMessage: e.message));
     }
   }
 }
