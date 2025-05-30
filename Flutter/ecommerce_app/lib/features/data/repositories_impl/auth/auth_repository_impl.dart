@@ -7,12 +7,12 @@ import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart
 import 'package:ecommerce_app/features/domain/repositories/auth/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRemoteDataSource dataSource = AuthRemoteDataSource();
+  AuthRemoteDataSource remoteDataSource = AuthRemoteDataSource();
 
   @override
   Future<Either<Failure, SignInResponseModel>> signIn(SignIn signInData) async {
     try {
-      final response = await dataSource.signIn(signInData);
+      final response = await remoteDataSource.signIn(signInData);
       return Right(response);
     } on DioServerError catch (e) {
       return Left(DioFailure(errorMessage: e.message));
