@@ -1,15 +1,23 @@
 import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_bloc_state.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-class SignInBloc extends Cubit<SignInBlocState> {
+class SignInBloc extends Bloc<SignInEvent, SignInBlocState> {
   AuthUseCases authUseCases;
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
 
-  SignInBloc(this.authUseCases) : super(SignInInitialState());
+  SignInBloc(this.authUseCases) : super(SignInBlocState()) {
+    on<EmailChangedEvent>(_onEmailChangedEvent);
+  }
+
+  Future<void> _onEmailChangedEvent(
+    EmailChangedEvent event,
+    Emitter<SignInBlocState> emit,
+  ) async {}
 
   Stream<String> get emailStream => _emailController.stream;
   Stream<String> get passwordStream => _passwordController.stream;
