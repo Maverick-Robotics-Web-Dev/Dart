@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/config/api_config.dart';
 import 'package:ecommerce_app/core/errors/errors.dart';
-import 'package:ecommerce_app/core/tools/dynamic_to_string.dart';
+import 'package:ecommerce_app/core/utils/dynamic_to_string.dart';
 import 'package:ecommerce_app/features/data/models/auth/sign_in_response_model.dart';
 import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
 

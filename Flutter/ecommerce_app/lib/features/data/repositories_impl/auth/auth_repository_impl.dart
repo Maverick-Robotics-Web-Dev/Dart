@@ -7,7 +7,9 @@ import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart
 import 'package:ecommerce_app/features/domain/repositories/auth/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRemoteDataSource remoteDataSource = AuthRemoteDataSource();
+  AuthRemoteDataSource remoteDataSource;
+
+  AuthRepositoryImpl(this.remoteDataSource);
 
   @override
   Future<Either<Failure, SignInResponseModel>> signIn(SignIn signInData) async {

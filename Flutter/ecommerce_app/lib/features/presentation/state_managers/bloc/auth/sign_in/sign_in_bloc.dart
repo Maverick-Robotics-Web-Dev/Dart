@@ -1,16 +1,15 @@
 import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
-import 'package:ecommerce_app/features/domain/use_cases/auth/sign_in_use_case.dart';
+import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-class SignInBlocCubit extends Cubit<SignInBlocState> {
+class SignInBloc extends Cubit<SignInBlocState> {
+  AuthUseCases authUseCases;
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
 
-  SignInBlocCubit() : super(SignInInitialState());
-
-  SignInUseCase signInUseCase = SignInUseCase();
+  SignInBloc(this.authUseCases) : super(SignInInitialState());
 
   Stream<String> get emailStream => _emailController.stream;
   Stream<String> get passwordStream => _passwordController.stream;
@@ -45,7 +44,7 @@ class SignInBlocCubit extends Cubit<SignInBlocState> {
     print('E-mail: ${_emailController.value}');
     print('Password: ${_passwordController.value}');
     // final SignIn data=
-    final response = await signInUseCase(
+    final response = await authUseCases.signIn(
       SignIn(
         email: _emailController.value,
         password: _passwordController.value,
