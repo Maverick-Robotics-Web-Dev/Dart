@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/config/api_config.dart';
 import 'package:ecommerce_app/core/errors/errors.dart';
@@ -14,7 +16,11 @@ class AuthRemoteDataSource {
 
   Future<SignInResponseModel> signIn(SignIn signInData) async {
     try {
-      final response = await _dio.post(_urlSignIn, data: signInData);
+      final response = await _dio.post(
+        _urlSignIn,
+        data: signInData,
+        options: Options(contentType: Headers.jsonContentType),
+      );
       final SignInResponseModel signInResponse = SignInResponseModel.fromJson(
         response.data,
       );
