@@ -6,7 +6,6 @@ import 'package:ecommerce_app/features/presentation/widgets/btn_elevated_custom.
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

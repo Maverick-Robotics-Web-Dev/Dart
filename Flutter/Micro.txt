@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=wLDlW92GdJo&list=PLKxOqr8Lfq-yvs2pgSB1R0ATrMBvXP93y&index=125
+https://www.youtube.com/watch?v=qVYIk4aaq_o&list=PLts8p0-b9wsucHZlgbMKLUFeCONyCM9Sb&index=119
+https://www.youtube.com/watch?v=H39zPERljZg
+https://frankgalandev.com/modelo-para-guardar-un-archivo-en-django-por-fecha/

@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/features/data/models/auth/sign_in_model.dart';
 import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
@@ -6,7 +5,6 @@ import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sig
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/bloc_form_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/rxdart.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   AuthUseCases authUseCases;
