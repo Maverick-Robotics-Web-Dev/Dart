@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/data/models/auth/sign_in_model.dart';
 import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
@@ -9,8 +10,8 @@ import 'package:rxdart/rxdart.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   AuthUseCases authUseCases;
-  final _emailController = BehaviorSubject<String>();
-  final _passwordController = BehaviorSubject<String>();
+  // final _emailController = BehaviorSubject<String>();
+  // final _passwordController = BehaviorSubject<String>();
 
   SignInBloc(this.authUseCases) : super(SignInState()) {
     on<SignInInitEvent>(_onSignInInitEvent);
@@ -59,7 +60,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     final response = await authUseCases.signIn(
       SignIn(email: state.email.value, password: state.password.value),
     );
-
+    print(response);
     return response.fold((failure) => failure, (signIn) => signIn);
   }
 
