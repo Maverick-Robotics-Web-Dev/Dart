@@ -55,11 +55,15 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     SignInSubmitEvent event,
     Emitter<SignInState> emit,
   ) async {
+    emit(state.copyWith(loadingData: 'Cargando'));
     final response = await authUseCases.signIn(
       SignIn(email: state.email.value, password: state.password.value),
     );
-    print(response);
-    return response.fold((failure) => failure, (signIn) => signIn);
+
+    response.fold(
+      (failure) => emit(state.copyWith(errorData: failure.errorMessage)),
+      (signIn) => emit(state.copyWith(singInResponse: signIn)),
+    );
   }
 
   // Stream<String> get emailStream => _emailController.stream;
