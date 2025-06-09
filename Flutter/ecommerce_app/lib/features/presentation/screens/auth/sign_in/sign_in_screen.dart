@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/core/errors/failures.dart';
-import 'package:ecommerce_app/features/data/models/auth/sign_in_response_model.dart';
+import 'package:ecommerce_app/features/data/models/auth/sign_in/sign_in_response_model.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_state.dart';
@@ -38,7 +38,6 @@ class _SignInScreenState extends State<SignInScreen> {
           width: double.infinity,
           child: BlocListener<SignInBloc, SignInState>(
             listener: (context, state) {
-              print(state.signInResponse);
               if (state.errorData is Failure) {
                 Fluttertoast.showToast(
                   msg: state.errorData!.errorMessage,
