@@ -8,8 +8,8 @@ import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart
 
 class AuthRemoteDataSource {
   final _dio = Dio();
-  final String _urlSignIn = '${ApiConfig.apiEcommercePath}/auth/sign_in/';
-  // final String _urlSignIn = '${ApiConfig.apiEcommerceHomePath}/auth/sign_in/';
+  // final String _urlSignIn = '${ApiConfig.apiEcommercePath}/auth/sign_in/';
+  final String _urlSignIn = '${ApiConfig.apiEcommerceHomePath}/auth/sign_in/';
   // final String _urlSignUp = '${ApiConfig.apiEcommercePath}/auth/sign_up/';
   // final String _urlSignUp = '${ApiConfig.apiEcommerceHomePath}/auth/sign_up/';
 

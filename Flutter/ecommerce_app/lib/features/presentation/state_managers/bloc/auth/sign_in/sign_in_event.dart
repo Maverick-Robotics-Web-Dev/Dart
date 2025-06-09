@@ -28,6 +28,13 @@ class PasswordChangedEvent extends SignInEvent {
   List<Object?> get props => [password];
 }
 
+class SignInFormResetEvent extends SignInEvent {
+  SignInFormResetEvent();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class SignInSubmitEvent extends SignInEvent {
   SignInSubmitEvent();
 

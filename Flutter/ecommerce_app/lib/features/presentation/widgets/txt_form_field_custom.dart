@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 class TxtFormFieldCustom extends StatelessWidget {
   final String label;
   final IconData icon;
+  final Function(String) onChanged;
+  final String? Function(String?)? validator;
   final String? errorText;
-  final Function(String)? onChanged;
   final bool? obscureText;
 
   const TxtFormFieldCustom({
     super.key,
     required this.label,
     required this.icon,
+    required this.onChanged,
+    this.validator,
     this.errorText,
-    this.onChanged,
     this.obscureText,
   });
 
@@ -21,11 +23,12 @@ class TxtFormFieldCustom extends StatelessWidget {
     return TextFormField(
       obscureText: obscureText ?? false,
       onChanged: (text) {
-        if (onChanged != null) {
-          onChanged!(text);
-        }
-        // onChanged?.call(text);
+        // if (onChanged != null) {
+        //   onChanged(text);
+        // }
+        onChanged(text);
       },
+      validator: validator,
       decoration: InputDecoration(
         label: Text(label, style: TextStyle(color: Colors.white)),
         errorText: errorText,

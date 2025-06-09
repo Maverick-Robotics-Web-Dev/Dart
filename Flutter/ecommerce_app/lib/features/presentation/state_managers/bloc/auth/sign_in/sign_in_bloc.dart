@@ -15,6 +15,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInInitEvent>(_onSignInInitEvent);
     on<EmailChangedEvent>(_onEmailChangedEvent);
     on<PasswordChangedEvent>(_onPasswordChangedEvent);
+    on<SignInFormResetEvent>(_onSignInFormResetEvent);
     on<SignInSubmitEvent>(_onSignInSubmitEvent);
   }
 
@@ -31,9 +32,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     EmailChangedEvent event,
     Emitter<SignInState> emit,
   ) async {
+    bool emailFormatValid = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(event.email.value);
     emit(
       state.copyWith(
-        email: BlocFormItem(value: event.email.value),
+        email: BlocFormItem(
+          value: event.email.value,
+          error:
+              event.email.value.isNotEmpty && emailFormatValid
+                  ? null
+                  : 'Invalid email format',
+        ),
         formKey: formKey,
       ),
     );
@@ -45,24 +55,39 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     emit(
       state.copyWith(
-        password: BlocFormItem(value: event.password.value),
+        password: BlocFormItem(
+          value: event.password.value,
+          error:
+              event.password.value.isNotEmpty &&
+                      event.password.value.length >= 8
+                  ? null
+                  : 'Password must be at least 8 characters',
+        ),
         formKey: formKey,
       ),
     );
+  }
+
+  Future<void> _onSignInFormResetEvent(
+    SignInFormResetEvent event,
+    Emitter<SignInState> emit,
+  ) async {
+    state.formKey?.currentState?.reset();
   }
 
   Future<void> _onSignInSubmitEvent(
     SignInSubmitEvent event,
     Emitter<SignInState> emit,
   ) async {
-    emit(state.copyWith(loadingData: 'Cargando'));
+    // emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
     final response = await authUseCases.signIn(
       SignIn(email: state.email.value, password: state.password.value),
     );
 
     response.fold(
-      (failure) => emit(state.copyWith(errorData: failure.errorMessage)),
-      (signIn) => emit(state.copyWith(singInResponse: signIn)),
+      (failure) => emit(state.copyWith(errorData: failure, formKey: formKey)),
+      (signIn) =>
+          emit(state.copyWith(signInResponse: signIn, formKey: formKey)),
     );
   }
 
