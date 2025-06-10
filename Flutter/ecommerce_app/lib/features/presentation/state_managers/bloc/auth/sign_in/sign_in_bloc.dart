@@ -8,8 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   AuthUseCases authUseCases;
-  // final _emailController = BehaviorSubject<String>();
-  // final _passwordController = BehaviorSubject<String>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   SignInBloc(this.authUseCases) : super(SignInState()) {
     on<SignInInitEvent>(_onSignInInitEvent);
@@ -18,8 +17,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInFormResetEvent>(_onSignInFormResetEvent);
     on<SignInSubmitEvent>(_onSignInSubmitEvent);
   }
-
-  final formKey = GlobalKey<FormState>();
 
   Future<void> _onSignInInitEvent(
     SignInInitEvent event,
@@ -85,7 +82,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
 
     response.fold(
-      (failure) => emit(state.copyWith(errorData: failure, formKey: formKey)),
+      (failure) => emit(state.copyWith(failure: failure, formKey: formKey)),
       (signIn) =>
           emit(state.copyWith(signInResponse: signIn, formKey: formKey)),
     );

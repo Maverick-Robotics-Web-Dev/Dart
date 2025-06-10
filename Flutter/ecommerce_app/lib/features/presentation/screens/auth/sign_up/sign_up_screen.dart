@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_up/sign_up_bloc_cubit.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_up/sign_up_bloc.dart';
 import 'package:ecommerce_app/features/presentation/widgets/btn_elevated_custom.dart';
 import 'package:ecommerce_app/features/presentation/widgets/btn_icon_custom.dart';
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
@@ -14,7 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  SignUpBlocCubit? _signUpBlocCubit;
+  SignUpBloc? _signUpBlocCubit;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _signUpBlocCubit = BlocProvider.of<SignUpBlocCubit>(context, listen: false);
+    _signUpBlocCubit = BlocProvider.of<SignUpBloc>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         body: SizedBox(

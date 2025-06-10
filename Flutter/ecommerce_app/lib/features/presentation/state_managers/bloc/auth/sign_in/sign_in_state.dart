@@ -9,7 +9,7 @@ class SignInState extends Equatable {
   final BlocFormItem password;
   final String? loadingData;
   final SignInResponse? signInResponse;
-  final Failure? errorData;
+  final Failure? failure;
   final GlobalKey<FormState>? formKey;
 
   const SignInState({
@@ -17,7 +17,7 @@ class SignInState extends Equatable {
     this.password = const BlocFormItem(error: 'Ingrese el password'),
     this.loadingData,
     this.signInResponse,
-    this.errorData,
+    this.failure,
     this.formKey,
   });
 
@@ -26,14 +26,14 @@ class SignInState extends Equatable {
     BlocFormItem? password,
     String? loadingData,
     SignInResponse? signInResponse,
-    Failure? errorData,
+    Failure? failure,
     GlobalKey<FormState>? formKey,
   }) => SignInState(
     email: email ?? this.email,
     password: password ?? this.password,
     loadingData: loadingData,
     signInResponse: signInResponse,
-    errorData: errorData,
+    failure: failure,
     formKey: formKey,
   );
 
@@ -43,6 +43,6 @@ class SignInState extends Equatable {
     password,
     loadingData,
     signInResponse,
-    errorData,
+    failure,
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/errors/failures.dart';
+import 'package:ecommerce_app/features/domain/entities/auth/sign_up/sign_up.dart';
 import 'package:ecommerce_app/features/domain/entities/auth/sign_up/sign_up_response.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/bloc_form_item.dart';
 import 'package:equatable/equatable.dart';
@@ -28,6 +29,14 @@ class SignUpState extends Equatable {
     this.failure,
     this.formKey,
   });
+
+  SignUp toSignUp() => SignUp(
+    name: name.value,
+    lastname: lastname.value,
+    email: email.value,
+    phone: phone.value,
+    password: password.value,
+  );
 
   SignUpState copyWith({
     BlocFormItem? name,

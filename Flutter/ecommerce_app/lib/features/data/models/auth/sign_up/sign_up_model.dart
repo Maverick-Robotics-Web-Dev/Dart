@@ -1,24 +1,24 @@
 import 'package:ecommerce_app/features/data/models/users/role_model.dart';
-import 'package:ecommerce_app/features/domain/entities/users/user.dart';
+import 'package:ecommerce_app/features/domain/entities/auth/sign_up/sign_up.dart';
 
-class UserModel extends User {
-  UserModel({
-    required super.id,
+class SignUpModel extends SignUp {
+  SignUpModel({
     required super.name,
     required super.lastname,
     required super.email,
     required super.phone,
+    required super.password,
     super.image,
     super.notificationToken,
     super.roles,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    id: json["id"],
+  factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
     name: json["name"],
     lastname: json["lastname"],
     email: json["email"],
     phone: json["phone"],
+    password: json["password"],
     image: json["image"],
     notificationToken: json["notification_token"],
     roles:
@@ -29,28 +29,28 @@ class UserModel extends User {
             : [],
   );
 
-  factory UserModel.fromEntity(User user) => UserModel(
-    id: user.id,
-    name: user.name,
-    lastname: user.lastname,
-    email: user.email,
-    phone: user.phone,
-    image: user.image,
-    notificationToken: user.notificationToken,
+  factory SignUpModel.fromEntity(SignUp signUp) => SignUpModel(
+    name: signUp.name,
+    lastname: signUp.lastname,
+    email: signUp.email,
+    phone: signUp.phone,
+    password: signUp.password,
+    image: signUp.image,
+    notificationToken: signUp.notificationToken,
     roles:
-        user.roles != null
+        signUp.roles != null
             ? List<RoleModel>.from(
-              user.roles!.map((x) => RoleModel.fromEntity(x)),
+              signUp.roles!.map((x) => RoleModel.fromEntity(x)),
             )
             : [],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
     "name": name,
     "lastname": lastname,
     "email": email,
     "phone": phone,
+    "password": password,
     "image": image,
     "notification_token": notificationToken,
     "roles":

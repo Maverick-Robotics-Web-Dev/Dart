@@ -38,9 +38,9 @@ class _SignInScreenState extends State<SignInScreen> {
           width: double.infinity,
           child: BlocListener<SignInBloc, SignInState>(
             listener: (context, state) {
-              if (state.errorData is Failure) {
+              if (state.failure is Failure) {
                 Fluttertoast.showToast(
-                  msg: state.errorData!.errorMessage,
+                  msg: state.failure!.errorMessage,
                   toastLength: Toast.LENGTH_LONG,
                 );
               } else if (state.signInResponse is SignInResponseModel) {
