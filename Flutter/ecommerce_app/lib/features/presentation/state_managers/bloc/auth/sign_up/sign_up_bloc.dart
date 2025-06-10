@@ -34,7 +34,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     emit(
       state.copyWith(
-        email: BlocFormItem(
+        name: BlocFormItem(
           value: event.name.value,
           error: event.name.value.isNotEmpty ? null : 'Ingrese el Nombre',
         ),
@@ -49,7 +49,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     emit(
       state.copyWith(
-        email: BlocFormItem(
+        lastname: BlocFormItem(
           value: event.lastname.value,
           error: event.lastname.value.isNotEmpty ? null : 'Ingrese el Apellido',
         ),
@@ -72,7 +72,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           error:
               event.email.value.isNotEmpty && emailFormatValid
                   ? null
-                  : 'Invalid email format',
+                  : 'Formato de email invalido',
         ),
         formKey: formKey,
       ),
@@ -85,7 +85,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     emit(
       state.copyWith(
-        email: BlocFormItem(
+        phone: BlocFormItem(
           value: event.phone.value,
           error: event.phone.value.isNotEmpty ? null : 'Ingrese el Telefono',
         ),
@@ -106,7 +106,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
               event.password.value.isNotEmpty &&
                       event.password.value.length >= 8
                   ? null
-                  : 'Password must be at least 8 characters',
+                  : 'Ingrese contraseña mayor a 8 caracteres',
         ),
         formKey: formKey,
       ),
@@ -119,12 +119,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     emit(
       state.copyWith(
-        password: BlocFormItem(
+        confirmPassword: BlocFormItem(
           value: event.confirmPassword.value,
           error:
               event.confirmPassword.value.isNotEmpty
                   ? null
-                  : 'Confirm Password',
+                  : 'Confirmar contraseña',
         ),
         formKey: formKey,
       ),

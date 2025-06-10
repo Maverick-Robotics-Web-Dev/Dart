@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/features/domain/entities/auth/sign_in/sign_in.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_state.dart';
@@ -76,10 +75,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     SignInSubmitEvent event,
     Emitter<SignInState> emit,
   ) async {
-    // emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
-    final response = await authUseCases.signIn(
-      SignIn(email: state.email.value, password: state.password.value),
-    );
+    emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
+    final response = await authUseCases.signIn(state.toSignIn());
 
     response.fold(
       (failure) => emit(state.copyWith(failure: failure, formKey: formKey)),

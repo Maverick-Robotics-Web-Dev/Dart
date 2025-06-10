@@ -1,5 +1,3 @@
-import 'package:ecommerce_app/features/domain/entities/users/role.dart';
-
 class SignUp {
   final String name;
   final String lastname;
@@ -8,7 +6,6 @@ class SignUp {
   final String password;
   final String? image;
   final dynamic notificationToken;
-  final List<Role>? roles;
 
   SignUp({
     required this.name,
@@ -18,6 +15,5 @@ class SignUp {
     required this.password,
     this.image,
     this.notificationToken,
-    this.roles,
   });
 }

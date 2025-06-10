@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/features/data/models/users/role_model.dart';
 import 'package:ecommerce_app/features/domain/entities/auth/sign_up/sign_up.dart';
 
 class SignUpModel extends SignUp {
@@ -10,7 +9,6 @@ class SignUpModel extends SignUp {
     required super.password,
     super.image,
     super.notificationToken,
-    super.roles,
   });
 
   factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
@@ -21,12 +19,6 @@ class SignUpModel extends SignUp {
     password: json["password"],
     image: json["image"],
     notificationToken: json["notification_token"],
-    roles:
-        json["roles"] != null
-            ? List<RoleModel>.from(
-              json["roles"].map((x) => RoleModel.fromJson(x)),
-            )
-            : [],
   );
 
   factory SignUpModel.fromEntity(SignUp signUp) => SignUpModel(
@@ -37,12 +29,6 @@ class SignUpModel extends SignUp {
     password: signUp.password,
     image: signUp.image,
     notificationToken: signUp.notificationToken,
-    roles:
-        signUp.roles != null
-            ? List<RoleModel>.from(
-              signUp.roles!.map((x) => RoleModel.fromEntity(x)),
-            )
-            : [],
   );
 
   Map<String, dynamic> toJson() => {
@@ -53,12 +39,5 @@ class SignUpModel extends SignUp {
     "password": password,
     "image": image,
     "notification_token": notificationToken,
-    "roles":
-        roles != null
-            ? List<dynamic>.from(
-              roles!.map((x) => RoleModel.fromEntity(x).toJson()),
-            )
-            : [],
-    // "roles": List<dynamic>.from(roles.map((x) => x.toJson())),
   };
 }

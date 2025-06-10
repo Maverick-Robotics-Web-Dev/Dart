@@ -11,10 +11,10 @@ import 'package:ecommerce_app/features/domain/entities/auth/sign_up/sign_up.dart
 
 class AuthRemoteDataSource {
   final _dio = Dio();
-  // final String _urlSignIn = '${ApiConfig.apiEcommercePath}/auth/sign_in/';
-  final String _urlSignIn = '${ApiConfig.apiEcommerceHomePath}/auth/sign_in/';
-  // final String _urlSignUp = '${ApiConfig.apiEcommercePath}/auth/sign_up/';
-  final String _urlSignUp = '${ApiConfig.apiEcommerceHomePath}/auth/sign_up/';
+  final String _urlSignIn = '${ApiConfig.apiEcommercePath}/auth/sign_in/';
+  final String _urlSignUp = '${ApiConfig.apiEcommercePath}/auth/sign_up/';
+  // final String _urlSignIn = '${ApiConfig.apiEcommerceHomePath}/auth/sign_in/';
+  // final String _urlSignUp = '${ApiConfig.apiEcommerceHomePath}/auth/sign_up/';
 
   Future<SignInResponseModel> signIn(SignIn signInData) async {
     try {
@@ -44,9 +44,10 @@ class AuthRemoteDataSource {
 
   Future<SignUpResponseModel> signUp(SignUp signUpData) async {
     try {
+      // print(signUpData);
       Map<String, dynamic> signUpJson =
           SignUpModel.fromEntity(signUpData).toJson();
-
+      // print(signUpJson.values);
       Response<dynamic> response = await _dio.post(
         _urlSignUp,
         data: signUpJson,
@@ -57,10 +58,12 @@ class AuthRemoteDataSource {
       return signUpResponse;
     } catch (e) {
       if (e is DioException) {
+        print('DioError: ${e.response}');
         throw DioServerError(
           message: getMessageString(e.response?.data["msg"]),
         );
       } else {
+        print('Error: $e');
         throw ServerError(message: e.toString());
       }
     }
