@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/data/models/auth/sign_in/sign_in_response_model.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/bloc_form_item.dart';
 import 'package:equatable/equatable.dart';
 
@@ -40,4 +41,13 @@ class SignInSubmitEvent extends SignInEvent {
 
   @override
   List<Object?> get props => [];
+}
+
+class SignInSaveUserSession extends SignInEvent {
+  final SignInResponseModel signInResponse;
+
+  SignInSaveUserSession({required this.signInResponse});
+
+  @override
+  List<Object?> get props => [signInResponse];
 }

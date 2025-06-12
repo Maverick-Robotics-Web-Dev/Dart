@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/data/models/auth/sign_in/sign_in_response_model.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_state.dart';
@@ -15,12 +16,15 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<PasswordChangedEvent>(_onPasswordChangedEvent);
     on<SignInFormResetEvent>(_onSignInFormResetEvent);
     on<SignInSubmitEvent>(_onSignInSubmitEvent);
+    on<SignInSaveUserSession>(_onSignInSaveUserSession);
   }
 
   Future<void> _onSignInInitEvent(
     SignInInitEvent event,
     Emitter<SignInState> emit,
   ) async {
+    SignInResponseModel? signInResponse = await authUseCases.getUserSession();
+    print('USUARIO DE SESION: ${signInResponse?.toJson()}');
     emit(state.copyWith(formKey: formKey));
   }
 
@@ -83,5 +87,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       (signIn) =>
           emit(state.copyWith(signInResponse: signIn, formKey: formKey)),
     );
+  }
+
+  Future<void> _onSignInSaveUserSession(
+    SignInSaveUserSession event,
+    Emitter<SignInState> emit,
+  ) async {
+    await authUseCases.saveUserSession(event.signInResponse);
   }
 }
