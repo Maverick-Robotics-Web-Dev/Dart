@@ -47,14 +47,13 @@ class _SignInScreenState extends State<SignInScreen> {
         } else if (state.signInResponse is SignInResponseModel) {
           final SignInResponseModel signInResponse =
               state.signInResponse as SignInResponseModel;
-          _signInBloc?.add(SignInFormResetEvent());
+          // _signInBloc?.add(SignInFormResetEvent());
           _signInBloc?.add(
             SignInSaveUserSession(signInResponse: signInResponse),
           );
-          Fluttertoast.showToast(
-            msg: 'Login Exitoso',
-            toastLength: Toast.LENGTH_LONG,
-          );
+          WidgetsBinding.instance.addPostFrameCallback((timestamp) {
+            Navigator.pushNamed(context, 'roles');
+          });
         }
       },
       child: _blocBuilder(),

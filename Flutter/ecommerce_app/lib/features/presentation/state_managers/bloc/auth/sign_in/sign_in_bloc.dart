@@ -26,6 +26,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     SignInResponseModel? signInResponse = await authUseCases.getUserSession();
     print('USUARIO DE SESION: ${signInResponse?.toJson()}');
     emit(state.copyWith(formKey: formKey));
+    if (signInResponse != null) {
+      emit(state.copyWith(signInResponse: signInResponse, formKey: formKey));
+    }
   }
 
   Future<void> _onEmailChangedEvent(
