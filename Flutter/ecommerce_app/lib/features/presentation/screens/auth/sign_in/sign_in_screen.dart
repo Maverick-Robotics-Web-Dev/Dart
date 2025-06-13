@@ -52,7 +52,11 @@ class _SignInScreenState extends State<SignInScreen> {
             SignInSaveUserSession(signInResponse: signInResponse),
           );
           WidgetsBinding.instance.addPostFrameCallback((timestamp) {
-            Navigator.pushNamed(context, 'roles');
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              'roles',
+              (route) => false,
+            );
           });
         }
       },

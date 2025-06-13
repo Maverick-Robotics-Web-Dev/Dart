@@ -3,6 +3,8 @@ import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sig
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_up/sign_up_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_up/sign_up_event.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/roles/roles_bloc.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/roles/roles_event.dart';
 import 'package:ecommerce_app/injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,5 +18,10 @@ List<BlocProvider> blocProviders = [
     create:
         (context) =>
             SignUpBloc(locator<AuthUseCases>())..add(SignUpInitEvent()),
+  ),
+  BlocProvider<RolesBloc>(
+    create:
+        (context) =>
+            RolesBloc(locator<AuthUseCases>())..add(GetRolesListEvent()),
   ),
 ];
