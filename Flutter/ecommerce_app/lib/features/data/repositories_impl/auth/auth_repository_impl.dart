@@ -55,4 +55,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return null;
   }
+
+  @override
+  Future<bool> signOut() async {
+    return await sharedPref.remove('user');
+  }
 }

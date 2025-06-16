@@ -6,6 +6,7 @@ import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart
 import 'package:ecommerce_app/features/domain/use_cases/auth/get_user_session_use_case.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/save_user_session_use_case.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/sign_in_use_case.dart';
+import 'package:ecommerce_app/features/domain/use_cases/auth/sign_out_use_case.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/sign_up_use_case.dart';
 import 'package:injectable/injectable.dart';
 
@@ -27,5 +28,6 @@ abstract class AppModule {
     signUp: SignUpUseCase(authRepository),
     saveUserSession: SaveUserSessionUseCase(authRepository),
     getUserSession: GetUserSessionUseCase(authRepository),
+    signOut: SignOutUseCase(authRepository),
   );
 }
