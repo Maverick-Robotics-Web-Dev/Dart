@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/features/presentation/screens/category/category_screen.dart';
 import 'package:ecommerce_app/features/presentation/screens/product/product_screen.dart';
+import 'package:ecommerce_app/features/presentation/screens/user_profile/info/profile_info_screen.dart';
+import 'package:ecommerce_app/features/presentation/screens/user_profile/update/profile_update_screen.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_state.dart';
@@ -15,7 +17,12 @@ class AdminHomeScreen extends StatefulWidget {
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
   AdminBloc? _bloc;
-  List<Widget> screens = <Widget>[CategoryScreen(), ProductScreen()];
+  List<Widget> screens = <Widget>[
+    ProfileInfoScreen(),
+    ProfileUpdateScreen(),
+    CategoryScreen(),
+    ProductScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     child: Text('Admin', style: TextStyle(color: Colors.white)),
                   ),
                   ListTile(
-                    title: Text('Categorias'),
+                    title: Text('Perfil'),
                     selected: state.screenIndex == 0,
                     onTap: () {
                       _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 0));
@@ -42,11 +49,38 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     },
                   ),
                   ListTile(
-                    title: Text('Productos'),
+                    title: Text('Actualizar'),
                     selected: state.screenIndex == 1,
                     onTap: () {
                       _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 1));
                       Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Categorias'),
+                    selected: state.screenIndex == 2,
+                    onTap: () {
+                      _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 2));
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Productos'),
+                    selected: state.screenIndex == 3,
+                    onTap: () {
+                      _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 3));
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Cerrar Sesion'),
+                    onTap: () {
+                      _bloc?.add(SignOutEvent());
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        'sign_in',
+                        (route) => false,
+                      );
                     },
                   ),
                 ],

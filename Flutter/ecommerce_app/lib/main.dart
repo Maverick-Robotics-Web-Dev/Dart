@@ -3,6 +3,8 @@ import 'package:ecommerce_app/features/presentation/screens/auth/sign_in/sign_in
 import 'package:ecommerce_app/features/presentation/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:ecommerce_app/features/presentation/screens/client/home/client_home_screen.dart';
 import 'package:ecommerce_app/features/presentation/screens/roles/roles_screen.dart';
+import 'package:ecommerce_app/features/presentation/screens/user_profile/info/profile_info_screen.dart';
+import 'package:ecommerce_app/features/presentation/screens/user_profile/update/profile_update_screen.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc_providers.dart';
 import 'package:ecommerce_app/injection.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,8 @@ class MainApp extends StatelessWidget {
           'sign_in': (BuildContext context) => SignInScreen(),
           'sign_up': (BuildContext context) => SignUpScreen(),
           'roles': (BuildContext context) => RolesScreen(),
+          'profile/info': (BuildContext context) => ProfileInfoScreen(),
+          'profile/update': (BuildContext context) => ProfileUpdateScreen(),
           'client/home': (BuildContext context) => ClientHomeScreen(),
           'admin/home': (BuildContext context) => AdminHomeScreen(),
         },

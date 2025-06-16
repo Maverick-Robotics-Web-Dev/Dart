@@ -9,3 +9,10 @@ class ChangeDrawerScreenEvent extends AdminEvent {
   @override
   List<Object?> get props => [];
 }
+
+class SignOutEvent extends AdminEvent {
+  SignOutEvent();
+
+  @override
+  List<Object?> get props => [];
+}
