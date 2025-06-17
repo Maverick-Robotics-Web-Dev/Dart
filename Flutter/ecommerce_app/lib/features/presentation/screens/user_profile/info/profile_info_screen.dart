@@ -43,12 +43,18 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
   }
 
   Widget _cardProfile(BuildContext context, ProfileInfoState state) {
-    return Column(
-      children: [
-        _imageProfile(state.user),
-        Spacer(),
-        _cardInfo(context, state.user),
-      ],
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _imageProfile(state.user),
+            // Spacer(),
+            _cardInfo(context, state.user),
+          ],
+        ),
+      ),
     );
   }
 
@@ -76,7 +82,7 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
   Widget _cardInfo(BuildContext context, User? user) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.40,
+      height: MediaQuery.of(context).size.height * 0.46,
       decoration: BoxDecoration(
         color: Color.fromRGBO(255, 255, 255, 0.7),
         borderRadius: BorderRadius.only(
@@ -84,37 +90,37 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
           topRight: Radius.circular(40),
         ),
       ),
-      child: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              ListTile(
-                title: Text('${user?.name ?? ''} ${user?.lastname ?? ''}'),
-                subtitle: Text('Nombre de Usuario'),
-                leading: Icon(Icons.person),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            ListTile(
+              title: Text('${user?.name ?? ''} ${user?.lastname ?? ''}'),
+              subtitle: Text('Nombre de Usuario'),
+              leading: Icon(Icons.person),
+            ),
+            ListTile(
+              title: Text(user?.email ?? ''),
+              subtitle: Text('Correo Electrónico'),
+              leading: Icon(Icons.email),
+            ),
+            ListTile(
+              title: Text(user?.phone ?? ''),
+              subtitle: Text('Telefono'),
+              leading: Icon(Icons.phone),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              margin: EdgeInsets.only(bottom: 10),
+              child: FloatingActionButton(
+                backgroundColor: Colors.black,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'profile/update');
+                },
+                child: Icon(Icons.edit, color: Colors.white),
               ),
-              ListTile(
-                title: Text(user?.email ?? ''),
-                subtitle: Text('Correo Electrónico'),
-                leading: Icon(Icons.email),
-              ),
-              ListTile(
-                title: Text(user?.phone ?? ''),
-                subtitle: Text('Telefono'),
-                leading: Icon(Icons.phone),
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.only(bottom: 10),
-                child: FloatingActionButton(
-                  backgroundColor: Colors.black,
-                  onPressed: () {},
-                  child: Icon(Icons.edit, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

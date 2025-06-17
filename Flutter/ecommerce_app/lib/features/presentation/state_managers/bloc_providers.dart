@@ -8,6 +8,8 @@ import 'package:ecommerce_app/features/presentation/state_managers/bloc/roles/ro
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/roles/roles_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_event.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_bloc.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
 import 'package:ecommerce_app/injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,22 +19,30 @@ List<BlocProvider> blocProviders = [
         (context) =>
             SignInBloc(locator<AuthUseCases>())..add(SignInInitEvent()),
   ),
+
   BlocProvider<SignUpBloc>(
     create:
         (context) =>
             SignUpBloc(locator<AuthUseCases>())..add(SignUpInitEvent()),
   ),
+
   BlocProvider<RolesBloc>(
     create:
         (context) =>
             RolesBloc(locator<AuthUseCases>())..add(GetRolesListEvent()),
   ),
+
   BlocProvider<AdminBloc>(
     create: (context) => AdminBloc(locator<AuthUseCases>()),
   ),
+
   BlocProvider<ProfileInfoBloc>(
     create:
         (context) =>
             ProfileInfoBloc(locator<AuthUseCases>())..add(GetUserEvent()),
+  ),
+
+  BlocProvider<ProfileUpdateBloc>(
+    create: (context) => ProfileUpdateBloc()..add(ProfileUpdateInitEvent()),
   ),
 ];

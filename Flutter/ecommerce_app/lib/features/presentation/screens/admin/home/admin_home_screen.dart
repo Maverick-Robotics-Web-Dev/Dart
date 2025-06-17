@@ -19,7 +19,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   AdminBloc? _bloc;
   List<Widget> screens = <Widget>[
     ProfileInfoScreen(),
-    ProfileUpdateScreen(),
+    // ProfileUpdateScreen(),
     CategoryScreen(),
     ProductScreen(),
   ];
@@ -48,8 +48,16 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       Navigator.pop(context);
                     },
                   ),
+                  // ListTile(
+                  //   title: Text('Actualizar'),
+                  //   selected: state.screenIndex == 1,
+                  //   onTap: () {
+                  //     _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 1));
+                  //     Navigator.pop(context);
+                  //   },
+                  // ),
                   ListTile(
-                    title: Text('Actualizar'),
+                    title: Text('Categorias'),
                     selected: state.screenIndex == 1,
                     onTap: () {
                       _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 1));
@@ -57,18 +65,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     },
                   ),
                   ListTile(
-                    title: Text('Categorias'),
+                    title: Text('Productos'),
                     selected: state.screenIndex == 2,
                     onTap: () {
                       _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 2));
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Productos'),
-                    selected: state.screenIndex == 3,
-                    onTap: () {
-                      _bloc?.add(ChangeDrawerScreenEvent(screenIndex: 3));
                       Navigator.pop(context);
                     },
                   ),
