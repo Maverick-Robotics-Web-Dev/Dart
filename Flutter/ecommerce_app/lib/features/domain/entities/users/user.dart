@@ -6,7 +6,7 @@ class User {
   final String lastname;
   final String email;
   final String phone;
-  final String? image;
+  final dynamic image;
   final dynamic notificationToken;
   final List<Role>? roles;
 

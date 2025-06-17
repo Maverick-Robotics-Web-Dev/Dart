@@ -4,24 +4,29 @@ class TxtFormFieldCustom extends StatelessWidget {
   final String label;
   final IconData icon;
   final Function(String) onChanged;
-  final String? Function(String?)? validator;
+  final Color? color;
   final String? errorText;
   final bool? obscureText;
+  final String? initialValue;
+  final String? Function(String?)? validator;
 
   const TxtFormFieldCustom({
     super.key,
     required this.label,
     required this.icon,
     required this.onChanged,
-    this.validator,
+    this.color = Colors.white,
     this.errorText,
     this.obscureText,
+    this.initialValue,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText ?? false,
+      initialValue: initialValue,
       onChanged: (text) {
         // if (onChanged != null) {
         //   onChanged(text);
@@ -30,17 +35,17 @@ class TxtFormFieldCustom extends StatelessWidget {
       },
       validator: validator,
       decoration: InputDecoration(
-        label: Text(label, style: TextStyle(color: Colors.white)),
+        label: Text(label, style: TextStyle(color: color)),
         errorText: errorText,
-        prefixIcon: Icon(icon, color: Colors.white),
+        prefixIcon: Icon(icon, color: color),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: color!),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: color!),
         ),
       ),
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: color),
     );
   }
 }

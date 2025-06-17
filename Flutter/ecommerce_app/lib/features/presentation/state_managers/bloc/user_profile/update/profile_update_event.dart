@@ -37,6 +37,20 @@ class PhoneChangedEvent extends ProfileUpdateEvent {
   List<Object?> get props => [phone];
 }
 
+class ImageUploadEvent extends ProfileUpdateEvent {
+  ImageUploadEvent();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class PhotoUploadEvent extends ProfileUpdateEvent {
+  PhotoUploadEvent();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class UpdateSubmitEvent extends ProfileUpdateEvent {
   UpdateSubmitEvent();
 

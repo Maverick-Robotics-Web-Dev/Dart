@@ -1,6 +1,9 @@
 import 'package:ecommerce_app/features/domain/entities/users/user.dart';
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_bloc.dart';
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_state.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_bloc.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_state.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/bloc_form_item.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/select_option_image_dialog.dart';
 import 'package:ecommerce_app/features/presentation/widgets/btn_icon_custom.dart';
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +17,21 @@ class ProfileUpdateScreen extends StatefulWidget {
 }
 
 class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
+  ProfileUpdateBloc? _profileUpdateBloc;
   @override
   Widget build(BuildContext context) {
+    _profileUpdateBloc = BlocProvider.of<ProfileUpdateBloc>(context);
+    User? user = ModalRoute.of(context)?.settings.arguments as User;
+
     return SafeArea(
       child: Scaffold(
-        body: BlocBuilder<ProfileInfoBloc, ProfileInfoState>(
+        body: BlocBuilder<ProfileUpdateBloc, ProfileUpdateState>(
           builder: (context, state) {
             return Stack(
               alignment: Alignment.center,
               children: [
                 _imageBackground(context),
-                _cardProfile(context, state),
+                _cardProfile(context, state, user),
                 _btnBack(),
               ],
             );
@@ -57,47 +64,66 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
     );
   }
 
-  Widget _cardProfile(BuildContext context, ProfileInfoState state) {
+  Widget _cardProfile(
+    BuildContext context,
+    ProfileUpdateState state,
+    User? user,
+  ) {
     return SingleChildScrollView(
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _imageProfile(state.user),
+            _imageProfile(context, state),
             // Spacer(),
-            _cardInfo(context, state.user),
+            _cardInfo(context, state, user),
           ],
         ),
       ),
     );
   }
 
-  Widget _imageProfile(User? user) {
-    return Container(
-      margin: EdgeInsets.only(top: 100),
-      height: 150,
-      child: AspectRatio(
-        aspectRatio: 1 / 1,
-        child: ClipOval(
-          child: FadeInImage(
-            placeholder: AssetImage('assets/img/no-image.png'),
-            image: NetworkImage(
-              user?.image ??
-                  'https://forbes.es/wp-content/uploads/2022/06/topgun.jpg',
-            ),
-            fit: BoxFit.cover,
-            fadeInDuration: Duration(seconds: 1),
+  Widget _imageProfile(BuildContext context, ProfileUpdateState state) {
+    return GestureDetector(
+      onTap: () {
+        selectOptionImageDialog(
+          context,
+          () {
+            _profileUpdateBloc?.add(ImageUploadEvent());
+          },
+          () {
+            _profileUpdateBloc?.add(PhotoUploadEvent());
+          },
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 100),
+        height: 150,
+        child: AspectRatio(
+          aspectRatio: 1 / 1,
+          child: ClipOval(
+            child:
+                state.image != null
+                    ? Image.file(state.image!, fit: BoxFit.cover)
+                    : FadeInImage(
+                      placeholder: AssetImage('assets/img/no-image.png'),
+                      image: NetworkImage(
+                        'https://forbes.es/wp-content/uploads/2022/06/topgun.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                      fadeInDuration: Duration(seconds: 1),
+                    ),
           ),
         ),
       ),
     );
   }
 
-  Widget _cardInfo(BuildContext context, User? user) {
+  Widget _cardInfo(BuildContext context, ProfileUpdateState state, User? user) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.44,
+      height: MediaQuery.of(context).size.height * 0.54,
       decoration: BoxDecoration(
         color: Color.fromRGBO(255, 255, 255, 0.7),
         borderRadius: BorderRadius.only(
@@ -109,61 +135,86 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
         margin: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            _txtFormFieldName(),
-            _txtFormFieldLastName(),
-            _txtFormFieldPhone(),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: EdgeInsets.only(bottom: 10, top: 26),
-              child: FloatingActionButton(
-                backgroundColor: Colors.black,
-                onPressed: () {},
-                child: Icon(Icons.check, color: Colors.white),
-              ),
-            ),
+            _textUpdateInfo(),
+            _txtFormFieldName(state, user),
+            _txtFormFieldLastName(state, user),
+            _txtFormFieldPhone(state, user),
+            _btnSubmit(),
           ],
         ),
       ),
     );
   }
 
-  Widget _txtFormFieldName() {
+  Container _btnSubmit() {
+    return Container(
+      alignment: Alignment.centerRight,
+      margin: EdgeInsets.only(bottom: 10, top: 34),
+      child: FloatingActionButton(
+        backgroundColor: Colors.black,
+        onPressed: () {},
+        child: Icon(Icons.check, color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _textUpdateInfo() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: EdgeInsets.only(top: 30, bottom: 10, left: 35),
+      child: Text('ACTUALIZAR INFORMACIÓN', style: TextStyle(fontSize: 18)),
+    );
+  }
+
+  Widget _txtFormFieldName(ProfileUpdateState state, User? user) {
     return Padding(
       padding: EdgeInsets.only(top: 24, right: 24, left: 24),
       child: TxtFormFieldCustom(
         label: 'Nombre',
         icon: Icons.person,
-        // validator: (value) => state.name.error,
+        initialValue: user?.name ?? '',
+        color: Colors.black,
+        validator: (value) => state.name.error,
         onChanged: (text) {
-          // _signUpBloc?.add(NameChangedEvent(name: BlocFormItem(value: text)));
+          _profileUpdateBloc?.add(
+            NameChangedEvent(name: BlocFormItem(value: text)),
+          );
         },
       ),
     );
   }
 
-  Widget _txtFormFieldLastName() {
+  Widget _txtFormFieldLastName(ProfileUpdateState state, User? user) {
     return Padding(
       padding: EdgeInsets.only(top: 24, right: 24, left: 24),
       child: TxtFormFieldCustom(
         label: 'Apellido',
         icon: Icons.person,
-        // validator: (value) => state.name.error,
+        initialValue: user?.lastname ?? '',
+        color: Colors.black,
+        validator: (value) => state.name.error,
         onChanged: (text) {
-          // _signUpBloc?.add(NameChangedEvent(name: BlocFormItem(value: text)));
+          _profileUpdateBloc?.add(
+            LastNameChangedEvent(lastname: BlocFormItem(value: text)),
+          );
         },
       ),
     );
   }
 
-  Widget _txtFormFieldPhone() {
+  Widget _txtFormFieldPhone(ProfileUpdateState state, User? user) {
     return Padding(
       padding: EdgeInsets.only(top: 24, right: 24, left: 24),
       child: TxtFormFieldCustom(
         label: 'Telefono',
         icon: Icons.smartphone,
-        // validator: (value) => state.name.error,
+        initialValue: user?.phone ?? '',
+        color: Colors.black,
+        validator: (value) => state.name.error,
         onChanged: (text) {
-          // _signUpBloc?.add(NameChangedEvent(name: BlocFormItem(value: text)));
+          _profileUpdateBloc?.add(
+            PhoneChangedEvent(phone: BlocFormItem(value: text)),
+          );
         },
       ),
     );
