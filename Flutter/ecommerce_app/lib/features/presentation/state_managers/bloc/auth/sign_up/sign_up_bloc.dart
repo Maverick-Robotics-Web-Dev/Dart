@@ -142,7 +142,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpSubmitEvent event,
     Emitter<SignUpState> emit,
   ) async {
-    // emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
+    emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
     final response = await authUseCases.signUp(state.toSignUp());
 
     response.fold(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ecommerce_app/features/domain/use_cases/users/user_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_state.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/bloc_form_item.dart';
@@ -9,21 +10,31 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  UserUseCases userUseCases;
 
-  ProfileUpdateBloc() : super(ProfileUpdateState()) {
+  ProfileUpdateBloc(this.userUseCases) : super(ProfileUpdateState()) {
     on<ProfileUpdateInitEvent>(_onProfileUpdateInitEvent);
     on<NameChangedEvent>(_onNameChangedEvent);
     on<LastNameChangedEvent>(_onLastNameChangedEvent);
     on<PhoneChangedEvent>(_onPhoneChangedEvent);
     on<ImageUploadEvent>(_onImageUploadEvent);
     on<PhotoUploadEvent>(_onPhotoUploadEvent);
+    on<UpdateSubmitEvent>(_onUpdateSubmitEvent);
   }
 
   Future<void> _onProfileUpdateInitEvent(
     ProfileUpdateInitEvent event,
     Emitter<ProfileUpdateState> emit,
   ) async {
-    emit(state.copyWith(formKey: formKey));
+    emit(
+      state.copyWith(
+        id: event.user?.id,
+        name: BlocFormItem(value: event.user?.name ?? ''),
+        lastname: BlocFormItem(value: event.user?.lastname ?? ''),
+        phone: BlocFormItem(value: event.user?.phone ?? ''),
+        formKey: formKey,
+      ),
+    );
   }
 
   Future<void> _onNameChangedEvent(
@@ -93,5 +104,19 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     if (photo != null) {
       emit(state.copyWith(image: File(photo.path)));
     }
+  }
+
+  Future<void> _onUpdateSubmitEvent(
+    UpdateSubmitEvent event,
+    Emitter<ProfileUpdateState> emit,
+  ) async {
+    emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
+
+    final response = await userUseCases.updateUseCase(state.id, state.toUser());
+
+    response.fold(
+      (failure) => emit(state.copyWith(failure: failure, formKey: formKey)),
+      (user) => emit(state.copyWith(user: user, formKey: formKey)),
+    );
   }
 }

@@ -4,7 +4,7 @@ class User {
   final int id;
   final String name;
   final String lastname;
-  final String email;
+  final String? email;
   final String phone;
   final dynamic image;
   final dynamic notificationToken;
@@ -14,7 +14,7 @@ class User {
     required this.id,
     required this.name,
     required this.lastname,
-    required this.email,
+    this.email,
     required this.phone,
     this.image,
     this.notificationToken,

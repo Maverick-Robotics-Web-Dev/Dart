@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
+import 'package:ecommerce_app/features/domain/use_cases/users/user_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/auth/sign_in/sign_in_event.dart';
@@ -9,7 +10,6 @@ import 'package:ecommerce_app/features/presentation/state_managers/bloc/roles/ro
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_bloc.dart';
-import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
 import 'package:ecommerce_app/injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,6 +43,6 @@ List<BlocProvider> blocProviders = [
   ),
 
   BlocProvider<ProfileUpdateBloc>(
-    create: (context) => ProfileUpdateBloc()..add(ProfileUpdateInitEvent()),
+    create: (context) => ProfileUpdateBloc(locator<UserUseCases>()),
   ),
 ];

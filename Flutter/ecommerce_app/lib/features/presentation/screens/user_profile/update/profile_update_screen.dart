@@ -18,10 +18,20 @@ class ProfileUpdateScreen extends StatefulWidget {
 
 class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
   ProfileUpdateBloc? _profileUpdateBloc;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _profileUpdateBloc?.add(ProfileUpdateInitEvent(user: user));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _profileUpdateBloc = BlocProvider.of<ProfileUpdateBloc>(context);
-    User? user = ModalRoute.of(context)?.settings.arguments as User;
+    user = ModalRoute.of(context)?.settings.arguments as User;
 
     return SafeArea(
       child: Scaffold(

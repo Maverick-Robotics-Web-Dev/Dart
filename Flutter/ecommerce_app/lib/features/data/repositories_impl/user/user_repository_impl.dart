@@ -11,9 +11,9 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, User>> update(String id, User user) async {
+  Future<Either<Failure, User>> update(int id, User user) async {
     try {
-      final response = await remoteDataSource.update(id, user);
+      final response = await remoteDataSource.updateImage(id, user);
       return Right(response);
     } on DioServerError catch (e) {
       return Left(DioFailure(errorMessage: e.message));

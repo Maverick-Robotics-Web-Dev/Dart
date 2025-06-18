@@ -11,6 +11,8 @@ import 'package:ecommerce_app/features/domain/use_cases/auth/save_user_session_u
 import 'package:ecommerce_app/features/domain/use_cases/auth/sign_in_use_case.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/sign_out_use_case.dart';
 import 'package:ecommerce_app/features/domain/use_cases/auth/sign_up_use_case.dart';
+import 'package:ecommerce_app/features/domain/use_cases/users/update_use_case.dart';
+import 'package:ecommerce_app/features/domain/use_cases/users/user_use_cases.dart';
 import 'package:injectable/injectable.dart';
 
 @module
@@ -39,4 +41,8 @@ abstract class AppModule {
     getUserSession: GetUserSessionUseCase(authRepository),
     signOut: SignOutUseCase(authRepository),
   );
+
+  @injectable
+  UserUseCases get userUseCases =>
+      UserUseCases(updateUseCase: UpdateUseCase(userRepository));
 }

@@ -1,13 +1,16 @@
+import 'package:ecommerce_app/features/domain/entities/users/user.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/utils/bloc_form_item.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ProfileUpdateEvent extends Equatable {}
 
 class ProfileUpdateInitEvent extends ProfileUpdateEvent {
-  ProfileUpdateInitEvent();
+  final User? user;
+
+  ProfileUpdateInitEvent({required this.user});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [user];
 }
 
 class NameChangedEvent extends ProfileUpdateEvent {

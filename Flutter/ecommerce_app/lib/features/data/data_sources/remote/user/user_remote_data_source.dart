@@ -7,15 +7,15 @@ import 'package:ecommerce_app/features/domain/entities/users/user.dart';
 
 class UserRemoteDataSource {
   final _dio = Dio();
-  final String _urlUpdate = '${ApiConfig.apiEcommercePath}/users/';
-  // final String _urlUpdate = '${ApiConfig.apiEcommerceHomePath}/users/';
+  // final String _urlUpdate = '${ApiConfig.apiEcommercePath}/users/';
+  final String _urlUpdate = '${ApiConfig.apiEcommerceHomePath}/users/';
 
-  Future<User> update(String id, User user) async {
+  Future<User> update(int id, User user) async {
     try {
       Map<String, dynamic> userJson = UserModel.fromEntity(user).toJson();
 
       Response<dynamic> response = await _dio.patch(
-        _urlUpdate + id,
+        _urlUpdate + id.toString(),
         data: userJson,
         // options: Options(contentType: 'application/json'),
       );
@@ -33,14 +33,14 @@ class UserRemoteDataSource {
     }
   }
 
-  Future<User> updateImage(String id, User user) async {
+  Future<User> updateImage(int id, User user) async {
     try {
       final userFormData = FormData.fromMap(
         UserModel.fromEntity(user).toJson(),
       );
 
       Response<dynamic> response = await _dio.patch(
-        _urlUpdate + id,
+        _urlUpdate + id.toString(),
         data: userFormData,
         // options: Options(contentType: 'application/json'),
       );
