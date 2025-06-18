@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/errors/failures.dart';
 import 'package:ecommerce_app/features/domain/entities/users/user.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
@@ -8,6 +9,7 @@ import 'package:ecommerce_app/features/presentation/widgets/btn_icon_custom.dart
 import 'package:ecommerce_app/features/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfileUpdateScreen extends StatefulWidget {
   const ProfileUpdateScreen({super.key});
@@ -35,17 +37,47 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
 
     return SafeArea(
       child: Scaffold(
-        body: BlocBuilder<ProfileUpdateBloc, ProfileUpdateState>(
-          builder: (context, state) {
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                _imageBackground(context),
-                _cardProfile(context, state, user),
-                _btnBack(),
-              ],
-            );
+        body: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
+          listener: (context, state) {
+            if (state.failure is Failure) {
+              Fluttertoast.showToast(
+                msg: state.failure!.errorMessage,
+                toastLength: Toast.LENGTH_LONG,
+              );
+            } else if (state.user is User) {
+              Fluttertoast.showToast(
+                msg: 'Actualizacion Exitosa',
+                toastLength: Toast.LENGTH_LONG,
+              );
+            }
           },
+          child: BlocBuilder<ProfileUpdateBloc, ProfileUpdateState>(
+            builder: (context, state) {
+              if (state.loadingData == 'Cargando') {
+                return Stack(
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        _imageBackground(context),
+                        _cardProfile(context, state, user),
+                        _btnBack(),
+                      ],
+                    ),
+                    Center(child: CircularProgressIndicator()),
+                  ],
+                );
+              }
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  _imageBackground(context),
+                  _cardProfile(context, state, user),
+                  _btnBack(),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -162,7 +194,9 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
       margin: EdgeInsets.only(bottom: 10, top: 34),
       child: FloatingActionButton(
         backgroundColor: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          _profileUpdateBloc?.add(UpdateSubmitEvent());
+        },
         child: Icon(Icons.check, color: Colors.white),
       ),
     );

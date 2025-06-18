@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/features/presentation/screens/category/category_screen.dart';
 import 'package:ecommerce_app/features/presentation/screens/product/product_screen.dart';
 import 'package:ecommerce_app/features/presentation/screens/user_profile/info/profile_info_screen.dart';
-import 'package:ecommerce_app/features/presentation/screens/user_profile/update/profile_update_screen.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_state.dart';

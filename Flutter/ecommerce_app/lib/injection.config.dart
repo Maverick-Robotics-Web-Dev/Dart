@@ -35,11 +35,11 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final appModule = _$AppModule();
+    gh.factory<_i649.SharedPref>(() => appModule.sharedPref);
     gh.factory<_i145.AuthRemoteDataSource>(() => appModule.remoteDataSource);
     gh.factory<_i192.UserRemoteDataSource>(
       () => appModule.userRemoteDataSource,
     );
-    gh.factory<_i649.SharedPref>(() => appModule.sharedPref);
     gh.factory<_i639.AuthRepository>(() => appModule.authRepository);
     gh.factory<_i762.UserRepository>(() => appModule.userRepository);
     gh.factory<_i210.AuthUseCases>(() => appModule.authUseCases);

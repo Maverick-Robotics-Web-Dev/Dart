@@ -18,13 +18,14 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class AppModule {
   @injectable
+  SharedPref get sharedPref => SharedPref();
+
+  @injectable
   AuthRemoteDataSource get remoteDataSource => AuthRemoteDataSource();
 
   @injectable
-  UserRemoteDataSource get userRemoteDataSource => UserRemoteDataSource();
-
-  @injectable
-  SharedPref get sharedPref => SharedPref();
+  UserRemoteDataSource get userRemoteDataSource =>
+      UserRemoteDataSource(sharedPref);
 
   @injectable
   AuthRepository get authRepository =>
