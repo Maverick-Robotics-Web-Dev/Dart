@@ -26,12 +26,14 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     ProfileUpdateInitEvent event,
     Emitter<ProfileUpdateState> emit,
   ) async {
+    print(event.user?.email);
     emit(
       state.copyWith(
         id: event.user?.id,
         name: BlocFormItem(value: event.user?.name ?? ''),
         lastname: BlocFormItem(value: event.user?.lastname ?? ''),
         phone: BlocFormItem(value: event.user?.phone ?? ''),
+        email: BlocFormItem(value: event.user?.email ?? ''),
         formKey: formKey,
       ),
     );
@@ -90,7 +92,7 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      emit(state.copyWith(image: File(image.path)));
+      emit(state.copyWith(image: File(image.path), formKey: formKey));
     }
   }
 
@@ -102,7 +104,7 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     final XFile? photo = await picker.pickImage(source: ImageSource.camera);
 
     if (photo != null) {
-      emit(state.copyWith(image: File(photo.path)));
+      emit(state.copyWith(image: File(photo.path), formKey: formKey));
     }
   }
 
@@ -113,7 +115,6 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     emit(state.copyWith(loadingData: 'Cargando', formKey: formKey));
 
     final response = await userUseCases.updateUseCase(state.id, state.toUser());
-
     response.fold(
       (failure) => emit(state.copyWith(failure: failure, formKey: formKey)),
       (user) => emit(state.copyWith(user: user, formKey: formKey)),

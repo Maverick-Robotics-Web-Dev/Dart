@@ -11,6 +11,7 @@ class ProfileUpdateState extends Equatable {
   final BlocFormItem name;
   final BlocFormItem lastname;
   final BlocFormItem phone;
+  final BlocFormItem? email;
   final File? image;
   final String? loadingData;
   final User? user;
@@ -22,6 +23,7 @@ class ProfileUpdateState extends Equatable {
     this.name = const BlocFormItem(error: 'Ingrese Nombre'),
     this.lastname = const BlocFormItem(error: 'Ingrese Apellido'),
     this.phone = const BlocFormItem(error: 'Ingrese Telefono'),
+    this.email,
     this.image,
     this.loadingData,
     this.user,
@@ -34,6 +36,7 @@ class ProfileUpdateState extends Equatable {
     name: name.value,
     lastname: lastname.value,
     phone: phone.value,
+    email: email?.value,
     image: image,
   );
 
@@ -42,6 +45,7 @@ class ProfileUpdateState extends Equatable {
     BlocFormItem? name,
     BlocFormItem? lastname,
     BlocFormItem? phone,
+    BlocFormItem? email,
     File? image,
     String? loadingData,
     User? user,
@@ -53,7 +57,8 @@ class ProfileUpdateState extends Equatable {
       name: name ?? this.name,
       lastname: lastname ?? this.lastname,
       phone: phone ?? this.phone,
-      image: image,
+      email: email ?? this.email,
+      image: image ?? this.image,
       loadingData: loadingData,
       user: user,
       failure: failure,
@@ -67,6 +72,7 @@ class ProfileUpdateState extends Equatable {
     name,
     lastname,
     phone,
+    email,
     image,
     loadingData,
     user,
