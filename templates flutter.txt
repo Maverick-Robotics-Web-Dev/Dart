@@ -1,0 +1,19 @@
+templates flutter
+https://cssauthor.com/best-flutter-templates-for-free/
+
+https://github.com/leo-elstin/flutter_kart
+https://github.com/mohammedhashim44/Flutter-Grocery-App-UI
+https://github.com/vellt/Movies-App-Flutter
+https://github.com/vilisimo/sink
+https://github.com/woosignal/flutter-woocommerce-app
+https://github.com/atornel/RestaurantAppUIKit
+https://github.com/bukunmialuko/FlutterMusicAppUI
+https://github.com/Sangwan5688/BlackHole
+https://github.com/gerfagerfa/real_estate
+
+Chosen ones
+https://github.com/robertodevs/flutter_ecommerce_template
+https://github.com/TheAlphamerc/flutter_ecommerce_app
+https://github.com/marciovalim/flutter-movies-app
+https://github.com/YOUNESSMOUATASSIM/digital-banking-app-mobile-side
+https://github.com/Dennis247/green_taxi
