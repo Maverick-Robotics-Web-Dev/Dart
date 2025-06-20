@@ -43,6 +43,8 @@ List<BlocProvider> blocProviders = [
   ),
 
   BlocProvider<ProfileUpdateBloc>(
-    create: (context) => ProfileUpdateBloc(locator<UserUseCases>()),
+    create:
+        (context) =>
+            ProfileUpdateBloc(locator<UserUseCases>(), locator<AuthUseCases>()),
   ),
 ];

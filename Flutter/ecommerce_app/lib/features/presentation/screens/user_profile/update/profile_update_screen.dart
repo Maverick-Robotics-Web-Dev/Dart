@@ -1,5 +1,8 @@
 import 'package:ecommerce_app/core/errors/failures.dart';
+import 'package:ecommerce_app/features/data/models/users/user_model.dart';
 import 'package:ecommerce_app/features/domain/entities/users/user.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_bloc.dart';
+import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/info/profile_info_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_state.dart';
@@ -45,6 +48,16 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
                 toastLength: Toast.LENGTH_LONG,
               );
             } else if (state.user is User) {
+              User user = state.user!;
+              print(
+                'USUARIO ACTUALIZADO: ${UserModel.fromEntity(user).toJson()}',
+              );
+              _profileUpdateBloc?.add(UpdateUserSession(user: user));
+              Future.delayed(Duration(seconds: 1), () {
+                if (context.mounted) {
+                  context.read<ProfileInfoBloc>().add(GetUserEvent());
+                }
+              });
               Fluttertoast.showToast(
                 msg: 'Actualizacion Exitosa',
                 toastLength: Toast.LENGTH_LONG,
@@ -56,25 +69,31 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
               if (state.loadingData == 'Cargando') {
                 return Stack(
                   children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        _imageBackground(context),
-                        _cardProfile(context, state, user),
-                        _btnBack(),
-                      ],
+                    Form(
+                      key: state.formKey,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          _imageBackground(context),
+                          _cardProfile(context, state, user),
+                          _btnBack(),
+                        ],
+                      ),
                     ),
                     Center(child: CircularProgressIndicator()),
                   ],
                 );
               }
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  _imageBackground(context),
-                  _cardProfile(context, state, user),
-                  _btnBack(),
-                ],
+              return Form(
+                key: state.formKey,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    _imageBackground(context),
+                    _cardProfile(context, state, user),
+                    _btnBack(),
+                  ],
+                ),
               );
             },
           ),
@@ -150,9 +169,7 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
                     ? Image.file(state.image!, fit: BoxFit.cover)
                     : FadeInImage(
                       placeholder: AssetImage('assets/img/no-image.png'),
-                      image: NetworkImage(
-                        'https://forbes.es/wp-content/uploads/2022/06/topgun.jpg',
-                      ),
+                      image: NetworkImage(user?.image),
                       fit: BoxFit.cover,
                       fadeInDuration: Duration(seconds: 1),
                     ),
