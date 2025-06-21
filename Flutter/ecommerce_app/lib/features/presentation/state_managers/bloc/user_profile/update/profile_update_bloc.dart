@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:ecommerce_app/features/data/models/auth/sign_in/sign_in_response_model.dart';
+import 'package:ecommerce_app/features/domain/use_cases/auth/auth_use_cases.dart';
 import 'package:ecommerce_app/features/domain/use_cases/users/user_use_cases.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/user_profile/update/profile_update_state.dart';
@@ -9,10 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   UserUseCases userUseCases;
+  AuthUseCases authUseCases;
+  final formKey = GlobalKey<FormState>();
 
-  ProfileUpdateBloc(this.userUseCases) : super(ProfileUpdateState()) {
+  ProfileUpdateBloc(this.userUseCases, this.authUseCases)
+    : super(ProfileUpdateState()) {
     on<ProfileUpdateInitEvent>(_onProfileUpdateInitEvent);
     on<NameChangedEvent>(_onNameChangedEvent);
     on<LastNameChangedEvent>(_onLastNameChangedEvent);
@@ -20,13 +24,13 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     on<ImageUploadEvent>(_onImageUploadEvent);
     on<PhotoUploadEvent>(_onPhotoUploadEvent);
     on<UpdateSubmitEvent>(_onUpdateSubmitEvent);
+    on<UpdateUserSession>(_onUpdateUserSession);
   }
 
   Future<void> _onProfileUpdateInitEvent(
     ProfileUpdateInitEvent event,
     Emitter<ProfileUpdateState> emit,
   ) async {
-    print(event.user?.email);
     emit(
       state.copyWith(
         id: event.user?.id,
@@ -34,6 +38,7 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
         lastname: BlocFormItem(value: event.user?.lastname ?? ''),
         phone: BlocFormItem(value: event.user?.phone ?? ''),
         email: BlocFormItem(value: event.user?.email ?? ''),
+        // image: event.user?.image ?? '',
         formKey: formKey,
       ),
     );
@@ -119,5 +124,14 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
       (failure) => emit(state.copyWith(failure: failure, formKey: formKey)),
       (user) => emit(state.copyWith(user: user, formKey: formKey)),
     );
+  }
+
+  Future<void> _onUpdateUserSession(
+    UpdateUserSession event,
+    Emitter<ProfileUpdateState> emit,
+  ) async {
+    SignInResponseModel? signInResponse = await authUseCases.getUserSession();
+    signInResponse!.user = event.user;
+    await authUseCases.saveUserSession(signInResponse);
   }
 }

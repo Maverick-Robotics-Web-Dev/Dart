@@ -65,15 +65,24 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
       child: AspectRatio(
         aspectRatio: 1 / 1,
         child: ClipOval(
-          child: FadeInImage(
-            placeholder: AssetImage('assets/img/no-image.png'),
-            image: NetworkImage(
-              user?.image ??
-                  'https://forbes.es/wp-content/uploads/2022/06/topgun.jpg',
-            ),
-            fit: BoxFit.cover,
-            fadeInDuration: Duration(seconds: 1),
-          ),
+          child:
+              user != null
+                  ? FadeInImage(
+                    placeholder: AssetImage('assets/img/no-image.png'),
+                    image: NetworkImage(user.image),
+                    fit: BoxFit.cover,
+                    fadeInDuration: Duration(seconds: 1),
+                  )
+                  : Container(),
+          // child: FadeInImage(
+          //   placeholder: AssetImage('assets/img/no-image.png'),
+          //   image: NetworkImage(
+          //     user?.image ??
+          //         'https://forbes.es/wp-content/uploads/2022/06/topgun.jpg',
+          //   ),
+          //   fit: BoxFit.cover,
+          //   fadeInDuration: Duration(seconds: 1),
+          // ),
         ),
       ),
     );

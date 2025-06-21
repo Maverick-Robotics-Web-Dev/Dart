@@ -43,10 +43,15 @@ class UserRemoteDataSource {
     try {
       String urlUpdate = '$_urlUpdate${id.toString()}/';
       String token = '';
-      MultipartFile imageFile = await multiFilePart(file: user.image);
       Map<String, dynamic> userJson = UserModel.fromEntity(user).toJson();
 
-      userJson['image'] = imageFile;
+      if (user.image != null) {
+        MultipartFile imageFile = await multiFilePart(file: user.image);
+        userJson.update('image', (_) => imageFile);
+      } else {
+        userJson.remove('image');
+      }
+      // userJson['image'] = imageFile;
       FormData userFormData = FormData.fromMap(userJson);
       final data = await sharedPref.read('user');
 

@@ -60,3 +60,12 @@ class UpdateSubmitEvent extends ProfileUpdateEvent {
   @override
   List<Object?> get props => [];
 }
+
+class UpdateUserSession extends ProfileUpdateEvent {
+  final User user;
+
+  UpdateUserSession({required this.user});
+
+  @override
+  List<Object?> get props => [user];
+}

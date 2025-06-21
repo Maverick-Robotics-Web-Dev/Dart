@@ -4,6 +4,7 @@ import 'package:ecommerce_app/features/presentation/screens/user_profile/info/pr
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_bloc.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_event.dart';
 import 'package:ecommerce_app/features/presentation/state_managers/bloc/admin/admin_state.dart';
+import 'package:ecommerce_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -75,9 +76,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     title: Text('Cerrar Sesion'),
                     onTap: () {
                       _bloc?.add(SignOutEvent());
-                      Navigator.pushNamedAndRemoveUntil(
+                      Navigator.pushAndRemoveUntil(
                         context,
-                        'sign_in',
+                        MaterialPageRoute(builder: (context) => MainApp()),
                         (route) => false,
                       );
                     },

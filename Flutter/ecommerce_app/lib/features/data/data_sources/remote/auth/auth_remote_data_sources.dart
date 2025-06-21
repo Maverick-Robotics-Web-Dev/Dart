@@ -44,26 +44,24 @@ class AuthRemoteDataSource {
 
   Future<SignUpResponseModel> signUp(SignUp signUpData) async {
     try {
-      // print(signUpData);
       Map<String, dynamic> signUpJson =
           SignUpModel.fromEntity(signUpData).toJson();
-      // print(signUpJson.values);
       Response<dynamic> response = await _dio.post(
         _urlSignUp,
         data: signUpJson,
       );
+
       SignUpResponseModel signUpResponse = SignUpResponseModel.fromJson(
         response.data,
       );
+
       return signUpResponse;
     } catch (e) {
       if (e is DioException) {
-        print('DioError: ${e.response}');
         throw DioServerError(
           message: getMessageString(e.response?.data["msg"]),
         );
       } else {
-        print('Error: $e');
         throw ServerError(message: e.toString());
       }
     }
