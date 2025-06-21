@@ -11,15 +11,14 @@ import 'package:ecommerce_app/features/domain/entities/users/user.dart';
 class UserRemoteDataSource {
   SharedPref sharedPref;
   final _dio = Dio();
-  final String _urlUpdate = '${ApiConfig.apiEcommercePath}/users/';
-  // final String _urlUpdate = '${ApiConfig.apiEcommerceHomePath}/users/';
+  // final String _urlUpdate = '${ApiConfig.apiEcommercePath}/users/';
+  final String _urlUpdate = '${ApiConfig.apiEcommerceHomePath}/users/';
 
   UserRemoteDataSource(this.sharedPref);
 
   Future<User> update(int id, User user) async {
     try {
       Map<String, dynamic> userJson = UserModel.fromEntity(user).toJson();
-      print('$_urlUpdate${id.toString()}/');
 
       Response<dynamic> response = await _dio.patch(
         '$_urlUpdate${id.toString()}/',
