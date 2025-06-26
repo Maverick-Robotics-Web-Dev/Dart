@@ -1,3 +1,6 @@
+import 'package:e_commerce_valamy/config/routes/path_routes.dart';
+import 'package:e_commerce_valamy/config/routes/routes.dart';
+import 'package:e_commerce_valamy/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,12 +12,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Valamy',
+      theme: lightTheme(context),
+      // themeMode: ThemeMode.light,
+      initialRoute: signInRoute,
+      routes: routes,
     );
   }
 }
