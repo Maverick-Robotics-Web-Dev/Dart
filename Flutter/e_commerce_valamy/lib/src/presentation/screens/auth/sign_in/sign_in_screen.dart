@@ -17,7 +17,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(children: [_headerScreen(), _headerTexts(context)]),
+          child: Column(children: [_headerScreen(), _bodyScreen(context)]),
         ),
       ),
     );
@@ -26,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget _headerScreen() =>
       Image.asset('assets/images/login_img.jpg', fit: BoxFit.cover);
 
-  Widget _headerTexts(BuildContext context) => Padding(
+  Widget _bodyScreen(BuildContext context) => Padding(
     padding: EdgeInsets.all(defaultPadding),
     child: Column(
       // mainAxisAlignment: MainAxisAlignment.start,
@@ -36,12 +36,13 @@ class _SignInScreenState extends State<SignInScreen> {
           'Peleteria Valamy',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        SizedBox(height: defaultPadding / 2),
+        SizedBox(height: defaultPadding),
         Text(
           // "Log in with your data that you intered during your registration.",
           'Inicia sesión con tus datos que ingresaste durante tu registro',
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
-        SizedBox(height: defaultPadding),
+        SizedBox(height: h_24),
         Form(
           key: _formKey,
           child: Column(
@@ -51,11 +52,19 @@ class _SignInScreenState extends State<SignInScreen> {
                 hintText: "Email address",
                 keyboardType: TextInputType.emailAddress,
               ),
+              SizedBox(height: h_24),
               TxtFormFieldCustom(
                 svgPath: "assets/icons/Lock.svg",
                 hintText: "Password",
+                obscureText: true,
               ),
             ],
+          ),
+        ),
+        Align(
+          child: TextButton(
+            onPressed: () {},
+            child: Text('Olvidaste tu contraseña'),
           ),
         ),
       ],

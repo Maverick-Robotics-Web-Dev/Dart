@@ -4,16 +4,18 @@ import 'package:flutter_svg/svg.dart';
 
 class TxtFormFieldCustom extends StatelessWidget {
   final String svgPath;
+  final String hintText;
+  final bool obscureText;
   final TextInputType? keyboardType;
-  final String? hintText;
   final double? height;
   final double? width;
 
   const TxtFormFieldCustom({
     super.key,
     required this.svgPath,
+    required this.hintText,
+    this.obscureText = false,
     this.keyboardType,
-    this.hintText,
     this.height = 24,
     this.width = 24,
   });
@@ -23,6 +25,8 @@ class TxtFormFieldCustom extends StatelessWidget {
     // validator: emaildValidator.call,
     // textInputAction: TextInputAction.next,
     keyboardType: keyboardType,
+    obscureText: obscureText,
+    style: TextStyle(color: textColor, fontWeight: FontWeight.w500),
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: Padding(
@@ -32,7 +36,12 @@ class TxtFormFieldCustom extends StatelessWidget {
           height: height,
           width: width,
           colorFilter: ColorFilter.mode(
-            Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.3),
+            Theme.of(context).textTheme.bodyLarge!.color!.withValues(
+              alpha: 0.4,
+              red: 0.051,
+              green: 0.278,
+              blue: 0.631,
+            ),
             BlendMode.srcIn,
           ),
         ),
