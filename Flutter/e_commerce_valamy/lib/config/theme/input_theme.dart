@@ -12,16 +12,16 @@ const InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
 );
 
 const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadious)),
+  borderRadius: BorderRadius.all(Radius.circular(borderRadious_12)),
   borderSide: BorderSide(color: borderColor),
 );
 
 const OutlineInputBorder focusedOutlineInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadious)),
+  borderRadius: BorderRadius.all(Radius.circular(borderRadious_12)),
   borderSide: BorderSide(color: primaryColor, width: 1.4),
 );
 
 const OutlineInputBorder errorOutlineInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadious)),
+  borderRadius: BorderRadius.all(Radius.circular(borderRadious_12)),
   borderSide: BorderSide(color: warningColor),
 );

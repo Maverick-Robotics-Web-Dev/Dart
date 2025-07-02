@@ -30,7 +30,7 @@ class TxtFormFieldCustom extends StatelessWidget {
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: Padding(
-        padding: EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        padding: EdgeInsets.symmetric(vertical: h_16 * 0.75),
         child: SvgPicture.asset(
           svgPath,
           height: height,
