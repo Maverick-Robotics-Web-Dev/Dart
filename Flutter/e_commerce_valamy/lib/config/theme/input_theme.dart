@@ -18,7 +18,7 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 
 const OutlineInputBorder focusedOutlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(borderRadious_12)),
-  borderSide: BorderSide(color: primaryColor, width: 1.4),
+  borderSide: BorderSide(color: primaryColor, width: 1.6),
 );
 
 const OutlineInputBorder errorOutlineInputBorder = OutlineInputBorder(

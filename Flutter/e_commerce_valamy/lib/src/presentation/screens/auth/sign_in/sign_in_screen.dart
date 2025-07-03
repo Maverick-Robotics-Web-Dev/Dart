@@ -16,14 +16,30 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              _headerScreen(),
-              _bodyScreen(context, textTheme, height),
+              Container(
+                height: height,
+                width: width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/login_img.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Container(
+                height: height,
+                width: width,
+                decoration: BoxDecoration(color: transparentWhite),
+              ),
+              Column(children: [_bodyScreen(context, textTheme, height)]),
             ],
           ),
         ),
@@ -44,12 +60,12 @@ class _SignInScreenState extends State<SignInScreen> {
       // mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Peleteria Valamy', style: textTheme.headlineSmall),
+        Text('Peleteria Valamy', style: textTheme.headlineLarge),
         SizedBox(height: h_16),
         Text(
           // "Log in with your data that you intered during your registration.",
           'Inicia sesión con tus datos que ingresaste durante tu registro',
-          style: textTheme.bodyMedium,
+          style: textTheme.bodyLarge,
         ),
         SizedBox(height: h_24),
         Form(
@@ -75,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
             onPressed: () {},
             child: Text(
               '¿Olvidaste tu contraseña?',
-              style: TextStyle(fontSize: 14.6),
+              style: TextStyle(fontSize: 16.6, letterSpacing: 1),
             ),
           ),
         ),
@@ -84,16 +100,35 @@ class _SignInScreenState extends State<SignInScreen> {
           onPressed: () {},
           child: Text(
             'Sign in',
-            style: TextStyle(fontSize: 14.6, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+            ),
           ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('¿No tienes una cuenta?', style: TextStyle(fontSize: 14.6)),
+            Text(
+              '¿No tienes una cuenta?',
+              style: TextStyle(
+                color: textColor,
+                fontSize: 16.6,
+                // fontWeight: FontWeight.w500,
+                letterSpacing: 1,
+              ),
+            ),
             TextButton(
               onPressed: () {},
-              child: Text('Sign Up', style: TextStyle(fontSize: 14.6)),
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontSize: 16.6,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1,
+                ),
+              ),
             ),
           ],
         ),

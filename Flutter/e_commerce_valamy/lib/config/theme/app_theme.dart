@@ -13,8 +13,8 @@ ThemeData lightTheme(BuildContext context) => ThemeData(
   scaffoldBackgroundColor: Colors.white,
   iconTheme: IconThemeData(color: primaryColor),
   textTheme: TextTheme(
-    bodyMedium: TextStyle(color: hintTextColor, fontSize: 14.6),
-    headlineSmall: TextStyle(color: textColor),
+    headlineLarge: TextStyle(color: primaryColor, letterSpacing: 1),
+    bodyLarge: TextStyle(color: textColor, letterSpacing: 1),
   ),
   elevatedButtonTheme: elevatedBtnTheme,
   textButtonTheme: txtButtonTheme,
