@@ -24,21 +24,8 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                height: height,
-                width: width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/login_img.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Container(
-                height: height,
-                width: width,
-                decoration: BoxDecoration(color: transparentWhite),
-              ),
+              _backgroundImage(height, width),
+              _backgroundOpacity(height, width),
               Column(children: [_bodyScreen(context, textTheme, height)]),
             ],
           ),
@@ -47,8 +34,29 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _headerScreen() =>
-      Image.asset('assets/images/login_img.jpg', fit: BoxFit.cover);
+  Container _backgroundImage(double height, double width) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/sign_in_image.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Container _backgroundOpacity(double height, double width) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(color: transparentWhite),
+    );
+  }
+
+  // Widget _headerScreen() =>
+  //     Image.asset('assets/images/login_img.jpg', fit: BoxFit.cover);
 
   Widget _bodyScreen(
     BuildContext context,
@@ -61,23 +69,23 @@ class _SignInScreenState extends State<SignInScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Peleteria Valamy', style: textTheme.headlineLarge),
-        SizedBox(height: h_16),
+        SizedBox(height: h_16 / 2),
         Text(
           // "Log in with your data that you intered during your registration.",
           'Inicia sesión con tus datos que ingresaste durante tu registro',
           style: textTheme.bodyLarge,
         ),
-        SizedBox(height: h_24),
+        SizedBox(height: h_16),
         Form(
           key: _formKey,
           child: Column(
             children: [
               TxtFormFieldCustom(
                 svgPath: "assets/icons/Message.svg",
-                hintText: "Email address",
+                hintText: "Email",
                 keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: h_24),
+              SizedBox(height: h_16),
               TxtFormFieldCustom(
                 svgPath: "assets/icons/Lock.svg",
                 hintText: "Password",
@@ -91,7 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
             onPressed: () {},
             child: Text(
               '¿Olvidaste tu contraseña?',
-              style: TextStyle(fontSize: 16.6, letterSpacing: 1),
+              style: TextStyle(fontSize: font_16, letterSpacing: 1),
             ),
           ),
         ),
@@ -101,7 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Text(
             'Sign in',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: font_18,
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
             ),
@@ -114,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
               '¿No tienes una cuenta?',
               style: TextStyle(
                 color: textColor,
-                fontSize: 16.6,
+                fontSize: font_16,
                 // fontWeight: FontWeight.w500,
                 letterSpacing: 1,
               ),
@@ -124,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Text(
                 'Sign Up',
                 style: TextStyle(
-                  fontSize: 16.6,
+                  fontSize: font_16,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1,
                 ),
