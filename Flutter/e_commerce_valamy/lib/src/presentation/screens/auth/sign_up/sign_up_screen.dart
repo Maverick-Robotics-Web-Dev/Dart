@@ -111,11 +111,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
         SizedBox(height: h_16),
         Row(
           children: [
-            Checkbox(value: false, onChanged: (value) {}),
+            Transform.scale(
+              scale: 1.26,
+              child: Checkbox(value: false, onChanged: (value) {}),
+            ),
             Expanded(
               child: Text.rich(
                 TextSpan(
                   text: "Estoy de acuerdo con los",
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: font_16,
+                    // fontWeight: FontWeight.w500,
+                    letterSpacing: 1,
+                  ),
                   children: [
                     TextSpan(
                       recognizer:
@@ -129,11 +138,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       text: " Terminos de Servicio ",
                       style: TextStyle(
                         color: primaryColor,
+                        fontSize: font_16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    TextSpan(text: "y la política de privacidad"),
+                    TextSpan(
+                      text: "y la política de privacidad",
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: font_16,
+                        // fontWeight: FontWeight.w500,
+                        letterSpacing: 1,
+                      ),
+                    ),
                   ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: h_16 * 2),
+        ElevatedButton(
+          onPressed: () {},
+          child: Text(
+            "Continuar",
+            style: TextStyle(
+              fontSize: font_18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "¿Tienes una cuenta?",
+              style: TextStyle(
+                color: textColor,
+                fontSize: font_16,
+                // fontWeight: FontWeight.w500,
+                letterSpacing: 1,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "Sign In",
+                style: TextStyle(
+                  fontSize: font_16,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1,
                 ),
               ),
             ),

@@ -16,7 +16,7 @@ const Color lightGreyColor = Color(0xFFF8F8F9);
 
 const Color borderColor = Color(0x990D47A1);
 const Color inputBackgroundColor = Color(0xFFF8F8F9);
-const Color hintTextColor = Color.fromRGBO(13, 71, 161, 0.8);
+const Color hintTextColor = Color(0xCC0D47A1);
 const Color textColor = Color(0xFF1E375A);
 const Color warningColor = Color(0xFFD50100);
 

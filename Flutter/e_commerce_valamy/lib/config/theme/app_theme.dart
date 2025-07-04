@@ -15,12 +15,14 @@ ThemeData lightTheme(BuildContext context) => ThemeData(
   iconTheme: IconThemeData(color: primaryColor),
   textTheme: TextTheme(
     headlineLarge: TextStyle(color: primaryColor, letterSpacing: 1),
-    bodyLarge: TextStyle(color: textColor, letterSpacing: 1),
+    bodyLarge: TextStyle(
+      color: textColor,
+      letterSpacing: 1,
+      // fontWeight: FontWeight.w500,
+    ),
   ),
   elevatedButtonTheme: elevatedBtnTheme,
   textButtonTheme: txtButtonTheme,
   inputDecorationTheme: lightInputDecorationTheme,
-  checkboxTheme: chkboxTheme.copyWith(
-    side: const BorderSide(color: borderColor),
-  ),
+  checkboxTheme: chkboxTheme.copyWith(side: BorderSide(color: borderColor)),
 );

@@ -2,9 +2,15 @@ import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 
 CheckboxThemeData chkboxTheme = CheckboxThemeData(
+  fillColor: WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.selected)) {
+      return primaryColor;
+    }
+    return inputBackgroundColor;
+  }),
   checkColor: WidgetStateProperty.all(Colors.white),
   shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(borderRadious_12 / 2)),
   ),
-  side: const BorderSide(color: whileColor40),
+  side: const BorderSide(color: whileColor40, width: 1.6),
 );

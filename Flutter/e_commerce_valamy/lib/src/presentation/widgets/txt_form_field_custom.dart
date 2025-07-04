@@ -37,7 +37,7 @@ class TxtFormFieldCustom extends StatelessWidget {
           width: width,
           colorFilter: ColorFilter.mode(
             Theme.of(context).textTheme.bodyLarge!.color!.withValues(
-              alpha: 0.4,
+              alpha: 0.8,
               red: 0.051,
               green: 0.278,
               blue: 0.631,
