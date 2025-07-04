@@ -83,7 +83,7 @@ class ReceivePaymentPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    user.name.first + ' ' + user.name.last,
+                                    '${user.name.first} ${user.name.last}',
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:template_ecommerce/app_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

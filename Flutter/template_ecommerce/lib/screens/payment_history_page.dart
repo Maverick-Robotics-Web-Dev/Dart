@@ -167,11 +167,7 @@ class _PaymentHistoryPageState extends State<PaymentHistoryPage> {
                                                                               16.0,
                                                                         ),
                                                                     child: Text(
-                                                                      user.name.first +
-                                                                          ' ' +
-                                                                          user
-                                                                              .name
-                                                                              .last,
+                                                                      '${user.name.first} ${user.name.last}',
                                                                       style: TextStyle(
                                                                         fontSize:
                                                                             16.0,

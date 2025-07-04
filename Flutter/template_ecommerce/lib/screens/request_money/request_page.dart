@@ -165,9 +165,7 @@ class _RequestPageState extends State<RequestPage> {
                                                       0.0,
                                                     ),
                                                 child: Text(
-                                                  user.name.first +
-                                                      ' ' +
-                                                      user.name.last,
+                                                  '${user.name.first} ${user.name.last}',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     fontSize: 14.0,
@@ -254,9 +252,7 @@ class _RequestPageState extends State<RequestPage> {
                                                             top: 16.0,
                                                           ),
                                                       child: Text(
-                                                        user.name.first +
-                                                            ' ' +
-                                                            user.name.last,
+                                                        '${user.name.first} ${user.name.last}',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight:

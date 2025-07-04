@@ -69,7 +69,7 @@ class ShopProductDisplay extends StatelessWidget {
             child: SizedBox(
               height: 80,
               width: 80,
-              child: Image.asset('${product.image}', fit: BoxFit.contain),
+              child: Image.asset(product.image, fit: BoxFit.contain),
             ),
           ),
           Positioned(

@@ -76,23 +76,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
           key: _formKey,
           child: Column(
             children: [
-              TxtFormFieldCustom(
-                hintText: "Nombre",
-                svgPath: "assets/icons/Profile.svg",
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(height: h_16),
-              TxtFormFieldCustom(
-                hintText: "Apellido",
-                svgPath: "assets/icons/User_circle.svg",
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(height: h_16),
-              TxtFormFieldCustom(
-                hintText: "Celular",
-                svgPath: "assets/icons/Call.svg",
-                keyboardType: TextInputType.emailAddress,
-              ),
+              // TxtFormFieldCustom(
+              //   hintText: "Nombre",
+              //   svgPath: "assets/icons/Profile.svg",
+              //   keyboardType: TextInputType.emailAddress,
+              // ),
+              // SizedBox(height: h_16),
+              // TxtFormFieldCustom(
+              //   hintText: "Apellido",
+              //   svgPath: "assets/icons/User_circle.svg",
+              //   keyboardType: TextInputType.emailAddress,
+              // ),
+              // SizedBox(height: h_16),
+              // TxtFormFieldCustom(
+              //   hintText: "Celular",
+              //   svgPath: "assets/icons/Call.svg",
+              //   keyboardType: TextInputType.emailAddress,
+              // ),
               SizedBox(height: h_16),
               TxtFormFieldCustom(
                 hintText: "Email",
@@ -112,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Row(
           children: [
             Transform.scale(
-              scale: 1.26,
+              scale: 1.1,
               child: Checkbox(value: false, onChanged: (value) {}),
             ),
             Expanded(
@@ -163,8 +163,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Text(
             "Continuar",
             style: TextStyle(
-              fontSize: font_18,
-              fontWeight: FontWeight.bold,
+              fontSize: font_16_6,
+              // fontWeight: FontWeight.bold,
               letterSpacing: 1,
             ),
           ),

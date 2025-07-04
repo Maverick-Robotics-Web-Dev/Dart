@@ -125,7 +125,7 @@ class RequestAmountPage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
-                                        user.name.first + ' ' + user.name.last,
+                                        '${user.name.first} ${user.name.last}',
                                         style: TextStyle(
                                           color: Colors.white54,
                                           fontSize: 16,

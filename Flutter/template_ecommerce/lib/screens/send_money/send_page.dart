@@ -147,9 +147,7 @@ class _SendPageState extends State<SendPage> {
                                                         0.0,
                                                       ),
                                                   child: Text(
-                                                    user.name.first +
-                                                        ' ' +
-                                                        user.name.last,
+                                                    '${user.name.first} ${user.name.last}',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontSize: 14.0,
@@ -239,9 +237,7 @@ class _SendPageState extends State<SendPage> {
                                                             top: 16.0,
                                                           ),
                                                       child: Text(
-                                                        user.name.first +
-                                                            ' ' +
-                                                            user.name.last,
+                                                        '${user.name.first} ${user.name.last}',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           fontWeight:

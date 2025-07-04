@@ -101,10 +101,10 @@ class _ConfirmOtpPageState extends State<ConfirmOtpPage> {
             borderRadius: BorderRadius.circular(9.0),
           ),
           child: Center(
-            child: new Text(
+            child: Text(
               "Verify",
               style: const TextStyle(
-                color: const Color(0xfffefefe),
+                color: Color(0xfffefefe),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
                 fontSize: 20.0,

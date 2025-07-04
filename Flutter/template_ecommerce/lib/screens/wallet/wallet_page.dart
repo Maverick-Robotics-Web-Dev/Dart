@@ -307,9 +307,7 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                                                           0.0,
                                                         ),
                                                     child: Text(
-                                                      user.name.first +
-                                                          ' ' +
-                                                          user.name.last,
+                                                      '${user.name.first} ${user.name.last}',
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
