@@ -26,7 +26,8 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               _backgroundImage(height, width),
               _backgroundOpacity(height, width),
-              Column(children: [_bodyScreen(context, textTheme, height)]),
+              // Column(children: [_bodyScreen(context, textTheme, height)]),
+              _bodyScreen(context, textTheme, height),
             ],
           ),
         ),
