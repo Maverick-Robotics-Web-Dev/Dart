@@ -107,6 +107,9 @@ class _SignInScreenState extends State<SignInScreen> {
         SizedBox(height: height > 700 ? height * 0.1 : h_16),
         ElevatedButton(
           onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(double.infinity, 32),
+          ),
           child: Text(
             'Sign in',
             style: TextStyle(

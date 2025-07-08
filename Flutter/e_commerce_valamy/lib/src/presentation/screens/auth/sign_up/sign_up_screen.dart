@@ -160,6 +160,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         SizedBox(height: h_16 * 2),
         ElevatedButton(
           onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(double.infinity, 32),
+          ),
           child: Text(
             "Continuar",
             style: TextStyle(
