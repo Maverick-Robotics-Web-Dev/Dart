@@ -1,7 +1,7 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignUpSetupScreen extends StatefulWidget {
   const SignUpSetupScreen({super.key});
@@ -27,7 +27,7 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
           backgroundColor: Colors.transparent,
         ),
         body: SingleChildScrollView(
-          child: Column(children: [_bodyScreen(context, textTheme, height)]),
+          child: _bodyScreen(context, textTheme, height),
         ),
       ),
     );
@@ -38,21 +38,44 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
     TextTheme textTheme,
     double height,
   ) => Padding(
-    padding: EdgeInsets.all(h_16),
+    padding: EdgeInsets.all(16),
     child: Column(
-      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CircleAvatar(maxRadius: 80),
-        // Container(
-        //   height: 100,
-        //   width: 100,
-        //   decoration: const BoxDecoration(
-        //     shape: BoxShape.circle,
-        //     color: Color(0xFFE486DD),
-        //   ),
-        //   // child: Transform.scale(scale: 0.55, child: Image.asset(Assets.dash)),
+        // Stack(
+        //   children: [
+        //     CircleAvatar(maxRadius: 66),
+        //     Positioned(
+        //       height: 44,
+        //       right: -6,
+        //       bottom: 0,
+        //       child: ElevatedButton(
+        //         onPressed: () {},
+        //         style: ElevatedButton.styleFrom(
+        //           shape: CircleBorder(),
+        //           padding: EdgeInsets.zero,
+        //         ),
+        //         child: SvgPicture.asset(
+        //           "assets/icons/Camera-Bold.svg",
+        //           height: 26,
+        //           fit: BoxFit.cover,
+        //           colorFilter: ColorFilter.mode(whiteColor, BlendMode.srcIn),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
         // ),
-        SizedBox(height: 24),
+        CircleAvatar(
+          maxRadius: 66,
+          backgroundImage: AssetImage("assets/images/scarlett_johansson.jpg"),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton(
+            onPressed: () {},
+            child: Text("Upload Image", style: TextStyle(fontSize: h_16)),
+          ),
+        ),
+        SizedBox(height: 8),
         Form(
           key: _formKey,
           child: Column(
@@ -77,7 +100,6 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
             ],
           ),
         ),
-
         // SizedBox(height: height > 700 ? height * 0.6 : h_16),
         SizedBox(height: 10),
         Row(
