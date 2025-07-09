@@ -29,6 +29,38 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
         body: SingleChildScrollView(
           child: _bodyScreen(context, textTheme, height),
         ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.transparent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: inputBackgroundColor,
+                    foregroundColor: primaryColor,
+                    side: BorderSide(color: borderColor),
+                  ),
+                  child: Text(
+                    'Saltar',
+                    style: TextStyle(fontSize: 16, letterSpacing: 1),
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 16, letterSpacing: 1),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -38,7 +70,7 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
     TextTheme textTheme,
     double height,
   ) => Padding(
-    padding: EdgeInsets.all(16),
+    padding: EdgeInsets.all(h_16),
     child: Column(
       children: [
         // Stack(
@@ -99,32 +131,6 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
               ),
             ],
           ),
-        ),
-        // SizedBox(height: height > 700 ? height * 0.6 : h_16),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'Saltar',
-                  style: TextStyle(fontSize: 16, letterSpacing: 1),
-                ),
-              ),
-            ),
-            SizedBox(width: 16),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(fontSize: 16, letterSpacing: 1),
-                ),
-              ),
-            ),
-          ],
         ),
       ],
     ),

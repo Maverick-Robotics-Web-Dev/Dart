@@ -7,7 +7,7 @@ ElevatedButtonThemeData elevatedBtnTheme = ElevatedButtonThemeData(
     backgroundColor: primaryColor,
     foregroundColor: whiteColor,
     // minimumSize: Size(double.infinity, 32),
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(borderRadious_12)),
     ),
   ),
