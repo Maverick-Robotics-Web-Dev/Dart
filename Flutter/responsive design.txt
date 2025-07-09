@@ -1,0 +1,4 @@
+https://medium.com/@arunb9525/building-a-responsive-flutter-app-how-to-match-your-figma-design-across-devices-756dfb6e7544
+https://www.youtube.com/watch?v=VCU1rBwId-k
+https://www.youtube.com/watch?v=cIXHgnjEzz8
+https://creapolis.dev/domina-el-diseno-responsivo-en-flutter-guia-completa-para-apps-flexibles/

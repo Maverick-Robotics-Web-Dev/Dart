@@ -1,7 +1,6 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SignUpSetupScreen extends StatefulWidget {
   const SignUpSetupScreen({super.key});
@@ -26,8 +25,10 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
         ),
-        body: SingleChildScrollView(
-          child: _bodyScreen(context, textTheme, height),
+        body: Center(
+          child: SingleChildScrollView(
+            child: _bodyScreen(context, textTheme, height),
+          ),
         ),
         bottomNavigationBar: BottomAppBar(
           color: Colors.transparent,
@@ -72,6 +73,7 @@ class _SignUpSetupScreenState extends State<SignUpSetupScreen> {
   ) => Padding(
     padding: EdgeInsets.all(h_16),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Stack(
         //   children: [
