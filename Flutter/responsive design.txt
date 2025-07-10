@@ -2,3 +2,10 @@ https://medium.com/@arunb9525/building-a-responsive-flutter-app-how-to-match-you
 https://www.youtube.com/watch?v=VCU1rBwId-k
 https://www.youtube.com/watch?v=cIXHgnjEzz8
 https://creapolis.dev/domina-el-diseno-responsivo-en-flutter-guia-completa-para-apps-flexibles/
+
+Now
+https://resocoder.com/2021/10/03/create-responsive-flutter-apps-with-minimal-effort/
+https://blog.stackademic.com/flutter-web-responsive-crafting-adaptive-uis-for-mobile-tablet-and-web-211effaa2445
+https://github.com/Codelessly/FlutterMinimalWebsite/blob/master/lib/main.dart
+https://pub.dev/packages/responsive_framework
+https://github.com/Codelessly/ResponsiveFramework?tab=readme-ov-file
