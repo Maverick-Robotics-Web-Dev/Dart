@@ -64,31 +64,62 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     ResponsiveBreakpoints.of(context).largerThan(TABLET)
                         ? ResponsiveRowColumnType.ROW
                         : ResponsiveRowColumnType.COLUMN,
+                rowPadding: EdgeInsets.all(10),
+                columnPadding: EdgeInsets.all(10),
+                rowMainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ResponsiveRowColumnItem(
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/sign_up_image.jpg',
-                          width: width * 0.3,
-                          height: 250,
-                          fit: BoxFit.cover,
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            width: width * 0.3,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: ProducWidget(
+                      width: width,
+                      name: 'Gaming Staff',
+                      img: 'assets/images/sign_up_image.jpg',
+                    ),
+                  ),
+                  ResponsiveRowColumnItem(
+                    child: ProducWidget(
+                      width: width,
+                      name: 'Gaming Staff',
+                      img: 'assets/images/sign_up_image.jpg',
+                    ),
+                  ),
+                  ResponsiveRowColumnItem(
+                    child: ProducWidget(
+                      width: width,
+                      name: 'Gaming Staff',
+                      img: 'assets/images/sign_up_image.jpg',
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              ResponsiveRowColumn(
+                layout:
+                    ResponsiveBreakpoints.of(context).largerThan(TABLET)
+                        ? ResponsiveRowColumnType.ROW
+                        : ResponsiveRowColumnType.COLUMN,
+                rowPadding: EdgeInsets.all(10),
+                columnPadding: EdgeInsets.all(10),
+                rowMainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ResponsiveRowColumnItem(
+                    child: ProducWidget(
+                      width: width,
+                      name: 'Gaming Staff',
+                      img: 'assets/images/sign_up_image.jpg',
+                    ),
+                  ),
+                  ResponsiveRowColumnItem(
+                    child: ProducWidget(
+                      width: width,
+                      name: 'Gaming Staff',
+                      img: 'assets/images/sign_up_image.jpg',
+                    ),
+                  ),
+                  ResponsiveRowColumnItem(
+                    child: ProducWidget(
+                      width: width,
+                      name: 'Gaming Staff',
+                      img: 'assets/images/sign_up_image.jpg',
                     ),
                   ),
                 ],
@@ -96,6 +127,74 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ProducWidget extends StatelessWidget {
+  final double width;
+  final String name;
+  final String img;
+
+  const ProducWidget({
+    super.key,
+    required this.width,
+    required this.name,
+    required this.img,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade300,
+            offset: Offset(5, 5),
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              img,
+              width: width * 0.3,
+              height: 250,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: width * 0.02,
+                vertical: 5,
+              ),
+              width: width * 0.3,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.black54,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: textResponsiveWhite(context)),
+                  SizedBox(height: 5),
+                  Text(
+                    'Ipsum quisquam enim similique praesentium animi quis fuga est repellendus porro consequatur minus eum.',
+                    style: textResponsiveWhite(context),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
