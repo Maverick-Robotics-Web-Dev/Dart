@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
       title: 'Valamy',
       theme: lightTheme(context),
       // themeMode: ThemeMode.light,
-      initialRoute: signUpSetupRoute,
+      initialRoute: verificationCodeRoute,
       routes: routes,
     );
   }
