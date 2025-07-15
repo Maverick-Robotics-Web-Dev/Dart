@@ -8,7 +8,7 @@ TextStyle textResponsiveWhite(BuildContext context) => TextStyle(
         context,
         conditionalValues: [
           Condition.equals(name: 'SMALL_MOBILE', value: 8),
-          Condition.equals(name: MOBILE, value: 16),
+          Condition.equals(name: MOBILE, value: 10),
           Condition.equals(name: TABLET, value: 12),
           Condition.equals(name: DESKTOP, value: 14),
           Condition.equals(name: '4K', value: 16),

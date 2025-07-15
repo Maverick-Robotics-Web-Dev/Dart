@@ -147,7 +147,6 @@ class ProducWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
       margin: EdgeInsets.all(5),
       decoration: BoxDecoration(
         boxShadow: [
@@ -164,7 +163,7 @@ class ProducWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               img,
-              width: width,
+              width: width * 0.3,
               height: 250,
               fit: BoxFit.cover,
             ),
@@ -176,7 +175,7 @@ class ProducWidget extends StatelessWidget {
                 horizontal: width * 0.02,
                 vertical: 5,
               ),
-              width: width,
+              width: width * 0.3,
               height: 100,
               decoration: BoxDecoration(
                 color: Colors.black54,

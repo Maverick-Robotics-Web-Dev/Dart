@@ -1,0 +1,45 @@
+name: e_commerce_valamy
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.0
+  responsive_framework: ^1.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Plus Jakarta
+      fonts:
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Regular.otf
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Medium.otf
+          weight: 500
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
+          weight: 700
+    - family: Grandis Extended
+      fonts:
+        - asset: assets/fonts/grandis_extended/GrandisExtended-Regular.ttf
+        - asset: assets/fonts/grandis_extended/GrandisExtended-Thin.ttf
+          weight: 300
+        - asset: assets/fonts/grandis_extended/GrandisExtended-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/grandis_extended/GrandisExtended-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/grandis_extended/GrandisExtended-Black.ttf
+          weight: 900
