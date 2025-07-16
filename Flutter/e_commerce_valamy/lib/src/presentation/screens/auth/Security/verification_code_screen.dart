@@ -27,7 +27,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ResponsiveBreakpoints.of(context).largerThan(TABLET)
+                    ResponsiveBreakpoints.of(context).largerThan(MOBILE)
                         ? Row(
                           children: [
                             Text(
