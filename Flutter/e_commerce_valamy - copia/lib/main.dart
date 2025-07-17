@@ -17,11 +17,11 @@ class MainApp extends StatelessWidget {
       builder:
           (context, widget) => ResponsiveBreakpoints(
             breakpoints: [
-              Breakpoint(start: 0, end: 360, name: 'SMALL_MOBILE'),
-              Breakpoint(start: 0, end: 450, name: MOBILE),
-              Breakpoint(start: 451, end: 800, name: TABLET),
-              Breakpoint(start: 801, end: 1920, name: DESKTOP),
-              Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+              Breakpoint(start: 720, end: 1440, name: MOBILE),
+              Breakpoint(start: 1441, end: 2560, name: TABLET),
+              // Breakpoint(start: 2560, end: double.infinity, name: DESKTOP),
+              // Breakpoint(start: 801, end: 1920, name: DESKTOP),
+              // Breakpoint(start: 1921, end: double.infinity, name: '4K'),
             ],
             child: ClampingScrollWrapper.builder(context, widget!),
           ),

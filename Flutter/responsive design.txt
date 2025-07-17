@@ -9,3 +9,10 @@ https://blog.stackademic.com/flutter-web-responsive-crafting-adaptive-uis-for-mo
 https://github.com/Codelessly/FlutterMinimalWebsite/blob/master/lib/main.dart
 https://pub.dev/packages/responsive_framework
 https://github.com/Codelessly/ResponsiveFramework?tab=readme-ov-file
+
+
+https://www.youtube.com/watch?v=OU1pqgSZw2Q
+https://www.youtube.com/watch?v=V0_baZFor8U
+https://www.youtube.com/watch?v=PTrwGKROaAY
+https://openwebinars.net/blog/diferencias-entre-px-dp-y-sp-en-android/
+https://www.perfecto.io/blog/how-mobile-screen-size-resolution-and-ppi-screen-affect-test-coverage

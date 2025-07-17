@@ -17,126 +17,70 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.03),
-                width: width,
-                height: 56,
-                color: primaryColor,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                        ? (Text('VERDADERO'))
-                        : (Text('FALSO')),
-                    ResponsiveBreakpoints.of(context).largerOrEqualTo(MOBILE)
-                        ? (Row(
-                          children: [
-                            Text(
-                              'Products',
-                              style: textResponsiveWhite(context),
-                            ),
-                            SizedBox(width: width * 0.02),
-                            Text('Cart', style: textResponsiveWhite(context)),
-                            SizedBox(width: width * 0.02),
-                            Text(
-                              'About Me',
-                              style: textResponsiveWhite(context),
-                            ),
-                            SizedBox(width: width * 0.02),
-                            Text(
-                              'Favorite',
-                              style: textResponsiveWhite(context),
-                            ),
-                            SizedBox(width: width * 0.02),
-                            Text(
-                              'Settings',
-                              style: textResponsiveWhite(context),
-                            ),
-                          ],
-                        ))
-                        : (Icon(Icons.menu_rounded, color: whiteColor)),
-                    Icon(Icons.login, color: whiteColor),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              ResponsiveRowColumn(
-                layout:
-                    ResponsiveBreakpoints.of(context).largerOrEqualTo(MOBILE)
-                        ? ResponsiveRowColumnType.ROW
-                        : ResponsiveRowColumnType.COLUMN,
-                rowPadding: EdgeInsets.all(10),
-                columnPadding: EdgeInsets.all(10),
-                rowMainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ResponsiveRowColumnItem(
-                    rowFlex: 1,
-                    child: ProducWidget(
-                      width: width,
-                      name: 'Gaming Staff',
-                      img: 'assets/images/sign_up_image.jpg',
-                    ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    rowFlex: 1,
-                    child: ProducWidget(
-                      width: width,
-                      name: 'Gaming Staff',
-                      img: 'assets/images/sign_up_image.jpg',
-                    ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    rowFlex: 1,
-                    child: ProducWidget(
-                      width: width,
-                      name: 'Gaming Staff',
-                      img: 'assets/images/sign_up_image.jpg',
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              ResponsiveRowColumn(
-                layout:
-                    ResponsiveBreakpoints.of(context).isMobile
-                        ? ResponsiveRowColumnType.ROW
-                        : ResponsiveRowColumnType.COLUMN,
-                rowPadding: EdgeInsets.all(10),
-                columnPadding: EdgeInsets.all(10),
-                rowMainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ResponsiveRowColumnItem(
-                    rowFlex: 1,
-                    child: ProducWidget(
-                      width: width,
-                      name: 'Gaming Staff',
-                      img: 'assets/images/sign_up_image.jpg',
-                    ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    rowFlex: 1,
-                    child: ProducWidget(
-                      width: width,
-                      name: 'Gaming Staff',
-                      img: 'assets/images/sign_up_image.jpg',
-                    ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    rowFlex: 1,
-                    child: ProducWidget(
-                      width: width,
-                      name: 'Gaming Staff',
-                      img: 'assets/images/sign_up_image.jpg',
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          child: Padding(
+            padding: EdgeInsets.all(30),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                print('WIDTH: ${constraints.maxWidth}');
+                print('Width Query: $width');
+                if (constraints.maxWidth >= 450) {
+                  return Desktop();
+                } else {
+                  return Center(child: Text('OTHER DESING'));
+                }
+              },
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class Desktop extends StatelessWidget {
+  const Desktop({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: 450,
+            width: 200,
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(33, 150, 243, 0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(child: Text('Box 1')),
+          ),
+        ),
+        SizedBox(width: 20),
+        Expanded(
+          flex: 2,
+          child: Container(
+            height: 450,
+            width: 200,
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(33, 150, 243, 0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(child: Text('Box 2')),
+          ),
+        ),
+        SizedBox(width: 20),
+        Expanded(
+          child: Container(
+            height: 450,
+            width: 200,
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(33, 150, 243, 0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(child: Text('Box 3')),
+          ),
+        ),
+      ],
     );
   }
 }

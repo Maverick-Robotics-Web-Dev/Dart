@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flutter-Launch-All",
+      "dependsOn": [
+        "Flutter-Launch-Android-Phone",
+        "Flutter-Launch-Android-Tablet",
+        "Flutter-Launch-Web"
+      ]
+    },
+    {
+      "label": "Flutter-Launch-Android-Phone",
+      "type": "shell",
+      "command": "flutter run -d 'Pixel 7 Pro' "
+    },
+    {
+      "label": "Flutter-Launch-Android-Tablet",
+      "type": "shell",
+      "command": "flutter run -d 'Pixel Tablet' "
+    },
+    {
+      "label": "Flutter-Launch-Web",
+      "type": "shell",
+      "command": "flutter run -d 'Chrome' "
+    }
+  ]
+}
