@@ -28,7 +28,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                        ? Row(
+                        ? (Text('VERDADERO'))
+                        : (Text('FALSO')),
+                    ResponsiveBreakpoints.of(context).largerOrEqualTo(MOBILE)
+                        ? (Row(
                           children: [
                             Text(
                               'Products',
@@ -52,8 +55,8 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                               style: textResponsiveWhite(context),
                             ),
                           ],
-                        )
-                        : Icon(Icons.menu_rounded, color: whiteColor),
+                        ))
+                        : (Icon(Icons.menu_rounded, color: whiteColor)),
                     Icon(Icons.login, color: whiteColor),
                   ],
                 ),
@@ -61,7 +64,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
               SizedBox(height: 20),
               ResponsiveRowColumn(
                 layout:
-                    ResponsiveBreakpoints.of(context).largerThan(TABLET)
+                    ResponsiveBreakpoints.of(context).largerOrEqualTo(MOBILE)
                         ? ResponsiveRowColumnType.ROW
                         : ResponsiveRowColumnType.COLUMN,
                 rowPadding: EdgeInsets.all(10),
@@ -69,6 +72,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                 rowMainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ResponsiveRowColumnItem(
+                    rowFlex: 1,
                     child: ProducWidget(
                       width: width,
                       name: 'Gaming Staff',
@@ -76,6 +80,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     ),
                   ),
                   ResponsiveRowColumnItem(
+                    rowFlex: 1,
                     child: ProducWidget(
                       width: width,
                       name: 'Gaming Staff',
@@ -83,6 +88,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     ),
                   ),
                   ResponsiveRowColumnItem(
+                    rowFlex: 1,
                     child: ProducWidget(
                       width: width,
                       name: 'Gaming Staff',
@@ -94,7 +100,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
               SizedBox(height: 20),
               ResponsiveRowColumn(
                 layout:
-                    ResponsiveBreakpoints.of(context).largerThan(TABLET)
+                    ResponsiveBreakpoints.of(context).isMobile
                         ? ResponsiveRowColumnType.ROW
                         : ResponsiveRowColumnType.COLUMN,
                 rowPadding: EdgeInsets.all(10),
@@ -102,6 +108,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                 rowMainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ResponsiveRowColumnItem(
+                    rowFlex: 1,
                     child: ProducWidget(
                       width: width,
                       name: 'Gaming Staff',
@@ -109,6 +116,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     ),
                   ),
                   ResponsiveRowColumnItem(
+                    rowFlex: 1,
                     child: ProducWidget(
                       width: width,
                       name: 'Gaming Staff',
@@ -116,6 +124,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     ),
                   ),
                   ResponsiveRowColumnItem(
+                    rowFlex: 1,
                     child: ProducWidget(
                       width: width,
                       name: 'Gaming Staff',
@@ -147,7 +156,7 @@ class ProducWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
+      // width: ResponsiveBreakpoints.of(context).isMobile ? null : width,
       margin: EdgeInsets.all(5),
       decoration: BoxDecoration(
         boxShadow: [
@@ -164,7 +173,10 @@ class ProducWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               img,
-              width: width,
+              width:
+                  ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                      ? width * 0.3
+                      : width,
               height: 250,
               fit: BoxFit.cover,
             ),
@@ -176,7 +188,10 @@ class ProducWidget extends StatelessWidget {
                 horizontal: width * 0.02,
                 vertical: 5,
               ),
-              width: width,
+              width:
+                  ResponsiveBreakpoints.of(context).largerThan(MOBILE)
+                      ? width * 0.3
+                      : width,
               height: 100,
               decoration: BoxDecoration(
                 color: Colors.black54,

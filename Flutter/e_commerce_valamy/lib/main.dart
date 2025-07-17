@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
             breakpoints: [
               Breakpoint(start: 720, end: 1440, name: MOBILE),
               Breakpoint(start: 1441, end: 2560, name: TABLET),
-              Breakpoint(start: 2560, end: double.infinity, name: DESKTOP),
+              // Breakpoint(start: 2560, end: double.infinity, name: DESKTOP),
               // Breakpoint(start: 801, end: 1920, name: DESKTOP),
               // Breakpoint(start: 1921, end: double.infinity, name: '4K'),
             ],
