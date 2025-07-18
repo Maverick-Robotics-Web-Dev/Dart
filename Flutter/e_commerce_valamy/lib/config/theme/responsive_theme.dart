@@ -7,11 +7,12 @@ TextStyle textResponsiveWhite(BuildContext context) => TextStyle(
       ResponsiveValue<double>(
         context,
         conditionalValues: [
-          Condition.equals(name: 'SMALL_MOBILE', value: 8),
+          // Condition.equals(name: 'SMALL_MOBILE', value: 8),
           Condition.equals(name: MOBILE, value: 16),
-          Condition.equals(name: TABLET, value: 12),
-          Condition.equals(name: DESKTOP, value: 14),
-          Condition.equals(name: '4K', value: 16),
+          Condition.largerThan(name: MOBILE, value: 18),
+          // Condition.equals(name: TABLET, value: 12),
+          // Condition.equals(name: DESKTOP, value: 14),
+          // Condition.equals(name: '4K', value: 16),
         ],
         defaultValue: 10,
       ).value,
