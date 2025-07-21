@@ -18,10 +18,9 @@ class MainApp extends StatelessWidget {
           (context, widget) => ResponsiveBreakpoints(
             breakpoints: [
               Breakpoint(start: 0, end: 450, name: MOBILE),
-              // Breakpoint(start: 1441, end: 2560, name: TABLET),
-              // Breakpoint(start: 2560, end: double.infinity, name: DESKTOP),
-              // Breakpoint(start: 801, end: 1920, name: DESKTOP),
-              // Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+              Breakpoint(start: 451, end: 1280, name: TABLET),
+              Breakpoint(start: 1281, end: 1920, name: DESKTOP),
+              Breakpoint(start: 1921, end: double.infinity, name: '4K'),
             ],
             child: ClampingScrollWrapper.builder(context, widget!),
           ),
@@ -29,7 +28,7 @@ class MainApp extends StatelessWidget {
       title: 'Valamy',
       theme: lightTheme(context),
       // themeMode: ThemeMode.light,
-      initialRoute: verificationCodeRoute,
+      initialRoute: signUpRoute,
       routes: routes,
     );
   }
