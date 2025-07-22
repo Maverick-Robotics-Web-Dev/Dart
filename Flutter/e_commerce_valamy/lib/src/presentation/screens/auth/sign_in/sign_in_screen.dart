@@ -20,28 +20,33 @@ class _SignInScreenState extends State<SignInScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    double paddingTop = MediaQuery.of(context).padding.top;
+    double paddingBottom = MediaQuery.of(context).padding.bottom;
+    double heightWithoutPadding = height - paddingTop - paddingBottom;
 
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: LayoutBuilder(
-            builder: (context, _) {
-              if (ResponsiveBreakpoints.of(context).isMobile) {
-                return SignInMobileScreen(
-                  height: height,
-                  width: width,
-                  textTheme: textTheme,
-                  formKey: _formKey,
-                );
-              } else if (ResponsiveBreakpoints.of(context).isTablet) {
-                return SignInTabletScreen();
-              } else if (ResponsiveBreakpoints.of(context).isDesktop) {
-                return Center(child: Text('DESKTOP'));
-              } else {
-                return Center(child: Text('4K'));
-              }
-            },
-          ),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            if (ResponsiveBreakpoints.of(context).isMobile) {
+              return SignInMobileScreen(
+                height: height,
+                width: width,
+                textTheme: textTheme,
+                formKey: _formKey,
+              );
+            } else if (ResponsiveBreakpoints.of(context).isTablet) {
+              print('HEIGHT: $height');
+              print('PADDING-TOP: ${paddingTop}');
+              print('PADDING-BOTTOM: ${paddingBottom}');
+              print('HEIGHT WITHOUT PADDING: $heightWithoutPadding');
+              return SignInTabletScreen(height: height, width: width);
+            } else if (ResponsiveBreakpoints.of(context).isDesktop) {
+              return Center(child: Text('DESKTOP'));
+            } else {
+              return Center(child: Text('4K'));
+            }
+          },
         ),
       ),
     );
