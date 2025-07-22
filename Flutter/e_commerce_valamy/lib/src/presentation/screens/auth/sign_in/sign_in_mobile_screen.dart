@@ -82,7 +82,7 @@ class BodyScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(h_16),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Peleteria Valamy', style: textTheme?.headlineLarge),

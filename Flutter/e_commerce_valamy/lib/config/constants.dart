@@ -22,4 +22,3 @@ const Color warningColor = Color(0xFFD50100);
 
 const double font_16 = 16;
 const double font_16_6 = 16.6;
-const double font_18 = 18;
