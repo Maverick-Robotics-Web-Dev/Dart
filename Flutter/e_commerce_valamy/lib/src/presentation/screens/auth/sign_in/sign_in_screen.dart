@@ -26,27 +26,29 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return SafeArea(
       child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            if (ResponsiveBreakpoints.of(context).isMobile) {
-              return SignInMobileScreen(
-                height: height,
-                width: width,
-                textTheme: textTheme,
-                formKey: _formKey,
-              );
-            } else if (ResponsiveBreakpoints.of(context).isTablet) {
-              print('HEIGHT: $height');
-              print('PADDING-TOP: ${paddingTop}');
-              print('PADDING-BOTTOM: ${paddingBottom}');
-              print('HEIGHT WITHOUT PADDING: $heightWithoutPadding');
-              return SignInTabletScreen(height: height, width: width);
-            } else if (ResponsiveBreakpoints.of(context).isDesktop) {
-              return Center(child: Text('DESKTOP'));
-            } else {
-              return Center(child: Text('4K'));
-            }
-          },
+        body: SingleChildScrollView(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (ResponsiveBreakpoints.of(context).isMobile) {
+                return SignInMobileScreen(
+                  height: height,
+                  width: width,
+                  textTheme: textTheme,
+                  formKey: _formKey,
+                );
+              } else if (ResponsiveBreakpoints.of(context).isTablet) {
+                print('HEIGHT: $height');
+                print('PADDING-TOP: ${paddingTop}');
+                print('PADDING-BOTTOM: ${paddingBottom}');
+                print('HEIGHT WITHOUT PADDING: $heightWithoutPadding');
+                return SignInTabletScreen(height: height, width: width);
+              } else if (ResponsiveBreakpoints.of(context).isDesktop) {
+                return Center(child: Text('DESKTOP'));
+              } else {
+                return Center(child: Text('4K'));
+              }
+            },
+          ),
         ),
       ),
     );
