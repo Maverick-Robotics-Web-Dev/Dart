@@ -43,7 +43,7 @@ class BackgroundImage extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/sign_in_image.jpg'),
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
     );
@@ -85,14 +85,27 @@ class BodyScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Peleteria Valamy', style: textTheme?.headlineLarge),
-          SizedBox(height: h_16 / 2),
+          Text(
+            'Peleteria Valamy',
+            style: TextStyle(
+              color: primaryColor,
+              fontSize: 32,
+              letterSpacing: 1,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: h_16),
           Text(
             // "Log in with your data that you intered during your registration.",
             'Inicia sesión con tus datos que ingresaste durante tu registro',
-            style: textTheme?.bodyLarge,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 16,
+              letterSpacing: 1,
+              // fontWeight: FontWeight.w500,
+            ),
           ),
-          SizedBox(height: h_16),
+          SizedBox(height: 40),
           Form(
             key: formKey,
             child: Column(
@@ -111,12 +124,13 @@ class BodyScreen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 18),
           Align(
             child: TextButton(
               onPressed: () {},
               child: Text(
                 '¿Olvidaste tu contraseña?',
-                style: TextStyle(fontSize: font_16, letterSpacing: 1),
+                style: TextStyle(fontSize: font_16_6, letterSpacing: 1),
               ),
             ),
           ),
@@ -142,6 +156,7 @@ class BodyScreen extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 18),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -149,7 +164,7 @@ class BodyScreen extends StatelessWidget {
                 '¿No tienes una cuenta?',
                 style: TextStyle(
                   color: textColor,
-                  fontSize: font_16,
+                  fontSize: font_16_6,
                   // fontWeight: FontWeight.w500,
                   letterSpacing: 1,
                 ),
@@ -159,7 +174,7 @@ class BodyScreen extends StatelessWidget {
                 child: Text(
                   'Sign Up',
                   style: TextStyle(
-                    fontSize: font_16,
+                    fontSize: font_16_6,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 1,
                   ),
