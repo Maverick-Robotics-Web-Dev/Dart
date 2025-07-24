@@ -2,15 +2,10 @@ import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_tablet_screen.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
-
-  @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
+class SignInScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +26,10 @@ class _SignInScreenState extends State<SignInScreen> {
             } else if (constraints.maxWidth <= 1280 &&
                 constraints.maxWidth > 450) {
               return SignInTabletScreen(
-                height: constraints.maxHeight,
-                width: constraints.maxWidth,
+                height: height,
+                width: width,
+                maxHeight: constraints.maxHeight,
+                maxWidth: constraints.maxWidth,
                 textTheme: textTheme,
                 formKey: _formKey,
                 isKeyboardVisible: isKeyboardVisible,
