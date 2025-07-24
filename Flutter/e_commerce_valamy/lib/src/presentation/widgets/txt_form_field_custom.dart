@@ -26,7 +26,7 @@ class TxtFormFieldCustom extends StatelessWidget {
     // textInputAction: TextInputAction.next,
     keyboardType: keyboardType,
     obscureText: obscureText,
-    style: TextStyle(color: textColor, fontSize: font_16),
+    style: TextStyle(color: textColor, fontSize: 18),
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: Padding(
