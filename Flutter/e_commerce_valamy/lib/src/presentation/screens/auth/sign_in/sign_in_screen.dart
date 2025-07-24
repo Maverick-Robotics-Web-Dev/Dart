@@ -14,7 +14,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     TextTheme textTheme = Theme.of(context).textTheme;
+    final bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return SafeArea(
       child: Scaffold(
@@ -32,11 +35,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 width: constraints.maxWidth,
                 textTheme: textTheme,
                 formKey: _formKey,
+                isKeyboardVisible: isKeyboardVisible,
               );
             } else {
               return SignInMobileScreen(
-                height: constraints.maxHeight,
-                width: constraints.maxWidth,
+                height: height,
+                width: width,
                 textTheme: textTheme,
                 formKey: _formKey,
               );

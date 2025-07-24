@@ -18,13 +18,15 @@ class SignInMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        BackgroundImage(height: height, width: width),
-        BackgroundOpacity(height: height, width: width),
-        BodyScreen(textTheme: textTheme, formKey: formKey, height: height),
-      ],
+    return SingleChildScrollView(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          BackgroundImage(height: height, width: width),
+          BackgroundOpacity(height: height, width: width),
+          BodyScreen(textTheme: textTheme, formKey: formKey, height: height),
+        ],
+      ),
     );
   }
 }
