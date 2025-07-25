@@ -6,7 +6,8 @@ const double borderRadious_12 = 12.0;
 
 const Color whiteColor = Color(0xFFFFFFFF);
 // const Color primaryColor = Color(0xFF0D47A1);
-const Color primaryColor = Color(0xFF182865);
+// const Color primaryColor = Color(0xFF182865);
+const Color primaryColor = Color(0xFF08296C);
 const Color secondaryColor = Color(0xFF00548B);
 const Color transparentBlue = Color(0xB30D47A1);
 const Color transparentWhite = Color(0xC2FFFFFF);
