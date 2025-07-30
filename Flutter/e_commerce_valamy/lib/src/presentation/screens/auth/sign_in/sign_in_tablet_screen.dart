@@ -35,168 +35,245 @@ class _SignInTabletScreenState extends State<SignInTabletScreen> {
         width: widget.width,
         child: Row(
           children: [
-            SizedBox(
-              width: widget.width * 0.6,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/sign_in_image.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(13, 71, 161, 0.7),
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo_valamy_blanco.png',
-                        width: 260,
-                        height: 260,
-                      ),
-                      Text(
-                        'Peleteria Valamy',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 48,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                      Text(
-                        'Exclusividad y Sofisticación',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: widget.width * 0.4,
-              padding: EdgeInsets.symmetric(horizontal: 46),
-              decoration: BoxDecoration(
-                // color: Color(0xFFFAFAFA),
-                color: Color.fromRGBO(255, 255, 255, 1),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Sign In',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontSize: 34,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  SizedBox(height: 26),
-                  Text(
-                    // "Log in with your data that you intered during your registration.",
-                    'Inicia sesión con tus datos que ingresaste durante tu registro',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: secondaryColor,
-                      fontSize: 16.6,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  SizedBox(height: 40),
-                  Form(
-                    key: widget.formKey,
-                    child: Column(
-                      children: [
-                        TxtFormFieldCustom(
-                          svgPath: "assets/icons/Message.svg",
-                          hintText: "Email",
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        SizedBox(height: 40),
-                        TxtFormFieldCustom(
-                          svgPath: "assets/icons/Lock.svg",
-                          hintText: "Password",
-                          obscureText: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Align(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        '¿Olvidaste tu contraseña?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: secondaryColor,
-                          fontSize: 16.6,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height:
-                        widget.height > 700 ? (widget.height * 0.1) : (h_16),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 32),
-                      backgroundColor: primaryColor,
-                    ),
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 18,
-                        letterSpacing: 1,
-                        color: whiteColor,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 26),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '¿No tienes una cuenta?',
-                        style: TextStyle(
-                          color: secondaryColor,
-                          fontSize: 16.6,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: secondaryColor,
-                            fontSize: 16.6,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            LeftSideContent(widget: widget),
+            RightSideContent(widget: widget),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class RightSideContent extends StatelessWidget {
+  final SignInTabletScreen widget;
+
+  const RightSideContent({super.key, required this.widget});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: widget.width * 0.4,
+      padding: EdgeInsets.symmetric(horizontal: 46),
+      decoration: BoxDecoration(
+        // color: Color(0xFFFAFAFA),
+        color: Color.fromRGBO(255, 255, 255, 1),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SignInTitle(),
+          SizedBox(height: 26),
+          SubtitleText(),
+          SizedBox(height: 40),
+          SignInForm(widget: widget),
+          SizedBox(height: 20),
+          ForgotPassTextBtn(),
+          SizedBox(
+            height: widget.height > 700 ? (widget.height * 0.1) : (h_16),
+          ),
+          SignInBtn(),
+          SizedBox(height: 26),
+          DontAccountLbl(),
+        ],
+      ),
+    );
+  }
+}
+
+class LeftSideContent extends StatelessWidget {
+  final SignInTabletScreen widget;
+
+  const LeftSideContent({super.key, required this.widget});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.width * 0.6,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [BackgroundImage(), BackgroundColorOpacity(), LogoLbl()],
+      ),
+    );
+  }
+}
+
+class DontAccountLbl extends StatelessWidget {
+  const DontAccountLbl({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '¿No tienes una cuenta?',
+          style: TextStyle(
+            color: secondaryColor,
+            fontSize: 16.6,
+            letterSpacing: 1,
+          ),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text(
+            'Sign Up',
+            style: TextStyle(
+              color: secondaryColor,
+              fontSize: 16.6,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SignInBtn extends StatelessWidget {
+  const SignInBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 32),
+        backgroundColor: primaryColor,
+      ),
+      child: Text(
+        'Sign In',
+        style: TextStyle(fontSize: 18, letterSpacing: 1, color: whiteColor),
+      ),
+    );
+  }
+}
+
+class ForgotPassTextBtn extends StatelessWidget {
+  const ForgotPassTextBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      child: TextButton(
+        onPressed: () {},
+        child: Text(
+          '¿Olvidaste tu contraseña?',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: secondaryColor,
+            fontSize: 16.6,
+            letterSpacing: 1,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SignInForm extends StatelessWidget {
+  const SignInForm({super.key, required this.widget});
+
+  final SignInTabletScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: widget.formKey,
+      child: Column(
+        children: [
+          TxtFormFieldCustom(
+            svgPath: "assets/icons/Message.svg",
+            hintText: "Email",
+            keyboardType: TextInputType.emailAddress,
+          ),
+          SizedBox(height: 40),
+          TxtFormFieldCustom(
+            svgPath: "assets/icons/Lock.svg",
+            hintText: "Password",
+            obscureText: true,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SubtitleText extends StatelessWidget {
+  const SubtitleText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      // "Log in with your data that you intered during your registration.",
+      'Inicia sesión con tus datos que ingresaste durante tu registro',
+      textAlign: TextAlign.center,
+      style: TextStyle(color: secondaryColor, fontSize: 16.6, letterSpacing: 1),
+    );
+  }
+}
+
+class SignInTitle extends StatelessWidget {
+  const SignInTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Sign In',
+      textAlign: TextAlign.center,
+      style: TextStyle(color: primaryColor, fontSize: 34, letterSpacing: 1),
+    );
+  }
+}
+
+class LogoLbl extends StatelessWidget {
+  const LogoLbl({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/logo_valamy_blanco.png',
+          width: 260,
+          height: 260,
+        ),
+        Text(
+          'Peleteria Valamy',
+          style: TextStyle(color: Colors.white, fontSize: 48, letterSpacing: 1),
+        ),
+        Text(
+          'Exclusividad y Sofisticación',
+          style: TextStyle(color: Colors.white, fontSize: 22, letterSpacing: 1),
+        ),
+      ],
+    );
+  }
+}
+
+class BackgroundColorOpacity extends StatelessWidget {
+  const BackgroundColorOpacity({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(color: const Color.fromRGBO(13, 71, 161, 0.7)),
+    );
+  }
+}
+
+class BackgroundImage extends StatelessWidget {
+  const BackgroundImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/sign_in_image.jpg'),
+          fit: BoxFit.fill,
         ),
       ),
     );
