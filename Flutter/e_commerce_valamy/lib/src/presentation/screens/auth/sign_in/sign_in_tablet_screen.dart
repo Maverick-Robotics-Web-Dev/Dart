@@ -218,7 +218,7 @@ class SignInTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Sign In',
+      '¡Bienvenido de Nuevo!',
       textAlign: TextAlign.center,
       style: TextStyle(color: primaryColor, fontSize: 34, letterSpacing: 1),
     );

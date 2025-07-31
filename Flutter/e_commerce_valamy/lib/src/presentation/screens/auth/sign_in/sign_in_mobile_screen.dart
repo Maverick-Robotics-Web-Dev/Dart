@@ -3,15 +3,15 @@ import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom
 import 'package:flutter/material.dart';
 
 class SignInMobileScreen extends StatelessWidget {
-  final double? height;
-  final double? width;
+  final double height;
+  final double width;
   final TextTheme? textTheme;
   final GlobalKey<FormState>? formKey;
 
   const SignInMobileScreen({
     super.key,
-    this.height,
-    this.width,
+    required this.height,
+    required this.width,
     this.textTheme,
     this.formKey,
   });
@@ -22,25 +22,45 @@ class SignInMobileScreen extends StatelessWidget {
       child: Column(
         // alignment: Alignment.center,
         children: [
-          Image.asset(
-            'assets/images/sign_in_image_mobile.jpg',
-            fit: BoxFit.cover,
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/sign_in_image_mobile.jpg',
+                color: const Color.fromRGBO(13, 71, 161, 0.7),
+                colorBlendMode: BlendMode.darken,
+                fit: BoxFit.cover,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/logo_valamy_blanco.png',
+                    width: 180,
+                    height: 180,
+                  ),
+                  Text(
+                    'Peleteria Valamy',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 34,
+                      letterSpacing: 1,
+                      // fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    'Exclusividad y Sofisticación',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      letterSpacing: 1,
+                      // fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          // Container(
-          //   height: height,
-          //   width: width,
-          //   decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AssetImage('assets/images/sign_in_image.jpg'),
-          //       fit: BoxFit.fill,
-          //     ),
-          //   ),
-          // ),
-          // Container(
-          //   height: height,
-          //   width: width,
-          //   decoration: BoxDecoration(color: transparentWhite),
-          // ),
           Padding(
             padding: const EdgeInsets.all(h_16),
             child: Column(
@@ -48,12 +68,11 @@ class SignInMobileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Peleteria Valamy',
+                  '¡Bienvenido de Nuevo!',
                   style: TextStyle(
                     color: primaryColor,
                     fontSize: 32,
                     letterSpacing: 1,
-                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: h_16 / 2),
@@ -64,7 +83,6 @@ class SignInMobileScreen extends StatelessWidget {
                     color: textColor,
                     fontSize: 16,
                     letterSpacing: 1,
-                    // fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(height: 16),
@@ -86,7 +104,6 @@ class SignInMobileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 18),
                 Align(
                   child: TextButton(
                     onPressed: () {},
@@ -96,14 +113,7 @@ class SignInMobileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height:
-                      height != null
-                          ? (height! > 700)
-                              ? (height! * 0.1)
-                              : (h_16)
-                          : null,
-                ),
+                SizedBox(height: height > 700 ? height * 0.1 : h_16),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -118,7 +128,6 @@ class SignInMobileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 18),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
