@@ -61,19 +61,19 @@ class RightSideContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SignInTitle(),
+          SignInTitleTablet(),
           SizedBox(height: 26),
-          SubtitleText(),
+          SignInSubtitleTextTablet(),
           SizedBox(height: 40),
           SignInForm(widget: widget),
           SizedBox(height: 20),
-          ForgotPassTextBtn(),
+          ForgotPassTextButtonTablet(),
           SizedBox(
             height: widget.height > 700 ? (widget.height * 0.1) : (h_16),
           ),
-          SignInBtn(),
+          SignInButtonTablet(),
           SizedBox(height: 26),
-          DontAccountLbl(),
+          DontAccountLabelTablet(),
         ],
       ),
     );
@@ -91,14 +91,18 @@ class LeftSideContent extends StatelessWidget {
       width: widget.width * 0.6,
       child: Stack(
         alignment: Alignment.center,
-        children: [BackgroundImage(), BackgroundColorOpacity(), LogoLbl()],
+        children: [
+          BackgroundImageTablet(),
+          BackgroundColorOpacityTablet(),
+          LogoLabelTablet(),
+        ],
       ),
     );
   }
 }
 
-class DontAccountLbl extends StatelessWidget {
-  const DontAccountLbl({super.key});
+class DontAccountLabelTablet extends StatelessWidget {
+  const DontAccountLabelTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +133,8 @@ class DontAccountLbl extends StatelessWidget {
   }
 }
 
-class SignInBtn extends StatelessWidget {
-  const SignInBtn({super.key});
+class SignInButtonTablet extends StatelessWidget {
+  const SignInButtonTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +152,8 @@ class SignInBtn extends StatelessWidget {
   }
 }
 
-class ForgotPassTextBtn extends StatelessWidget {
-  const ForgotPassTextBtn({super.key});
+class ForgotPassTextButtonTablet extends StatelessWidget {
+  const ForgotPassTextButtonTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -198,8 +202,8 @@ class SignInForm extends StatelessWidget {
   }
 }
 
-class SubtitleText extends StatelessWidget {
-  const SubtitleText({super.key});
+class SignInSubtitleTextTablet extends StatelessWidget {
+  const SignInSubtitleTextTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -212,8 +216,8 @@ class SubtitleText extends StatelessWidget {
   }
 }
 
-class SignInTitle extends StatelessWidget {
-  const SignInTitle({super.key});
+class SignInTitleTablet extends StatelessWidget {
+  const SignInTitleTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -225,8 +229,8 @@ class SignInTitle extends StatelessWidget {
   }
 }
 
-class LogoLbl extends StatelessWidget {
-  const LogoLbl({super.key});
+class LogoLabelTablet extends StatelessWidget {
+  const LogoLabelTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -251,8 +255,8 @@ class LogoLbl extends StatelessWidget {
   }
 }
 
-class BackgroundColorOpacity extends StatelessWidget {
-  const BackgroundColorOpacity({super.key});
+class BackgroundColorOpacityTablet extends StatelessWidget {
+  const BackgroundColorOpacityTablet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -263,8 +267,8 @@ class BackgroundColorOpacity extends StatelessWidget {
   }
 }
 
-class BackgroundImage extends StatelessWidget {
-  const BackgroundImage({super.key});
+class BackgroundImageTablet extends StatelessWidget {
+  const BackgroundImageTablet({super.key});
 
   @override
   Widget build(BuildContext context) {

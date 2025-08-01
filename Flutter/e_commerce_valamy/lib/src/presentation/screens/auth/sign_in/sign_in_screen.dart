@@ -1,3 +1,4 @@
+import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_desktop_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_mobile_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_tablet_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,12 @@ class SignInScreen extends StatelessWidget {
               return Center(child: Text('4K'));
             } else if (constraints.maxWidth <= 1920 &&
                 constraints.maxWidth > 1280) {
-              return Center(child: Text('DESKTOP'));
+              return SignInDesktopScreen(
+                height: height,
+                width: width,
+                textTheme: textTheme,
+                formKey: _formKey,
+              );
             } else if (constraints.maxWidth <= 1280 &&
                 constraints.maxWidth > 450) {
               return SignInTabletScreen(

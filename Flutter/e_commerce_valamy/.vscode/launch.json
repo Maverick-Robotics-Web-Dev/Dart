@@ -44,7 +44,7 @@
   "compounds": [
     {
       "name": "All Devices",
-      "configurations": ["Android-Phone", "Android-Tablet"]
+      "configurations": ["Android-Phone", "Android-Tablet", "Web"]
     }
   ]
 }
