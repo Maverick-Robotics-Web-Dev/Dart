@@ -262,7 +262,7 @@ class BackgroundColorOpacityTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: const Color.fromRGBO(13, 71, 161, 0.7)),
+      decoration: BoxDecoration(color: Color.fromRGBO(13, 71, 161, 0.7)),
     );
   }
 }
