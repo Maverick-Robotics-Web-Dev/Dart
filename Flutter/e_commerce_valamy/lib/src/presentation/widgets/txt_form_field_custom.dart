@@ -9,6 +9,7 @@ class TxtFormFieldCustom extends StatelessWidget {
   final TextInputType? keyboardType;
   final double? height;
   final double? width;
+  final double? fontSize;
 
   const TxtFormFieldCustom({
     super.key,
@@ -18,6 +19,7 @@ class TxtFormFieldCustom extends StatelessWidget {
     this.keyboardType,
     this.height = 24,
     this.width = 24,
+    this.fontSize = 18,
   });
 
   @override
@@ -26,7 +28,7 @@ class TxtFormFieldCustom extends StatelessWidget {
     // textInputAction: TextInputAction.next,
     keyboardType: keyboardType,
     obscureText: obscureText,
-    style: TextStyle(color: textColor, fontSize: 18),
+    style: TextStyle(color: textColor, fontSize: fontSize),
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: Padding(

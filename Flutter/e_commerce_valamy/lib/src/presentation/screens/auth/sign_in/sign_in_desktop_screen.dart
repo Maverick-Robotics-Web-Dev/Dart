@@ -69,7 +69,7 @@ class BackgroundColorOpacityDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: const Color.fromRGBO(13, 71, 161, 0.7)),
+      decoration: BoxDecoration(color: transparentBlue),
     );
   }
 }
@@ -93,19 +93,27 @@ class LogoLabelDesktop extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/images/logo_valamy_blanco.png',
-          width: 260,
-          height: 260,
+        Container(
+          color: whiteColor,
+          child: Image.asset(
+            'assets/images/sign_in_photo.jpg',
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
+          ),
         ),
-        Text(
-          'Peleteria Valamy',
-          style: TextStyle(color: Colors.white, fontSize: 48, letterSpacing: 1),
-        ),
-        Text(
-          'Exclusividad y Sofisticación',
-          style: TextStyle(color: Colors.white, fontSize: 22, letterSpacing: 1),
-        ),
+        // Image.asset(
+        //   'assets/images/logo_valamy_azul.png',
+        //   width: 260,
+        //   height: 260,
+        // ),
+        // Text(
+        //   'Peleteria Valamy',
+        //   style: TextStyle(color: primaryColor, fontSize: 48, letterSpacing: 1),
+        // ),
+        // Text(
+        //   'Exclusividad y Sofisticación',
+        //   style: TextStyle(color: primaryColor, fontSize: 22, letterSpacing: 1),
+        // ),
       ],
     );
   }
@@ -120,7 +128,8 @@ class RightSideContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 80, horizontal: 140),
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(vertical: 40, horizontal: 120),
         padding: EdgeInsets.symmetric(horizontal: 40),
         decoration: BoxDecoration(
           // color: Color(0xFFFAFAFA),
@@ -158,7 +167,7 @@ class SignInTitleDesktop extends StatelessWidget {
     return Text(
       '¡Bienvenido de Nuevo!',
       textAlign: TextAlign.center,
-      style: TextStyle(color: primaryColor, fontSize: 34, letterSpacing: 1),
+      style: TextStyle(color: primaryColor, fontSize: 28, letterSpacing: 1),
     );
   }
 }
@@ -172,7 +181,7 @@ class SignInSubtitleTextDesktop extends StatelessWidget {
       // "Log in with your data that you intered during your registration.",
       'Inicia sesión con tus datos que ingresaste durante tu registro',
       textAlign: TextAlign.center,
-      style: TextStyle(color: secondaryColor, fontSize: 16.6, letterSpacing: 1),
+      style: TextStyle(color: secondaryColor, fontSize: 14, letterSpacing: 1),
     );
   }
 }
@@ -191,12 +200,14 @@ class SignInForm extends StatelessWidget {
           TxtFormFieldCustom(
             svgPath: "assets/icons/Message.svg",
             hintText: "Email",
+            fontSize: 14,
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 40),
           TxtFormFieldCustom(
             svgPath: "assets/icons/Lock.svg",
             hintText: "Password",
+            fontSize: 14,
             obscureText: true,
           ),
         ],
@@ -218,7 +229,7 @@ class ForgotPassTextButtonTablet extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             color: secondaryColor,
-            fontSize: 16.6,
+            fontSize: 14.6,
             letterSpacing: 1,
           ),
         ),
@@ -235,12 +246,12 @@ class SignInButtonTablet extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(double.infinity, 32),
+        minimumSize: Size(double.infinity, 56),
         backgroundColor: primaryColor,
       ),
       child: Text(
         'Sign In',
-        style: TextStyle(fontSize: 18, letterSpacing: 1, color: whiteColor),
+        style: TextStyle(fontSize: 14, letterSpacing: 1, color: whiteColor),
       ),
     );
   }
@@ -258,7 +269,7 @@ class DontAccountLabelTablet extends StatelessWidget {
           '¿No tienes una cuenta?',
           style: TextStyle(
             color: secondaryColor,
-            fontSize: 16.6,
+            fontSize: 14,
             letterSpacing: 1,
           ),
         ),
@@ -268,7 +279,7 @@ class DontAccountLabelTablet extends StatelessWidget {
             'Sign Up',
             style: TextStyle(
               color: secondaryColor,
-              fontSize: 16.6,
+              fontSize: 14,
               letterSpacing: 1,
             ),
           ),

@@ -202,6 +202,19 @@ class SignInForm extends StatelessWidget {
   }
 }
 
+class SignInTitleTablet extends StatelessWidget {
+  const SignInTitleTablet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '¡Bienvenido de Nuevo!',
+      textAlign: TextAlign.center,
+      style: TextStyle(color: primaryColor, fontSize: 34, letterSpacing: 1),
+    );
+  }
+}
+
 class SignInSubtitleTextTablet extends StatelessWidget {
   const SignInSubtitleTextTablet({super.key});
 
@@ -212,19 +225,6 @@ class SignInSubtitleTextTablet extends StatelessWidget {
       'Inicia sesión con tus datos que ingresaste durante tu registro',
       textAlign: TextAlign.center,
       style: TextStyle(color: secondaryColor, fontSize: 16.6, letterSpacing: 1),
-    );
-  }
-}
-
-class SignInTitleTablet extends StatelessWidget {
-  const SignInTitleTablet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '¡Bienvenido de Nuevo!',
-      textAlign: TextAlign.center,
-      style: TextStyle(color: primaryColor, fontSize: 34, letterSpacing: 1),
     );
   }
 }
