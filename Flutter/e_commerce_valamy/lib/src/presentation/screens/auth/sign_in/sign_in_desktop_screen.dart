@@ -27,7 +27,7 @@ class _SignInDesktopScreenState extends State<SignInDesktopScreen> {
       child: Container(
         height: widget.height,
         width: widget.width,
-        color: Colors.amber,
+        // color: Colors.amber,
         child: Stack(
           children: [
             BackgroundImageDesktop(widget: widget),
@@ -94,11 +94,14 @@ class LogoLabelDesktop extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          color: whiteColor,
-          child: Image.asset(
-            'assets/images/sign_in_photo.jpg',
-            height: MediaQuery.of(context).size.height,
-            width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          // color: whiteColor,
+          decoration: BoxDecoration(
+            color: whiteColor,
+            image: DecorationImage(
+              image: AssetImage('assets/images/sign_in_photo_2.png'),
+              // fit: BoxFit.fill,
+            ),
           ),
         ),
         // Image.asset(
