@@ -24,7 +24,7 @@ class _SignInDesktopScreenState extends State<SignInDesktopScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: widget.height,
         width: widget.width,
         // color: Colors.amber,
@@ -95,28 +95,12 @@ class LogoLabelDesktop extends StatelessWidget {
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
-          // color: whiteColor,
-          decoration: BoxDecoration(
-            color: whiteColor,
-            image: DecorationImage(
-              image: AssetImage('assets/images/sign_in_photo_2.png'),
-              // fit: BoxFit.fill,
-            ),
+          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+          child: Image.asset(
+            'assets/images/sign_in_photo_2_wh.webp',
+            fit: BoxFit.fill,
           ),
         ),
-        // Image.asset(
-        //   'assets/images/logo_valamy_azul.png',
-        //   width: 260,
-        //   height: 260,
-        // ),
-        // Text(
-        //   'Peleteria Valamy',
-        //   style: TextStyle(color: primaryColor, fontSize: 48, letterSpacing: 1),
-        // ),
-        // Text(
-        //   'Exclusividad y Sofisticación',
-        //   style: TextStyle(color: primaryColor, fontSize: 22, letterSpacing: 1),
-        // ),
       ],
     );
   }
@@ -132,7 +116,7 @@ class RightSideContent extends StatelessWidget {
     return Expanded(
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(vertical: 40, horizontal: 120),
+        margin: EdgeInsets.symmetric(vertical: 40, horizontal: 160),
         padding: EdgeInsets.symmetric(horizontal: 40),
         decoration: BoxDecoration(
           // color: Color(0xFFFAFAFA),
