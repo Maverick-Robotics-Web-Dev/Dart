@@ -79,9 +79,7 @@ class LeftSideContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(alignment: Alignment.center, children: [LogoLabelDesktop()]),
-    );
+    return Expanded(child: Stack(children: [LogoLabelDesktop()]));
   }
 }
 
@@ -95,7 +93,7 @@ class LogoLabelDesktop extends StatelessWidget {
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 0),
           child: Image.asset(
             'assets/images/sign_in_photo_2_wh.webp',
             fit: BoxFit.fill,
@@ -116,7 +114,7 @@ class RightSideContent extends StatelessWidget {
     return Expanded(
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(vertical: 40, horizontal: 160),
+        margin: EdgeInsets.symmetric(vertical: 40, horizontal: 120),
         padding: EdgeInsets.symmetric(horizontal: 40),
         decoration: BoxDecoration(
           // color: Color(0xFFFAFAFA),
