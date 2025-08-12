@@ -33,7 +33,10 @@ class _SignInDesktopScreenState extends State<SignInDesktopScreen> {
             BackgroundImageDesktop(widget: widget),
             BackgroundColorOpacityDesktop(),
             Row(
-              children: [LeftSideContent(), RightSideContent(widget: widget)],
+              children: [
+                LeftSideContent(widget: widget),
+                RightSideContent(widget: widget),
+              ],
             ),
           ],
         ),
@@ -75,11 +78,16 @@ class BackgroundColorOpacityDesktop extends StatelessWidget {
 }
 
 class LeftSideContent extends StatelessWidget {
-  const LeftSideContent({super.key});
+  final SignInDesktopScreen widget;
+
+  const LeftSideContent({super.key, required this.widget});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Stack(children: [LogoLabelDesktop()]));
+    return SizedBox(
+      width: widget.width * 0.6,
+      child: Stack(alignment: Alignment.center, children: [LogoLabelDesktop()]),
+    );
   }
 }
 
@@ -93,9 +101,10 @@ class LogoLabelDesktop extends StatelessWidget {
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 0),
+          width: double.infinity,
+          padding: EdgeInsets.all(80),
           child: Image.asset(
-            'assets/images/sign_in_photo_2_wh.webp',
+            'assets/images/sign_in_photo_2_whi.webp',
             fit: BoxFit.fill,
           ),
         ),
@@ -111,32 +120,65 @@ class RightSideContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      width: widget.width * 0.4,
       child: Container(
-        width: double.infinity,
-        margin: EdgeInsets.symmetric(vertical: 40, horizontal: 120),
-        padding: EdgeInsets.symmetric(horizontal: 40),
-        decoration: BoxDecoration(
-          // color: Color(0xFFFAFAFA),
-          color: Color.fromRGBO(255, 255, 255, 1),
-          borderRadius: BorderRadius.circular(20),
-        ),
+        color: whiteColor,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SignInTitleDesktop(),
-            SizedBox(height: 26),
-            SignInSubtitleTextDesktop(),
-            SizedBox(height: 40),
-            SignInForm(widget: widget),
-            SizedBox(height: 20),
-            ForgotPassTextButtonTablet(),
-            SizedBox(
-              height: widget.height > 700 ? (widget.height * 0.1) : (h_16),
+            Container(
+              margin: EdgeInsets.only(top: 40, bottom: 60),
+              padding: EdgeInsets.only(left: 30),
+              height: 60,
+              width: 344,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
+                ),
+                color: primaryColor,
+              ),
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset(
+                    'assets/images/logo_valamy_wh.webp',
+                    fit: BoxFit.fill,
+                  ),
+                  SizedBox(width: 16),
+                  Text(
+                    'PELETERIA VALAMY',
+                    style: TextStyle(color: whiteColor, fontSize: 22),
+                  ),
+                ],
+              ),
             ),
-            SignInButtonTablet(),
-            SizedBox(height: 26),
-            DontAccountLabelTablet(),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 100),
+              decoration: BoxDecoration(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SignInTitleDesktop(),
+                  SizedBox(height: 26),
+                  SignInSubtitleTextDesktop(),
+                  SizedBox(height: 40),
+                  SignInForm(widget: widget),
+                  SizedBox(height: 20),
+                  ForgotPassTextButtonTablet(),
+                  SizedBox(
+                    height:
+                        widget.height > 700 ? (widget.height * 0.1) : (h_16),
+                  ),
+                  SignInButtonTablet(),
+                  SizedBox(height: 26),
+                  DontAccountLabelTablet(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
