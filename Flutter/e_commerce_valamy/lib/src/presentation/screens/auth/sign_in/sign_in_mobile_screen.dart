@@ -21,47 +21,36 @@ class SignInMobileScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Stack(
-            // alignment: Alignment.center,
-            children: [
-              BackgroundImageTopMobile(height: height),
-              SignInImageMobile(),
-              Container(
-                margin: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                alignment: Alignment.center,
-                width: 220,
-                height: 40,
-                // margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(50),
-                    bottomRight: Radius.circular(50),
-                  ),
-                ),
-                child: Text(
-                  'PELETERIA VALAMY',
-                  style: TextStyle(color: primaryColor, fontSize: 20),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(h_16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          Container(
+            color: Colors.amber,
+            height: height * 0.35,
+            child: Stack(
+              // alignment: Alignment.center,
               children: [
-                SignInTitleMobile(),
-                SizedBox(height: h_16 / 2),
-                SignInSubtitleMobile(),
-                SizedBox(height: 16),
-                SignInFormMobile(formKey: formKey),
-                ForgotPassTextButtonMobile(),
-                SizedBox(height: height > 700 ? height * 0.1 : h_16),
-                SignInButtonMobile(),
-                DontAccountLabelMobile(),
+                BackgroundImageTopMobile(height: height),
+                SignInImageMobile(height: height),
               ],
+            ),
+          ),
+          Container(
+            height: height * 0.65,
+            color: Colors.deepPurple,
+            child: Padding(
+              padding: const EdgeInsets.all(h_16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SignInTitleMobile(),
+                  SizedBox(height: h_16 / 2),
+                  SignInSubtitleMobile(),
+                  SizedBox(height: 16),
+                  SignInFormMobile(formKey: formKey),
+                  ForgotPassTextButtonMobile(),
+                  SizedBox(height: height > 700 ? height * 0.1 : h_16),
+                  SignInButtonMobile(),
+                  DontAccountLabelMobile(),
+                ],
+              ),
             ),
           ),
         ],
@@ -90,17 +79,52 @@ class BackgroundImageTopMobile extends StatelessWidget {
 }
 
 class SignInImageMobile extends StatelessWidget {
-  const SignInImageMobile({super.key});
+  final double height;
+  final GlobalKey? keyWidget;
+  const SignInImageMobile({super.key, required this.height, this.keyWidget});
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      child: Container(
-        alignment: Alignment.center,
-        width: 350,
-        height: 350,
-        child: Image.asset('assets/images/sign_in_photo_3_wh_mobile-02.webp'),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          width: 220,
+          height: 40,
+          margin: EdgeInsets.only(top: 26, bottom: 16),
+          decoration: BoxDecoration(
+            color: whiteColor,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(50),
+              bottomRight: Radius.circular(50),
+            ),
+          ),
+          child: Text(
+            'PELETERIA VALAMY',
+            style: TextStyle(color: primaryColor, fontSize: 20),
+          ),
+        ),
+        Align(
+          child: Column(
+            children: [
+              Container(
+                key: keyWidget,
+                // width: double.infinity,
+                height: 200,
+                child: Image.asset(
+                  'assets/images/sign_in_photo_3_wh_mobile.webp',
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Text(
+                'Exclusividad y Sofisticación ',
+                style: TextStyle(color: whiteColor, fontSize: 18),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

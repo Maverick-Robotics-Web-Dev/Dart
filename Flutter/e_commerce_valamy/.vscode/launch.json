@@ -17,7 +17,7 @@
       "deviceId": "emulator-5556"
     },
     {
-      "name": "Web",
+      "name": "Chrome",
       "request": "launch",
       "type": "dart",
       "deviceId": "chrome"
