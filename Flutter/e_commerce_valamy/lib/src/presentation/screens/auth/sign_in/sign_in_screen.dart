@@ -30,7 +30,7 @@ class SignInScreen extends StatelessWidget {
                 formKey: _formKey,
               );
             } else if (constraints.maxWidth <= 1280 &&
-                constraints.maxWidth > 450) {
+                constraints.maxWidth > 1024) {
               return SignInTabletScreen(
                 height: height,
                 width: width,

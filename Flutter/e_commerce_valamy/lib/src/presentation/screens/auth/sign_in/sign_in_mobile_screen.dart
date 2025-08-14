@@ -22,8 +22,30 @@ class SignInMobileScreen extends StatelessWidget {
       child: Column(
         children: [
           Stack(
-            alignment: Alignment.center,
-            children: [BackgroundImageTopMobile(), LogoLabelMobile()],
+            // alignment: Alignment.center,
+            children: [
+              BackgroundImageTopMobile(height: height),
+              SignInImageMobile(),
+              Container(
+                margin: EdgeInsets.zero,
+                padding: EdgeInsets.zero,
+                alignment: Alignment.center,
+                width: 220,
+                height: 40,
+                // margin: EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(50),
+                    bottomRight: Radius.circular(50),
+                  ),
+                ),
+                child: Text(
+                  'PELETERIA VALAMY',
+                  style: TextStyle(color: primaryColor, fontSize: 20),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(h_16),
@@ -49,51 +71,36 @@ class SignInMobileScreen extends StatelessWidget {
 }
 
 class BackgroundImageTopMobile extends StatelessWidget {
-  const BackgroundImageTopMobile({super.key});
+  final double height;
+
+  const BackgroundImageTopMobile({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/images/sign_in_image_mobile.jpg',
-      color: const Color.fromRGBO(13, 71, 161, 0.7),
-      colorBlendMode: BlendMode.darken,
-      fit: BoxFit.cover,
+    return SizedBox(
+      width: double.infinity,
+      child: Image.asset(
+        'assets/images/sign_in_image_mobile.jpg',
+        color: const Color.fromRGBO(13, 71, 161, 0.7),
+        colorBlendMode: BlendMode.darken,
+        fit: BoxFit.fill,
+      ),
     );
   }
 }
 
-class LogoLabelMobile extends StatelessWidget {
-  const LogoLabelMobile({super.key});
+class SignInImageMobile extends StatelessWidget {
+  const SignInImageMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          'assets/images/logo_valamy_blanco.png',
-          width: 180,
-          height: 180,
-        ),
-        Text(
-          'Peleteria Valamy',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 34,
-            letterSpacing: 1,
-            // fontWeight: FontWeight.w500,
-          ),
-        ),
-        Text(
-          'Exclusividad y Sofisticación',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            letterSpacing: 1,
-            // fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+    return Align(
+      child: Container(
+        alignment: Alignment.center,
+        width: 350,
+        height: 350,
+        child: Image.asset('assets/images/sign_in_photo_3_wh_mobile-02.webp'),
+      ),
     );
   }
 }

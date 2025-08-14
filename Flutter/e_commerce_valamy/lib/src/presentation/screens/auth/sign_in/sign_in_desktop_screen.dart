@@ -57,7 +57,7 @@ class BackgroundImageDesktop extends StatelessWidget {
       width: widget.width,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/sign_in_image_mobile.jpg'),
+          image: AssetImage('assets/images/sign_in_hd.jpg'),
           fit: BoxFit.fill,
         ),
       ),
@@ -96,19 +96,13 @@ class LogoLabelDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          padding: EdgeInsets.all(80),
-          child: Image.asset(
-            'assets/images/sign_in_photo_2_whi.webp',
-            fit: BoxFit.fill,
-          ),
-        ),
-      ],
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20),
+      child: Image.asset(
+        'assets/images/sign_in_photo_3_whi.webp',
+        // fit: BoxFit.fill,
+      ),
     );
   }
 }
@@ -124,21 +118,21 @@ class RightSideContent extends StatelessWidget {
       width: widget.width * 0.4,
       child: Container(
         color: whiteColor,
+        // margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 40, bottom: 60),
+              margin: EdgeInsets.only(top: 40, bottom: 40),
               padding: EdgeInsets.only(left: 30),
               height: 60,
               width: 344,
               decoration: BoxDecoration(
+                color: primaryColor,
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(50),
                   bottomRight: Radius.circular(50),
                 ),
-                color: primaryColor,
               ),
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
