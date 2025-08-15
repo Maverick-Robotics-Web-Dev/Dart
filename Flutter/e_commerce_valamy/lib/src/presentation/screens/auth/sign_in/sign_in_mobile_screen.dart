@@ -25,34 +25,21 @@ class SignInMobileScreen extends StatelessWidget {
             color: Colors.amber,
             height: height * 0.35,
             child: Stack(
-              // alignment: Alignment.center,
               children: [
-                BackgroundImageTopMobile(height: height),
-                SignInImageMobile(height: height),
+                Container(
+                  width: double.infinity,
+                  color: Colors.deepOrange,
+                  child: Image.asset(
+                    'assets/images/sign_in_image_mobile.jpg',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Container(color: transparentBlue),
+                Container(color: Colors.lime),
               ],
             ),
           ),
-          Container(
-            height: height * 0.65,
-            color: Colors.deepPurple,
-            child: Padding(
-              padding: const EdgeInsets.all(h_16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SignInTitleMobile(),
-                  SizedBox(height: h_16 / 2),
-                  SignInSubtitleMobile(),
-                  SizedBox(height: 16),
-                  SignInFormMobile(formKey: formKey),
-                  ForgotPassTextButtonMobile(),
-                  SizedBox(height: height > 700 ? height * 0.1 : h_16),
-                  SignInButtonMobile(),
-                  DontAccountLabelMobile(),
-                ],
-              ),
-            ),
-          ),
+          Container(color: Colors.deepPurple, height: height * 0.65),
         ],
       ),
     );
