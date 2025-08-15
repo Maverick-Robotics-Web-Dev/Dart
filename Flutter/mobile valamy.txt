@@ -1,0 +1,32 @@
+Container(
+            color: Colors.amber,
+            height: height * 0.35,
+            child: Stack(
+              // alignment: Alignment.center,
+              children: [
+                BackgroundImageTopMobile(height: height),
+                SignInImageMobile(height: height),
+              ],
+            ),
+          ),
+          Container(
+            height: height * 0.65,
+            color: Colors.deepPurple,
+            child: Padding(
+              padding: const EdgeInsets.all(h_16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SignInTitleMobile(),
+                  SizedBox(height: h_16 / 2),
+                  SignInSubtitleMobile(),
+                  SizedBox(height: 16),
+                  SignInFormMobile(formKey: formKey),
+                  ForgotPassTextButtonMobile(),
+                  SizedBox(height: height > 700 ? height * 0.1 : h_16),
+                  SignInButtonMobile(),
+                  DontAccountLabelMobile(),
+                ],
+              ),
+            ),
+          ),
