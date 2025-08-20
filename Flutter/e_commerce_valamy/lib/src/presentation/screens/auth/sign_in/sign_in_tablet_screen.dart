@@ -29,15 +29,17 @@ class SignInTabletScreen extends StatefulWidget {
 class _SignInTabletScreenState extends State<SignInTabletScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: widget.isKeyboardVisible ? widget.height : widget.maxHeight,
-        width: widget.width,
-        child: Row(
-          children: [
-            LeftSideContent(widget: widget),
-            RightSideContent(widget: widget),
-          ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: widget.isKeyboardVisible ? widget.height : widget.maxHeight,
+          width: widget.width,
+          child: Row(
+            children: [
+              LeftSideContent(widget: widget),
+              RightSideContent(widget: widget),
+            ],
+          ),
         ),
       ),
     );

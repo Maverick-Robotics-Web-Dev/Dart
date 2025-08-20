@@ -16,40 +16,38 @@ class SignInScreen extends StatelessWidget {
     final bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return SafeArea(
-      child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            if (constraints.maxWidth > 1920) {
-              return Center(child: Text('4K'));
-            } else if (constraints.maxWidth <= 1920 &&
-                constraints.maxWidth > 1280) {
-              return SignInDesktopScreen(
-                height: height,
-                width: width,
-                textTheme: textTheme,
-                formKey: _formKey,
-              );
-            } else if (constraints.maxWidth <= 1280 &&
-                constraints.maxWidth > 1024) {
-              return SignInTabletScreen(
-                height: height,
-                width: width,
-                maxHeight: constraints.maxHeight,
-                maxWidth: constraints.maxWidth,
-                textTheme: textTheme,
-                formKey: _formKey,
-                isKeyboardVisible: isKeyboardVisible,
-              );
-            } else {
-              return SignInMobileScreen(
-                height: constraints.maxHeight,
-                width: constraints.maxWidth,
-                textTheme: textTheme,
-                formKey: _formKey,
-              );
-            }
-          },
-        ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 1920) {
+            return Center(child: Text('4K'));
+          } else if (constraints.maxWidth <= 1920 &&
+              constraints.maxWidth > 1280) {
+            return SignInDesktopScreen(
+              height: height,
+              width: width,
+              textTheme: textTheme,
+              formKey: _formKey,
+            );
+          } else if (constraints.maxWidth <= 1280 &&
+              constraints.maxWidth > 1024) {
+            return SignInTabletScreen(
+              height: height,
+              width: width,
+              maxHeight: constraints.maxHeight,
+              maxWidth: constraints.maxWidth,
+              textTheme: textTheme,
+              formKey: _formKey,
+              isKeyboardVisible: isKeyboardVisible,
+            );
+          } else {
+            return SignInMobileScreen(
+              height: constraints.maxHeight,
+              width: constraints.maxWidth,
+              textTheme: textTheme,
+              formKey: _formKey,
+            );
+          }
+        },
       ),
     );
   }

@@ -23,22 +23,24 @@ class SignInDesktopScreen extends StatefulWidget {
 class _SignInDesktopScreenState extends State<SignInDesktopScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: widget.height,
-        width: widget.width,
-        // color: Colors.amber,
-        child: Stack(
-          children: [
-            BackgroundImageDesktop(widget: widget),
-            BackgroundColorOpacityDesktop(),
-            Row(
-              children: [
-                LeftSideContent(widget: widget),
-                RightSideContent(widget: widget),
-              ],
-            ),
-          ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: widget.height,
+          width: widget.width,
+          // color: Colors.amber,
+          child: Stack(
+            children: [
+              BackgroundImageDesktop(widget: widget),
+              BackgroundColorOpacityDesktop(),
+              Row(
+                children: [
+                  LeftSideContent(widget: widget),
+                  RightSideContent(widget: widget),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
