@@ -20,19 +20,27 @@ class SignInMobileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 50,
+        toolbarHeight: 66,
         backgroundColor: whiteColor,
         // centerTitle: true,
         title: Container(
-          // height: 40,
-          // color: primaryColor,
-          child: Text(
-            'PELETERIA VALAMY',
-            style: TextStyle(
-              color: primaryColor,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
+          alignment: Alignment.center,
+          // margin: EdgeInsets.only(left: 4),
+          // width: 170,
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/logo_valamy_bl.webp', height: 48),
+              SizedBox(width: 10),
+              Text(
+                'PELETERIA\nVALAMY',
+                style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
         actions: [
@@ -40,7 +48,7 @@ class SignInMobileScreen extends StatelessWidget {
             onPressed: () {},
             icon: Icon(Icons.person, color: primaryColor, size: 26),
             label: Text(
-              'Crear Cuenta',
+              'Registrate',
               style: TextStyle(color: primaryColor, fontSize: 20),
             ),
           ),
@@ -166,8 +174,8 @@ class SignInMobileScreen extends StatelessWidget {
                     // SizedBox(height: 16),
                     Spacer(),
                     SignInButtonMobile(),
-                    SizedBox(height: 16),
-                    DontAccountLabelMobile(),
+                    // SizedBox(height: 16),
+                    // DontAccountLabelMobile(),
                   ],
                 ),
               ),
