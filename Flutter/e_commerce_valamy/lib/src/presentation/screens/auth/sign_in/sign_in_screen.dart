@@ -41,8 +41,8 @@ class SignInScreen extends StatelessWidget {
             );
           } else {
             return SignInMobileScreen(
-              height: constraints.maxHeight,
-              width: constraints.maxWidth,
+              maxHeight: constraints.maxHeight,
+              maxWidth: constraints.maxWidth,
               textTheme: textTheme,
               formKey: _formKey,
             );

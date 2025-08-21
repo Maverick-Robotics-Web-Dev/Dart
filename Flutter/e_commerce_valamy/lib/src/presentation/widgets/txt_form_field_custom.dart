@@ -19,7 +19,7 @@ class TxtFormFieldCustom extends StatelessWidget {
     this.keyboardType,
     this.height = 24,
     this.width = 24,
-    this.fontSize = 18,
+    this.fontSize = 16,
   });
 
   @override
