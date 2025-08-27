@@ -28,7 +28,7 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            LogoBox(maxHeight: widget.maxHeight),
+            LogoBox(maxHeight: widget.maxHeight, maxWidth: widget.maxWidth),
             ImageBox(maxHeight: widget.maxHeight),
             FormBox(maxHeight: widget.maxHeight, formKey: widget.formKey),
           ],
@@ -39,9 +39,10 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
 }
 
 class LogoBox extends StatelessWidget {
-  const LogoBox({super.key, required this.maxHeight});
-
   final double maxHeight;
+  final double maxWidth;
+
+  const LogoBox({super.key, required this.maxHeight, required this.maxWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,11 @@ class LogoBox extends StatelessWidget {
           SizedBox(width: 10),
           Text(
             'PELETERIA VALAMY',
-            style: TextStyle(color: whiteColor, fontSize: 30, letterSpacing: 1),
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: maxWidth > 364 ? 30 : 24,
+              letterSpacing: 1,
+            ),
           ),
         ],
       ),
@@ -91,7 +96,7 @@ class FormBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: maxHeight * 0.55,
+      height: maxHeight > 760 ? maxHeight * 0.55 : maxHeight * 0.90,
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
