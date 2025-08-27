@@ -24,6 +24,7 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -50,16 +51,11 @@ class LogoBox extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/logo_valamy_bl.webp', height: 48),
+          Image.asset('assets/images/logo_valamy_wh.webp', height: 48),
           SizedBox(width: 10),
           Text(
             'PELETERIA VALAMY',
-            style: TextStyle(
-              color: primaryColor,
-              fontSize: 28,
-              letterSpacing: 1,
-              // fontWeight: FontWeight.w500,
-            ),
+            style: TextStyle(color: whiteColor, fontSize: 30, letterSpacing: 1),
           ),
         ],
       ),
@@ -79,7 +75,7 @@ class ImageBox extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          Expanded(child: Image.asset('assets/images/sign_in_photo_3_bl.webp')),
+          Expanded(child: Image.asset('assets/images/sign_in_photo_3_wh.webp')),
         ],
       ),
     );
@@ -103,7 +99,7 @@ class FormBox extends StatelessWidget {
             Text(
               '¡Bienvenido de Nuevo!',
               style: TextStyle(
-                color: primaryColor,
+                color: whiteColor,
                 fontSize: 32,
                 letterSpacing: 1,
               ),
@@ -113,7 +109,7 @@ class FormBox extends StatelessWidget {
               // "Log in with your data that you intered during your registration.",
               'Inicia sesión con tus datos que ingresaste durante tu registro',
               style: TextStyle(
-                color: textColor,
+                color: whiteColor,
                 fontSize: 16,
                 letterSpacing: 1,
               ),
@@ -141,7 +137,11 @@ class FormBox extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 '¿Olvidaste tu contraseña?',
-                style: TextStyle(fontSize: font_16_6, letterSpacing: 1),
+                style: TextStyle(
+                  color: whiteColor,
+                  fontSize: font_16_6,
+                  letterSpacing: 1,
+                ),
               ),
             ),
             Spacer(),
@@ -166,7 +166,7 @@ class FormBox extends StatelessWidget {
                 Text(
                   '¿No tienes una cuenta?',
                   style: TextStyle(
-                    color: textColor,
+                    color: whiteColor,
                     fontSize: font_16_6,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 1,
@@ -177,6 +177,7 @@ class FormBox extends StatelessWidget {
                   child: Text(
                     'Registrate',
                     style: TextStyle(
+                      color: whiteColor,
                       fontSize: font_16_6,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1,
