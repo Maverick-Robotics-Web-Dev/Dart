@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,9 @@ class LogoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sumsqsides = pow(maxHeight, 2) + pow(maxWidth, 2);
+    final diagonal = sqrt(sumsqsides) * 0.030;
+    print('Diagonal: $diagonal');
     return Container(
       alignment: Alignment.center,
       height: maxHeight * 0.10,
@@ -58,7 +63,7 @@ class LogoBox extends StatelessWidget {
             'PELETERIA VALAMY',
             style: TextStyle(
               color: whiteColor,
-              fontSize: maxWidth > 364 ? 30 : 24,
+              fontSize: diagonal,
               letterSpacing: 1,
             ),
           ),

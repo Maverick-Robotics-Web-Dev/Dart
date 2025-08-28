@@ -102,7 +102,7 @@ class LogoLabelDesktop extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(20),
       child: Image.asset(
-        'assets/images/sign_in_photo_3_whi.webp',
+        'assets/images/sign_in_photo_3_wh.webp',
         // fit: BoxFit.fill,
       ),
     );
