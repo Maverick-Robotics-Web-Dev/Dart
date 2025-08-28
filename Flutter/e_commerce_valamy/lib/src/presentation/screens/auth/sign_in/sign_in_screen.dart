@@ -31,8 +31,6 @@ class SignInScreen extends StatelessWidget {
           } else if (constraints.maxWidth <= 1280 &&
               constraints.maxWidth > 1024) {
             return SignInTabletScreen(
-              height: height,
-              width: width,
               maxHeight: constraints.maxHeight,
               maxWidth: constraints.maxWidth,
               textTheme: textTheme,

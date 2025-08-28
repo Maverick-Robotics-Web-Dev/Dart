@@ -25,14 +25,21 @@ class SignInMobileScreen extends StatefulWidget {
 class _SignInMobileScreenState extends State<SignInMobileScreen> {
   @override
   Widget build(BuildContext context) {
+    final num sumsqsides = pow(widget.maxHeight, 2) + pow(widget.maxWidth, 2);
+    final double diagonal = sqrt(sumsqsides);
+
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            LogoBox(maxHeight: widget.maxHeight, maxWidth: widget.maxWidth),
+            LogoBox(maxHeight: widget.maxHeight, diagonal: diagonal),
             ImageBox(maxHeight: widget.maxHeight),
-            FormBox(maxHeight: widget.maxHeight, formKey: widget.formKey),
+            FormBox(
+              maxHeight: widget.maxHeight,
+              formKey: widget.formKey,
+              diagonal: diagonal,
+            ),
           ],
         ),
       ),
@@ -42,15 +49,12 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
 
 class LogoBox extends StatelessWidget {
   final double maxHeight;
-  final double maxWidth;
+  final double diagonal;
 
-  const LogoBox({super.key, required this.maxHeight, required this.maxWidth});
+  const LogoBox({super.key, required this.maxHeight, required this.diagonal});
 
   @override
   Widget build(BuildContext context) {
-    final sumsqsides = pow(maxHeight, 2) + pow(maxWidth, 2);
-    final diagonal = sqrt(sumsqsides) * 0.030;
-    print('Diagonal: $diagonal');
     return Container(
       alignment: Alignment.center,
       height: maxHeight * 0.10,
@@ -63,7 +67,7 @@ class LogoBox extends StatelessWidget {
             'PELETERIA VALAMY',
             style: TextStyle(
               color: whiteColor,
-              fontSize: diagonal,
+              fontSize: diagonal * 0.0294,
               letterSpacing: 1,
             ),
           ),
@@ -81,7 +85,7 @@ class ImageBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: maxHeight * 0.35,
+      height: maxHeight > 760 ? maxHeight * 0.35 : maxHeight * 0.21,
       width: double.infinity,
       child: Column(
         children: [
@@ -93,15 +97,21 @@ class ImageBox extends StatelessWidget {
 }
 
 class FormBox extends StatelessWidget {
-  const FormBox({super.key, required this.maxHeight, required this.formKey});
-
   final double maxHeight;
+  final double diagonal;
   final GlobalKey<FormState>? formKey;
+
+  const FormBox({
+    super.key,
+    required this.maxHeight,
+    required this.formKey,
+    required this.diagonal,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: maxHeight > 760 ? maxHeight * 0.55 : maxHeight * 0.90,
+      height: maxHeight > 760 ? maxHeight * 0.55 : maxHeight * 0.69,
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -110,7 +120,7 @@ class FormBox extends StatelessWidget {
               '¡Bienvenido de Nuevo!',
               style: TextStyle(
                 color: whiteColor,
-                fontSize: 32,
+                fontSize: diagonal * 0.0313,
                 letterSpacing: 1,
               ),
             ),
@@ -120,7 +130,7 @@ class FormBox extends StatelessWidget {
               'Inicia sesión con tus datos que ingresaste durante tu registro',
               style: TextStyle(
                 color: whiteColor,
-                fontSize: 16,
+                fontSize: diagonal * 0.0163,
                 letterSpacing: 1,
               ),
             ),
@@ -133,12 +143,14 @@ class FormBox extends StatelessWidget {
                     svgPath: "assets/icons/Message.svg",
                     hintText: "Email",
                     keyboardType: TextInputType.emailAddress,
+                    fontSize: diagonal * 0.0163,
                   ),
                   SizedBox(height: 16),
                   TxtFormFieldCustom(
                     svgPath: "assets/icons/Lock.svg",
                     hintText: "Password",
                     obscureText: true,
+                    fontSize: diagonal * 0.0163,
                   ),
                 ],
               ),
@@ -149,7 +161,7 @@ class FormBox extends StatelessWidget {
                 '¿Olvidaste tu contraseña?',
                 style: TextStyle(
                   color: whiteColor,
-                  fontSize: font_16_6,
+                  fontSize: diagonal * 0.0163,
                   letterSpacing: 1,
                 ),
               ),
@@ -163,7 +175,7 @@ class FormBox extends StatelessWidget {
               child: Text(
                 'Iniciar Sesión',
                 style: TextStyle(
-                  fontSize: font_16_6,
+                  fontSize: diagonal * 0.0163,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1,
                 ),
@@ -177,7 +189,7 @@ class FormBox extends StatelessWidget {
                   '¿No tienes una cuenta?',
                   style: TextStyle(
                     color: whiteColor,
-                    fontSize: font_16_6,
+                    fontSize: diagonal * 0.0163,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 1,
                   ),
@@ -188,7 +200,7 @@ class FormBox extends StatelessWidget {
                     'Registrate',
                     style: TextStyle(
                       color: whiteColor,
-                      fontSize: font_16_6,
+                      fontSize: diagonal * 0.0163,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1,
                     ),
