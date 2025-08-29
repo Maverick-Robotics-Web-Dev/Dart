@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
 import 'package:flutter/material.dart';
 
 class SignInTabletScreen extends StatefulWidget {
@@ -82,9 +83,10 @@ class _SignInTabletScreenState extends State<SignInTabletScreen> {
             Container(
               width: widget.maxWidth * 0.4,
               height: widget.maxHeight,
-              padding: EdgeInsets.symmetric(horizontal: 46),
+              padding: EdgeInsets.all(46),
               decoration: BoxDecoration(color: whiteColor),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     '¡Bienvenido de Nuevo!',
@@ -105,6 +107,81 @@ class _SignInTabletScreenState extends State<SignInTabletScreen> {
                       fontSize: 16.6,
                       letterSpacing: 1,
                     ),
+                  ),
+                  SizedBox(height: 40),
+                  Form(
+                    key: widget.formKey,
+                    child: Column(
+                      children: [
+                        TxtFormFieldCustom(
+                          svgPath: "assets/icons/Message.svg",
+                          hintText: "Email",
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        SizedBox(height: 40),
+                        TxtFormFieldCustom(
+                          svgPath: "assets/icons/Lock.svg",
+                          hintText: "Password",
+                          obscureText: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Align(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '¿Olvidaste tu contraseña?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 16.6,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity, 32),
+                      backgroundColor: primaryColor,
+                    ),
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 1,
+                        color: whiteColor,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '¿No tienes una cuenta?',
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 16.6,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: secondaryColor,
+                            fontSize: 16.6,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
