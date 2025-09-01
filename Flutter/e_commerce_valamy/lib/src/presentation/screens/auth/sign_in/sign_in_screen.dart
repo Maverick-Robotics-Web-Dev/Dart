@@ -1,3 +1,4 @@
+import 'package:e_commerce_valamy/config/screen_sizes.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_mobile_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_tablet_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,8 @@ class SignInScreen extends StatelessWidget {
           //     formKey: _formKey,
           //     isKeyboardVisible: isKeyboardVisible,
           //   );
-          if (constraints.maxWidth <= 1280 && constraints.maxWidth > 1024) {
+          if (constraints.maxWidth <= ScreenSizes.xLarge &&
+              constraints.maxWidth > ScreenSizes.large) {
             return SignInTabletScreen(
               maxHeight: constraints.maxHeight,
               maxWidth: constraints.maxWidth,

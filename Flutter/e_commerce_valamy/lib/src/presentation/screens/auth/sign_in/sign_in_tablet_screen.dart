@@ -90,7 +90,9 @@ class LeftBox extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(child: Image.asset('assets/images/sign_in_photo_3_wh.webp')),
+          Expanded(
+            child: Image.asset('assets/images/sign_in_photo_3_whi.webp'),
+          ),
           Container(
             alignment: Alignment.center,
             height: maxHeight * 0.15,

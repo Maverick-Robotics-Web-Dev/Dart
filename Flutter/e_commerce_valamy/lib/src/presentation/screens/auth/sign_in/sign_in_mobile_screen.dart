@@ -89,7 +89,9 @@ class ImageBox extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          Expanded(child: Image.asset('assets/images/sign_in_photo_3_wh.webp')),
+          Expanded(
+            child: Image.asset('assets/images/sign_in_photo_3_whi.webp'),
+          ),
         ],
       ),
     );
