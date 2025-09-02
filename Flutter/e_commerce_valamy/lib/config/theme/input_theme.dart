@@ -2,7 +2,8 @@ import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 
 const InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
-  fillColor: inputBackgroundColor,
+  // fillColor: inputBackgroundColor,
+  fillColor: whiteColor,
   filled: true,
   hintStyle: TextStyle(color: hintTextColor),
   border: outlineInputBorder,

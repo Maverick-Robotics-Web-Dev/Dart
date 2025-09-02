@@ -27,6 +27,7 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
   Widget build(BuildContext context) {
     final num sumsqsides = pow(widget.maxHeight, 2) + pow(widget.maxWidth, 2);
     final double diagonal = sqrt(sumsqsides);
+    print('Diagonal: ${diagonal * 0.01662}');
 
     return Scaffold(
       backgroundColor: Colors.blue,
@@ -78,9 +79,9 @@ class LogoBox extends StatelessWidget {
 }
 
 class ImageBox extends StatelessWidget {
-  const ImageBox({super.key, required this.maxHeight});
-
   final double maxHeight;
+
+  const ImageBox({super.key, required this.maxHeight});
 
   @override
   Widget build(BuildContext context) {
