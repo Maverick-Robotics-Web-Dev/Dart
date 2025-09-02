@@ -2,15 +2,16 @@ import 'dart:math';
 
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class SignInTabletScreen extends StatefulWidget {
+class SignUpTabletScreen extends StatefulWidget {
   final double maxWidth;
   final double maxHeight;
   final TextTheme? textTheme;
   final GlobalKey<FormState>? formKey;
 
-  const SignInTabletScreen({
+  const SignUpTabletScreen({
     super.key,
     required this.maxWidth,
     required this.maxHeight,
@@ -19,10 +20,10 @@ class SignInTabletScreen extends StatefulWidget {
   });
 
   @override
-  State<SignInTabletScreen> createState() => _SignInTabletScreenState();
+  State<SignUpTabletScreen> createState() => _SignUpTabletScreenState();
 }
 
-class _SignInTabletScreenState extends State<SignInTabletScreen> {
+class _SignUpTabletScreenState extends State<SignUpTabletScreen> {
   @override
   Widget build(BuildContext context) {
     final num sumsqsides = pow(widget.maxHeight, 2) + pow(widget.maxWidth, 2);
@@ -89,7 +90,7 @@ class LeftBox extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Image.asset('assets/images/sign_in_photo_3_whi.webp'),
+            child: Image.asset('assets/images/sign_up_photo_3_whi.webp'),
           ),
           Container(
             alignment: Alignment.center,
@@ -117,9 +118,9 @@ class RightBox extends StatelessWidget {
 
   const RightBox({
     super.key,
-    required this.diagonal,
     required this.maxWidth,
     required this.maxHeight,
+    required this.diagonal,
     this.formKey,
   });
 
@@ -136,10 +137,9 @@ class RightBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '¡Bienvenido de Nuevo!',
+              '¡Comencemos!',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: primaryColor,
@@ -151,7 +151,7 @@ class RightBox extends StatelessWidget {
             SizedBox(height: 26),
             Text(
               // "Log in with your data that you intered during your registration.",
-              'Inicia sesión con tus datos que ingresaste durante tu registro',
+              'Por favor ingrese sus datos válidos para crear una cuenta.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: secondaryColor,
@@ -180,20 +180,44 @@ class RightBox extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            Align(
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  '¿Olvidaste tu contraseña?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: secondaryColor,
-                    // color: whiteColor,
-                    fontSize: diagonal * 0.01122,
-                    letterSpacing: 1,
+            Row(
+              children: [
+                Transform.scale(
+                  scale: 1.1,
+                  child: Checkbox(value: false, onChanged: (value) {}),
+                ),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Acepto los",
+                      style: TextStyle(
+                        color: secondaryColor,
+                        fontSize: diagonal * 0.01122,
+                        // fontWeight: FontWeight.w500,
+                        letterSpacing: 1,
+                      ),
+                      children: [
+                        TextSpan(
+                          recognizer:
+                              TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Navigator.pushNamed(
+                                  //   context,
+                                  //   termsOfServicesScreenRoute,
+                                  // );
+                                },
+                          text: " Terminos y Condiciones ",
+                          style: TextStyle(
+                            color: secondaryColor,
+                            fontSize: diagonal * 0.01122,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
             Spacer(),
             ElevatedButton(
@@ -203,7 +227,7 @@ class RightBox extends StatelessWidget {
                 backgroundColor: primaryColor,
               ),
               child: Text(
-                'Iniciar Sesión',
+                'Continuar',
                 style: TextStyle(
                   fontSize: diagonal * 0.0122,
                   letterSpacing: 1,

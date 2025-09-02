@@ -11,7 +11,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    final bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+    // final bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return SafeArea(
       child: LayoutBuilder(
@@ -42,7 +42,6 @@ class SignInScreen extends StatelessWidget {
               maxWidth: constraints.maxWidth,
               textTheme: textTheme,
               formKey: _formKey,
-              isKeyboardVisible: isKeyboardVisible,
             );
           } else {
             return SignInMobileScreen(

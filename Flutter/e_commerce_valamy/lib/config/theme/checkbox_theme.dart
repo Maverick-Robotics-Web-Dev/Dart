@@ -10,7 +10,7 @@ CheckboxThemeData chkboxTheme = CheckboxThemeData(
   }),
   checkColor: WidgetStateProperty.all(Colors.white),
   shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(borderRadious_12 / 2)),
+    borderRadius: BorderRadius.all(Radius.circular(4)),
   ),
   side: const BorderSide(color: whileColor40, width: 1.6),
 );

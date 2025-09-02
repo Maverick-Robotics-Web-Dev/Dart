@@ -24,5 +24,7 @@ ThemeData lightTheme(BuildContext context) => ThemeData(
   elevatedButtonTheme: elevatedBtnTheme,
   textButtonTheme: txtButtonTheme,
   inputDecorationTheme: lightInputDecorationTheme,
-  checkboxTheme: chkboxTheme.copyWith(side: BorderSide(color: borderColor)),
+  checkboxTheme: chkboxTheme.copyWith(
+    side: BorderSide(color: borderColor, width: 1.4),
+  ),
 );

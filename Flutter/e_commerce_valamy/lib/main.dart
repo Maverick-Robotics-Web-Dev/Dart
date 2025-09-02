@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
       title: 'Valamy',
       theme: lightTheme(context),
       // themeMode: ThemeMode.light,
-      initialRoute: signUpRoute,
+      initialRoute: signUpSetupRoute,
       routes: routes,
     );
   }
