@@ -18,7 +18,12 @@ class SignUpSetupScreen extends StatelessWidget {
         builder: (context, constraints) {
           if (constraints.maxWidth <= ScreenSizes.xLarge &&
               constraints.maxWidth > ScreenSizes.large) {
-            return SignUpSetupTabletScreen();
+            return SignUpSetupTabletScreen(
+              maxHeight: constraints.maxHeight,
+              maxWidth: constraints.maxWidth,
+              textTheme: textTheme,
+              formKey: _formKey,
+            );
           } else {
             return SignUpSetupMobileScreen(
               maxHeight: constraints.maxHeight,

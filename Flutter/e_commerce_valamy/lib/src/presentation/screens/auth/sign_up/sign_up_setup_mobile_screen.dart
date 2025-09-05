@@ -28,12 +28,11 @@ class _SignUpSetupMobileScreenState extends State<SignUpSetupMobileScreen> {
   Widget build(BuildContext context) {
     final num sumsqsides = pow(widget.maxHeight, 2) + pow(widget.maxWidth, 2);
     final double diagonal = sqrt(sumsqsides);
-    print('Diagonal: ${diagonal * 0.0176}');
 
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: widget.maxHeight,
           child: Padding(
             padding: EdgeInsets.all(20),
@@ -46,6 +45,7 @@ class _SignUpSetupMobileScreenState extends State<SignUpSetupMobileScreen> {
                     color: whiteColor,
                     fontSize: diagonal * 0.0215,
                     fontWeight: FontWeight.w500,
+                    letterSpacing: 1,
                   ),
                 ),
                 SizedBox(height: 40),
@@ -63,6 +63,7 @@ class _SignUpSetupMobileScreenState extends State<SignUpSetupMobileScreen> {
                     style: TextStyle(
                       color: whiteColor,
                       fontSize: diagonal * 0.017,
+                      letterSpacing: 1,
                     ),
                   ),
                 ),
@@ -107,6 +108,7 @@ class _SignUpSetupMobileScreenState extends State<SignUpSetupMobileScreen> {
                           style: TextStyle(
                             color: primaryColor,
                             fontSize: diagonal * 0.0163,
+                            letterSpacing: 1,
                           ),
                         ),
                         onPressed: () {},
@@ -118,7 +120,10 @@ class _SignUpSetupMobileScreenState extends State<SignUpSetupMobileScreen> {
                         onPressed: () {},
                         child: Text(
                           'Registrarse',
-                          style: TextStyle(fontSize: diagonal * 0.0163),
+                          style: TextStyle(
+                            fontSize: diagonal * 0.0163,
+                            letterSpacing: 1,
+                          ),
                         ),
                       ),
                     ),
