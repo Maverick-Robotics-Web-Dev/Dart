@@ -39,101 +39,160 @@ class _SignUpSetupMobileScreenState extends State<SignUpSetupMobileScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Perfil',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.0215,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1,
-                  ),
-                ),
+                ProfileTextBox(diagonal: diagonal),
                 SizedBox(height: 40),
-                CircleAvatar(
-                  maxRadius: 66,
-                  backgroundImage: AssetImage(
-                    "assets/images/scarlett_johansson.jpg",
-                  ),
-                ),
+                ImageUserBox(maxHeight: widget.maxHeight),
                 SizedBox(height: 8),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Upload Image",
-                    style: TextStyle(
-                      color: whiteColor,
-                      fontSize: diagonal * 0.017,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
+                UploadTextButtomBox(diagonal: diagonal),
                 SizedBox(height: 28),
-                Form(
-                  key: widget.formKey,
-                  child: Column(
-                    children: [
-                      TxtFormFieldCustom(
-                        hintText: "Nombre",
-                        svgPath: "assets/icons/Profile.svg",
-                        keyboardType: TextInputType.emailAddress,
-                        fontSize: diagonal * 0.0163,
-                      ),
-                      SizedBox(height: 20),
-                      TxtFormFieldCustom(
-                        hintText: "Apellido",
-                        svgPath: "assets/icons/User_circle.svg",
-                        keyboardType: TextInputType.emailAddress,
-                        fontSize: diagonal * 0.0163,
-                      ),
-                      SizedBox(height: 20),
-                      TxtFormFieldCustom(
-                        hintText: "Celular",
-                        svgPath: "assets/icons/Call.svg",
-                        keyboardType: TextInputType.emailAddress,
-                        fontSize: diagonal * 0.0163,
-                      ),
-                    ],
-                  ),
-                ),
+                FormBox(formKey: widget.formKey, diagonal: diagonal),
                 Spacer(),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: whiteColor,
-                        ),
-                        child: Text(
-                          'Saltar',
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontSize: diagonal * 0.0163,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Registrarse',
-                          style: TextStyle(
-                            fontSize: diagonal * 0.0163,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                ButtonBox(diagonal: diagonal),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProfileTextBox extends StatelessWidget {
+  const ProfileTextBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Perfil',
+      style: TextStyle(
+        color: whiteColor,
+        fontSize: diagonal * 0.0215,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 1,
+      ),
+    );
+  }
+}
+
+class ImageUserBox extends StatelessWidget {
+  final double maxHeight;
+
+  const ImageUserBox({super.key, required this.maxHeight});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: maxHeight * 0.16,
+      child: AspectRatio(
+        aspectRatio: 1 / 1,
+        child: ClipOval(
+          child: FadeInImage(
+            placeholder: AssetImage('assets/images/no_image.png'),
+            image: AssetImage('assets/images/scarlett_johansson.jpg'),
+            fit: BoxFit.cover,
+            fadeInDuration: Duration(seconds: 1),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class UploadTextButtomBox extends StatelessWidget {
+  const UploadTextButtomBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {},
+      child: Text(
+        "Upload Image",
+        style: TextStyle(
+          color: whiteColor,
+          fontSize: diagonal * 0.017,
+          letterSpacing: 1,
+        ),
+      ),
+    );
+  }
+}
+
+class FormBox extends StatelessWidget {
+  final double diagonal;
+  final GlobalKey<FormState>? formKey;
+
+  const FormBox({super.key, required this.diagonal, this.formKey});
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          TxtFormFieldCustom(
+            hintText: "Nombre",
+            svgPath: "assets/icons/Profile.svg",
+            keyboardType: TextInputType.emailAddress,
+            fontSize: diagonal * 0.0163,
+          ),
+          SizedBox(height: 20),
+          TxtFormFieldCustom(
+            hintText: "Apellido",
+            svgPath: "assets/icons/User_circle.svg",
+            keyboardType: TextInputType.emailAddress,
+            fontSize: diagonal * 0.0163,
+          ),
+          SizedBox(height: 20),
+          TxtFormFieldCustom(
+            hintText: "Celular",
+            svgPath: "assets/icons/Call.svg",
+            keyboardType: TextInputType.emailAddress,
+            fontSize: diagonal * 0.0163,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ButtonBox extends StatelessWidget {
+  const ButtonBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: whiteColor),
+            child: Text(
+              'Saltar',
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: diagonal * 0.0163,
+                letterSpacing: 1,
+              ),
+            ),
+            onPressed: () {},
+          ),
+        ),
+        SizedBox(width: 16),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              'Registrarse',
+              style: TextStyle(fontSize: diagonal * 0.0163, letterSpacing: 1),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

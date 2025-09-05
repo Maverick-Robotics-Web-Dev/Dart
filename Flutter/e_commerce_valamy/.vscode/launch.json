@@ -14,7 +14,7 @@
       "name": "Android-Small",
       "request": "launch",
       "type": "dart",
-      "deviceId": "emulator-5556"
+      "deviceId": "emulator-5558"
     },
     {
       "name": "Android-Tablet",

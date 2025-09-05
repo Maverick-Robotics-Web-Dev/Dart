@@ -33,127 +33,117 @@ class _SignUpSetupTabletScreenState extends State<SignUpSetupTabletScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SingleChildScrollView(
-        child: Column(
+        child: Row(
           children: [
-            Container(
-              alignment: Alignment.center,
-              height: widget.maxHeight * 0.10,
-              child: Text(
-                'Perfil',
-                style: TextStyle(
-                  color: whiteColor,
-                  fontSize: diagonal * 0.02432,
-                  letterSpacing: 1,
+            SizedBox(
+              width: widget.maxWidth * 0.6,
+              // height: widget.maxHeight,
+              child: Container(
+                alignment: Alignment.center,
+                height: widget.maxHeight * 0.60,
+                // width: widget.maxWidth * 0.48,
+                child: AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: ClipOval(
+                    child: FadeInImage(
+                      placeholder: AssetImage('assets/images/no_image.png'),
+                      image: AssetImage('assets/images/scarlett_johansson.jpg'),
+                      fit: BoxFit.cover,
+                      fadeInDuration: Duration(seconds: 1),
+                    ),
+                  ),
                 ),
               ),
             ),
             SizedBox(
-              height: widget.maxHeight * 0.90,
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: widget.maxWidth * 0.5,
-                    height: widget.maxHeight * 0.9,
-                    child: SizedBox(
-                      height: widget.maxHeight * 0.6,
-                      child: AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: ClipOval(
-                          child: FadeInImage(
-                            placeholder: AssetImage(
-                              'assets/images/no_image.png',
-                            ),
-                            image: AssetImage(
-                              'assets/images/scarlett_johansson.jpg',
-                            ),
-                            fit: BoxFit.cover,
-                            fadeInDuration: Duration(seconds: 1),
-                          ),
-                        ),
+              // color: whiteColor,
+              width: widget.maxWidth * 0.4,
+              height: widget.maxHeight,
+              child: Container(
+                margin: EdgeInsets.all(40),
+                padding: EdgeInsets.symmetric(vertical: 46, horizontal: 26),
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Perfil',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: primaryColor,
+                        // color: whiteColor,
+                        fontSize: diagonal * 0.023,
+                        letterSpacing: 1,
                       ),
                     ),
-                  ),
-                  Container(
-                    color: whiteColor,
-                    width: widget.maxWidth * 0.5,
-                    height: widget.maxHeight * 0.9,
-                    child: Container(
-                      margin: EdgeInsets.all(40),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 46,
-                        horizontal: 26,
-                      ),
-
+                    SizedBox(height: 26),
+                    Form(
+                      key: widget.formKey,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Form(
-                            key: widget.formKey,
-                            child: Column(
-                              children: [
-                                TxtFormFieldCustom(
-                                  hintText: "Nombre",
-                                  svgPath: "assets/icons/Profile.svg",
-                                  keyboardType: TextInputType.emailAddress,
-                                  fontSize: diagonal * 0.0163,
-                                ),
-                                SizedBox(height: 20),
-                                TxtFormFieldCustom(
-                                  hintText: "Apellido",
-                                  svgPath: "assets/icons/User_circle.svg",
-                                  keyboardType: TextInputType.emailAddress,
-                                  fontSize: diagonal * 0.0163,
-                                ),
-                                SizedBox(height: 20),
-                                TxtFormFieldCustom(
-                                  hintText: "Celular",
-                                  svgPath: "assets/icons/Call.svg",
-                                  keyboardType: TextInputType.emailAddress,
-                                  fontSize: diagonal * 0.0163,
-                                ),
-                              ],
-                            ),
+                          TxtFormFieldCustom(
+                            hintText: "Nombre",
+                            svgPath: "assets/icons/Profile.svg",
+                            keyboardType: TextInputType.emailAddress,
+                            fontSize: diagonal * 0.0163,
                           ),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: whiteColor,
-                                  ),
-                                  child: Text(
-                                    'Saltar',
-                                    style: TextStyle(
-                                      color: primaryColor,
-                                      fontSize: diagonal * 0.0163,
-                                      letterSpacing: 1,
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'Registrarse',
-                                    style: TextStyle(
-                                      fontSize: diagonal * 0.0163,
-                                      letterSpacing: 1,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          SizedBox(height: 20),
+                          TxtFormFieldCustom(
+                            hintText: "Apellido",
+                            svgPath: "assets/icons/User_circle.svg",
+                            keyboardType: TextInputType.emailAddress,
+                            fontSize: diagonal * 0.0163,
+                          ),
+                          SizedBox(height: 20),
+                          TxtFormFieldCustom(
+                            hintText: "Celular",
+                            svgPath: "assets/icons/Call.svg",
+                            keyboardType: TextInputType.emailAddress,
+                            fontSize: diagonal * 0.0163,
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    Spacer(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: inputBackgroundColor,
+                              side: BorderSide(color: primaryColor),
+                            ),
+                            child: Text(
+                              'Saltar',
+                              style: TextStyle(
+                                color: primaryColor,
+                                fontSize: diagonal * 0.0163,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Registrarse',
+                              style: TextStyle(
+                                fontSize: diagonal * 0.0163,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
