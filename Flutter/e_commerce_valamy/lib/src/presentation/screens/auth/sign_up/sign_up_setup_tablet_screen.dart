@@ -74,20 +74,19 @@ class LeftBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            // alignment: Alignment.center,
             height: maxHeight * 0.6,
+            width: maxHeight * 0.6,
             decoration: BoxDecoration(
               color: Colors.amber,
-              image: DecorationImage(
-                image: AssetImage('assets/images/scarlett_johansson.jpg'),
-                fit: BoxFit.contain,
-              ),
               shape: BoxShape.circle,
             ),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                'https://media.gq.com.mx/photos/5e220ec2ffa8c7000803441e/1:1/w_2071,h_2071,c_limit/40-datos-curiosos-para-descubrir-a-scarlett-johansson.jpg',
+              ),
+            ),
           ),
-          // Expanded(
-          //   child: Image.asset('assets/images/sign_in_photo_3_whi.webp'),
-          // ),
+
           // Container(
           //   alignment: Alignment.center,
           //   height: maxHeight * 0.15,

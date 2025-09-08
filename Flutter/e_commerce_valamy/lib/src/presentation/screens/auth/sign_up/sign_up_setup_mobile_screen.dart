@@ -85,15 +85,14 @@ class ImageUserBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: maxHeight * 0.16,
-      child: AspectRatio(
-        aspectRatio: 1 / 1,
-        child: ClipOval(
-          child: FadeInImage(
-            placeholder: AssetImage('assets/images/no_image.png'),
-            image: AssetImage('assets/images/scarlett_johansson.jpg'),
-            fit: BoxFit.cover,
-            fadeInDuration: Duration(seconds: 1),
-          ),
+      child: ClipOval(
+        child: FadeInImage(
+          height: maxHeight * 0.16,
+          width: maxHeight * 0.16,
+          placeholder: AssetImage('assets/images/no_image.png'),
+          image: AssetImage('assets/images/scarlett_johansson.jpg'),
+          fit: BoxFit.cover,
+          fadeInDuration: Duration(seconds: 1),
         ),
       ),
     );
