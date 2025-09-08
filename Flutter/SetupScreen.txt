@@ -116,3 +116,94 @@ Widget _bodyScreen(
       ],
     ),
   );
+
+FadeInImage(
+                      placeholder: AssetImage('assets/images/no_image.png'),
+                      image: AssetImage('assets/images/scarlett_johansson.jpg'),
+                      fit: BoxFit.cover,
+                      fadeInDuration: Duration(seconds: 1),
+                    ),
+
+CircleAvatar(
+        radius: 28,
+        child: NetworkImageWithLoader(imageSrc, radius: 100),
+      ),
+
+Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Perfil',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: primaryColor,
+                        // color: whiteColor,
+                        fontSize: diagonal * 0.023,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(height: 26),
+                    Form(
+                      key: widget.formKey,
+                      child: Column(
+                        children: [
+                          TxtFormFieldCustom(
+                            hintText: "Nombre",
+                            svgPath: "assets/icons/Profile.svg",
+                            keyboardType: TextInputType.emailAddress,
+                            fontSize: diagonal * 0.0163,
+                          ),
+                          SizedBox(height: 20),
+                          TxtFormFieldCustom(
+                            hintText: "Apellido",
+                            svgPath: "assets/icons/User_circle.svg",
+                            keyboardType: TextInputType.emailAddress,
+                            fontSize: diagonal * 0.0163,
+                          ),
+                          SizedBox(height: 20),
+                          TxtFormFieldCustom(
+                            hintText: "Celular",
+                            svgPath: "assets/icons/Call.svg",
+                            keyboardType: TextInputType.emailAddress,
+                            fontSize: diagonal * 0.0163,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: inputBackgroundColor,
+                              side: BorderSide(color: primaryColor),
+                            ),
+                            child: Text(
+                              'Saltar',
+                              style: TextStyle(
+                                color: primaryColor,
+                                fontSize: diagonal * 0.0163,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Registrarse',
+                              style: TextStyle(
+                                fontSize: diagonal * 0.0163,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
