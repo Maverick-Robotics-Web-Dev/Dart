@@ -83,16 +83,24 @@ class ImageUserBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: maxHeight * 0.16,
-      child: ClipOval(
-        child: FadeInImage(
-          height: maxHeight * 0.16,
-          width: maxHeight * 0.16,
-          placeholder: AssetImage('assets/images/no_image.png'),
-          image: AssetImage('assets/images/scarlett_johansson.jpg'),
-          fit: BoxFit.cover,
-          fadeInDuration: Duration(seconds: 1),
+    return Container(
+      height: maxHeight * 0.17386,
+      width: maxHeight * 0.17386,
+      padding: EdgeInsets.all(4),
+      decoration: BoxDecoration(color: whiteColor, shape: BoxShape.circle),
+      child: CircleAvatar(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(maxHeight * 0.16),
+          child: FadeInImage(
+            height: maxHeight,
+            placeholder: AssetImage('assets/images/no_image.png'),
+            image: AssetImage('assets/images/scarlett_johansson.jpg'),
+            // image: NetworkImage(
+            //   'https://media.gq.com.mx/photos/5e220ec2ffa8c7000803441e/1:1/w_2071,h_2071,c_limit/40-datos-curiosos-para-descubrir-a-scarlett-johansson.jpg',
+            // ),
+            fit: BoxFit.cover,
+            fadeInDuration: Duration(seconds: 1),
+          ),
         ),
       ),
     );
@@ -109,7 +117,7 @@ class UploadTextButtomBox extends StatelessWidget {
     return TextButton(
       onPressed: () {},
       child: Text(
-        "Upload Image",
+        "Subir Imagen",
         style: TextStyle(
           color: whiteColor,
           fontSize: diagonal * 0.017,

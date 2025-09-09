@@ -28,7 +28,6 @@ class _SignUpSetupTabletScreenState extends State<SignUpSetupTabletScreen> {
   Widget build(BuildContext context) {
     final num sumsqsides = pow(widget.maxHeight, 2) + pow(widget.maxWidth, 2);
     final double diagonal = sqrt(sumsqsides);
-    // print('Diagonal: ${diagonal * 0.0176}');
 
     return Scaffold(
       backgroundColor: Colors.blue,
@@ -76,29 +75,39 @@ class LeftBox extends StatelessWidget {
           Container(
             height: maxHeight * 0.6,
             width: maxHeight * 0.6,
+            padding: EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: Colors.amber,
+              color: whiteColor,
               shape: BoxShape.circle,
             ),
             child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://media.gq.com.mx/photos/5e220ec2ffa8c7000803441e/1:1/w_2071,h_2071,c_limit/40-datos-curiosos-para-descubrir-a-scarlett-johansson.jpg',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(maxHeight * 0.6),
+                child: FadeInImage(
+                  height: maxHeight,
+                  placeholder: AssetImage('assets/images/no_image.png'),
+                  image: AssetImage('assets/images/scarlett_johansson.jpg'),
+                  // image: NetworkImage(
+                  //   'https://media.gq.com.mx/photos/5e220ec2ffa8c7000803441e/1:1/w_2071,h_2071,c_limit/40-datos-curiosos-para-descubrir-a-scarlett-johansson.jpg',
+                  // ),
+                  fit: BoxFit.cover,
+                  fadeInDuration: Duration(seconds: 1),
+                ),
               ),
             ),
           ),
-
-          // Container(
-          //   alignment: Alignment.center,
-          //   height: maxHeight * 0.15,
-          //   child: Text(
-          //     'Exclusividad y Sofisticación',
-          //     style: TextStyle(
-          //       color: whiteColor,
-          //       fontSize: diagonal * 0.0203,
-          //       letterSpacing: 1,
-          //     ),
-          //   ),
-          // ),
+          SizedBox(height: 20),
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              'Subir Imagen',
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: diagonal * 0.0203,
+                letterSpacing: 1,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -121,8 +130,6 @@ class RightBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Diagonal: ${diagonal * 0.01122}');
-
     return SizedBox(
       width: maxWidth * 0.4,
       height: maxHeight,
