@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:e_commerce_valamy/config/constants.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/text_form_field_custom.dart';
 import 'package:flutter/material.dart';
 
 class SignUpSetupMobileScreen extends StatefulWidget {
@@ -140,21 +140,21 @@ class FormBox extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
-          TxtFormFieldCustom(
+          TextFormFieldCustom(
             hintText: "Nombre",
             svgPath: "assets/icons/Profile.svg",
             keyboardType: TextInputType.emailAddress,
             fontSize: diagonal * 0.0163,
           ),
           SizedBox(height: 20),
-          TxtFormFieldCustom(
+          TextFormFieldCustom(
             hintText: "Apellido",
             svgPath: "assets/icons/User_circle.svg",
             keyboardType: TextInputType.emailAddress,
             fontSize: diagonal * 0.0163,
           ),
           SizedBox(height: 20),
-          TxtFormFieldCustom(
+          TextFormFieldCustom(
             hintText: "Celular",
             svgPath: "assets/icons/Call.svg",
             keyboardType: TextInputType.emailAddress,

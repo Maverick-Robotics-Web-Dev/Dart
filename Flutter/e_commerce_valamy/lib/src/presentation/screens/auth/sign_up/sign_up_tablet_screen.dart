@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:e_commerce_valamy/config/constants.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/txt_form_field_custom.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/text_form_field_custom.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -165,13 +165,13 @@ class RightBox extends StatelessWidget {
               key: formKey,
               child: Column(
                 children: [
-                  TxtFormFieldCustom(
+                  TextFormFieldCustom(
                     svgPath: "assets/icons/Message.svg",
                     hintText: "Email",
                     keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 40),
-                  TxtFormFieldCustom(
+                  TextFormFieldCustom(
                     svgPath: "assets/icons/Lock.svg",
                     hintText: "Password",
                     obscureText: true,

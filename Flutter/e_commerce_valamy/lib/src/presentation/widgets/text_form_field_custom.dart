@@ -2,7 +2,7 @@ import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class TxtFormFieldCustom extends StatelessWidget {
+class TextFormFieldCustom extends StatelessWidget {
   final String svgPath;
   final String hintText;
   final bool obscureText;
@@ -11,7 +11,7 @@ class TxtFormFieldCustom extends StatelessWidget {
   final double? width;
   final double? fontSize;
 
-  const TxtFormFieldCustom({
+  const TextFormFieldCustom({
     super.key,
     required this.svgPath,
     required this.hintText,
