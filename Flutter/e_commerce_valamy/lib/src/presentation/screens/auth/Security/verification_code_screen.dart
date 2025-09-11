@@ -1,15 +1,38 @@
+import 'package:e_commerce_valamy/config/screen_sizes.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/auth/security/verification_code_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/auth/security/verification_code_tablet_screen.dart';
 import 'package:flutter/material.dart';
 
-class VerificationCodeScreen extends StatefulWidget {
-  const VerificationCodeScreen({super.key});
+class VerificationCodeScreen extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  @override
-  State<VerificationCodeScreen> createState() => _VerificationCodeScreenState();
-}
+  VerificationCodeScreen({super.key});
 
-class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    TextTheme textTheme = Theme.of(context).textTheme;
+
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth <= ScreenSizes.xLarge &&
+              constraints.maxWidth > ScreenSizes.large) {
+            return VerificationCodeTabletScreen(
+              maxHeight: constraints.maxHeight,
+              maxWidth: constraints.maxWidth,
+              textTheme: textTheme,
+              formKey: _formKey,
+            );
+          } else {
+            return VerificationCodeMobileScreen(
+              maxHeight: constraints.maxHeight,
+              maxWidth: constraints.maxWidth,
+              textTheme: textTheme,
+              formKey: _formKey,
+            );
+          }
+        },
+      ),
+    );
   }
 }
