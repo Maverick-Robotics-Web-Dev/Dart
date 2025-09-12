@@ -43,6 +43,18 @@ class _VerificationCodeMobileScreenState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BackButtonBox(diagonal: diagonal),
+                SizedBox(
+                  height: widget.maxHeight * 0.35,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Image.asset(
+                          'assets/images/code_verification_whi.webp',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(height: 60),
                 VerificationCodeTitleTextBox(diagonal: diagonal),
                 SizedBox(height: 16),
