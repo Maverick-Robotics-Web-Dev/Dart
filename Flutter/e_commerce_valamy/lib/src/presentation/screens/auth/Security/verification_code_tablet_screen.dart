@@ -39,11 +39,11 @@ class _VerificationCodeTabletScreenState
         child: Container(
           alignment: Alignment.center,
           height: widget.maxHeight,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Align(
+          child: Column(
+            children: [
+              SizedBox(
+                height: widget.maxHeight * 0.1,
+                child: Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: () {},
@@ -52,101 +52,244 @@ class _VerificationCodeTabletScreenState
                     iconSize: diagonal * 0.02432,
                   ),
                 ),
-                SizedBox(height: 60),
-                Text(
-                  'Código de verificación',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.023,
-                    letterSpacing: 1,
-                  ),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              SizedBox(
+                height: widget.maxHeight * 0.9,
+                child: Row(
                   children: [
-                    Text(
-                      'Hemos enviado el código de verificación a',
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: diagonal * 0.01122,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      'andrwchvez7690@gmail.com',
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: diagonal * 0.01122,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    PinCodeTextFormFieldCustom(),
-                    SizedBox(width: 26),
-                    PinCodeTextFormFieldCustom(),
-                    SizedBox(width: 26),
-                    PinCodeTextFormFieldCustom(),
-                    SizedBox(width: 26),
-                    PinCodeTextFormFieldCustom(),
-                  ],
-                ),
-                SizedBox(height: 40),
-                Text(
-                  'Reenviar código después 1:36',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.01122,
-                    letterSpacing: 1,
-                  ),
-                ),
-                Spacer(),
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Spacer(),
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: whiteColor,
-                        ),
-                        child: Text(
-                          'Reenviar',
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontSize: diagonal * 0.0122,
-                            letterSpacing: 1,
+                    SizedBox(
+                      width: widget.maxWidth * 0.5,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Image.asset(
+                              'assets/images/code_verification_white.webp',
+                            ),
                           ),
-                        ),
-                        onPressed: () {},
+                        ],
                       ),
                     ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Confirmar',
-                          style: TextStyle(
-                            fontSize: diagonal * 0.0122,
-                            letterSpacing: 1,
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(80),
+                      // color: Colors.deepOrange,
+                      // height: widget.maxHeight,
+                      width: widget.maxWidth * 0.5,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Código de verificación',
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontSize: diagonal * 0.023,
+                              letterSpacing: 1,
+                            ),
                           ),
-                        ),
+                          SizedBox(height: 40),
+                          Text(
+                            'Hemos enviado el código de verificación a',
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontSize: diagonal * 0.01122,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'andrwchvez7690@gmail.com',
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontSize: diagonal * 0.01122,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          SizedBox(height: 60),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              PinCodeTextFormFieldCustom(),
+                              SizedBox(width: 26),
+                              PinCodeTextFormFieldCustom(),
+                              SizedBox(width: 26),
+                              PinCodeTextFormFieldCustom(),
+                              SizedBox(width: 26),
+                              PinCodeTextFormFieldCustom(),
+                            ],
+                          ),
+                          SizedBox(height: 60),
+                          Text(
+                            'Reenviar código después 1:36',
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontSize: diagonal * 0.01122,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          Spacer(),
+                          Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // Spacer(),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: whiteColor,
+                                  ),
+                                  child: Text(
+                                    'Reenviar',
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: diagonal * 0.0122,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Confirmar',
+                                    style: TextStyle(
+                                      fontSize: diagonal * 0.0122,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              // Spacer(),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    Spacer(),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+          //##############################################
+          // child: Column(
+          //   children: [
+          //     Align(
+          //       alignment: Alignment.centerLeft,
+          //       child: IconButton(
+          //         onPressed: () {},
+          //         icon: Icon(Icons.arrow_back),
+          //         color: whiteColor,
+          //         iconSize: diagonal * 0.02432,
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       height: widget.maxHeight * 0.35,
+          //       child: Column(
+          //         children: [
+          //           Expanded(
+          //             child: Image.asset(
+          //               'assets/images/code_verification_white.webp',
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     SizedBox(height: 20),
+          //     Text(
+          //       'Código de verificación',
+          //       style: TextStyle(
+          //         color: whiteColor,
+          //         fontSize: diagonal * 0.023,
+          //         letterSpacing: 1,
+          //       ),
+          //     ),
+          //     SizedBox(height: 16),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         Text(
+          //           'Hemos enviado el código de verificación a',
+          //           style: TextStyle(
+          //             color: whiteColor,
+          //             fontSize: diagonal * 0.01122,
+          //             letterSpacing: 1,
+          //           ),
+          //         ),
+          //         SizedBox(width: 8),
+          //         Text(
+          //           'andrwchvez7690@gmail.com',
+          //           style: TextStyle(
+          //             color: whiteColor,
+          //             fontSize: diagonal * 0.01122,
+          //             fontWeight: FontWeight.w500,
+          //             letterSpacing: 1,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     SizedBox(height: 40),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         PinCodeTextFormFieldCustom(),
+          //         SizedBox(width: 26),
+          //         PinCodeTextFormFieldCustom(),
+          //         SizedBox(width: 26),
+          //         PinCodeTextFormFieldCustom(),
+          //         SizedBox(width: 26),
+          //         PinCodeTextFormFieldCustom(),
+          //       ],
+          //     ),
+          //     SizedBox(height: 40),
+          //     Text(
+          //       'Reenviar código después 1:36',
+          //       style: TextStyle(
+          //         color: whiteColor,
+          //         fontSize: diagonal * 0.01122,
+          //         letterSpacing: 1,
+          //       ),
+          //     ),
+          //     Spacer(),
+          //     Row(
+          //       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [
+          //         Spacer(),
+          //         Expanded(
+          //           child: ElevatedButton(
+          //             style: ElevatedButton.styleFrom(
+          //               backgroundColor: whiteColor,
+          //             ),
+          //             child: Text(
+          //               'Reenviar',
+          //               style: TextStyle(
+          //                 color: primaryColor,
+          //                 fontSize: diagonal * 0.0122,
+          //                 letterSpacing: 1,
+          //               ),
+          //             ),
+          //             onPressed: () {},
+          //           ),
+          //         ),
+          //         SizedBox(width: 16),
+          //         Expanded(
+          //           child: ElevatedButton(
+          //             onPressed: () {},
+          //             child: Text(
+          //               'Confirmar',
+          //               style: TextStyle(
+          //                 fontSize: diagonal * 0.0122,
+          //                 letterSpacing: 1,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //         Spacer(),
+          //       ],
+          //     ),
+          //   ],
+          // ),
         ),
       ),
     );

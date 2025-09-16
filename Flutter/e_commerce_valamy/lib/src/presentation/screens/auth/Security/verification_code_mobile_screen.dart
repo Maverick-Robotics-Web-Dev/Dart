@@ -49,13 +49,13 @@ class _VerificationCodeMobileScreenState
                     children: [
                       Expanded(
                         child: Image.asset(
-                          'assets/images/code_verification_whi.webp',
+                          'assets/images/code_verification_white.webp',
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 60),
+                SizedBox(height: 20),
                 VerificationCodeTitleTextBox(diagonal: diagonal),
                 SizedBox(height: 16),
                 VerificationCodeTextBox(diagonal: diagonal),
