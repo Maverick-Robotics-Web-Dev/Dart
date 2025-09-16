@@ -31,20 +31,23 @@ class _SignInTabletScreenState extends State<SignInTabletScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SingleChildScrollView(
-        child: Row(
-          children: [
-            LeftBox(
-              maxWidth: widget.maxWidth,
-              maxHeight: widget.maxHeight,
-              diagonal: diagonal,
-            ),
-            RightBox(
-              maxWidth: widget.maxWidth,
-              maxHeight: widget.maxHeight,
-              diagonal: diagonal,
-              formKey: widget.formKey,
-            ),
-          ],
+        child: SizedBox(
+          height: widget.maxHeight,
+          child: Row(
+            children: [
+              LeftBox(
+                maxWidth: widget.maxWidth,
+                maxHeight: widget.maxHeight,
+                diagonal: diagonal,
+              ),
+              RightBox(
+                maxWidth: widget.maxWidth,
+                maxHeight: widget.maxHeight,
+                diagonal: diagonal,
+                formKey: widget.formKey,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -65,42 +68,36 @@ class LeftBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: maxWidth * 0.6,
-      height: maxHeight,
+    return Container(
+      width: maxWidth * 0.5,
+      padding: EdgeInsets.only(top: 40, bottom: 40, left: 60),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: maxHeight * 0.15,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/logo_valamy_wh.webp', height: 80),
-                SizedBox(width: 20),
-                Text(
-                  'PELETERIA VALAMY',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.02432,
-                    letterSpacing: 1,
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/logo_valamy_wh.webp', height: 80),
+              SizedBox(width: 20),
+              Text(
+                'PELETERIA VALAMY',
+                style: TextStyle(
+                  color: whiteColor,
+                  fontSize: diagonal * 0.02432,
+                  letterSpacing: 1,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Expanded(
             child: Image.asset('assets/images/sign_in_photo_3_whi.webp'),
           ),
-          Container(
-            alignment: Alignment.center,
-            height: maxHeight * 0.15,
-            child: Text(
-              'Exclusividad y Sofisticación',
-              style: TextStyle(
-                color: whiteColor,
-                fontSize: diagonal * 0.0203,
-                letterSpacing: 1,
-              ),
+          Text(
+            'Exclusividad y Sofisticación',
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: diagonal * 0.0203,
+              letterSpacing: 1,
             ),
           ),
         ],
@@ -125,121 +122,109 @@ class RightBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: maxWidth * 0.4,
-      height: maxHeight,
-      child: Container(
-        margin: EdgeInsets.all(40),
-        padding: EdgeInsets.symmetric(vertical: 46, horizontal: 26),
-        decoration: BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '¡Bienvenido de Nuevo!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: primaryColor,
-                // color: whiteColor,
-                fontSize: diagonal * 0.023,
-                letterSpacing: 1,
-              ),
+    return Container(
+      width: maxWidth * 0.5,
+      padding: EdgeInsets.symmetric(horizontal: 100, vertical: 60),
+      // height: maxHeight,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '¡Bienvenido de Nuevo!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: diagonal * 0.023,
+              letterSpacing: 1,
             ),
-            SizedBox(height: 26),
-            Text(
-              // "Log in with your data that you intered during your registration.",
-              'Inicia sesión con tus datos que ingresaste durante tu registro',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: secondaryColor,
-                // color: whiteColor,
-                fontSize: diagonal * 0.01122,
-                letterSpacing: 1,
-              ),
+          ),
+          SizedBox(height: 20),
+          Text(
+            // "Log in with your data that you intered during your registration.",
+            'Inicia sesión con tus datos que ingresaste durante tu registro',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: diagonal * 0.01122,
+              letterSpacing: 1,
             ),
-            SizedBox(height: 40),
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  TextFormFieldCustom(
-                    svgPath: "assets/icons/Message.svg",
-                    hintText: "Email",
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: 40),
-                  TextFormFieldCustom(
-                    svgPath: "assets/icons/Lock.svg",
-                    hintText: "Password",
-                    obscureText: true,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            Align(
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  '¿Olvidaste tu contraseña?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: secondaryColor,
-                    // color: whiteColor,
-                    fontSize: diagonal * 0.01122,
-                    letterSpacing: 1,
-                  ),
-                ),
-              ),
-            ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 32),
-                backgroundColor: primaryColor,
-              ),
-              child: Text(
-                'Iniciar Sesión',
-                style: TextStyle(
-                  fontSize: diagonal * 0.0122,
-                  letterSpacing: 1,
-                  color: whiteColor,
-                ),
-              ),
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          SizedBox(height: 80),
+          Form(
+            key: formKey,
+            child: Column(
               children: [
-                Text(
-                  '¿No tienes una cuenta?',
-                  style: TextStyle(
-                    color: secondaryColor,
-                    // color: whiteColor,
-                    fontSize: diagonal * 0.01122,
-                    letterSpacing: 1,
-                  ),
+                TextFormFieldCustom(
+                  svgPath: "assets/icons/Message.svg",
+                  hintText: "Email",
+                  keyboardType: TextInputType.emailAddress,
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Registrate',
-                    style: TextStyle(
-                      color: secondaryColor,
-                      // color: whiteColor,
-                      fontSize: diagonal * 0.01122,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                SizedBox(height: 40),
+                TextFormFieldCustom(
+                  svgPath: "assets/icons/Lock.svg",
+                  hintText: "Password",
+                  obscureText: true,
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 20),
+          Align(
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                '¿Olvidaste tu contraseña?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: whiteColor,
+                  fontSize: diagonal * 0.01122,
+                  letterSpacing: 1,
+                ),
+              ),
+            ),
+          ),
+          Spacer(),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(double.infinity, 32),
+              backgroundColor: primaryColor,
+            ),
+            child: Text(
+              'Iniciar Sesión',
+              style: TextStyle(
+                fontSize: diagonal * 0.0122,
+                letterSpacing: 1,
+                color: whiteColor,
+              ),
+            ),
+          ),
+          SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '¿No tienes una cuenta?',
+                style: TextStyle(
+                  color: whiteColor,
+                  fontSize: diagonal * 0.01122,
+                  letterSpacing: 1,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Registrate',
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: diagonal * 0.01122,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
