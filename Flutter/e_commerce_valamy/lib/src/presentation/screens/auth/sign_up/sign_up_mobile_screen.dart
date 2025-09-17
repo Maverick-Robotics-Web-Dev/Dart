@@ -32,14 +32,145 @@ class _SignUpMobileScreenState extends State<SignUpMobileScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            LogoBox(maxHeight: widget.maxHeight, diagonal: diagonal),
-            ImageBox(maxHeight: widget.maxHeight),
-            FormBox(maxHeight: widget.maxHeight, diagonal: diagonal),
-          ],
+        child: Container(
+          alignment: Alignment.center,
+          height: widget.maxHeight,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                LogoBox(diagonal: diagonal),
+                ImageBox(maxHeight: widget.maxHeight),
+                Text(
+                  '¡Comencemos!',
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: diagonal * 0.0313,
+                    letterSpacing: 1,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Por favor ingrese sus datos válidos para crear una cuenta.',
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: diagonal * 0.0163,
+                    letterSpacing: 1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                FormBox(diagonal: diagonal, formKey: widget.formKey),
+                SizedBox(height: 16),
+                Row(
+                  children: [
+                    Transform.scale(
+                      scale: 1.2,
+                      child: Checkbox(value: false, onChanged: (value) {}),
+                    ),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          text: "Acepto los",
+                          style: TextStyle(
+                            color: whiteColor,
+                            fontSize: diagonal * 0.0163,
+                            // fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
+                          ),
+                          children: [
+                            TextSpan(
+                              recognizer:
+                                  TapGestureRecognizer()
+                                    ..onTap = () {
+                                      // Navigator.pushNamed(
+                                      //   context,
+                                      //   termsOfServicesScreenRoute,
+                                      // );
+                                    },
+                              text: " Terminos y Condiciones ",
+                              style: TextStyle(
+                                color: whiteColor,
+                                fontSize: diagonal * 0.0163,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 32),
+                  ),
+                  child: Text(
+                    "Continuar",
+                    style: TextStyle(
+                      fontSize: diagonal * 0.0163,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "¿Tienes una cuenta?",
+                      style: TextStyle(
+                        color: whiteColor,
+                        fontSize: diagonal * 0.0163,
+                        // fontWeight: FontWeight.w500,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(
+                          color: whiteColor,
+                          fontSize: diagonal * 0.0163,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
       ),
+    );
+  }
+}
+
+class LogoBox extends StatelessWidget {
+  final double diagonal;
+
+  const LogoBox({super.key, required this.diagonal});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset('assets/images/logo_valamy_wh.webp', height: 48),
+        SizedBox(width: 10),
+        Text(
+          'PELETERIA VALAMY',
+          style: TextStyle(
+            color: whiteColor,
+            fontSize: diagonal * 0.0294,
+            letterSpacing: 1,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -53,7 +184,6 @@ class ImageBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: maxHeight > 760 ? maxHeight * 0.35 : maxHeight * 0.21,
-      width: double.infinity,
       child: Column(
         children: [
           Expanded(
@@ -65,176 +195,32 @@ class ImageBox extends StatelessWidget {
   }
 }
 
-class LogoBox extends StatelessWidget {
-  final double maxHeight;
-  final double diagonal;
-
-  const LogoBox({super.key, required this.maxHeight, required this.diagonal});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: maxHeight * 0.10,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/images/logo_valamy_wh.webp', height: 48),
-          SizedBox(width: 10),
-          Text(
-            'PELETERIA VALAMY',
-            style: TextStyle(
-              color: whiteColor,
-              fontSize: diagonal * 0.0294,
-              letterSpacing: 1,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class FormBox extends StatelessWidget {
-  final double maxHeight;
   final double diagonal;
   final GlobalKey<FormState>? formKey;
 
-  const FormBox({
-    super.key,
-    required this.maxHeight,
-    required this.diagonal,
-    this.formKey,
-  });
+  const FormBox({super.key, required this.diagonal, this.formKey});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: maxHeight * 0.55,
-      child: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Text(
-              '¡Comencemos!',
-              style: TextStyle(
-                color: whiteColor,
-                fontSize: diagonal * 0.0313,
-                letterSpacing: 1,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Por favor ingrese sus datos válidos para crear una cuenta.',
-              style: TextStyle(
-                color: whiteColor,
-                fontSize: diagonal * 0.0163,
-                letterSpacing: 1,
-              ),
-            ),
-            SizedBox(height: 20),
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  TextFormFieldCustom(
-                    hintText: "Email",
-                    svgPath: "assets/icons/Message.svg",
-                    keyboardType: TextInputType.emailAddress,
-                    fontSize: diagonal * 0.0163,
-                  ),
-                  SizedBox(height: 16),
-                  TextFormFieldCustom(
-                    svgPath: "assets/icons/Lock.svg",
-                    hintText: "Password",
-                    obscureText: true,
-                    fontSize: diagonal * 0.0163,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: [
-                Transform.scale(
-                  scale: 1.2,
-                  child: Checkbox(value: false, onChanged: (value) {}),
-                ),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      text: "Acepto los",
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: diagonal * 0.0163,
-                        // fontWeight: FontWeight.w500,
-                        letterSpacing: 1,
-                      ),
-                      children: [
-                        TextSpan(
-                          recognizer:
-                              TapGestureRecognizer()
-                                ..onTap = () {
-                                  // Navigator.pushNamed(
-                                  //   context,
-                                  //   termsOfServicesScreenRoute,
-                                  // );
-                                },
-                          text: " Terminos y Condiciones ",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: diagonal * 0.0163,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 32),
-              ),
-              child: Text(
-                "Continuar",
-                style: TextStyle(
-                  fontSize: diagonal * 0.0163,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1,
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "¿Tienes una cuenta?",
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.0163,
-                    // fontWeight: FontWeight.w500,
-                    letterSpacing: 1,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Sign In",
-                    style: TextStyle(
-                      color: whiteColor,
-                      fontSize: diagonal * 0.0163,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          TextFormFieldCustom(
+            hintText: "Email",
+            svgPath: "assets/icons/Message.svg",
+            keyboardType: TextInputType.emailAddress,
+            fontSize: diagonal * 0.0163,
+          ),
+          SizedBox(height: 16),
+          TextFormFieldCustom(
+            svgPath: "assets/icons/Lock.svg",
+            hintText: "Password",
+            obscureText: true,
+            fontSize: diagonal * 0.0163,
+          ),
+        ],
       ),
     );
   }
