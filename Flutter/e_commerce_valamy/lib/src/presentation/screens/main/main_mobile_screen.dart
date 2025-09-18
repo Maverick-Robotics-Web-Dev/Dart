@@ -30,17 +30,14 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: whiteColor,
+        backgroundColor: Colors.blue,
         leading: SizedBox(),
         leadingWidth: 0,
         centerTitle: false,
         title: SvgPicture.asset(
           "assets/logo/Shoplon.svg",
-          colorFilter: ColorFilter.mode(
-            Theme.of(context).iconTheme.color!,
-            BlendMode.srcIn,
-          ),
-          height: 20,
+          colorFilter: ColorFilter.mode(whiteColor, BlendMode.srcIn),
+          height: 22,
           width: 100,
         ),
         actions: [
@@ -50,11 +47,8 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
             },
             icon: SvgPicture.asset(
               "assets/icons/Search.svg",
-              height: 24,
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).iconTheme.color!,
-                BlendMode.srcIn,
-              ),
+              height: 28,
+              colorFilter: ColorFilter.mode(whiteColor, BlendMode.srcIn),
             ),
           ),
           IconButton(
@@ -63,11 +57,8 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
             },
             icon: SvgPicture.asset(
               "assets/icons/Notification.svg",
-              height: 24,
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).iconTheme.color!,
-                BlendMode.srcIn,
-              ),
+              height: 28,
+              colorFilter: ColorFilter.mode(whiteColor, BlendMode.srcIn),
             ),
           ),
         ],
@@ -84,22 +75,28 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
         child: BottomNavigationBar(
           backgroundColor: whiteColor,
           type: BottomNavigationBarType.fixed,
-          selectedFontSize: 12,
-          selectedItemColor: primaryColor,
-          unselectedItemColor: Colors.transparent,
+          selectedFontSize: 14,
+          unselectedFontSize: 14,
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: secondaryColor,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
+          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
           items: [
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Shop.svg"),
-              activeIcon: svgIcon("assets/icons/Shop.svg", color: primaryColor),
-              label: "Shop",
+              icon: svgIcon("assets/icons/Bag.svg"),
+              activeIcon: svgIcon(
+                "assets/icons/bag_full.svg",
+                color: Colors.blue,
+              ),
+              label: "Tienda",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Category.svg"),
+              icon: svgIcon("assets/icons/Category.svg", color: blackColor),
               activeIcon: svgIcon(
                 "assets/icons/Category.svg",
                 color: primaryColor,
               ),
-              label: "Discover",
+              label: "Favoritos",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bookmark.svg"),
@@ -107,12 +104,12 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
                 "assets/icons/Bookmark.svg",
                 color: primaryColor,
               ),
-              label: "Bookmark",
+              label: "Mi Cuenta",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bag.svg"),
               activeIcon: svgIcon("assets/icons/Bag.svg", color: primaryColor),
-              label: "Cart",
+              label: "Carrito",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Profile.svg"),
@@ -120,7 +117,7 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
                 "assets/icons/Profile.svg",
                 color: primaryColor,
               ),
-              label: "Profile",
+              label: "Ajustes",
             ),
           ],
         ),
