@@ -177,7 +177,9 @@ class ButtonBox extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: whiteColor),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: inputBackgroundColor,
+            ),
             child: Text(
               'Saltar',
               style: TextStyle(

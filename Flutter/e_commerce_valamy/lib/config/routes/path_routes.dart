@@ -3,9 +3,11 @@ import 'package:e_commerce_valamy/src/presentation/screens/auth/security/verific
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_up/sign_up_setup_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
+  mainRoute: (BuildContext context) => MainScreen(),
   signInRoute: (BuildContext context) => SignInScreen(),
   signUpRoute: (BuildContext context) => SignUpScreen(),
   signUpSetupRoute: (BuildContext context) => SignUpSetupScreen(),

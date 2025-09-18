@@ -40,107 +40,20 @@ class _SignUpMobileScreenState extends State<SignUpMobileScreen> {
             child: Column(
               children: [
                 LogoBox(diagonal: diagonal),
-                ImageBox(maxHeight: widget.maxHeight),
-                Text(
-                  '¡Comencemos!',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.0313,
-                    letterSpacing: 1,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Por favor ingrese sus datos válidos para crear una cuenta.',
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: diagonal * 0.0163,
-                    letterSpacing: 1,
-                  ),
-                ),
                 SizedBox(height: 20),
+                ImageBox(maxHeight: widget.maxHeight),
+                SizedBox(height: 20),
+                TitleTextBox(diagonal: diagonal),
+                SizedBox(height: 8),
+                SubtitleTextBox(diagonal: diagonal),
+                SizedBox(height: 40),
                 FormBox(diagonal: diagonal, formKey: widget.formKey),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Transform.scale(
-                      scale: 1.2,
-                      child: Checkbox(value: false, onChanged: (value) {}),
-                    ),
-                    Expanded(
-                      child: Text.rich(
-                        TextSpan(
-                          text: "Acepto los",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: diagonal * 0.0163,
-                            // fontWeight: FontWeight.w500,
-                            letterSpacing: 1,
-                          ),
-                          children: [
-                            TextSpan(
-                              recognizer:
-                                  TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // Navigator.pushNamed(
-                                      //   context,
-                                      //   termsOfServicesScreenRoute,
-                                      // );
-                                    },
-                              text: " Terminos y Condiciones ",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize: diagonal * 0.0163,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                SizedBox(height: 8),
+                TermsServicesTextButtonBox(diagonal: diagonal),
                 Spacer(),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 32),
-                  ),
-                  child: Text(
-                    "Continuar",
-                    style: TextStyle(
-                      fontSize: diagonal * 0.0163,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "¿Tienes una cuenta?",
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: diagonal * 0.0163,
-                        // fontWeight: FontWeight.w500,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Sign In",
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontSize: diagonal * 0.0163,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                ContinueButtonBox(diagonal: diagonal),
+                SizedBox(height: 4),
+                SignInTextButtonBox(diagonal: diagonal),
               ],
             ),
           ),
@@ -195,6 +108,42 @@ class ImageBox extends StatelessWidget {
   }
 }
 
+class TitleTextBox extends StatelessWidget {
+  const TitleTextBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '¡Comencemos!',
+      style: TextStyle(
+        color: whiteColor,
+        fontSize: diagonal * 0.0313,
+        letterSpacing: 1,
+      ),
+    );
+  }
+}
+
+class SubtitleTextBox extends StatelessWidget {
+  const SubtitleTextBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Ingrese sus datos para crear una cuenta.',
+      style: TextStyle(
+        color: whiteColor,
+        fontSize: diagonal * 0.0163,
+        letterSpacing: 1,
+      ),
+    );
+  }
+}
+
 class FormBox extends StatelessWidget {
   final double diagonal;
   final GlobalKey<FormState>? formKey;
@@ -213,7 +162,7 @@ class FormBox extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             fontSize: diagonal * 0.0163,
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 20),
           TextFormFieldCustom(
             svgPath: "assets/icons/Lock.svg",
             hintText: "Password",
@@ -222,6 +171,113 @@ class FormBox extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class TermsServicesTextButtonBox extends StatelessWidget {
+  const TermsServicesTextButtonBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Transform.scale(
+          scale: 1.2,
+          child: Checkbox(value: false, onChanged: (value) {}),
+        ),
+        Expanded(
+          child: Text.rich(
+            TextSpan(
+              text: "Acepto los",
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: diagonal * 0.0163,
+                // fontWeight: FontWeight.w500,
+                letterSpacing: 1,
+              ),
+              children: [
+                TextSpan(
+                  recognizer:
+                      TapGestureRecognizer()
+                        ..onTap = () {
+                          // Navigator.pushNamed(
+                          //   context,
+                          //   termsOfServicesScreenRoute,
+                          // );
+                        },
+                  text: " Terminos y Condiciones ",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: diagonal * 0.0163,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ContinueButtonBox extends StatelessWidget {
+  const ContinueButtonBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 32)),
+      child: Text(
+        "Continuar",
+        style: TextStyle(
+          fontSize: diagonal * 0.0163,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 1,
+        ),
+      ),
+    );
+  }
+}
+
+class SignInTextButtonBox extends StatelessWidget {
+  const SignInTextButtonBox({super.key, required this.diagonal});
+
+  final double diagonal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "¿Tienes una cuenta?",
+          style: TextStyle(
+            color: whiteColor,
+            fontSize: diagonal * 0.0163,
+            // fontWeight: FontWeight.w500,
+            letterSpacing: 1,
+          ),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text(
+            "Inica Sesión",
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: diagonal * 0.0163,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -32,20 +32,23 @@ class _SignUpSetupTabletScreenState extends State<SignUpSetupTabletScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SingleChildScrollView(
-        child: Row(
-          children: [
-            LeftBox(
-              maxWidth: widget.maxWidth,
-              maxHeight: widget.maxHeight,
-              diagonal: diagonal,
-            ),
-            RightBox(
-              maxWidth: widget.maxWidth,
-              maxHeight: widget.maxHeight,
-              diagonal: diagonal,
-              formKey: widget.formKey,
-            ),
-          ],
+        child: SizedBox(
+          height: widget.maxHeight,
+          child: Row(
+            children: [
+              LeftBox(
+                maxWidth: widget.maxWidth,
+                maxHeight: widget.maxHeight,
+                diagonal: diagonal,
+              ),
+              RightBox(
+                maxWidth: widget.maxWidth,
+                maxHeight: widget.maxHeight,
+                diagonal: diagonal,
+                formKey: widget.formKey,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -66,9 +69,9 @@ class LeftBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: maxWidth * 0.6,
-      height: maxHeight,
+    return Container(
+      width: maxWidth * 0.5,
+      padding: EdgeInsets.only(top: 40, bottom: 40, left: 60),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -130,94 +133,84 @@ class RightBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: maxWidth * 0.4,
-      height: maxHeight,
-      child: Container(
-        margin: EdgeInsets.all(40),
-        padding: EdgeInsets.symmetric(vertical: 46, horizontal: 26),
-        decoration: BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Perfil',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: primaryColor,
-                // color: whiteColor,
-                fontSize: diagonal * 0.023,
-                letterSpacing: 1,
-              ),
+    return Container(
+      width: maxWidth * 0.5,
+      padding: EdgeInsets.symmetric(horizontal: 100, vertical: 60),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Perfil',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: whiteColor,
+              fontSize: diagonal * 0.023,
+              letterSpacing: 1,
             ),
-            SizedBox(height: 40),
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  TextFormFieldCustom(
-                    svgPath: "assets/icons/Profile.svg",
-                    hintText: "Nombre",
-                    keyboardType: TextInputType.emailAddress,
-                    fontSize: diagonal * 0.01122,
-                  ),
-                  SizedBox(height: 40),
-                  TextFormFieldCustom(
-                    svgPath: "assets/icons/User_circle.svg",
-                    hintText: "Apellido",
-                    obscureText: true,
-                    fontSize: diagonal * 0.01122,
-                  ),
-                  SizedBox(height: 40),
-                  TextFormFieldCustom(
-                    svgPath: "assets/icons/Call.svg",
-                    hintText: "Celular",
-                    obscureText: true,
-                    fontSize: diagonal * 0.01122,
-                  ),
-                ],
-              ),
-            ),
-            Spacer(),
-            Row(
+          ),
+          SizedBox(height: 80),
+          Form(
+            key: formKey,
+            child: Column(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: inputBackgroundColor,
-                      side: BorderSide(color: primaryColor),
-                    ),
-                    child: Text(
-                      'Saltar',
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontSize: diagonal * 0.01122,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
+                TextFormFieldCustom(
+                  svgPath: "assets/icons/Profile.svg",
+                  hintText: "Nombre",
+                  keyboardType: TextInputType.emailAddress,
+                  fontSize: diagonal * 0.01122,
                 ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Registrarse',
-                      style: TextStyle(
-                        fontSize: diagonal * 0.01122,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ),
+                SizedBox(height: 40),
+                TextFormFieldCustom(
+                  svgPath: "assets/icons/User_circle.svg",
+                  hintText: "Apellido",
+                  obscureText: true,
+                  fontSize: diagonal * 0.01122,
+                ),
+                SizedBox(height: 40),
+                TextFormFieldCustom(
+                  svgPath: "assets/icons/Call.svg",
+                  hintText: "Celular",
+                  obscureText: true,
+                  fontSize: diagonal * 0.01122,
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          Spacer(),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: inputBackgroundColor,
+                  ),
+                  child: Text(
+                    'Saltar',
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontSize: diagonal * 0.01122,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Registrarse',
+                    style: TextStyle(
+                      fontSize: diagonal * 0.01122,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

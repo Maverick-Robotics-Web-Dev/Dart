@@ -27,7 +27,6 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
   Widget build(BuildContext context) {
     final num sumsqsides = pow(widget.maxHeight, 2) + pow(widget.maxWidth, 2);
     final double diagonal = sqrt(sumsqsides);
-    print('Diagonal: ${diagonal * 0.01662}');
 
     return Scaffold(
       backgroundColor: Colors.blue,

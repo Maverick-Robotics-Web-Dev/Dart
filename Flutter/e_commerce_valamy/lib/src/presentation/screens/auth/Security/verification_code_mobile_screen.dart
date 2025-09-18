@@ -42,18 +42,7 @@ class _VerificationCodeMobileScreenState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BackButtonBox(diagonal: diagonal),
-                SizedBox(
-                  height: widget.maxHeight * 0.35,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Image.asset(
-                          'assets/images/code_verification_white.webp',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ImageBox(widget: widget),
                 SizedBox(height: 20),
                 VerificationCodeTitleTextBox(diagonal: diagonal),
                 SizedBox(height: 16),
@@ -89,6 +78,26 @@ class BackButtonBox extends StatelessWidget {
         icon: Icon(Icons.arrow_back),
         color: whiteColor,
         iconSize: diagonal * 0.02931,
+      ),
+    );
+  }
+}
+
+class ImageBox extends StatelessWidget {
+  const ImageBox({super.key, required this.widget});
+
+  final VerificationCodeMobileScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: widget.maxHeight * 0.35,
+      child: Column(
+        children: [
+          Expanded(
+            child: Image.asset('assets/images/code_verification_white.webp'),
+          ),
+        ],
       ),
     );
   }

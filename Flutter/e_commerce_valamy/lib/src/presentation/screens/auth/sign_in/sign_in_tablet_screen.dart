@@ -35,14 +35,9 @@ class _SignInTabletScreenState extends State<SignInTabletScreen> {
           height: widget.maxHeight,
           child: Row(
             children: [
-              LeftBox(
-                maxWidth: widget.maxWidth,
-                maxHeight: widget.maxHeight,
-                diagonal: diagonal,
-              ),
+              LeftBox(maxWidth: widget.maxWidth, diagonal: diagonal),
               RightBox(
                 maxWidth: widget.maxWidth,
-                maxHeight: widget.maxHeight,
                 diagonal: diagonal,
                 formKey: widget.formKey,
               ),
@@ -56,15 +51,9 @@ class _SignInTabletScreenState extends State<SignInTabletScreen> {
 
 class LeftBox extends StatelessWidget {
   final double maxWidth;
-  final double maxHeight;
   final double diagonal;
 
-  const LeftBox({
-    super.key,
-    required this.diagonal,
-    required this.maxWidth,
-    required this.maxHeight,
-  });
+  const LeftBox({super.key, required this.diagonal, required this.maxWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +97,6 @@ class LeftBox extends StatelessWidget {
 
 class RightBox extends StatelessWidget {
   final double maxWidth;
-  final double maxHeight;
   final double diagonal;
   final GlobalKey<FormState>? formKey;
 
@@ -116,7 +104,6 @@ class RightBox extends StatelessWidget {
     super.key,
     required this.diagonal,
     required this.maxWidth,
-    required this.maxHeight,
     this.formKey,
   });
 
@@ -125,7 +112,6 @@ class RightBox extends StatelessWidget {
     return Container(
       width: maxWidth * 0.5,
       padding: EdgeInsets.symmetric(horizontal: 100, vertical: 60),
-      // height: maxHeight,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
