@@ -17,14 +17,8 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
     SvgPicture svgIcon(String src, {Color? color}) {
       return SvgPicture.asset(
         src,
-        height: 24,
-        colorFilter: ColorFilter.mode(
-          color ??
-              Theme.of(context).iconTheme.color!.withOpacity(
-                Theme.of(context).brightness == Brightness.dark ? 0.3 : 1,
-              ),
-          BlendMode.srcIn,
-        ),
+        height: 30,
+        colorFilter: ColorFilter.mode(blackColor, BlendMode.srcIn),
       );
     }
 
@@ -85,15 +79,15 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bag.svg"),
               activeIcon: svgIcon(
-                "assets/icons/bag_full.svg",
+                "assets/iconsSVG/bag_filled.svg",
                 color: Colors.blue,
               ),
               label: "Tienda",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Category.svg", color: blackColor),
+              icon: svgIcon("assets/iconsSVG/bag_outlined.svg"),
               activeIcon: svgIcon(
-                "assets/icons/Category.svg",
+                "assets/iconsSVG/favorites_filled.svg",
                 color: primaryColor,
               ),
               label: "Favoritos",
