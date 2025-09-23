@@ -17,8 +17,8 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
     SvgPicture svgIcon(String src, {Color? color}) {
       return SvgPicture.asset(
         src,
-        height: 30,
-        colorFilter: ColorFilter.mode(blackColor, BlendMode.srcIn),
+        height: 32,
+        colorFilter: ColorFilter.mode(color ?? blackColor, BlendMode.srcIn),
       );
     }
 
@@ -72,12 +72,15 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           selectedFontSize: 14,
           unselectedFontSize: 14,
           selectedItemColor: Colors.blue,
-          unselectedItemColor: secondaryColor,
+          unselectedItemColor: primaryColor,
           selectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
           unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
           items: [
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Bag.svg"),
+              icon: svgIcon(
+                "assets/icons/bag_outlined.svg",
+                color: primaryColor,
+              ),
               activeIcon: svgIcon(
                 "assets/iconsSVG/bag_filled.svg",
                 color: Colors.blue,
@@ -85,31 +88,46 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
               label: "Tienda",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/iconsSVG/bag_outlined.svg"),
-              activeIcon: svgIcon(
-                "assets/iconsSVG/favorites_filled.svg",
+              icon: svgIcon(
+                "assets/iconsSVG/favorite_outlined.svg",
                 color: primaryColor,
+              ),
+              activeIcon: svgIcon(
+                "assets/iconsSVG/favorite_filled.svg",
+                color: Colors.blue,
               ),
               label: "Favoritos",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Bookmark.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Bookmark.svg",
+              icon: svgIcon(
+                "assets/iconsSVG/user_outlined.svg",
                 color: primaryColor,
+              ),
+              activeIcon: svgIcon(
+                "assets/iconsSVG/user_filled.svg",
+                color: Colors.blue,
               ),
               label: "Mi Cuenta",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Bag.svg"),
-              activeIcon: svgIcon("assets/icons/Bag.svg", color: primaryColor),
+              icon: svgIcon(
+                "assets/iconsSVG/cart_outlined.svg",
+                color: primaryColor,
+              ),
+              activeIcon: svgIcon(
+                "assets/iconsSVG/cart_filled.svg",
+                color: Colors.blue,
+              ),
               label: "Carrito",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Profile.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Profile.svg",
+              icon: svgIcon(
+                "assets/iconsSVG/settings_outlined.svg",
                 color: primaryColor,
+              ),
+              activeIcon: svgIcon(
+                "assets/iconsSVG/settings_filled.svg",
+                color: Colors.blue,
               ),
               label: "Ajustes",
             ),
