@@ -1,4 +1,9 @@
 import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/cart/cart_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/favorite/favorite_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/home/home_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/profile/profile_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/settings/settings_mobile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,6 +17,15 @@ class MainMobileScreen extends StatefulWidget {
 }
 
 class _MainMobileScreenState extends State<MainMobileScreen> {
+  int currentIndex = 0;
+  final List<Widget> screens = [
+    HomeMobileScreen(),
+    FavoriteMobileScreen(),
+    ProfileMobileScreen(),
+    CartMobileScreen(),
+    SettingsMobileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     SvgPicture svgIcon(String src, {Color? color}) {
@@ -57,12 +71,8 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          'Main Mobile Screen',
-          style: widget.textTheme?.headlineLarge,
-        ),
-      ),
+      body: IndexedStack(index: currentIndex, children: screens),
+      // body: ,
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(top: 8),
         color: whiteColor,
@@ -71,63 +81,69 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           type: BottomNavigationBarType.fixed,
           selectedFontSize: 14,
           unselectedFontSize: 14,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: primaryColor,
+          selectedItemColor: primaryColor,
+          unselectedItemColor: Colors.blue,
           selectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
           unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
+          currentIndex: currentIndex,
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
           items: [
             BottomNavigationBarItem(
               icon: svgIcon(
-                "assets/icons/bag_outlined.svg",
-                color: primaryColor,
+                "assets/iconsSVG/bag_outlined.svg",
+                color: Colors.blue,
               ),
               activeIcon: svgIcon(
                 "assets/iconsSVG/bag_filled.svg",
-                color: Colors.blue,
+                color: primaryColor,
               ),
               label: "Tienda",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(
                 "assets/iconsSVG/favorite_outlined.svg",
-                color: primaryColor,
+                color: Colors.blue,
               ),
               activeIcon: svgIcon(
                 "assets/iconsSVG/favorite_filled.svg",
-                color: Colors.blue,
+                color: primaryColor,
               ),
               label: "Favoritos",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(
                 "assets/iconsSVG/user_outlined.svg",
-                color: primaryColor,
+                color: Colors.blue,
               ),
               activeIcon: svgIcon(
                 "assets/iconsSVG/user_filled.svg",
-                color: Colors.blue,
+                color: primaryColor,
               ),
-              label: "Mi Cuenta",
+              label: "Mi Perfil",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(
                 "assets/iconsSVG/cart_outlined.svg",
-                color: primaryColor,
+                color: Colors.blue,
               ),
               activeIcon: svgIcon(
                 "assets/iconsSVG/cart_filled.svg",
-                color: Colors.blue,
+                color: primaryColor,
               ),
               label: "Carrito",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(
                 "assets/iconsSVG/settings_outlined.svg",
-                color: primaryColor,
+                color: Colors.blue,
               ),
               activeIcon: svgIcon(
                 "assets/iconsSVG/settings_filled.svg",
-                color: Colors.blue,
+                color: primaryColor,
               ),
               label: "Ajustes",
             ),
