@@ -71,8 +71,35 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           ),
         ],
       ),
-      body: IndexedStack(index: currentIndex, children: screens),
-      // body: ,
+      // body: IndexedStack(index: currentIndex, children: screens),
+      // body: AnimatedSwitcher(
+      //   duration: Duration(milliseconds: 500),
+      //   transitionBuilder: (child, animation) {
+      //     return SlideTransition(
+      //       position: Tween(begin: Offset(1, 0), end: Offset.zero).animate(
+      //         CurvedAnimation(parent: animation, curve: Curves.easeInBack),
+      //       ),
+      //       child: child,
+      //     );
+      //   },
+      //   child: screens[currentIndex],
+      // ),
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 500),
+        transitionBuilder: (child, animation) {
+          const begin = Offset(1, 0);
+          const end = Offset.zero;
+          const curve = Curves.linear;
+          final tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
+          final offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(position: offsetAnimation, child: child);
+        },
+        child: screens[currentIndex],
+      ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(top: 8),
         color: whiteColor,

@@ -8,10 +8,13 @@ class CartMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Cart Mobile Screen",
-          style: Theme.of(context).textTheme.headlineLarge,
+      body: Container(
+        color: Colors.pink,
+        child: Center(
+          child: Text(
+            "Cart Mobile Screen",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );

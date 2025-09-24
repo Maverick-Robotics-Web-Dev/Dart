@@ -8,10 +8,13 @@ class SettingsMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Settings Mobile Screen",
-          style: Theme.of(context).textTheme.headlineLarge,
+      body: Container(
+        color: Colors.purple,
+        child: Center(
+          child: Text(
+            "Settings Mobile Screen",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );

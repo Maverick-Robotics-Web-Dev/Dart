@@ -8,10 +8,13 @@ class FavoriteMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Favorite Mobile Screen",
-          style: Theme.of(context).textTheme.headlineLarge,
+      body: Container(
+        color: Colors.green,
+        child: Center(
+          child: Text(
+            "Favorite Mobile Screen",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );

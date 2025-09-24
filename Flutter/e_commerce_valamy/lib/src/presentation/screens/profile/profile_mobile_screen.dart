@@ -13,10 +13,13 @@ class _ProfileMobileScreenState extends State<ProfileMobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Profile Mobile Screen",
-          style: Theme.of(context).textTheme.headlineLarge,
+      body: Container(
+        color: Colors.amber,
+        child: Center(
+          child: Text(
+            "Profile Mobile Screen",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );

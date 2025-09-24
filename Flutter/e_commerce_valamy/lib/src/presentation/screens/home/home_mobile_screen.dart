@@ -8,10 +8,13 @@ class HomeMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Home Mobile Screen",
-          style: Theme.of(context).textTheme.headlineLarge,
+      body: Container(
+        color: Colors.red,
+        child: Center(
+          child: Text(
+            "Home Mobile Screen",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );
