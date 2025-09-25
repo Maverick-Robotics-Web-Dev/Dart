@@ -2,3 +2,157 @@ https://www.youtube.com/watch?v=kkw--zpzI6M
 https://www.youtube.com/watch?v=nJG_tWTk9rI
 https://www.youtube.com/watch?v=xJY3koT71fY
 https://www.youtube.com/watch?v=HB5WMcxAmQQ
+
+    class SlideFromRightRoute extends PageRouteBuilder {
+      SlideFromRightRoute()
+          : super(
+              pageBuilder: (context, animation, secondaryAnimation) => SecondPage(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                // Transición de entrada (desde la derecha)
+                final entryAnimation = Tween<Offset>(
+                  begin: const Offset(1.0, 0.0), // Desde la derecha
+                  end: Offset.zero,
+                ).animate(animation);
+
+                // Transición de salida (hacia la izquierda)
+                final exitAnimation = Tween<Offset>(
+                  begin: Offset.zero, // Comienza desde su posición normal
+                  end: const Offset(-1.0, 0.0), // Sale hacia la izquierda
+                ).animate(secondaryAnimation); // Usa secondaryAnimation para la salida
+
+                return Stack( // Usa Stack para superponer las transiciones
+                  children: [
+                    SlideTransition(
+                      position: exitAnimation,
+                      child: child, // El widget que está saliendo
+                    ),
+                    SlideTransition(
+                      position: entryAnimation,
+                      child: child, // El widget que está entrando
+                    ),
+                  ],
+                );
+              },
+            );
+    }
+
+##################################################################################
+
+AnimatedSwitcher(
+  key: ValueKey<int>(someValue), // Usa una clave única para el cambio de widgets
+  duration: const Duration(milliseconds: 500),
+  transitionBuilder: (Widget child, Animation<double> animation) {
+    // Esta es una animación de entrada (widget nuevo)
+    final entryAnimation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0), // Entra desde la derecha
+      end: Offset.zero,
+    ).animate(animation);
+
+    // Esta es la animación de salida (widget antiguo)
+    final exitAnimation = Tween<Offset>(
+      begin: Offset.zero, // Sale del centro
+      end: const Offset(-1.0, 0.0), // Sale hacia la izquierda
+    ).animate(animation);
+
+    // Usa un Stack para aplicar ambas animaciones
+    return Stack(
+      children: <Widget>[
+        // Widget antiguo: animación de salida
+        SlideTransition(
+          child: child, // Asume que 'child' es el widget a salir
+          position: exitAnimation,
+        ),
+        // Widget nuevo: animación de entrada
+        _buildNewWidgetEntry(entryAnimation), // Un método que construye el nuevo widget con su animación
+      ],
+    );
+  },
+  child: _buildCurrentWidget(), // El widget que se está mostrando
+)
+
+###################################################################################
+
+import 'package:flutter/material.dart';
+
+class CustomAnimatedSwitch extends StatefulWidget {
+  const CustomAnimatedSwitch({super.key});
+
+  @override
+  State<CustomAnimatedSwitch> createState() => _CustomAnimatedSwitchState();
+}
+
+class _CustomAnimatedSwitchState extends State<CustomAnimatedSwitch> {
+  Widget? _child;
+  int _key = 0; // Contador para forzar la transición
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500), // Duración de la animación
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        // Animación de entrada de derecha a izquierda
+        final Widget enteringWidget = FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+
+        // Animación de salida de izquierda a derecha
+        // El widget saliente tiene la animación invertida
+        return AnimatedBuilder(
+          animation: animation,
+          child: enteringWidget,
+          builder: (BuildContext context, Widget? widget) {
+            // Anima la posición del widget entrante
+            // El `child` es el widget entrante.
+            // `animation.value` va de 0.0 (widget nuevo) a 1.0 (widget antiguo)
+            final offset = Offset(1.0 - animation.value, 0.0); // De derecha a izquierda
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0), // Entrada desde la derecha
+                end: Offset.zero, // Posición final en el centro
+              ).animate(animation),
+              child: enteringWidget,
+            );
+          },
+        );
+      },
+      child: _child ?? Container(), // Widget inicial
+    );
+  }
+
+  void _nextWidget() {
+    setState(() {
+      _key++; // Incrementamos la clave para forzar el cambio de widget
+      _child = _buildWidget(_key); // Construimos el siguiente widget
+    });
+  }
+
+  Widget _buildWidget(int key) {
+    // Construye widgets de ejemplo
+    if (key % 2 == 0) {
+      return Container(
+        key: ValueKey('widget_$key'),
+        width: 200,
+        height: 100,
+        color: Colors.blue,
+        alignment: Alignment.center,
+        child: const Text(
+          'Widget Azul',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    } else {
+      return Container(
+        key: ValueKey('widget_$key'),
+        width: 200,
+        height: 100,
+        color: Colors.red,
+        alignment: Alignment.center,
+        child: const Text(
+          'Widget Rojo',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
+  }
+}

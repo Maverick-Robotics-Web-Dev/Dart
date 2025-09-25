@@ -72,34 +72,71 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
         ],
       ),
       // body: IndexedStack(index: currentIndex, children: screens),
-      // body: AnimatedSwitcher(
-      //   duration: Duration(milliseconds: 500),
-      //   transitionBuilder: (child, animation) {
-      //     return SlideTransition(
-      //       position: Tween(begin: Offset(1, 0), end: Offset.zero).animate(
-      //         CurvedAnimation(parent: animation, curve: Curves.easeInBack),
-      //       ),
-      //       child: child,
-      //     );
-      //   },
-      //   child: screens[currentIndex],
-      // ),
       body: AnimatedSwitcher(
+        // key: ValueKey(currentIndex),
         duration: Duration(milliseconds: 500),
         transitionBuilder: (child, animation) {
-          const begin = Offset(1, 0);
-          const end = Offset.zero;
-          const curve = Curves.linear;
-          final tween = Tween(
-            begin: begin,
-            end: end,
-          ).chain(CurveTween(curve: curve));
-          final offsetAnimation = animation.drive(tween);
+          print('ANIMATION STATUS: ${animation.status}');
+          print('ANIMATION VALUE: ${animation.value}');
 
-          return SlideTransition(position: offsetAnimation, child: child);
+          final entryAnimation = Tween<Offset>(
+            begin: const Offset(1.0, 0.0), // Entra desde la derecha
+            end: Offset.zero,
+          ).animate(animation);
+
+          // Esta es la animación de salida (widget antiguo)
+          final exitAnimation = Tween<Offset>(
+            begin: Offset.zero, // Sale del centro
+            end: const Offset(-1.0, 0.0), // Sale hacia la izquierda
+          ).animate(animation);
+          // final isPop = animation.status == AnimationStatus.completed;
+          final isPop = animation.value == 1.0;
+          print(' IS POP: $isPop');
+          // final tween = Tween(
+          //   begin: isPop ? end : begin,
+          //   end: isPop ? Offset(-1, 0) : end,
+          // ).chain(CurveTween(curve: curve));
+          // final offsetAnimation = animation.drive(
+          //   isPop ? entryAnimation : exitAnimation,
+          // );
+
+          return SlideTransition(
+            position: isPop ? exitAnimation : entryAnimation,
+            child: child,
+          );
         },
         child: screens[currentIndex],
       ),
+      // body: AnimatedSwitcher(
+      //   duration: Duration(milliseconds: 300),
+      //   transitionBuilder: (child, animation) {
+      //     const begin = Offset(1, 0);
+      //     const end = Offset.zero;
+      //     const curve = Curves.easeInOut;
+      //     final isPop = animation.status == AnimationStatus.reverse;
+      //     final tween = Tween(begin: begin, end: end).animate(animation);
+
+      //     return SlideTransition(position: tween, child: child);
+      //   },
+      //   child: screens[currentIndex],
+      // ),
+      // body: AnimatedSwitcher(
+      //   duration: Duration(milliseconds: 300),
+      //   transitionBuilder: (child, animation) {
+      //     const begin = Offset(1, 0);
+      //     const end = Offset.zero;
+      //     const curve = Curves.easeInOut;
+      //     final isPop = animation.status == AnimationStatus.reverse;
+      //     final tween = Tween(
+      //       begin: isPop ? end : begin,
+      //       end: isPop ? Offset(-1, 0) : end,
+      //     ).chain(CurveTween(curve: curve));
+      //     final offsetAnimation = animation.drive(tween);
+
+      //     return SlideTransition(position: offsetAnimation, child: child);
+      //   },
+      //   child: screens[currentIndex],
+      // ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(top: 8),
         color: whiteColor,
