@@ -2,7 +2,33 @@ https://www.youtube.com/watch?v=kkw--zpzI6M
 https://www.youtube.com/watch?v=nJG_tWTk9rI
 https://www.youtube.com/watch?v=xJY3koT71fY
 https://www.youtube.com/watch?v=HB5WMcxAmQQ
+https://www.youtube.com/watch?v=au9MbagFZc8
 
+https://www.google.com/search?q=transicion+entrada+de+derecha+a+izquierda+y+salida+izquierda+en+flutter&sca_esv=d05a4234866c3ef7&sxsrf=AE3TifMyLYg83SQ939EKyvi3iS841I6Zkg%3A1760563867038&ei=mxLwaMaLAqSHwbkPxb2J4Q8&ved=0ahUKEwiGxZi_k6eQAxWkQzABHcVeIvwQ4dUDCBA&uact=5&oq=transicion+entrada+de+derecha+a+izquierda+y+salida+izquierda+en+flutter&gs_lp=Egxnd3Mtd2l6LXNlcnAiR3RyYW5zaWNpb24gZW50cmFkYSBkZSBkZXJlY2hhIGEgaXpxdWllcmRhIHkgc2FsaWRhIGl6cXVpZXJkYSBlbiBmbHV0dGVySMDUIlDaBVjZziJwBXgAkAEAmAHSAqABkUKqAQgwLjYzLjAuMbgBA8gBAPgBAZgCOaAChjqoAhTCAgsQLhiDARixAxiABMICERAuGIAEGLEDGIMBGMcBGNEDwgIKEAAYgAQYigUYQ8ICCxAAGIAEGLEDGIMBwgIaEC4YgwEYsQMYgAQYlwUY3AQY3gQY4ATYAQHCAgcQIxjqAhgnwgINECMY8AUYyQIY6gIYJ8ICDRAjGMkCGPAFGOoCGCfCAhAQABgDGI8BGOoCGLQC2AEBwgIQEC4YAxiPARjqAhi0AtgBAcICBBAjGCfCAhAQABiABBiKBRhDGLEDGIMBwgIFEAAYgATCAggQABiABBixA8ICCxAAGIAEGIoFGJIDwgIIEAAYgAQYkgPCAg0QABiABBiKBRhDGLEDwgILEC4YgAQYsQMYgwHCAgsQABiABBixAxjJA8ICCBAuGIAEGLEDwgIKEAAYgAQYFBiHAsICBhAAGBYYHsICBRAAGO8FwgIFECEYoAHCAgUQIRifBcICBBAhGBWYAwqIBgG6BgYIARABGBSSBwg0LjUyLjAuMaAH4PoBsgcIMC41Mi4wLjG4B-45wgcJMC4yMC4zNC4zyAfPAQ&sclient=gws-wiz-serp
+
+Navigator.push(
+  context,
+  PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => SecondPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      // Animación de entrada: derecha a izquierda
+      var begin = const Offset(1.0, 0.0); // Inicia a la derecha
+      var end = Offset.zero; // Termina en su posición original
+      var tween = Tween(begin: begin, end: end);
+      var curvedAnimation = CurvedAnimation(parent: animation, curve: Curves.easeOut);
+
+      // Animación de salida: hacia la izquierda
+      var slideOut = SlideTransition(
+        position: tween.animate(curvedAnimation),
+        child: child,
+      );
+
+      return slideOut;
+    },
+  ),
+);
+
+###########################################################################################################
     class SlideFromRightRoute extends PageRouteBuilder {
       SlideFromRightRoute()
           : super(
