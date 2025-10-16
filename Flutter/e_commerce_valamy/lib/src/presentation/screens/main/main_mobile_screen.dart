@@ -72,13 +72,16 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
         ],
       ),
       // body: IndexedStack(index: currentIndex, children: screens),
+      // body: AnimatedSwitcher(
+      //   duration: Duration(milliseconds: 300),
+      //   transitionBuilder: (child, animation) {
+      //     return FadeTransition(opacity: animation, child: child);
+      //   },
+      //   child: screens[currentIndex],
+      // ),
       body: AnimatedSwitcher(
-        // key: ValueKey(currentIndex),
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 300),
         transitionBuilder: (child, animation) {
-          print('ANIMATION STATUS: ${animation.status}');
-          print('ANIMATION VALUE: ${animation.value}');
-
           final entryAnimation = Tween<Offset>(
             begin: const Offset(1.0, 0.0), // Entra desde la derecha
             end: Offset.zero,
@@ -89,47 +92,48 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
             begin: Offset.zero, // Sale del centro
             end: const Offset(-1.0, 0.0), // Sale hacia la izquierda
           ).animate(animation);
-          // final isPop = animation.status == AnimationStatus.completed;
-          final isPop = animation.value == 1.0;
-          print(' IS POP: $isPop');
-          // final tween = Tween(
-          //   begin: isPop ? end : begin,
-          //   end: isPop ? Offset(-1, 0) : end,
-          // ).chain(CurveTween(curve: curve));
-          // final offsetAnimation = animation.drive(
-          //   isPop ? entryAnimation : exitAnimation,
-          // );
 
-          return SlideTransition(
-            position: isPop ? exitAnimation : entryAnimation,
-            child: child,
+          Widget buildNewWidgetEntry(Animation<Offset> entryAnimation) {
+            return Container(
+              child: SlideTransition(position: entryAnimation, child: child),
+            );
+          }
+
+          // Use exitAnimation for the outgoing widget and entryAnimation for the incoming one.
+          return Stack(
+            children: [
+              // Widget antiguo: animación de salida
+              Container(
+                child: SlideTransition(
+                  position: exitAnimation,
+                  child: child, // Asume que 'child' es el widget a salir
+                ),
+              ),
+              // Widget nuevo: animación de entrada
+              buildNewWidgetEntry(
+                entryAnimation,
+              ), // Un método que construye el nuevo widget con su animación
+            ],
           );
         },
         child: screens[currentIndex],
       ),
       // body: AnimatedSwitcher(
-      //   duration: Duration(milliseconds: 300),
+      //   // key: ValueKey(currentIndex),
+      //   duration: Duration(milliseconds: 500),
       //   transitionBuilder: (child, animation) {
-      //     const begin = Offset(1, 0);
+      //     const begin = Offset(1.0, 0.0);
       //     const end = Offset.zero;
-      //     const curve = Curves.easeInOut;
-      //     final isPop = animation.status == AnimationStatus.reverse;
-      //     final tween = Tween(begin: begin, end: end).animate(animation);
+      //     const curve = Curves.ease;
+      //     // final tween = Tween(begin: begin, end: end);
+      //     // final curvedAnimation = CurvedAnimation(
+      //     //   parent: animation,
+      //     //   curve: Curves.easeOut,
+      //     // );
 
-      //     return SlideTransition(position: tween, child: child);
-      //   },
-      //   child: screens[currentIndex],
-      // ),
-      // body: AnimatedSwitcher(
-      //   duration: Duration(milliseconds: 300),
-      //   transitionBuilder: (child, animation) {
-      //     const begin = Offset(1, 0);
-      //     const end = Offset.zero;
-      //     const curve = Curves.easeInOut;
-      //     final isPop = animation.status == AnimationStatus.reverse;
       //     final tween = Tween(
-      //       begin: isPop ? end : begin,
-      //       end: isPop ? Offset(-1, 0) : end,
+      //       begin: begin,
+      //       end: end,
       //     ).chain(CurveTween(curve: curve));
       //     final offsetAnimation = animation.drive(tween);
 
@@ -216,4 +220,33 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
       ),
     );
   }
+}
+
+class AnimatePageRoute extends PageRouteBuilder {
+  final Widget page;
+  AnimatePageRoute({required this.page})
+    : super(
+        pageBuilder: (context, animation, secondaryAnimation) => page,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          // const curve = Curves.ease;
+          final tween = Tween(begin: begin, end: end);
+          final curvedAnimation = CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOut,
+          );
+
+          // final tween = Tween(
+          //   begin: begin,
+          //   end: end,
+          // ).chain(CurveTween(curve: curve));
+          // final offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: tween.animate(curvedAnimation),
+            child: child,
+          );
+        },
+      );
 }
