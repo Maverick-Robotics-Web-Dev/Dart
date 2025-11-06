@@ -1,7 +1,6 @@
+import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/network_image_with_loader.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
-import '../network_image_with_loader.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -28,6 +27,10 @@ class ProductCard extends StatelessWidget {
         minimumSize: const Size(140, 220),
         maximumSize: const Size(140, 220),
         padding: const EdgeInsets.all(8),
+        side: BorderSide(color: Colors.grey),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
       ),
       child: Column(
         children: [
@@ -35,21 +38,17 @@ class ProductCard extends StatelessWidget {
             aspectRatio: 1.15,
             child: Stack(
               children: [
-                NetworkImageWithLoader(image, radius: defaultBorderRadious),
+                NetworkImageWithLoader(image, radius: 12.0),
                 if (dicountpercent != null)
                   Positioned(
-                    right: defaultPadding / 2,
-                    top: defaultPadding / 2,
+                    right: 16.0 / 2,
+                    top: 16.0 / 2,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: defaultPadding / 2,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0 / 2),
                       height: 16,
                       decoration: const BoxDecoration(
-                        color: errorColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(defaultBorderRadious),
-                        ),
+                        color: warningColor,
+                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
                       ),
                       child: Text(
                         "$dicountpercent% off",
@@ -67,8 +66,8 @@ class ProductCard extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding / 2,
-                vertical: defaultPadding / 2,
+                horizontal: 16.0 / 2,
+                vertical: 16.0 / 2,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +78,7 @@ class ProductCard extends StatelessWidget {
                       context,
                     ).textTheme.bodyMedium!.copyWith(fontSize: 10),
                   ),
-                  const SizedBox(height: defaultPadding / 2),
+                  const SizedBox(height: 16.0 / 2),
                   Text(
                     title,
                     maxLines: 2,
@@ -95,12 +94,12 @@ class ProductCard extends StatelessWidget {
                           Text(
                             "\$$priceAfetDiscount",
                             style: const TextStyle(
-                              color: Color(0xFF31B0D8),
+                              color: primaryColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 12,
                             ),
                           ),
-                          const SizedBox(width: defaultPadding / 4),
+                          const SizedBox(width: 16.0 / 4),
                           Text(
                             "\$$price",
                             style: TextStyle(
@@ -115,7 +114,7 @@ class ProductCard extends StatelessWidget {
                       : Text(
                         "\$$price",
                         style: const TextStyle(
-                          color: Color(0xFF31B0D8),
+                          color: primaryColor,
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),

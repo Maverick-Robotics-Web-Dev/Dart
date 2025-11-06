@@ -72,75 +72,13 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
         ],
       ),
       // body: IndexedStack(index: currentIndex, children: screens),
-      // body: AnimatedSwitcher(
-      //   duration: Duration(milliseconds: 300),
-      //   transitionBuilder: (child, animation) {
-      //     return FadeTransition(opacity: animation, child: child);
-      //   },
-      //   child: screens[currentIndex],
-      // ),
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 300),
         transitionBuilder: (child, animation) {
-          final entryAnimation = Tween<Offset>(
-            begin: const Offset(1.0, 0.0), // Entra desde la derecha
-            end: Offset.zero,
-          ).animate(animation);
-
-          // Esta es la animación de salida (widget antiguo)
-          final exitAnimation = Tween<Offset>(
-            begin: Offset.zero, // Sale del centro
-            end: const Offset(-1.0, 0.0), // Sale hacia la izquierda
-          ).animate(animation);
-
-          Widget buildNewWidgetEntry(Animation<Offset> entryAnimation) {
-            return Container(
-              child: SlideTransition(position: entryAnimation, child: child),
-            );
-          }
-
-          // Use exitAnimation for the outgoing widget and entryAnimation for the incoming one.
-          return Stack(
-            children: [
-              // Widget antiguo: animación de salida
-              Container(
-                child: SlideTransition(
-                  position: exitAnimation,
-                  child: child, // Asume que 'child' es el widget a salir
-                ),
-              ),
-              // Widget nuevo: animación de entrada
-              buildNewWidgetEntry(
-                entryAnimation,
-              ), // Un método que construye el nuevo widget con su animación
-            ],
-          );
+          return FadeTransition(opacity: animation, child: child);
         },
         child: screens[currentIndex],
       ),
-      // body: AnimatedSwitcher(
-      //   // key: ValueKey(currentIndex),
-      //   duration: Duration(milliseconds: 500),
-      //   transitionBuilder: (child, animation) {
-      //     const begin = Offset(1.0, 0.0);
-      //     const end = Offset.zero;
-      //     const curve = Curves.ease;
-      //     // final tween = Tween(begin: begin, end: end);
-      //     // final curvedAnimation = CurvedAnimation(
-      //     //   parent: animation,
-      //     //   curve: Curves.easeOut,
-      //     // );
-
-      //     final tween = Tween(
-      //       begin: begin,
-      //       end: end,
-      //     ).chain(CurveTween(curve: curve));
-      //     final offsetAnimation = animation.drive(tween);
-
-      //     return SlideTransition(position: offsetAnimation, child: child);
-      //   },
-      //   child: screens[currentIndex],
-      // ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(top: 8),
         color: whiteColor,
