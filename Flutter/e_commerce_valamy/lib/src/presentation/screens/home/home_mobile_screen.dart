@@ -1,7 +1,11 @@
+import 'package:e_commerce_valamy/src/presentation/widgets/banners/L/banner_l_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_1.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_2.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_5.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/best_sellers.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/carousel_custom.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/flash_sale.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/most_popular.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +40,7 @@ class HomeMobileScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 16.0 / 4),
-                  BannerSStyle5(
+                  BannerSStyle2(
                     title: "Summer \nsale",
                     subtitle: "SPECIAL OFFER",
                     bottomText: "up to 80% off".toUpperCase(),
@@ -45,6 +49,34 @@ class HomeMobileScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 16.0 / 4),
+                  BannerSStyle2(
+                    title: "Black \nfriday",
+                    subtitle: "50% Off",
+                    bottomText: "Collection".toUpperCase(),
+                    press: () {
+                      Navigator.pushNamed(context, 'onSaleScreenRoute');
+                    },
+                  ),
+
+                  // We have 4 banner styles, all in the pro version
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(child: BestSellers()),
+            SliverToBoxAdapter(child: MostPopular()),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  const SizedBox(height: 16 * 1.5),
+                  BannerLStyle1(
+                    title: "summer \nsale",
+                    subtitle: "SPECIAL OFFER",
+                    discountPercent: 50,
+                    press: () {
+                      Navigator.pushNamed(context, 'onSaleScreenRoute');
+                    },
+                  ),
+                  SizedBox(height: 16 / 4),
                   BannerSStyle5(
                     title: "Black \nfriday",
                     subtitle: "50% Off",
@@ -53,10 +85,19 @@ class HomeMobileScreen extends StatelessWidget {
                       Navigator.pushNamed(context, 'onSaleScreenRoute');
                     },
                   ),
-                  // We have 4 banner styles, all in the pro version
+                  SizedBox(height: 16 / 4),
+                  BannerSStyle5(
+                    title: "grab \nyours now",
+                    subtitle: "65% Off",
+                    press: () {
+                      Navigator.pushNamed(context, 'onSaleScreenRoute');
+                    },
+                  ),
+                  SizedBox(height: 16 / 4),
                 ],
               ),
             ),
+            SliverToBoxAdapter(child: BestSellers()),
           ],
         ),
       ),
