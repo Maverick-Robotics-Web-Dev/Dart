@@ -1,3 +1,5 @@
+import 'package:e_commerce_valamy/src/presentation/screens/cart/widgets/order_summary.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/cart/widgets/review_your_order.dart';
 import 'package:flutter/material.dart';
 
 class CartMobileScreen extends StatelessWidget {
@@ -8,13 +10,12 @@ class CartMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.pink,
-        child: Center(
-          child: Text(
-            "Cart Mobile Screen",
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: ReviewYourOrder()),
+            SliverToBoxAdapter(child: OrderSummary()),
+          ],
         ),
       ),
     );

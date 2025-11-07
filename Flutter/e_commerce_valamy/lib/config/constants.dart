@@ -23,6 +23,7 @@ const Color inputBackgroundColor = Color(0xFFF8F8F9);
 const Color hintTextColor = Color(0xCC0D47A1);
 const Color textColor = Color(0xFF1E375A);
 const Color warningColor = Color(0xFFD50100);
+const Color successgColor = Color(0xFF12B76A);
 
 const double font_16 = 16;
 const double font_16_6 = 16.6;
