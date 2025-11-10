@@ -1,7 +1,6 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/profile/widgets/profile_card.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/profile/widgets/profile_menu_item_list_tile.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/list_tile/divider_list_tile.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/network_image_with_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -94,79 +93,79 @@ class _ProfileMobileScreenState extends State<ProfileMobileScreen> {
             },
           ),
           const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16 / 2,
-            ),
-            child: Text(
-              "Personalization",
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          DividerListTileWithTrilingText(
-            svgSrc: "assets/icons/Notification.svg",
-            title: "Notification",
-            trilingText: "Off",
-            press: () {
-              Navigator.pushNamed(context, 'enableNotificationScreenRoute');
-            },
-          ),
-          ProfileMenuListTile(
-            text: "Preferences",
-            svgSrc: "assets/icons/Preferences.svg",
-            press: () {
-              Navigator.pushNamed(context, 'preferencesScreenRoute');
-            },
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16 / 2,
-            ),
-            child: Text(
-              "Settings",
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          ProfileMenuListTile(
-            text: "Language",
-            svgSrc: "assets/icons/Language.svg",
-            press: () {
-              Navigator.pushNamed(context, 'selectLanguageScreenRoute');
-            },
-          ),
-          ProfileMenuListTile(
-            text: "Location",
-            svgSrc: "assets/icons/Location.svg",
-            press: () {},
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16 / 2,
-            ),
-            child: Text(
-              "Help & Support",
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          ProfileMenuListTile(
-            text: "Get Help",
-            svgSrc: "assets/icons/Help.svg",
-            press: () {
-              Navigator.pushNamed(context, 'getHelpScreenRoute');
-            },
-          ),
-          ProfileMenuListTile(
-            text: "FAQ",
-            svgSrc: "assets/icons/FAQ.svg",
-            press: () {},
-            isShowDivider: false,
-          ),
-          const SizedBox(height: 16),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     horizontal: 16,
+          //     vertical: 16 / 2,
+          //   ),
+          //   child: Text(
+          //     "Personalization",
+          //     style: Theme.of(context).textTheme.titleSmall,
+          //   ),
+          // ),
+          // DividerListTileWithTrilingText(
+          //   svgSrc: "assets/icons/Notification.svg",
+          //   title: "Notification",
+          //   trilingText: "Off",
+          //   press: () {
+          //     Navigator.pushNamed(context, 'enableNotificationScreenRoute');
+          //   },
+          // ),
+          // ProfileMenuListTile(
+          //   text: "Preferences",
+          //   svgSrc: "assets/icons/Preferences.svg",
+          //   press: () {
+          //     Navigator.pushNamed(context, 'preferencesScreenRoute');
+          //   },
+          // ),
+          // const SizedBox(height: 16),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     horizontal: 16,
+          //     vertical: 16 / 2,
+          //   ),
+          //   child: Text(
+          //     "Settings",
+          //     style: Theme.of(context).textTheme.titleSmall,
+          //   ),
+          // ),
+          // ProfileMenuListTile(
+          //   text: "Language",
+          //   svgSrc: "assets/icons/Language.svg",
+          //   press: () {
+          //     Navigator.pushNamed(context, 'selectLanguageScreenRoute');
+          //   },
+          // ),
+          // ProfileMenuListTile(
+          //   text: "Location",
+          //   svgSrc: "assets/icons/Location.svg",
+          //   press: () {},
+          // ),
+          // const SizedBox(height: 16),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     horizontal: 16,
+          //     vertical: 16 / 2,
+          //   ),
+          //   child: Text(
+          //     "Help & Support",
+          //     style: Theme.of(context).textTheme.titleSmall,
+          //   ),
+          // ),
+          // ProfileMenuListTile(
+          //   text: "Get Help",
+          //   svgSrc: "assets/icons/Help.svg",
+          //   press: () {
+          //     Navigator.pushNamed(context, 'getHelpScreenRoute');
+          //   },
+          // ),
+          // ProfileMenuListTile(
+          //   text: "FAQ",
+          //   svgSrc: "assets/icons/FAQ.svg",
+          //   press: () {},
+          //   isShowDivider: false,
+          // ),
+          // const SizedBox(height: 16),
 
           // Log Out
           ListTile(

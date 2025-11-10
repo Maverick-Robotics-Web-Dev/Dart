@@ -167,7 +167,11 @@ class _OrderSummaryState extends State<OrderSummary> {
             ),
             child: Text(
               'Continue',
-              style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 1),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1,
+              ),
             ),
           ),
         ),

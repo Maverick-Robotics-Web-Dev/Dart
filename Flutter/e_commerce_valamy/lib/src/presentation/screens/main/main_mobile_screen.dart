@@ -1,4 +1,5 @@
 import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/cart/cart_mobile_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/favorite/favorite_mobile_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/home/home_mobile_screen.dart';
@@ -51,7 +52,7 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.pushNamed(context, searchScreenRoute);
+              Navigator.pushNamed(context, searchScreenRoute);
             },
             icon: SvgPicture.asset(
               "assets/icons/Search.svg",

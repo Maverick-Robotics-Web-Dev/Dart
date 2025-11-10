@@ -4,12 +4,15 @@ import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_in/sign_in_
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_up/sign_up_setup_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/main/main_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
-  mainRoute: (BuildContext context) => MainScreen(),
-  signInRoute: (BuildContext context) => SignInScreen(),
-  signUpRoute: (BuildContext context) => SignUpScreen(),
-  signUpSetupRoute: (BuildContext context) => SignUpSetupScreen(),
-  verificationCodeRoute: (BuildContext context) => VerificationCodeScreen(),
+  mainScreenRoute: (BuildContext context) => MainScreen(),
+  signInScreenRoute: (BuildContext context) => SignInScreen(),
+  signUpScreenRoute: (BuildContext context) => SignUpScreen(),
+  signUpSetupScreenRoute: (BuildContext context) => SignUpSetupScreen(),
+  verificationCodeScreenRoute:
+      (BuildContext context) => VerificationCodeScreen(),
+  searchScreenRoute: (BuildContext context) => SearchScreen(),
 };
