@@ -1,6 +1,8 @@
-const String signInScreenRoute = 'sign_in';
-const String signUpScreenRoute = 'sign_up';
-const String signUpSetupScreenRoute = 'sign_up_setup';
-const String verificationCodeScreenRoute = 'verification_code';
-const String mainScreenRoute = 'main';
-const String searchScreenRoute = "search";
+const String signInScreenRoute = 'sign_in_screen';
+const String signUpScreenRoute = 'sign_up_screen';
+const String signUpSetupScreenRoute = 'sign_up_setup_screen';
+const String verificationCodeScreenRoute = 'verification_code_screen';
+const String mainScreenRoute = 'main_screen';
+const String searchScreenRoute = 'search_screen';
+const String homeScreenRoute = 'home_screen';
+const String profileScreenRoute = 'profile_screen';

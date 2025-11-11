@@ -31,7 +31,7 @@ class DividerListTile extends StatelessWidget {
           trailing:
               isShowForwordArrow
                   ? SvgPicture.asset(
-                    isShowForwordArrow ? "assets/icons/miniRight.svg" : svgSrc!,
+                    svgSrc != null ? svgSrc! : "assets/icons/miniRight.svg",
                     colorFilter: ColorFilter.mode(
                       Theme.of(context).iconTheme.color!.withOpacity(0.4),
                       BlendMode.srcIn,
@@ -103,21 +103,21 @@ class DividerListTileWithText extends StatelessWidget {
   const DividerListTileWithText({
     super.key,
     required this.text,
-    required this.svgSrc,
     required this.press,
     this.isShowDivider = true,
   });
 
-  final String text, svgSrc;
+  final String text;
   final VoidCallback press;
   final bool isShowDivider;
 
   @override
   Widget build(BuildContext context) {
     return DividerListTile(
+      svgSrc: 'assets/icons/Close.svg',
       minLeadingWidth: 24,
       leading: SvgPicture.asset(
-        svgSrc,
+        'assets/icons/Clock.svg',
         height: 24,
         width: 24,
         colorFilter: ColorFilter.mode(
@@ -125,7 +125,7 @@ class DividerListTileWithText extends StatelessWidget {
           BlendMode.srcIn,
         ),
       ),
-      title: Text(text, style: const TextStyle(fontSize: 14, height: 1)),
+      title: Text(text, style: const TextStyle(fontSize: 16, height: 1)),
       press: press,
       isShowDivider: isShowDivider,
     );

@@ -65,6 +65,7 @@ List<ProductModel> demoPopularProducts = [
     dicountpercent: 5,
   ),
 ];
+
 List<ProductModel> demoFlashSaleProducts = [
   ProductModel(
     image: "https://i.imgur.com/MsppAcx.png",
@@ -91,6 +92,7 @@ List<ProductModel> demoFlashSaleProducts = [
     dicountpercent: 15,
   ),
 ];
+
 List<ProductModel> demoBestSellersProducts = [
   ProductModel(
     image: "https://i.imgur.com/tXyOMMG.png",
@@ -117,6 +119,7 @@ List<ProductModel> demoBestSellersProducts = [
     dicountpercent: 15,
   ),
 ];
+
 List<ProductModel> kidsProducts = [
   ProductModel(
     image: "https://i.imgur.com/dbbT6PA.png",

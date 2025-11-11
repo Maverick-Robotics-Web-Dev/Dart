@@ -1,4 +1,4 @@
-import 'package:e_commerce_valamy/config/routes/path_routes.dart';
+import 'package:e_commerce_valamy/config/routes/path_routes.dart' as router;
 import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,8 @@ class MainApp extends StatelessWidget {
       theme: lightTheme(context),
       // themeMode: ThemeMode.light,
       initialRoute: mainScreenRoute,
-      routes: routes,
+      onGenerateRoute: router.generateRoute,
+      // routes: routes,
     );
   }
 }

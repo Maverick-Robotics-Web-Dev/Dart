@@ -1,4 +1,3 @@
-import 'package:e_commerce_valamy/src/presentation/screens/search/widgets/search_bar.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/search/widgets/search_body.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/search/widgets/search_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +15,11 @@ class _SearchMobileScreenState extends State<SearchMobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(child: SearchTopBar()),
-          SliverToBoxAdapter(child: SearchBarCustom()),
-          SliverToBoxAdapter(child: SearchBody()),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(222),
+        child: SearchTopBar(),
       ),
+      body: SafeArea(child: SearchBody()),
     );
   }
 }

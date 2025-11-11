@@ -53,6 +53,11 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, searchScreenRoute);
+              // Navigator.pushNamedAndRemoveUntil(
+              //   context,
+              //   searchScreenRoute,
+              //   (Route<dynamic> route) => false,
+              // );
             },
             icon: SvgPicture.asset(
               "assets/icons/Search.svg",

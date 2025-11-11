@@ -1,38 +1,40 @@
+import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/list_tile/divider_list_tile.dart';
 import 'package:flutter/material.dart';
 
-class SearchBody extends StatelessWidget {
+class RecentSearchModel {
+  final String text;
+  final String? svgSrc;
+
+  RecentSearchModel({required this.text, this.svgSrc});
+}
+
+List<RecentSearchModel> recentSearches = [
+  RecentSearchModel(text: 'Preferences'),
+  RecentSearchModel(text: 'Preferences'),
+  RecentSearchModel(text: 'Preferences'),
+  RecentSearchModel(text: 'Preferences'),
+];
+
+class SearchBody extends StatefulWidget {
   const SearchBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16.0 / 2),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            "Recent Searches",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        ),
+  State<SearchBody> createState() => _SearchBodyState();
+}
 
-        DividerListTileWithText(
-          text: "Preferences",
-          svgSrc: "assets/icons/Clock.svg",
-          press: () {
-            Navigator.pushNamed(context, 'preferencesScreenRoute');
-          },
-        ),
-        DividerListTileWithText(
-          text: "Preferences",
-          svgSrc: "assets/icons/Clock.svg",
-          press: () {
-            Navigator.pushNamed(context, 'preferencesScreenRoute');
-          },
-        ),
-      ],
+class _SearchBodyState extends State<SearchBody> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: recentSearches.length,
+      itemBuilder:
+          (context, index) => DividerListTileWithText(
+            text: recentSearches[index].text,
+            press: () {
+              Navigator.pushNamed(context, 'preferencesScreenRoute');
+            },
+          ),
     );
   }
 }
