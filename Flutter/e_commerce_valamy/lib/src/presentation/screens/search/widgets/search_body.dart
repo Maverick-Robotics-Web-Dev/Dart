@@ -1,4 +1,3 @@
-import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/list_tile/divider_list_tile.dart';
 import 'package:flutter/material.dart';
 

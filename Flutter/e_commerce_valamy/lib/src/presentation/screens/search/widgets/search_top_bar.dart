@@ -1,5 +1,6 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/show_dialog_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -25,11 +26,6 @@ class SearchTopBar extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, mainScreenRoute);
-                // Navigator.pushNamedAndRemoveUntil(
-                //   context,
-                //   mainScreenRoute,
-                //   (Route<dynamic> route) => false,
-                // );
               },
               icon: SvgPicture.asset(
                 "assets/icons/Close.svg",
@@ -90,7 +86,9 @@ class SearchTopBar extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final result = await showDialogCustom(context: context);
+                    },
                     icon: SvgPicture.asset(
                       "assets/icons/Filter.svg",
                       height: 32,
