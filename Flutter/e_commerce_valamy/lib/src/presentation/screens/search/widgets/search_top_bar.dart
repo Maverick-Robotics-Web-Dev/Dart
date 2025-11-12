@@ -1,6 +1,6 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/show_dialog_custom.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -9,6 +9,38 @@ class SearchTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // void _openFilterSheet() async {
+    //   final result = await showModalBottomSheet<Map<String, dynamic>>(
+    //     context: context,
+    //     isScrollControlled: true,
+    //     backgroundColor: Colors.transparent,
+    //     builder: (context) => FilterBottomSheet(),
+    //   );
+
+    //   // if (result != null) {
+    //   //   setState(() {
+    //   //     filters = result;
+    //   //   });
+    //   // }
+    // }
+
+    void _openFilterSheet() async {
+      final result = await showModalBottomSheet<Map<String, dynamic>>(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        builder: (context) => FilterBottomSheet(),
+      );
+
+      // if (result != null) {
+      //   setState(() {
+      //     filters = result;
+      //   });
+      // }
+    }
+
     return Column(
       children: [
         Row(
@@ -86,9 +118,10 @@ class SearchTopBar extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () async {
-                      final result = await showDialogCustom(context: context);
-                    },
+                    onPressed: _openFilterSheet,
+                    // onPressed: () async {
+                    //   // final result = await showDialogCustom(context: context);
+                    // },
                     icon: SvgPicture.asset(
                       "assets/icons/Filter.svg",
                       height: 32,
