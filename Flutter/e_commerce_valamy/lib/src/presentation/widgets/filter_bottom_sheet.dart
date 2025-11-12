@@ -1,318 +1,338 @@
-// import 'package:flutter/material.dart';
-
-// class FilterBottomSheet extends StatefulWidget {
-//   final Map<String, dynamic>? initialFilters;
-
-//   const FilterBottomSheet({super.key, this.initialFilters});
-
-//   @override
-//   State<FilterBottomSheet> createState() => _FilterBottomSheetState();
-// }
-
-// class _FilterBottomSheetState extends State<FilterBottomSheet> {
-//   late bool showOnlyAvailable;
-//   late String selectedCategory;
-//   late RangeValues priceRange;
-//   late Set<String> selectedTags;
-
-//   final List<String> allTags = [
-//     'Nuevo',
-//     'Recomendado',
-//     'Popular',
-//     'En oferta',
-//     'Limitado',
-//     'Top ventas',
-//     'Favoritos',
-//     'Exclusivo',
-//   ];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     showOnlyAvailable = widget.initialFilters?['available'] ?? false;
-//     selectedCategory = widget.initialFilters?['category'] ?? 'Todos';
-//     priceRange =
-//         widget.initialFilters?['priceRange'] ?? const RangeValues(0, 100);
-//     selectedTags = Set<String>.from(widget.initialFilters?['tags'] ?? {});
-//   }
-
-//   void _toggleTag(String tag) {
-//     setState(() {
-//       if (selectedTags.contains(tag)) {
-//         selectedTags.remove(tag);
-//       } else {
-//         selectedTags.add(tag);
-//       }
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-
-//     return DraggableScrollableSheet(
-//       initialChildSize: 0.6,
-//       minChildSize: 0.4,
-//       maxChildSize: 0.95,
-//       expand: false,
-//       builder: (context, scrollController) {
-//         return Container(
-//           padding: const EdgeInsets.all(16),
-//           decoration: const BoxDecoration(
-//             color: Colors.white,
-//             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-//           ),
-//           child: Column(
-//             children: [
-//               // 🔹 Encabezado
-//               Row(
-//                 children: [
-//                   Text(
-//                     'Filtros',
-//                     style: theme.textTheme.titleLarge?.copyWith(
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                   const Spacer(),
-//                   IconButton(
-//                     icon: const Icon(Icons.close),
-//                     onPressed: () => Navigator.pop(context, null),
-//                   ),
-//                 ],
-//               ),
-//               const Divider(),
-
-//               // 🔹 Contenido scrolleable
-//               Expanded(
-//                 child: SingleChildScrollView(
-//                   controller: scrollController,
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       SwitchListTile(
-//                         title: const Text('Solo disponibles'),
-//                         value: showOnlyAvailable,
-//                         onChanged: (v) => setState(() => showOnlyAvailable = v),
-//                       ),
-//                       const SizedBox(height: 10),
-
-//                       const Text('Categoría'),
-//                       DropdownButton<String>(
-//                         value: selectedCategory,
-//                         isExpanded: true,
-//                         onChanged: (v) => setState(() => selectedCategory = v!),
-//                         items: const [
-//                           DropdownMenuItem(
-//                             value: 'Todos',
-//                             child: Text('Todos'),
-//                           ),
-//                           DropdownMenuItem(
-//                             value: 'Electrónica',
-//                             child: Text('Electrónica'),
-//                           ),
-//                           DropdownMenuItem(value: 'Ropa', child: Text('Ropa')),
-//                           DropdownMenuItem(
-//                             value: 'Hogar',
-//                             child: Text('Hogar'),
-//                           ),
-//                         ],
-//                       ),
-//                       const SizedBox(height: 15),
-
-//                       const Text('Rango de precio'),
-//                       RangeSlider(
-//                         values: priceRange,
-//                         min: 0,
-//                         max: 500,
-//                         divisions: 10,
-//                         labels: RangeLabels(
-//                           '${priceRange.start.toInt()}€',
-//                           '${priceRange.end.toInt()}€',
-//                         ),
-//                         onChanged: (v) => setState(() => priceRange = v),
-//                       ),
-//                       const SizedBox(height: 15),
-
-//                       const Text('Etiquetas'),
-//                       const SizedBox(height: 8),
-//                       Wrap(
-//                         spacing: 8,
-//                         runSpacing: 8,
-//                         children:
-//                             allTags.map((tag) {
-//                               final selected = selectedTags.contains(tag);
-//                               return FilterChip(
-//                                 label: Text(tag),
-//                                 selected: selected,
-//                                 selectedColor: theme.colorScheme.primary
-//                                     .withOpacity(0.2),
-//                                 checkmarkColor: theme.colorScheme.primary,
-//                                 onSelected: (_) => _toggleTag(tag),
-//                               );
-//                             }).toList(),
-//                       ),
-//                       const SizedBox(
-//                         height: 100,
-//                       ), // espacio inferior para los botones
-//                     ],
-//                   ),
-//                 ),
-//               ),
-
-//               // 🔹 Botones fijos al final
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 10),
-//                 child: Row(
-//                   children: [
-//                     Expanded(
-//                       child: OutlinedButton(
-//                         onPressed: () => Navigator.pop(context, null),
-//                         child: const Text('Cancelar'),
-//                       ),
-//                     ),
-//                     const SizedBox(width: 10),
-//                     Expanded(
-//                       child: ElevatedButton(
-//                         onPressed: () {
-//                           Navigator.pop(context, {
-//                             'available': showOnlyAvailable,
-//                             'category': selectedCategory,
-//                             'priceRange': priceRange,
-//                             'tags': selectedTags.toList(),
-//                           });
-//                         },
-//                         child: const Text('Aplicar'),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
-
+import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/list_tile/divider_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FilterBottomSheet extends StatefulWidget {
-  final Map<String, dynamic>? initialFilters;
-
-  const FilterBottomSheet({super.key, this.initialFilters});
+  const FilterBottomSheet({super.key});
 
   @override
   State<FilterBottomSheet> createState() => _FilterBottomSheetState();
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
-  late bool showOnlyAvailable;
-  late String selectedCategory;
-  late RangeValues priceRange;
-
-  @override
-  void initState() {
-    super.initState();
-    showOnlyAvailable = widget.initialFilters?['available'] ?? false;
-    selectedCategory = widget.initialFilters?['category'] ?? 'Todos';
-    priceRange =
-        widget.initialFilters?['priceRange'] ?? const RangeValues(0, 100);
-  }
+  String option = 'Filter';
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final screenHeihgt = MediaQuery.of(context).size.height;
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: Container(
+        height: screenHeihgt * 0.88,
+        // padding: const EdgeInsets.all(16.0),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(
-                  'Filtros',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: SvgPicture.asset(
+                      "assets/icons/Arrow - Left.svg",
+                      height: 30,
+                      colorFilter: const ColorFilter.mode(
+                        primaryColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    onPressed: () => Navigator.pop(context),
                   ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.pop(context, null),
-                ),
-              ],
-            ),
-            const Divider(),
-
-            // 🔘 Switch de disponibilidad
-            SwitchListTile(
-              title: const Text('Solo disponibles'),
-              value: showOnlyAvailable,
-              onChanged: (value) => setState(() => showOnlyAvailable = value),
-            ),
-            const SizedBox(height: 10),
-
-            // 🏷 Categoría
-            const Text('Categoría'),
-            DropdownButton<String>(
-              value: selectedCategory,
-              isExpanded: true,
-              onChanged: (value) => setState(() => selectedCategory = value!),
-              items: const [
-                DropdownMenuItem(value: 'Todos', child: Text('Todos')),
-                DropdownMenuItem(
-                  value: 'Electrónica',
-                  child: Text('Electrónica'),
-                ),
-                DropdownMenuItem(value: 'Ropa', child: Text('Ropa')),
-                DropdownMenuItem(value: 'Hogar', child: Text('Hogar')),
-              ],
-            ),
-            const SizedBox(height: 10),
-
-            // 💰 Rango de precios
-            const Text('Rango de precio'),
-            RangeSlider(
-              values: priceRange,
-              min: 0,
-              max: 500,
-              divisions: 10,
-              labels: RangeLabels(
-                '${priceRange.start.toInt()}€',
-                '${priceRange.end.toInt()}€',
+                  Text(
+                    'FIlter',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: primaryColor,
+                    ),
+                  ),
+                  Text(
+                    'Clear All',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
               ),
-              onChanged: (values) => setState(() => priceRange = values),
             ),
-            const SizedBox(height: 20),
-
-            // 🔘 Botones
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () => Navigator.pop(context, null),
-                    child: const Text('Cancelar'),
+            // SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            option == 'Filter' ? primaryColor : whiteColor,
+                        side: BorderSide(
+                          color:
+                              option == 'Filter' ? primaryColor : Colors.grey,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          option = 'Filter';
+                        });
+                      },
+                      child: Text(
+                        'Filter',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: option == 'Filter' ? whiteColor : primaryColor,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context, {
-                        'available': showOnlyAvailable,
-                        'category': selectedCategory,
-                        'priceRange': priceRange,
-                      });
-                    },
-                    child: const Text('Aplicar'),
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            option == 'Sort' ? primaryColor : whiteColor,
+                        side: BorderSide(
+                          color: option == 'Sort' ? primaryColor : Colors.grey,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          option = 'Sort';
+                        });
+                      },
+                      child: Text(
+                        'Sort',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: option == 'Sort' ? whiteColor : primaryColor,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            // SizedBox(height: 16),
+            option == 'Filter'
+                ? Column(
+                  children: [
+                    DividerListTileWithSubtitle(
+                      title: Text(
+                        'Color',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      subTitle: Text(
+                        'Seleccionar',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      press: () {},
+                    ),
+                    DividerListTileWithSubtitle(
+                      title: Text(
+                        'Size',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      subTitle: Text(
+                        'Seleccionar',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      press: () {},
+                    ),
+                    DividerListTileWithSubtitle(
+                      title: Text(
+                        'Brand',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      subTitle: Text(
+                        'Seleccionar',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      press: () {},
+                    ),
+                    DividerListTileWithSubtitle(
+                      title: Text(
+                        'Price',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      subTitle: Text(
+                        'Seleccionar',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      press: () {},
+                    ),
+                    SizedBox(height: 8),
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'Available in stock',
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: primaryColor,
+                          fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                  ],
+                )
+                : Column(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'Price [Low to High]',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: primaryColor,
+                          // fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                    Divider(height: 1, color: Colors.grey),
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'Price [High to Low]',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: primaryColor,
+                          // fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                    Divider(height: 1, color: Colors.grey),
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'New',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: primaryColor,
+                          // fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                    Divider(height: 1, color: Colors.grey),
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'Highest Rated',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: primaryColor,
+                          // fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                    Divider(height: 1, color: Colors.grey),
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'A-Z',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: primaryColor,
+                          // fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                    Divider(height: 1, color: Colors.grey),
+                    CheckboxListTile(
+                      value: false,
+                      title: Text(
+                        'Z-A',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: primaryColor,
+                          // fontWeight: FontWeight.w500,
+                          // letterSpacing: 1,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (value) {},
+                    ),
+                    Divider(height: 1, color: Colors.grey),
+                  ],
+                ),
+            if (option == 'Sort') Spacer(),
+            if (option == 'Sort')
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 60),
+                    backgroundColor: primaryColor,
+                  ),
+                  onPressed: () {},
+                  child: Text('Done', style: TextStyle(fontSize: 17)),
+                ),
+              ),
           ],
         ),
       ),

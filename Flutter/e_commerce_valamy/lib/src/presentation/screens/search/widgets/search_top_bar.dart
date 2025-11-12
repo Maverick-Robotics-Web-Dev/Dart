@@ -9,21 +9,6 @@ class SearchTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // void _openFilterSheet() async {
-    //   final result = await showModalBottomSheet<Map<String, dynamic>>(
-    //     context: context,
-    //     isScrollControlled: true,
-    //     backgroundColor: Colors.transparent,
-    //     builder: (context) => FilterBottomSheet(),
-    //   );
-
-    //   // if (result != null) {
-    //   //   setState(() {
-    //   //     filters = result;
-    //   //   });
-    //   // }
-    // }
-
     void _openFilterSheet() async {
       final result = await showModalBottomSheet<Map<String, dynamic>>(
         context: context,

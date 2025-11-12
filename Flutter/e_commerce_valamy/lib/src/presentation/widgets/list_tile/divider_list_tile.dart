@@ -1,3 +1,4 @@
+import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -128,6 +129,53 @@ class DividerListTileWithText extends StatelessWidget {
       title: Text(text, style: const TextStyle(fontSize: 16, height: 1)),
       press: press,
       isShowDivider: isShowDivider,
+    );
+  }
+}
+
+class DividerListTileWithSubtitle extends StatelessWidget {
+  const DividerListTileWithSubtitle({
+    super.key,
+    this.isShowForwordArrow = true,
+    required this.title,
+    this.subTitle,
+    required this.press,
+    this.leading,
+    this.minLeadingWidth,
+    this.isShowDivider = true,
+    this.svgSrc,
+  });
+  final bool isShowForwordArrow, isShowDivider;
+  final Widget title;
+  final Widget? subTitle;
+  final Widget? leading;
+  final double? minLeadingWidth;
+  final VoidCallback press;
+  final String? svgSrc;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          minLeadingWidth: minLeadingWidth,
+          leading: leading,
+          onTap: press,
+          title: title,
+          subtitle: subTitle,
+          trailing:
+              isShowForwordArrow
+                  ? SvgPicture.asset(
+                    svgSrc != null ? svgSrc! : "assets/icons/miniRight.svg",
+                    colorFilter: ColorFilter.mode(
+                      primaryColor,
+                      BlendMode.srcIn,
+                    ),
+                  )
+                  : null,
+        ),
+        if (isShowDivider) const Divider(height: 1, color: Colors.grey),
+      ],
     );
   }
 }
