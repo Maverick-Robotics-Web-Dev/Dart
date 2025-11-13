@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VentanaFiltrosDinamicos extends StatefulWidget {
-  const VentanaFiltrosDinamicos({Key? key}) : super(key: key);
+  const VentanaFiltrosDinamicos({super.key});
 
   @override
   State<VentanaFiltrosDinamicos> createState() =>

@@ -1,6 +1,6 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/filter_bottom_sheet.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,13 +10,13 @@ class SearchTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _openFilterSheet() async {
-      final result = await showModalBottomSheet<Map<String, dynamic>>(
+      final result = await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
-        builder: (context) => FilterBottomSheet(),
+        builder: (context) => FilterBottomSheet(centerTitle: 'Filtros'),
       );
 
       // if (result != null) {
