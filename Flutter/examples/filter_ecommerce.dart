@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class FilterBottomSheet extends StatefulWidget {
+class FilterBottomSheet4 extends StatefulWidget {
   final Map<String, dynamic> initialFilters;
 
-  const FilterBottomSheet({super.key, required this.initialFilters});
+  const FilterBottomSheet4({super.key, required this.initialFilters});
 
   @override
-  State<FilterBottomSheet> createState() => _FilterBottomSheetState();
+  State<FilterBottomSheet4> createState() => _FilterBottomSheet4State();
 }
 
-class _FilterBottomSheetState extends State<FilterBottomSheet> {
+class _FilterBottomSheet4State extends State<FilterBottomSheet4> {
   late bool showOnlyAvailable;
   late String selectedCategory;
   late RangeValues priceRange;

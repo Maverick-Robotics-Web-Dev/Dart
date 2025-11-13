@@ -141,7 +141,7 @@ class _ProductPageState extends State<ProductPage> {
                     // Categoría
                     DropdownButtonFormField<String>(
                       decoration: const InputDecoration(labelText: "Categoría"),
-                      value: selectedCategory,
+                      initialValue: selectedCategory,
                       items:
                           [
                                 "Electrónica",

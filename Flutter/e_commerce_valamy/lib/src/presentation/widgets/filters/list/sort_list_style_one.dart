@@ -1,5 +1,5 @@
 import 'package:e_commerce_valamy/config/constants.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet_with_top_buttons.dart';
 import 'package:flutter/material.dart';
 
 class SortListStyleOne extends StatelessWidget {

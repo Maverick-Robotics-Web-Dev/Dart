@@ -4,5 +4,6 @@ const String signUpSetupScreenRoute = 'sign_up_setup_screen';
 const String verificationCodeScreenRoute = 'verification_code_screen';
 const String mainScreenRoute = 'main_screen';
 const String searchScreenRoute = 'search_screen';
+const String notificationScreenRoute = 'notification_screen';
 const String homeScreenRoute = 'home_screen';
 const String profileScreenRoute = 'profile_screen';

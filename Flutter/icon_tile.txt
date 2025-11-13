@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+class NotificacionIconTile extends StatelessWidget {
+  final String titulo;
+  final String subtitulo;
+  final IconData icono;
+  final Color colorIcono;
+  final VoidCallback? onTap;
+
+  const NotificacionIconTile({
+    super.key,
+    required this.titulo,
+    required this.subtitulo,
+    this.icono = Icons.notifications,
+    this.colorIcono = Colors.blue,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: colorIcono.withOpacity(0.15),
+          child: Icon(icono, color: colorIcono),
+        ),
+        title: Text(
+          titulo,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(subtitulo),
+        onTap: onTap,
+      ),
+    );
+  }
+}

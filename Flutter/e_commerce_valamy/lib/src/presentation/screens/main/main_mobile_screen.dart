@@ -62,7 +62,7 @@ class _MainMobileScreenState extends State<MainMobileScreen> {
           ),
           IconButton(
             onPressed: () {
-              // Navigator.pushNamed(context, notificationsScreenRoute);
+              Navigator.pushNamed(context, notificationScreenRoute);
             },
             icon: SvgPicture.asset(
               "assets/icons/Notification.svg",

@@ -1,15 +1,45 @@
 import 'package:e_commerce_valamy/config/constants.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet_with_checkbox.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet_with_top_buttons.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/list_tile/divider_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class FilterListStyleOne extends StatelessWidget {
   final List<FilterOption> filters;
+  // final VoidCallback press;
 
-  const FilterListStyleOne({super.key, required this.filters});
+  const FilterListStyleOne({
+    super.key,
+    required this.filters,
+    // required this.press,
+  });
 
   @override
   Widget build(BuildContext context) {
+    void openFilterSheet({
+      String? centerTitle,
+      required List<String> filters,
+    }) async {
+      final result = await showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        builder:
+            (context) => FilterBottomSheetWithCheckbox(
+              centerTitle: centerTitle!,
+              filters: filters,
+            ),
+      );
+
+      // if (result != null) {
+      //   setState(() {
+      //     filters = result;
+      //   });
+      // }
+    }
+
     return Column(
       children: [
         ...List.generate(
@@ -33,7 +63,12 @@ class FilterListStyleOne extends StatelessWidget {
                 letterSpacing: 1,
               ),
             ),
-            press: () {},
+            press: () {
+              openFilterSheet(
+                centerTitle: filters[index].title,
+                filters: filters[index].options ?? [],
+              );
+            },
           ),
         ),
         SizedBox(height: 8),

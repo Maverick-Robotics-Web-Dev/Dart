@@ -5,6 +5,7 @@ import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_up/sign_up_
 import 'package:e_commerce_valamy/src/presentation/screens/auth/sign_up/sign_up_setup_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/home/home_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/main/main_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/notification/notification_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SearchScreen());
     case homeScreenRoute:
       return MaterialPageRoute(builder: (context) => HomeScreen());
+    case notificationScreenRoute:
+      return MaterialPageRoute(builder: (context) => NotificationScreen());
     default:
       return MaterialPageRoute(
         builder:

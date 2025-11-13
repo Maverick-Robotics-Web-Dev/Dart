@@ -1,22 +1,62 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/filters/filter_bottom_sheet_with_top_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+List<FilterOption> filters = [
+  FilterOption(
+    title: 'Color',
+    subTitle: 'Seleccionar',
+    options: ['Black', 'Blue', 'White', 'Purple', 'Pink', 'Red'],
+  ),
+  FilterOption(
+    title: 'Size',
+    subTitle: 'Seleccionar',
+    options: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+  ),
+  FilterOption(
+    title: 'Brand',
+    subTitle: 'Seleccionar',
+    options: ['Adidas', 'Nike', 'Puma', 'Reebok', 'New Balance'],
+  ),
+  FilterOption(
+    title: 'Price',
+    subTitle: 'Seleccionar',
+    options: [
+      '\$0 - \$50',
+      '\$50 - \$100',
+      '\$100 - \$200',
+      '\$200 - \$500',
+      '\$500+',
+    ],
+  ),
+];
+
+List<SortOption> sorts = [
+  SortOption(title: 'Price [Low to High]'),
+  SortOption(title: 'Price [High to Low]'),
+  SortOption(title: 'New'),
+  SortOption(title: 'Highest Rated'),
+  SortOption(title: 'A-Z'),
+  SortOption(title: 'Z-A'),
+];
 
 class SearchTopBar extends StatelessWidget {
   const SearchTopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    void _openFilterSheet() async {
+    void openFilterSheetWithTopButtons() async {
       final result = await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
-        builder: (context) => FilterBottomSheet(centerTitle: 'Filtros'),
+        builder:
+            (context) =>
+                FilterBottomSheetWithTopButtons(filters: filters, sorts: sorts),
       );
 
       // if (result != null) {
@@ -75,14 +115,9 @@ class SearchTopBar extends StatelessWidget {
               ),
               prefixIcon: SvgPicture.asset(
                 "assets/icons/Search.svg",
-                // height: 10,
-                // width: 20,
                 colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcIn),
               ),
-              prefixIconConstraints: BoxConstraints(
-                maxHeight: 32,
-                // minHeight: 20,
-              ),
+              prefixIconConstraints: BoxConstraints(maxHeight: 32),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.grey.shade400),
@@ -103,7 +138,7 @@ class SearchTopBar extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: _openFilterSheet,
+                    onPressed: openFilterSheetWithTopButtons,
                     // onPressed: () async {
                     //   // final result = await showDialogCustom(context: context);
                     // },
