@@ -8,3 +8,5 @@ const String notificationScreenRoute = 'notification_screen';
 const String homeScreenRoute = 'home_screen';
 const String profileScreenRoute = 'profile_screen';
 const String onSaleScreenRoute = 'on_sale_screen';
+const String kidsScreenRoute = 'kids_screen';
+const String productScreenRoute = 'product_screen';

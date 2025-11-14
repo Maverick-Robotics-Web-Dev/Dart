@@ -28,6 +28,7 @@ class AppBarStyleOne extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       title: Text(title, style: TextStyle(color: primaryColor)),
       centerTitle: centerTitle,
+      surfaceTintColor: whiteColor,
       actions: actions,
       leading: leading,
       iconTheme: IconThemeData(color: primaryColor),

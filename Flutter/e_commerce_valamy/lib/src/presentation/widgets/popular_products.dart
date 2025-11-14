@@ -202,6 +202,7 @@ class PopularProducts extends StatelessWidget {
                         demoPopularProducts[index].priceAfetDiscount,
                     dicountpercent: demoPopularProducts[index].dicountpercent,
                     press: () {
+                      debugPrint('INDEX EVEN: ${index.isEven}');
                       Navigator.pushNamed(
                         context,
                         'productDetailsScreenRoute',

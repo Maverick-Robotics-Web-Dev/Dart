@@ -3,23 +3,22 @@ import 'package:e_commerce_valamy/src/presentation/widgets/app_bars/app_bar_styl
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/L/banner_l_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_2.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/best_sellers.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/flash_sale.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/most_popular.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/text_form_field_search_with_filters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class OnSaleMobileScreen extends StatelessWidget {
+class KidsMobileScreen extends StatelessWidget {
   final TextTheme? textTheme;
 
-  const OnSaleMobileScreen({super.key, this.textTheme});
+  const KidsMobileScreen({super.key, this.textTheme});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarStyleOne(
-        title: 'On Sale',
+        title: 'Kids',
         backgroundColor: Colors.transparent,
         actions: [
           IconButton(
@@ -37,39 +36,28 @@ class OnSaleMobileScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: BannerLStyle1(
-                title: "summer \nsale",
-                subtitle: "SPECIAL OFFER",
-                discountPercent: 50,
-                press: () {
-                  Navigator.pushNamed(context, 'onSaleScreenRoute');
-                },
-              ),
-            ),
-            SliverToBoxAdapter(child: BestSellers()),
             SliverPadding(
-              padding: EdgeInsets.symmetric(vertical: 16.0 * 1.5),
-              sliver: SliverToBoxAdapter(child: FlashSale()),
+              padding: EdgeInsets.symmetric(vertical: 16 * 1.5, horizontal: 16),
+              sliver: SliverToBoxAdapter(
+                child: TextFormFieldSearchWithFilters(),
+              ),
             ),
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  // While loading use 👇
-                  // const BannerMSkelton(),‚
-                  BannerSStyle1(
-                    title: "New \narrival",
+                  BannerLStyle1(
+                    title: "summer \nsale",
                     subtitle: "SPECIAL OFFER",
-                    discountParcent: 50,
+                    discountPercent: 50,
                     press: () {
                       Navigator.pushNamed(context, 'onSaleScreenRoute');
                     },
                   ),
-                  const SizedBox(height: 16.0 / 4),
-                  BannerSStyle2(
-                    title: "Summer \nsale",
+                  SizedBox(height: 16 / 4),
+                  BannerSStyle1(
+                    title: "New \narrival",
                     subtitle: "SPECIAL OFFER",
-                    bottomText: "up to 80% off".toUpperCase(),
+                    discountParcent: 50,
                     press: () {
                       Navigator.pushNamed(context, 'onSaleScreenRoute');
                     },
@@ -83,29 +71,36 @@ class OnSaleMobileScreen extends StatelessWidget {
                       Navigator.pushNamed(context, 'onSaleScreenRoute');
                     },
                   ),
-
-                  // We have 4 banner styles, all in the pro version
                 ],
               ),
             ),
-            SliverToBoxAdapter(child: PopularProducts()),
-            SliverToBoxAdapter(child: MostPopular()),
             SliverPadding(
-              padding: EdgeInsets.only(top: 16.0 * 1.5),
-              sliver: SliverToBoxAdapter(
-                child: BannerLStyle1(
-                  title: "summer \nsale",
-                  subtitle: "SPECIAL OFFER",
-                  discountPercent: 50,
-                  press: () {
-                    Navigator.pushNamed(context, 'onSaleScreenRoute');
-                  },
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200.0,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 0.66,
                 ),
+                delegate: SliverChildBuilderDelegate((
+                  BuildContext context,
+                  int index,
+                ) {
+                  return ProductCard(
+                    image: demoPopularProducts[index].image,
+                    brandName: demoPopularProducts[index].brandName,
+                    title: demoPopularProducts[index].title,
+                    price: demoPopularProducts[index].price,
+                    priceAfetDiscount:
+                        demoPopularProducts[index].priceAfetDiscount,
+                    dicountpercent: demoPopularProducts[index].dicountpercent,
+                    press: () {
+                      Navigator.pushNamed(context, 'productDetailsScreenRoute');
+                    },
+                  );
+                }, childCount: demoPopularProducts.length),
               ),
-            ),
-            SliverPadding(
-              padding: EdgeInsets.only(bottom: 16.0 * 1.5),
-              sliver: SliverToBoxAdapter(child: BestSellers()),
             ),
           ],
         ),

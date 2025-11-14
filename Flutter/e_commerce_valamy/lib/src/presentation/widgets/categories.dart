@@ -22,7 +22,7 @@ List<CategoryModel> demoCategories = [
   CategoryModel(
     name: "Kids",
     svgSrc: "assets/icons/Child.svg",
-    // route: kidsScreenRoute,
+    route: kidsScreenRoute,
   ),
 ];
 
