@@ -7,3 +7,4 @@ const String searchScreenRoute = 'search_screen';
 const String notificationScreenRoute = 'notification_screen';
 const String homeScreenRoute = 'home_screen';
 const String profileScreenRoute = 'profile_screen';
+const String onSaleScreenRoute = 'on_sale_screen';

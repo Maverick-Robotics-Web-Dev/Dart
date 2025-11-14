@@ -1,4 +1,5 @@
 import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,7 +15,7 @@ List<CategoryModel> demoCategories = [
   CategoryModel(
     name: "On Sale",
     svgSrc: "assets/icons/Sale.svg",
-    // route: onSaleScreenRoute,
+    route: onSaleScreenRoute,
   ),
   CategoryModel(name: "Man's", svgSrc: "assets/icons/Man.svg"),
   CategoryModel(name: "Woman’s", svgSrc: "assets/icons/Woman.svg"),
