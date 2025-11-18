@@ -10,3 +10,5 @@ const String profileScreenRoute = 'profile_screen';
 const String onSaleScreenRoute = 'on_sale_screen';
 const String kidsScreenRoute = 'kids_screen';
 const String productScreenRoute = 'product_screen';
+const String productBuyNowScreenRoute = 'product_buy_now_screen';
+const String productReviewsScreenRoute = 'product_reviews_screen';

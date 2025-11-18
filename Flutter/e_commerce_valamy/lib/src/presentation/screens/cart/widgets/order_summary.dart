@@ -43,7 +43,7 @@ class _OrderSummaryState extends State<OrderSummary> {
                   Text(
                     'Free',
                     style: TextStyle(
-                      color: successgColor,
+                      color: successColor,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),

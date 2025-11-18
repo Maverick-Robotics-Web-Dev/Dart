@@ -26,3 +26,12 @@ const OutlineInputBorder errorOutlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(borderRadious_12)),
   borderSide: BorderSide(color: warningColor),
 );
+
+OutlineInputBorder secodaryOutlineInputBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(
+      color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.15),
+    ),
+  );
+}

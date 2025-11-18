@@ -1,3 +1,4 @@
+import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
 import 'package:flutter/material.dart';
 
@@ -205,7 +206,7 @@ class PopularProducts extends StatelessWidget {
                       debugPrint('INDEX EVEN: ${index.isEven}');
                       Navigator.pushNamed(
                         context,
-                        'productDetailsScreenRoute',
+                        productScreenRoute,
                         arguments: index.isEven,
                       );
                     },

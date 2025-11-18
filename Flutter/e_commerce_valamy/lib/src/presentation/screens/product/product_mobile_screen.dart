@@ -1,4 +1,16 @@
+import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/config/routes/routes.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/product_buy_now_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/notify_me_card.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/product_images.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/product_info.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/product_list_tile.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/card_button.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/custom_modal_bottom_sheet.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
+import 'package:e_commerce_valamy/src/presentation/widgets/review_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ProductMobileScreen extends StatelessWidget {
   final bool isProductAvailable;
@@ -21,7 +33,7 @@ class ProductMobileScreen extends StatelessWidget {
                   customModalBottomSheet(
                     context,
                     height: MediaQuery.of(context).size.height * 0.92,
-                    child: const ProductBuyNowScreen(),
+                    child: ProductBuyNowScreen(),
                   );
                 },
               )
@@ -32,7 +44,7 @@ class ProductMobileScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: whiteColor,
               floating: true,
               actions: [
                 IconButton(
@@ -44,7 +56,7 @@ class ProductMobileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const ProductImages(
+            ProductImages(
               images: [productDemoImg1, productDemoImg2, productDemoImg3],
             ),
             ProductInfo(
@@ -60,26 +72,26 @@ class ProductMobileScreen extends StatelessWidget {
               svgSrc: "assets/icons/Product.svg",
               title: "Product Details",
               press: () {
-                customModalBottomSheet(
-                  context,
-                  height: MediaQuery.of(context).size.height * 0.92,
-                  child: const BuyFullKit(
-                    images: ["assets/screens/Product detail.png"],
-                  ),
-                );
+                // customModalBottomSheet(
+                //   context,
+                //   height: MediaQuery.of(context).size.height * 0.92,
+                //   child: const BuyFullKit(
+                //     images: ["assets/screens/Product detail.png"],
+                //   ),
+                // );
               },
             ),
             ProductListTile(
               svgSrc: "assets/icons/Delivery.svg",
               title: "Shipping Information",
               press: () {
-                customModalBottomSheet(
-                  context,
-                  height: MediaQuery.of(context).size.height * 0.92,
-                  child: const BuyFullKit(
-                    images: ["assets/screens/Shipping information.png"],
-                  ),
-                );
+                // customModalBottomSheet(
+                //   context,
+                //   height: MediaQuery.of(context).size.height * 0.92,
+                //   child: const BuyFullKit(
+                //     images: ["assets/screens/Shipping information.png"],
+                //   ),
+                // );
               },
             ),
             ProductListTile(
@@ -87,16 +99,16 @@ class ProductMobileScreen extends StatelessWidget {
               title: "Returns",
               isShowBottomBorder: true,
               press: () {
-                customModalBottomSheet(
-                  context,
-                  height: MediaQuery.of(context).size.height * 0.92,
-                  child: const ProductReturnsScreen(),
-                );
+                // customModalBottomSheet(
+                //   context,
+                //   height: MediaQuery.of(context).size.height * 0.92,
+                //   child: const ProductReturnsScreen(),
+                // );
               },
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(16),
                 child: ReviewCard(
                   rating: 4.3,
                   numOfReviews: 128,
@@ -117,7 +129,7 @@ class ProductMobileScreen extends StatelessWidget {
               },
             ),
             SliverPadding(
-              padding: const EdgeInsets.all(defaultPadding),
+              padding: const EdgeInsets.all(16),
               sliver: SliverToBoxAdapter(
                 child: Text(
                   "You may also like",
@@ -134,8 +146,8 @@ class ProductMobileScreen extends StatelessWidget {
                   itemBuilder:
                       (context, index) => Padding(
                         padding: EdgeInsets.only(
-                          left: defaultPadding,
-                          right: index == 4 ? defaultPadding : 0,
+                          left: 16,
+                          right: index == 4 ? 16 : 0,
                         ),
                         child: ProductCard(
                           image: productDemoImg2,
@@ -150,7 +162,7 @@ class ProductMobileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: defaultPadding)),
+            SliverToBoxAdapter(child: SizedBox(height: 16)),
           ],
         ),
       ),
