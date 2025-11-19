@@ -1,6 +1,9 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/product_buy_now_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/product_detail_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/shipping_information_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/shipping_information_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/notify_me_card.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/product_images.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/product_info.dart';
@@ -72,26 +75,22 @@ class ProductMobileScreen extends StatelessWidget {
               svgSrc: "assets/icons/Product.svg",
               title: "Product Details",
               press: () {
-                // customModalBottomSheet(
-                //   context,
-                //   height: MediaQuery.of(context).size.height * 0.92,
-                //   child: const BuyFullKit(
-                //     images: ["assets/screens/Product detail.png"],
-                //   ),
-                // );
+                customModalBottomSheet(
+                  context,
+                  height: MediaQuery.of(context).size.height * 0.92,
+                  child: ProductDetailScreen(),
+                );
               },
             ),
             ProductListTile(
               svgSrc: "assets/icons/Delivery.svg",
               title: "Shipping Information",
               press: () {
-                // customModalBottomSheet(
-                //   context,
-                //   height: MediaQuery.of(context).size.height * 0.92,
-                //   child: const BuyFullKit(
-                //     images: ["assets/screens/Shipping information.png"],
-                //   ),
-                // );
+                customModalBottomSheet(
+                  context,
+                  height: MediaQuery.of(context).size.height * 0.92,
+                  child: ShippingInformationScreen(),
+                );
               },
             ),
             ProductListTile(

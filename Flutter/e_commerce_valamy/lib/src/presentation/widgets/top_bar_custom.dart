@@ -7,14 +7,16 @@ class TopBarCustom extends StatelessWidget {
   final String rightTitle;
   final String svgSrc;
   final bool showRightTitle;
+  final bool showRightButton;
   final String svgSrcRight;
 
   const TopBarCustom({
     super.key,
     required this.centerTitle,
+    this.showRightTitle = false,
+    this.showRightButton = false,
     this.rightTitle = 'Clear All',
     this.svgSrc = "assets/icons/Arrow - Left.svg",
-    this.showRightTitle = true,
     this.svgSrcRight = "assets/icons/Close.svg",
   });
 
@@ -31,14 +33,27 @@ class TopBarCustom extends StatelessWidget {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        Text(
-          centerTitle,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: primaryColor,
+        if (showRightTitle || showRightButton)
+          Text(
+            centerTitle,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: primaryColor,
+            ),
           ),
-        ),
+        if (!showRightTitle && !showRightButton)
+          Expanded(
+            child: Text(
+              centerTitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: primaryColor,
+              ),
+            ),
+          ),
         if (showRightTitle)
           TextButton(
             onPressed: () {},
@@ -51,7 +66,7 @@ class TopBarCustom extends StatelessWidget {
               ),
             ),
           ),
-        if (!showRightTitle)
+        if (showRightButton)
           IconButton(
             icon: SvgPicture.asset(
               svgSrcRight,

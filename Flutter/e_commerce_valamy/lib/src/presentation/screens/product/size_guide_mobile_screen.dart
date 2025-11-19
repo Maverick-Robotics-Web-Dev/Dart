@@ -124,7 +124,7 @@ class _SizeGuideMobileScreenState extends State<SizeGuideMobileScreen> {
             padding: const EdgeInsets.all(16.0),
             child: TopBarCustom(
               centerTitle: 'Size Guide',
-              showRightTitle: false,
+              showRightButton: true,
               svgSrcRight: 'assets/icons/Share.svg',
             ),
           ),
