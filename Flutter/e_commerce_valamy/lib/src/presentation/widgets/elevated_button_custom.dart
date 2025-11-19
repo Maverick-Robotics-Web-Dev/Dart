@@ -1,35 +1,76 @@
 import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 
-class ElevatedButtonCustom extends StatelessWidget {
-  final bool option;
-  final VoidCallback press;
-  final String textButton;
+class RowElevatedButtonCustom extends StatelessWidget {
+  final String textCondition;
+  final VoidCallback onLeftFilterPressed;
+  final VoidCallback onRightFilterPressed;
+  final String leftButtonText;
+  final String rightButtonText;
 
-  const ElevatedButtonCustom({
+  const RowElevatedButtonCustom({
     super.key,
-    this.option = false,
-    required this.press,
-    this.textButton = 'Ingrese Texto',
+    required this.textCondition,
+    required this.onLeftFilterPressed,
+    required this.onRightFilterPressed,
+    this.leftButtonText = 'Ingrese Texto',
+    this.rightButtonText = 'Ingrese Texto',
   });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: option ? whiteColor : primaryColor,
-          side: BorderSide(color: option ? Colors.grey : primaryColor),
-        ),
-        onPressed: press,
-        child: Text(
-          textButton,
-          style: TextStyle(
-            fontSize: 16,
-            color: option ? primaryColor : whiteColor,
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  textCondition == leftButtonText ? primaryColor : whiteColor,
+              side: BorderSide(
+                color:
+                    textCondition == leftButtonText
+                        ? primaryColor
+                        : Colors.grey,
+              ),
+            ),
+            onPressed: onLeftFilterPressed,
+            child: Text(
+              leftButtonText,
+              style: TextStyle(
+                fontSize: 16,
+                color:
+                    textCondition == leftButtonText ? whiteColor : primaryColor,
+              ),
+            ),
           ),
         ),
-      ),
+        SizedBox(width: 20),
+        Expanded(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  textCondition == rightButtonText ? primaryColor : whiteColor,
+              side: BorderSide(
+                color:
+                    textCondition == rightButtonText
+                        ? primaryColor
+                        : Colors.grey,
+              ),
+            ),
+            onPressed: onRightFilterPressed,
+            child: Text(
+              rightButtonText,
+              style: TextStyle(
+                fontSize: 16,
+                color:
+                    textCondition == rightButtonText
+                        ? whiteColor
+                        : primaryColor,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

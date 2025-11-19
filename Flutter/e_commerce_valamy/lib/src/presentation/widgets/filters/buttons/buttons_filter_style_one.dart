@@ -19,6 +19,8 @@ class ButtonsFilterStyleOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Option ButtonsFilterStyleOne: $option');
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
