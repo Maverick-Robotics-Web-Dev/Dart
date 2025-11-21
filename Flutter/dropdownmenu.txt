@@ -1,0 +1,35 @@
+class DropdownIconExample extends StatefulWidget {
+  @override
+  _DropdownIconExampleState createState() => _DropdownIconExampleState();
+}
+
+class _DropdownIconExampleState extends State<DropdownIconExample> {
+  String? selectedValue = 'home';
+
+  final items = [
+    {'value': 'home', 'text': 'Inicio', 'icon': Icons.home},
+    {'value': 'profile', 'text': 'Perfil', 'icon': Icons.person},
+    {'value': 'settings', 'text': 'Ajustes', 'icon': Icons.settings},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: selectedValue,
+      icon: Icon(Icons.arrow_drop_down),
+      onChanged: (value) => setState(() => selectedValue = value),
+      items: items.map((item) {
+        return DropdownMenuItem(
+          value: item['value'] as String,
+          child: Row(
+            children: [
+              Icon(item['icon'] as IconData),
+              const SizedBox(width: 10),
+              Text(item['text'] as String),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+}

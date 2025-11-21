@@ -2,10 +2,16 @@ import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class RateBar extends StatelessWidget {
-  const RateBar({super.key, required this.star, required this.value});
-
   final int star;
   final double value;
+  final Color color;
+
+  const RateBar({
+    super.key,
+    required this.star,
+    required this.value,
+    this.color = Colors.amber,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class RateBar extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: LinearProgressIndicator(
                 minHeight: 6,
-                color: warningColor,
+                color: color,
                 backgroundColor: Theme.of(
                   context,
                 ).textTheme.bodyLarge!.color!.withOpacity(0.05),
