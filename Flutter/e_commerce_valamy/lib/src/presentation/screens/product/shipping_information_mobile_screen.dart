@@ -1,5 +1,8 @@
 import 'package:e_commerce_valamy/config/constants.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/top_bar_custom.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/shipping_express_card.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/shipping_rush_card.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/shipping_standard_card.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/shipping_truck_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,118 +14,80 @@ class ShippingInformationMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TopBarCustom(
-              centerTitle: 'Shipping methods',
-              showRightButton: true,
-              svgSrcRight: 'assets/icons/Danger Circle.svg',
-            ),
-            SizedBox(height: 16.0),
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(16),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: whiteColor,
+          surfaceTintColor: whiteColor,
+          centerTitle: true,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: IconButton(
+              icon: SvgPicture.asset(
+                'assets/icons/Arrow - Left.svg',
+                height: 30,
+                colorFilter: const ColorFilter.mode(
+                  primaryColor,
+                  BlendMode.srcIn,
+                ),
               ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/Standard.svg',
-                              height: 28,
-                              color:
-                                  Theme.of(context).textTheme.bodyLarge!.color,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'Standard',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Arrives in 5-8 business days',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Text(
-                              'Order up to \$49.99:',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '\$4.95',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Text(
-                              'Orders \$50 and over:',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Free',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+          title: Text(
+            'Shipping methods',
+            style: TextStyle(
+              color: primaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: IconButton(
+                icon: SvgPicture.asset(
+                  'assets/icons/Danger Circle.svg',
+                  height: 30,
+                  colorFilter: const ColorFilter.mode(
+                    primaryColor,
+                    BlendMode.srcIn,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      'Free with Valamy Premier',
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+                onPressed: () {},
               ),
             ),
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                ShippingStandardCard(),
+                SizedBox(height: 16),
+                ShippingExpressCard(),
+                SizedBox(height: 16),
+                ShippingRushCard(),
+                SizedBox(height: 16),
+                ShippingTruckCard(),
+                SizedBox(height: 16),
+                Text(
+                  'Mesaure under your arms at the fullest part of your bust. Be sure to go over your shoulder blades',
+                  style: TextStyle(fontSize: 15),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Mesaure under your arms at the fullest part of your bust. Be sure to go over your shoulder blades',
+                  style: TextStyle(fontSize: 15),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Mesaure under your arms at the fullest part of your bust. Be sure to go over your shoulder blades',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

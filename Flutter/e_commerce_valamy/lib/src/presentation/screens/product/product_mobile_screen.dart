@@ -2,7 +2,7 @@ import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/product_buy_now_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/product_detail_screen.dart';
-import 'package:e_commerce_valamy/src/presentation/screens/product/shipping_information_mobile_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/product/product_returns_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/shipping_information_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/notify_me_card.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/widgets/product_images.dart';
@@ -98,11 +98,11 @@ class ProductMobileScreen extends StatelessWidget {
               title: "Returns",
               isShowBottomBorder: true,
               press: () {
-                // customModalBottomSheet(
-                //   context,
-                //   height: MediaQuery.of(context).size.height * 0.92,
-                //   child: const ProductReturnsScreen(),
-                // );
+                customModalBottomSheet(
+                  context,
+                  height: MediaQuery.of(context).size.height * 0.92,
+                  child: const ProductReturnsScreen(),
+                );
               },
             ),
             SliverToBoxAdapter(
