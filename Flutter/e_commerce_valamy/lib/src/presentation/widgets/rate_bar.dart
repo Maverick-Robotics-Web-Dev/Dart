@@ -1,4 +1,3 @@
-import 'package:e_commerce_valamy/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class RateBar extends StatelessWidget {
