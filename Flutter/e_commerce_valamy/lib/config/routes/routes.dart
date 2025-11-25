@@ -12,3 +12,4 @@ const String kidsScreenRoute = 'kids_screen';
 const String productScreenRoute = 'product_screen';
 const String productBuyNowScreenRoute = 'product_buy_now_screen';
 const String productReviewsScreenRoute = 'product_reviews_screen';
+const String productAddReviewsScreenRoute = 'product_add_reviews_screen';

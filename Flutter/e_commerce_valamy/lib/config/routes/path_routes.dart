@@ -10,6 +10,7 @@ import 'package:e_commerce_valamy/src/presentation/screens/notification/notifica
 import 'package:e_commerce_valamy/src/presentation/screens/on_sale/on_sale_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/product_buy_now_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/product/product_screen.dart';
+import 'package:e_commerce_valamy/src/presentation/screens/reviews/product_add_review_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/reviews/product_reviews_screen.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case productReviewsScreenRoute:
       return MaterialPageRoute(builder: (context) => ProductReviewsScreen());
 
+    case productAddReviewsScreenRoute:
+      return MaterialPageRoute(builder: (context) => ProductAddReviewScreen());
     default:
       return MaterialPageRoute(
         builder:
