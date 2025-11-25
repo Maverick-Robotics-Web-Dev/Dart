@@ -1,3 +1,4 @@
+import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/L/banner_l_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_2.dart';
@@ -36,7 +37,7 @@ class HomeMobileScreen extends StatelessWidget {
                     subtitle: "SPECIAL OFFER",
                     discountParcent: 50,
                     press: () {
-                      Navigator.pushNamed(context, 'onSaleScreenRoute');
+                      Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
                   const SizedBox(height: 16.0 / 4),
@@ -45,7 +46,7 @@ class HomeMobileScreen extends StatelessWidget {
                     subtitle: "SPECIAL OFFER",
                     bottomText: "up to 80% off".toUpperCase(),
                     press: () {
-                      Navigator.pushNamed(context, 'onSaleScreenRoute');
+                      Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
                   const SizedBox(height: 16.0 / 4),
@@ -54,7 +55,7 @@ class HomeMobileScreen extends StatelessWidget {
                     subtitle: "50% Off",
                     bottomText: "Collection".toUpperCase(),
                     press: () {
-                      Navigator.pushNamed(context, 'onSaleScreenRoute');
+                      Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
 

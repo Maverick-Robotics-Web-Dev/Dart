@@ -1,6 +1,7 @@
+import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:e_commerce_valamy/src/presentation/screens/cart/widgets/cart_item.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ReviewYourOrder extends StatefulWidget {
   const ReviewYourOrder({super.key});
@@ -12,6 +13,8 @@ class ReviewYourOrder extends StatefulWidget {
 class _ReviewYourOrderState extends State<ReviewYourOrder> {
   @override
   Widget build(BuildContext context) {
+    final productsProvider = context.watch<ProductsProvider>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,18 +31,22 @@ class _ReviewYourOrderState extends State<ReviewYourOrder> {
           child: ListView.builder(
             // scrollDirection: Axis.horizontal,
             // Find demoPopularProducts on models/ProductModel.dart
-            itemCount: demoPopularProducts.length,
+            itemCount: productsProvider.popularProducts.length,
             itemBuilder:
                 (context, index) => Padding(
                   padding: EdgeInsets.only(right: 16, left: 16, bottom: 16),
                   child: CartItem(
-                    image: demoPopularProducts[index].image,
-                    brandName: demoPopularProducts[index].brandName,
-                    title: demoPopularProducts[index].title,
-                    price: demoPopularProducts[index].price,
+                    image: productsProvider.popularProducts[index].image,
+                    brandName:
+                        productsProvider.popularProducts[index].brandName,
+                    title: productsProvider.popularProducts[index].title,
+                    price: productsProvider.popularProducts[index].price,
                     priceAfetDiscount:
-                        demoPopularProducts[index].priceAfetDiscount,
-                    dicountpercent: demoPopularProducts[index].dicountpercent,
+                        productsProvider
+                            .popularProducts[index]
+                            .priceAfetDiscount,
+                    dicountpercent:
+                        productsProvider.popularProducts[index].dicountpercent,
                     press: () {
                       Navigator.pushNamed(
                         context,

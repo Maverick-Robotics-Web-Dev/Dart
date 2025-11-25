@@ -1,12 +1,16 @@
-import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
+import 'package:e_commerce_valamy/config/routes/routes.dart';
+import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/product/secondary_product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MostPopular extends StatelessWidget {
   const MostPopular({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = context.watch<ProductsProvider>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,25 +29,32 @@ class MostPopular extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             // Find demoPopularProducts on models/ProductModel.dart
-            itemCount: demoPopularProducts.length,
+            itemCount: productsProvider.popularProducts.length,
             itemBuilder:
                 (context, index) => Padding(
                   padding: EdgeInsets.only(
                     left: 16.0,
-                    right: index == demoPopularProducts.length - 1 ? 16.0 : 0,
+                    right:
+                        index == productsProvider.popularProducts.length - 1
+                            ? 16.0
+                            : 0,
                   ),
                   child: SecondaryProductCard(
-                    image: demoPopularProducts[index].image,
-                    brandName: demoPopularProducts[index].brandName,
-                    title: demoPopularProducts[index].title,
-                    price: demoPopularProducts[index].price,
+                    image: productsProvider.popularProducts[index].image,
+                    brandName:
+                        productsProvider.popularProducts[index].brandName,
+                    title: productsProvider.popularProducts[index].title,
+                    price: productsProvider.popularProducts[index].price,
                     priceAfetDiscount:
-                        demoPopularProducts[index].priceAfetDiscount,
-                    dicountpercent: demoPopularProducts[index].dicountpercent,
+                        productsProvider
+                            .popularProducts[index]
+                            .priceAfetDiscount,
+                    dicountpercent:
+                        productsProvider.popularProducts[index].dicountpercent,
                     press: () {
                       Navigator.pushNamed(
                         context,
-                        'productDetailsScreenRoute',
+                        productScreenRoute,
                         arguments: index.isEven,
                       );
                     },

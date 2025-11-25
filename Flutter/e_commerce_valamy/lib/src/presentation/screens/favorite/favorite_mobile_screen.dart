@@ -1,6 +1,7 @@
-import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
+import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FavoriteMobileScreen extends StatelessWidget {
   final TextTheme? textTheme;
@@ -9,6 +10,8 @@ class FavoriteMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = context.watch<ProductsProvider>();
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -28,18 +31,19 @@ class FavoriteMobileScreen extends StatelessWidget {
                 int index,
               ) {
                 return ProductCard(
-                  image: demoPopularProducts[index].image,
-                  brandName: demoPopularProducts[index].brandName,
-                  title: demoPopularProducts[index].title,
-                  price: demoPopularProducts[index].price,
+                  image: productsProvider.popularProducts[index].image,
+                  brandName: productsProvider.popularProducts[index].brandName,
+                  title: productsProvider.popularProducts[index].title,
+                  price: productsProvider.popularProducts[index].price,
                   priceAfetDiscount:
-                      demoPopularProducts[index].priceAfetDiscount,
-                  dicountpercent: demoPopularProducts[index].dicountpercent,
+                      productsProvider.popularProducts[index].priceAfetDiscount,
+                  dicountpercent:
+                      productsProvider.popularProducts[index].dicountpercent,
                   press: () {
                     Navigator.pushNamed(context, 'productDetailsScreenRoute');
                   },
                 );
-              }, childCount: demoPopularProducts.length),
+              }, childCount: productsProvider.popularProducts.length),
             ),
           ),
         ],

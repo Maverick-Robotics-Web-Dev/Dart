@@ -185,7 +185,7 @@ class _ProductAddReviewMobileScreenState
                       // maxLines: null,
                       style: TextStyle(fontSize: 17),
                       decoration: InputDecoration(
-                        hintText: 'Summarize review',
+                        hintText: 'What should shoppers know before?',
                         hintStyle: TextStyle(
                           color: hintTextColor,
                           fontWeight: FontWeight.w500,

@@ -25,7 +25,7 @@ class SecondaryProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: press,
       style:
           style ??
           OutlinedButton.styleFrom(

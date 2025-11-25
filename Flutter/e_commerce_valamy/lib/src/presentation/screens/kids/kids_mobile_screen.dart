@@ -1,13 +1,14 @@
 import 'package:e_commerce_valamy/config/constants.dart';
+import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/app_bars/app_bar_style_one.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/L/banner_l_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_1.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/banners/S/banner_s_style_2.dart';
-import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/text_form_field_search_with_filters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class KidsMobileScreen extends StatelessWidget {
   final TextTheme? textTheme;
@@ -16,6 +17,9 @@ class KidsMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider =
+        context.watch<ProductsProvider>()..loadKidsProducts();
+
     return Scaffold(
       appBar: AppBarStyleOne(
         title: 'Kids',
@@ -88,18 +92,19 @@ class KidsMobileScreen extends StatelessWidget {
                   int index,
                 ) {
                   return ProductCard(
-                    image: demoPopularProducts[index].image,
-                    brandName: demoPopularProducts[index].brandName,
-                    title: demoPopularProducts[index].title,
-                    price: demoPopularProducts[index].price,
+                    image: productsProvider.kidsProducts[index].image,
+                    brandName: productsProvider.kidsProducts[index].brandName,
+                    title: productsProvider.kidsProducts[index].title,
+                    price: productsProvider.kidsProducts[index].price,
                     priceAfetDiscount:
-                        demoPopularProducts[index].priceAfetDiscount,
-                    dicountpercent: demoPopularProducts[index].dicountpercent,
+                        productsProvider.kidsProducts[index].priceAfetDiscount,
+                    dicountpercent:
+                        productsProvider.kidsProducts[index].dicountpercent,
                     press: () {
                       Navigator.pushNamed(context, 'productDetailsScreenRoute');
                     },
                   );
-                }, childCount: demoPopularProducts.length),
+                }, childCount: productsProvider.kidsProducts.length),
               ),
             ),
           ],

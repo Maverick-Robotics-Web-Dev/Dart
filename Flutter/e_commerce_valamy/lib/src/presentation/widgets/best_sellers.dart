@@ -1,12 +1,17 @@
-import 'package:e_commerce_valamy/src/presentation/widgets/popular_products.dart';
+import 'package:e_commerce_valamy/config/routes/routes.dart';
+import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BestSellers extends StatelessWidget {
   const BestSellers({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider =
+        context.watch<ProductsProvider>()..loadBestSellersProducts();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,27 +30,34 @@ class BestSellers extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             // Find demoBestSellersProducts on models/ProductModel.dart
-            itemCount: demoBestSellersProducts.length,
+            itemCount: productsProvider.bestSellersProducts.length,
             itemBuilder:
                 (context, index) => Padding(
                   padding: EdgeInsets.only(
                     left: 16.0,
                     right:
-                        index == demoBestSellersProducts.length - 1 ? 16.0 : 0,
+                        index == productsProvider.bestSellersProducts.length - 1
+                            ? 16.0
+                            : 0,
                   ),
                   child: ProductCard(
-                    image: demoBestSellersProducts[index].image,
-                    brandName: demoBestSellersProducts[index].brandName,
-                    title: demoBestSellersProducts[index].title,
-                    price: demoBestSellersProducts[index].price,
+                    image: productsProvider.bestSellersProducts[index].image,
+                    brandName:
+                        productsProvider.bestSellersProducts[index].brandName,
+                    title: productsProvider.bestSellersProducts[index].title,
+                    price: productsProvider.bestSellersProducts[index].price,
                     priceAfetDiscount:
-                        demoBestSellersProducts[index].priceAfetDiscount,
+                        productsProvider
+                            .bestSellersProducts[index]
+                            .priceAfetDiscount,
                     dicountpercent:
-                        demoBestSellersProducts[index].dicountpercent,
+                        productsProvider
+                            .bestSellersProducts[index]
+                            .dicountpercent,
                     press: () {
                       Navigator.pushNamed(
                         context,
-                        'productDetailsScreenRoute',
+                        productScreenRoute,
                         arguments: index.isEven,
                       );
                     },
