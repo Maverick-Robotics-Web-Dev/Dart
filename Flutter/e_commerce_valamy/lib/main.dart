@@ -1,6 +1,9 @@
-import 'package:e_commerce_valamy/config/routes/path_routes.dart' as router;
+import 'package:e_commerce_valamy/config/routes/router.dart' as router;
+import 'package:e_commerce_valamy/config/routes/router.dart';
 import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/config/theme/app_theme.dart';
+import 'package:e_commerce_valamy/src/infrastructure/data_sources/product_local_datasource_impl.dart';
+import 'package:e_commerce_valamy/src/infrastructure/repositories/product_repository_impl.dart';
 import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,20 +17,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productRepository = ProductRepositoryImpl(
+      productDatasource: ProductLocalDatasource(),
+    );
+
     return MultiProvider(
       providers: [
         // ChangeNotifierProvider(
         //   create: (_) => ProductsProvider()..loadPopularProducts(),
         // ),
-        ChangeNotifierProvider(create: (_) => ProductsProvider()),
+        ChangeNotifierProvider(
+          create: (_) => ProductsProvider(productRepository: productRepository),
+        ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: appRouter,
         debugShowCheckedModeBanner: false,
         title: 'Valamy',
         theme: lightTheme(context),
         // themeMode: ThemeMode.light,
-        initialRoute: mainScreenRoute,
-        onGenerateRoute: router.generateRoute,
+        // initialRoute: mainScreenRoute,
+        // onGenerateRoute: router.generateRoute,
         // routes: routes,
       ),
     );

@@ -2,6 +2,7 @@ import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:e_commerce_valamy/src/presentation/widgets/product/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class PopularProducts extends StatelessWidget {
@@ -53,11 +54,16 @@ class PopularProducts extends StatelessWidget {
                     dicountpercent:
                         productsProvider.popularProducts[index].dicountpercent,
                     press: () {
-                      Navigator.pushNamed(
-                        context,
-                        productScreenRoute,
-                        arguments: index.isEven,
-                      );
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   productScreenRoute,
+                      //   arguments: index.isEven,
+                      // );
+                      context.push(productScreenRoute, extra: index.isEven);
+                      // context.pushNamed(
+                      //   'product_screen',
+                      //   pathParameters: {'isAvailable': index.isEven as String},
+                      // );
                     },
                   ),
                 ),
