@@ -1,12 +1,10 @@
-import 'package:e_commerce_valamy/config/routes/router.dart' as router;
+import 'package:e_commerce_valamy/config/bloc_providers.dart';
 import 'package:e_commerce_valamy/config/routes/router.dart';
-import 'package:e_commerce_valamy/config/routes/routes.dart';
 import 'package:e_commerce_valamy/config/theme/app_theme.dart';
 import 'package:e_commerce_valamy/src/infrastructure/data_sources/product_local_datasource_impl.dart';
 import 'package:e_commerce_valamy/src/infrastructure/repositories/product_repository_impl.dart';
-import 'package:e_commerce_valamy/src/presentation/providers/products_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MainApp());
@@ -21,15 +19,8 @@ class MainApp extends StatelessWidget {
       productDatasource: ProductLocalDatasource(),
     );
 
-    return MultiProvider(
-      providers: [
-        // ChangeNotifierProvider(
-        //   create: (_) => ProductsProvider()..loadPopularProducts(),
-        // ),
-        ChangeNotifierProvider(
-          create: (_) => ProductsProvider(productRepository: productRepository),
-        ),
-      ],
+    return MultiBlocProvider(
+      providers: blocProviders,
       child: MaterialApp.router(
         routerConfig: appRouter,
         debugShowCheckedModeBanner: false,
