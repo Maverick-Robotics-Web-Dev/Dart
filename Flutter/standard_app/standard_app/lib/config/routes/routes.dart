@@ -1,0 +1,15 @@
+const String signInScreenRoute = '/sign_in_screen';
+const String signUpScreenRoute = '/sign_up_screen';
+const String signUpSetupScreenRoute = '/sign_up_setup_screen';
+const String verificationCodeScreenRoute = '/verification_code_screen';
+const String mainScreenRoute = '/main_screen';
+const String searchScreenRoute = '/search_screen';
+const String notificationScreenRoute = '/notification_screen';
+const String homeScreenRoute = '/home_screen';
+const String profileScreenRoute = '/profile_screen';
+const String onSaleScreenRoute = '/on_sale_screen';
+const String kidsScreenRoute = '/kids_screen';
+const String productScreenRoute = '/product_screen';
+const String productBuyNowScreenRoute = '/product_buy_now_screen';
+const String productReviewsScreenRoute = '/product_reviews_screen';
+const String productAddReviewsScreenRoute = '/product_add_reviews_screen';

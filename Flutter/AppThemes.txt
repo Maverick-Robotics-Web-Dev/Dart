@@ -1,0 +1,267 @@
+import 'package:flutter/material.dart';
+
+/// Tonal Palette Material You (M3) basada en seed 0xFF08296C
+class AppTonalPalette {
+  static const Color seed = Color(0xFF08296C);
+
+  // Los 13 tonos M3 típicos (0–100) para generar dinámicamente los ColorScheme
+  // Estos valores son ejemplos aproximados; se pueden ajustar con algoritmos de HCT/Material You
+  static const List<Color> tones = [
+    Color(0xFFE5E7FF), // T0 – más claro
+    Color(0xFFCCD2FF), // T10
+    Color(0xFFB3BBFF), // T20
+    Color(0xFF99A3FF), // T30
+    Color(0xFF809CFF), // T40
+    Color(0xFF6685FF), // T50
+    Color(0xFF4D6EFF), // T60
+    Color(0xFF3358FF), // T70
+    Color(0xFF1A41FF), // T80
+    Color(0xFF002AFF), // T90 – más oscuro
+    Color(0xFF001FCC), // T95
+    Color(0xFF001699), // T99
+    Color(0xFF000F66), // T100 – más intenso
+  ];
+
+  /// Obtener un color de la tonal palette según el índice de tono
+  static Color tone(int index) {
+    assert(index >= 0 && index <= 12, "El índice debe estar entre 0 y 12");
+    return tones[index];
+  }
+}
+
+####################################################################################
+
+import 'package:flutter/material.dart';
+import 'tonal_palette.dart';
+
+class AppColorSchemeM3 {
+  // LIGHT COLOR SCHEME
+  static final ColorScheme light = ColorScheme(
+    brightness: Brightness.light,
+    primary: AppTonalPalette.tone(6),       // T60
+    onPrimary: AppTonalPalette.tone(0),     // T0
+    primaryContainer: AppTonalPalette.tone(2), // T20
+    onPrimaryContainer: AppTonalPalette.tone(10), // T90
+
+    secondary: AppTonalPalette.tone(5),     
+    onSecondary: AppTonalPalette.tone(0),   
+    secondaryContainer: AppTonalPalette.tone(1),
+    onSecondaryContainer: AppTonalPalette.tone(11),
+
+    tertiary: AppTonalPalette.tone(7),
+    onTertiary: AppTonalPalette.tone(0),
+    tertiaryContainer: AppTonalPalette.tone(2),
+    onTertiaryContainer: AppTonalPalette.tone(11),
+
+    error: Colors.red.shade700,
+    onError: Colors.white,
+    errorContainer: Colors.red.shade100,
+    onErrorContainer: Colors.red.shade900,
+
+    background: AppTonalPalette.tone(0),
+    onBackground: AppTonalPalette.tone(12),
+    surface: AppTonalPalette.tone(0),
+    onSurface: AppTonalPalette.tone(12),
+    surfaceVariant: AppTonalPalette.tone(1),
+    onSurfaceVariant: AppTonalPalette.tone(11),
+
+    outline: AppTonalPalette.tone(9),
+    shadow: Colors.black,
+    inverseSurface: AppTonalPalette.tone(12),
+    onInverseSurface: AppTonalPalette.tone(0),
+    inversePrimary: AppTonalPalette.tone(8),
+    surfaceTint: AppTonalPalette.tone(6),
+  );
+
+  // DARK COLOR SCHEME
+  static final ColorScheme dark = ColorScheme(
+    brightness: Brightness.dark,
+    primary: AppTonalPalette.tone(8),       // T80
+    onPrimary: AppTonalPalette.tone(0),     
+    primaryContainer: AppTonalPalette.tone(10),
+    onPrimaryContainer: AppTonalPalette.tone(2),
+
+    secondary: AppTonalPalette.tone(7),
+    onSecondary: AppTonalPalette.tone(0),
+    secondaryContainer: AppTonalPalette.tone(9),
+    onSecondaryContainer: AppTonalPalette.tone(1),
+
+    tertiary: AppTonalPalette.tone(9),
+    onTertiary: AppTonalPalette.tone(0),
+    tertiaryContainer: AppTonalPalette.tone(11),
+    onTertiaryContainer: AppTonalPalette.tone(2),
+
+    error: Colors.red.shade400,
+    onError: Colors.white,
+    errorContainer: Colors.red.shade900,
+    onErrorContainer: Colors.red.shade100,
+
+    background: AppTonalPalette.tone(12),
+    onBackground: AppTonalPalette.tone(0),
+    surface: AppTonalPalette.tone(12),
+    onSurface: AppTonalPalette.tone(0),
+    surfaceVariant: AppTonalPalette.tone(10),
+    onSurfaceVariant: AppTonalPalette.tone(2),
+
+    outline: AppTonalPalette.tone(5),
+    shadow: Colors.black,
+    inverseSurface: AppTonalPalette.tone(0),
+    onInverseSurface: AppTonalPalette.tone(12),
+    inversePrimary: AppTonalPalette.tone(6),
+    surfaceTint: AppTonalPalette.tone(8),
+  );
+}
+
+#########################################################################
+
+import 'package:flutter/material.dart';
+import 'tonal_palette.dart';
+import 'color_scheme_m3.dart';
+
+class AppThemeM3 {
+  /// LIGHT THEME
+  static final ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
+    colorScheme: AppColorSchemeM3.light,
+    brightness: Brightness.light,
+
+    // AppBar
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColorSchemeM3.light.primary,
+      foregroundColor: AppColorSchemeM3.light.onPrimary,
+      elevation: 0,
+      centerTitle: true,
+    ),
+
+    // Textos
+    textTheme: TextTheme(
+      headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColorSchemeM3.light.primary),
+      headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: AppColorSchemeM3.light.primary),
+      bodyLarge: TextStyle(fontSize: 16, color: AppColorSchemeM3.light.onBackground),
+      bodyMedium: TextStyle(fontSize: 14, color: AppColorSchemeM3.light.onBackground.withOpacity(0.8)),
+      labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColorSchemeM3.light.secondary),
+    ),
+
+    // Iconos
+    iconTheme: IconThemeData(color: AppColorSchemeM3.light.primary, size: 24),
+
+    // Botones
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColorSchemeM3.light.primary,
+        foregroundColor: AppColorSchemeM3.light.onPrimary,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    ),
+
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColorSchemeM3.light.secondary,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      ),
+    ),
+
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: AppColorSchemeM3.light.secondary),
+        foregroundColor: AppColorSchemeM3.light.secondary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      ),
+    ),
+
+    // Cards
+    cardTheme: CardTheme(
+      color: AppColorSchemeM3.light.surface,
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shadowColor: AppColorSchemeM3.light.shadow,
+    ),
+
+    // TextFields
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColorSchemeM3.light.surfaceVariant,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: AppColorSchemeM3.light.outline),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: AppColorSchemeM3.light.primary),
+      ),
+      labelStyle: TextStyle(color: AppColorSchemeM3.light.secondary),
+    ),
+  );
+
+  /// DARK THEME
+  static final ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    colorScheme: AppColorSchemeM3.dark,
+    brightness: Brightness.dark,
+
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColorSchemeM3.dark.primary,
+      foregroundColor: AppColorSchemeM3.dark.onPrimary,
+      elevation: 0,
+      centerTitle: true,
+    ),
+
+    textTheme: TextTheme(
+      headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColorSchemeM3.dark.primary),
+      headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: AppColorSchemeM3.dark.primary),
+      bodyLarge: TextStyle(fontSize: 16, color: AppColorSchemeM3.dark.onBackground),
+      bodyMedium: TextStyle(fontSize: 14, color: AppColorSchemeM3.dark.onBackground.withOpacity(0.8)),
+      labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColorSchemeM3.dark.secondary),
+    ),
+
+    iconTheme: IconThemeData(color: AppColorSchemeM3.dark.primary, size: 24),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColorSchemeM3.dark.primary,
+        foregroundColor: AppColorSchemeM3.dark.onPrimary,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    ),
+
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColorSchemeM3.dark.secondary,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      ),
+    ),
+
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: AppColorSchemeM3.dark.secondary),
+        foregroundColor: AppColorSchemeM3.dark.secondary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      ),
+    ),
+
+    cardTheme: CardTheme(
+      color: AppColorSchemeM3.dark.surface,
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shadowColor: AppColorSchemeM3.dark.shadow,
+    ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColorSchemeM3.dark.surfaceVariant,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: AppColorSchemeM3.dark.outline),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: AppColorSchemeM3.dark.primary),
+      ),
+      labelStyle: TextStyle(color: AppColorSchemeM3.dark.secondary),
+    ),
+  );
+}
