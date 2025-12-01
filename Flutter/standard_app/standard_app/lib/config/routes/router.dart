@@ -1,48 +1,55 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:standard_app/config/routes/routes.dart';
+import 'package:standard_app/presentation/screens/screens.dart';
 
 final appRouter = GoRouter(
-  initialLocation: mainScreenRoute,
+  initialLocation: pathSignInScreenRoute,
   routes: [
+    GoRoute(
+      name: mainScreenRoute,
+      path: pathMainScreenRoute,
+      builder: (context, state) => MainScreen(),
+    ),
+    GoRoute(
+      name: signInScreenRoute,
+      path: pathSignInScreenRoute,
+      builder: (context, state) => SignInScreen(),
+    ),
     // GoRoute(
-    //   // name: 'main_screen',
-    //   path: mainScreenRoute,
-    //   builder: (context, state) => MainScreen(),
-    // ),
-    // GoRoute(
-    //   path: signInScreenRoute,
-    //   builder: (context, state) => SignInScreen(),
-    // ),
-    // GoRoute(
-    //   path: signUpScreenRoute,
+    //   path: pathSignUpScreenRoute,
     //   builder: (context, state) => SignUpScreen(),
     // ),
     // GoRoute(
-    //   path: signUpSetupScreenRoute,
+    //   path: pathSignUpSetupScreenRoute,
     //   builder: (context, state) => SignUpSetupScreen(),
     // ),
     // GoRoute(
-    //   path: verificationCodeScreenRoute,
+    //   path: pathVerificationCodeScreenRoute,
     //   builder: (context, state) => VerificationCodeScreen(),
     // ),
     // GoRoute(
-    //   path: searchScreenRoute,
+    //   path: pathSearchScreenRoute,
     //   builder: (context, state) => SearchScreen(),
     // ),
-    // GoRoute(path: homeScreenRoute, builder: (context, state) => HomeScreen()),
     // GoRoute(
-    //   path: notificationScreenRoute,
+    //   path: pathHomeScreenRoute,
+    //   builder: (context, state) => HomeScreen(),
+    // ),
+    // GoRoute(
+    //   path: pathNotificationScreenRoute,
     //   builder: (context, state) => NotificationScreen(),
     // ),
     // GoRoute(
-    //   path: onSaleScreenRoute,
+    //   path: pathOnSaleScreenRoute,
     //   builder: (context, state) => OnSaleScreen(),
     // ),
-    // GoRoute(path: kidsScreenRoute, builder: (context, state) => KidsScreen()),
+    // GoRoute(
+    //   path: pathKidsScreenRoute,
+    //   builder: (context, state) => KidsScreen(),
+    // ),
     // GoRoute(
     //   name: 'product_screen',
-    //   path: productScreenRoute,
+    //   path: pathProductScreenRoute,
     //   builder: (context, state) {
     //     final bool isProductAvailable = state.extra as bool;
 
@@ -50,15 +57,15 @@ final appRouter = GoRouter(
     //   },
     // ),
     // GoRoute(
-    //   path: productBuyNowScreenRoute,
+    //   path: pathProductBuyNowScreenRoute,
     //   builder: (context, state) => ProductBuyNowScreen(),
     // ),
     // GoRoute(
-    //   path: productReviewsScreenRoute,
+    //   path: pathProductReviewsScreenRoute,
     //   builder: (context, state) => ProductReviewsScreen(),
     // ),
     // GoRoute(
-    //   path: productAddReviewsScreenRoute,
+    //   path: pathProductAddReviewsScreenRoute,
     //   builder: (context, state) => ProductAddReviewScreen(),
     // ),
   ],

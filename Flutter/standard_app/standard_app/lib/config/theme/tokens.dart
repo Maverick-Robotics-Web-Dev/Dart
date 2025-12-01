@@ -26,3 +26,11 @@ class IconsTokens {
   static const double md = 24;
   static const double lg = 32;
 }
+
+class ScreenSizes {
+  static const double xs = 320;
+  static const double s = 411;
+  static const double m = 600;
+  static const double l = 1024;
+  static const double xl = 1280;
+}
