@@ -27,6 +27,15 @@ class IconsTokens {
   static const double lg = 32;
 }
 
+class FontTokens {
+  static const double xs = 4;
+  static const double sm = 8;
+  static const double md = 16;
+  static const double lg = 24;
+  static const double xl = 32;
+  static const double xxl = 48;
+}
+
 class ScreenSizes {
   static const double xs = 320;
   static const double s = 411;

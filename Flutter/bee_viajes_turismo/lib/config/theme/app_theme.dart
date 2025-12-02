@@ -76,6 +76,19 @@ class AppTheme {
       ),
       labelStyle: TextStyle(color: AppColorScheme.light.secondary),
     ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return AppColorScheme.light.primary;
+        }
+        return AppColorScheme.light.onPrimary;
+      }),
+      checkColor: WidgetStateProperty.all(AppColorScheme.light.onPrimary),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(RadiusTokens.xs)),
+      ),
+      side: BorderSide(color: AppColorScheme.light.primary, width: 1.6),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(

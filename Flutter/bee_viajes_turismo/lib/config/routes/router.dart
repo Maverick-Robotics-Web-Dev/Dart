@@ -15,10 +15,11 @@ final appRouter = GoRouter(
       path: pathSignInScreenRoute,
       builder: (context, state) => SignInScreen(),
     ),
-    // GoRoute(
-    //   path: pathSignUpScreenRoute,
-    //   builder: (context, state) => SignUpScreen(),
-    // ),
+    GoRoute(
+      name: signUpScreenRoute,
+      path: pathSignUpScreenRoute,
+      builder: (context, state) => SignUpScreen(),
+    ),
     // GoRoute(
     //   path: pathSignUpSetupScreenRoute,
     //   builder: (context, state) => SignUpSetupScreen(),

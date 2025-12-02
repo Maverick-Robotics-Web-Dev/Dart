@@ -1,20 +1,21 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/config/routes/routes.dart';
 import 'package:bee_viajes_turismo/presentation/widgets/widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SignInMobileScreen extends StatefulWidget {
+class SignUpMobileScreen extends StatefulWidget {
   final ThemeData appTheme;
   final GlobalKey<FormState>? formKey;
 
-  const SignInMobileScreen({super.key, required this.appTheme, this.formKey});
+  const SignUpMobileScreen({super.key, required this.appTheme, this.formKey});
 
   @override
-  State<SignInMobileScreen> createState() => _SignInMobileScreenState();
+  State<SignUpMobileScreen> createState() => _SignUpMobileScreenState();
 }
 
-class _SignInMobileScreenState extends State<SignInMobileScreen> {
+class _SignUpMobileScreenState extends State<SignUpMobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,7 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: SpacingTokens.md),
-              child: Image.asset('assets/img/sign_in_photo_blue.webp'),
+              child: Image.asset('assets/img/sign_up_photo_blue.webp'),
             ),
           ),
           SliverToBoxAdapter(
@@ -51,12 +52,12 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
               child: Column(
                 children: [
                   Text(
-                    '¡Bienvenido de Nuevo!',
+                    '¡Comencemos!',
                     style: widget.appTheme.textTheme.headlineLarge,
                   ),
                   SizedBox(height: SpacingTokens.sm),
                   Text(
-                    'Inicia sesión con los datos que te registraste',
+                    'Ingrese sus datos para crear una cuenta.',
                     style: widget.appTheme.textTheme.titleMedium,
                   ),
                   SizedBox(height: SpacingTokens.lg),
@@ -76,12 +77,38 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                           obscureText: true,
                         ),
                         SizedBox(height: SpacingTokens.sm),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            '¿Olvidaste tu contraseña?',
-                            style: widget.appTheme.textTheme.titleMedium,
-                          ),
+                        Row(
+                          children: [
+                            Transform.scale(
+                              scale: 1.2,
+                              child: Checkbox(
+                                value: false,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                            Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  text: "Acepto los",
+                                  style: widget.appTheme.textTheme.titleMedium,
+                                  children: [
+                                    TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          // Navigator.pushNamed(
+                                          //   context,
+                                          //   'termsOfServicesScreenRoute',
+                                          // );
+                                        },
+                                      text: " Terminos y Condiciones ",
+                                      style:
+                                          widget.appTheme.textTheme.titleMedium,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: SpacingTokens.xxl),
                         ElevatedButton(
@@ -89,22 +116,22 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                             minimumSize: Size(double.infinity, 60),
                           ),
                           child: Text(
-                            'Iniciar Sesión',
+                            'Continuar',
                             style: TextStyle(fontSize: FontTokens.md),
                           ),
                           onPressed: () {
-                            context.pushNamed(mainScreenRoute);
+                            // context.pushNamed(mainScreenRoute);
                           },
                         ),
                         SizedBox(height: SpacingTokens.xs),
                         TextButton(
+                          onPressed: () {
+                            context.pushNamed(signInScreenRoute);
+                          },
                           child: Text(
-                            '¿No tienes una cuenta? Registrate',
+                            '¿Tienes una cuenta? Inica Sesión',
                             style: widget.appTheme.textTheme.titleMedium,
                           ),
-                          onPressed: () {
-                            context.pushNamed(signUpScreenRoute);
-                          },
                         ),
                       ],
                     ),

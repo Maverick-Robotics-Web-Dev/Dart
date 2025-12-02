@@ -4,7 +4,7 @@ import 'package:e_commerce_valamy/src/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: signInScreenRoute,
+  initialLocation: mainScreenRoute,
   routes: [
     GoRoute(
       // name: 'main_screen',

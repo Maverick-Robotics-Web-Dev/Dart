@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bee_viajes_turismo/config/configs.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(
