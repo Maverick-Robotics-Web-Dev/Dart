@@ -65,14 +65,16 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                     child: Column(
                       children: [
                         CustomTextFormField(
+                          labelText: 'Email',
                           hintText: 'Email',
-                          svgPath: "assets/icons/Message.svg",
+                          svgPath: 'assets/icons/Message.svg',
                           keyboardType: TextInputType.emailAddress,
                         ),
                         SizedBox(height: SpacingTokens.md),
                         CustomTextFormField(
+                          labelText: 'Password',
                           hintText: 'Password',
-                          svgPath: "assets/icons/Lock.svg",
+                          svgPath: 'assets/icons/Lock.svg',
                           obscureText: true,
                         ),
                         SizedBox(height: SpacingTokens.sm),

@@ -70,11 +70,23 @@ class AppTheme {
         borderRadius: BorderRadius.circular(RadiusTokens.md),
         borderSide: BorderSide(color: AppColorScheme.light.outline),
       ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(RadiusTokens.md),
+      ),
+      labelStyle: TextStyle(color: AppColorScheme.light.primary),
+      focusColor: AppColorScheme.light.primary,
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusTokens.md),
-        borderSide: BorderSide(color: AppColorScheme.light.primary),
+        borderSide: BorderSide(color: AppColorScheme.light.primary, width: 1.6),
       ),
-      labelStyle: TextStyle(color: AppColorScheme.light.secondary),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(RadiusTokens.md),
+        borderSide: BorderSide(color: AppColorScheme.light.error, width: 1.6),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(RadiusTokens.md),
+        borderSide: BorderSide(color: AppColorScheme.light.error, width: 1.6),
+      ),
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.resolveWith((states) {

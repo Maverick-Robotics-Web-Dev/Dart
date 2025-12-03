@@ -1,5 +1,7 @@
+import 'package:bee_viajes_turismo/config/bloc_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:bee_viajes_turismo/config/configs.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(
@@ -13,11 +15,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: appRouter,
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      // home: Scaffold(body: Center(child: Text('Hello World!'))),
+    return MultiBlocProvider(
+      providers: blocProviders,
+      child: MaterialApp.router(
+        routerConfig: appRouter,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        // home: Scaffold(body: Center(child: Text('Hello World!'))),
+      ),
     );
   }
 }

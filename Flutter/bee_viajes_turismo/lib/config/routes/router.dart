@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:bee_viajes_turismo/config/routes/routes.dart';
 
 final appRouter = GoRouter(
-  initialLocation: pathSignInScreenRoute,
+  initialLocation: pathSignUpScreenRoute,
   routes: [
     GoRoute(
       name: mainScreenRoute,
