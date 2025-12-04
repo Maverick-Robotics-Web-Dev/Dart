@@ -1,40 +1,44 @@
 import 'package:bee_viajes_turismo/domain/entities/entities.dart';
+import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:equatable/equatable.dart';
 
 class SignUpState extends Equatable {
-  final String name;
-  final String lastname;
-  final String username;
-  final String password;
-  final String confirmPassword;
+  final Name name;
+  final LastName lastname;
+  final UserName username;
+  final Password password;
+  final Password confirmPassword;
   final String email;
   final Address address;
   final String phone;
   final FormStatus formStatus;
+  final bool isValid;
 
   const SignUpState({
-    this.name = '',
-    this.lastname = '',
-    this.username = '',
-    this.password = '',
-    this.confirmPassword = '',
+    this.name = const Name.pure(),
+    this.lastname = const LastName.pure(),
+    this.username = const UserName.pure(),
+    this.password = const Password.pure(),
+    this.confirmPassword = const Password.pure(),
     this.email = '',
     this.address = const Address(city: '', number: 0, street: '', zipcode: ''),
     this.phone = '',
     this.formStatus = FormStatus.invalid,
+    this.isValid = false,
   });
 
   SignUpState copyWith({
-    String? name,
-    String? lastname,
-    String? username,
-    String? password,
-    String? confirmPassword,
+    Name? name,
+    LastName? lastname,
+    UserName? username,
+    Password? password,
+    Password? confirmPassword,
     String? email,
     Address? address,
     String? phone,
     FormStatus? formStatus,
+    bool? isValid,
   }) => SignUpState(
     name: name ?? this.name,
     lastname: lastname ?? this.lastname,
@@ -45,6 +49,7 @@ class SignUpState extends Equatable {
     address: address ?? this.address,
     phone: phone ?? this.phone,
     formStatus: formStatus ?? this.formStatus,
+    isValid: isValid ?? this.isValid,
   );
 
   @override
@@ -57,5 +62,6 @@ class SignUpState extends Equatable {
     address,
     phone,
     formStatus,
+    isValid,
   ];
 }

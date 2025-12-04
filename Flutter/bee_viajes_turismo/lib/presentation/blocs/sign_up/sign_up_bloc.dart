@@ -1,5 +1,7 @@
+import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_event.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_state.dart';
+import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +9,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   SignUpBloc() : super(SignUpState()) {
+    on<SignUpInit>(_onSignUpInit);
     on<NameChange>(_onNameChange);
     on<LastnameChange>(_onLastnameChange);
     on<UsernameChange>(_onUsernameChange);
@@ -23,6 +26,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onNameChange(NameChange event, Emitter<SignUpState> emit) {
+    print('NAME: ${event.name.value}');
+    // final name = Name.dirty(value: event.name.value);
     emit(state.copyWith(name: event.name));
   }
 
@@ -35,6 +40,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onPasswordChange(PasswordChange event, Emitter<SignUpState> emit) {
+    print('NAME: ${event.password.value}');
     emit(state.copyWith(password: event.password));
   }
 
@@ -58,6 +64,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onOnSubmit(OnSubmit event, Emitter<SignUpState> emit) {
+    emit(
+      state.copyWith(
+        formStatus: FormStatus.validating,
+        password: Password.dirty(value: state.password.value),
+      ),
+    );
     print('SUBMIT: $state');
   }
 }

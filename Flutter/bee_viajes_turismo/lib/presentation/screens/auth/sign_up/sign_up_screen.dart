@@ -4,8 +4,6 @@ import 'package:bee_viajes_turismo/presentation/screens/auth/sign_up/sign_up_tab
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   SignUpScreen({super.key});
 
   @override
@@ -17,9 +15,9 @@ class SignUpScreen extends StatelessWidget {
         builder: (context, constraints) {
           if (constraints.maxWidth <= ScreenSizes.xl &&
               constraints.maxWidth > ScreenSizes.lg) {
-            return SignUpTabletScreen(appTheme: apptheme, formKey: _formKey);
+            return SignUpTabletScreen(appTheme: apptheme);
           } else {
-            return SignUpMobileScreen(appTheme: apptheme, formKey: _formKey);
+            return SignUpMobileScreen(appTheme: apptheme);
           }
         },
       ),

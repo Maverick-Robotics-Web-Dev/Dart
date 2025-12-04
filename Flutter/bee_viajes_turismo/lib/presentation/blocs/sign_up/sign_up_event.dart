@@ -1,4 +1,5 @@
 import 'package:bee_viajes_turismo/domain/entities/entities.dart';
+import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 
 abstract class SignUpEvent {
@@ -11,31 +12,31 @@ class SignUpInit extends SignUpEvent {
 }
 
 class NameChange extends SignUpEvent {
-  final String name;
+  final Name name;
 
   NameChange({required this.name});
 }
 
 class LastnameChange extends SignUpEvent {
-  final String lastname;
+  final LastName lastname;
 
   LastnameChange({required this.lastname});
 }
 
 class UsernameChange extends SignUpEvent {
-  final String username;
+  final UserName username;
 
   UsernameChange({required this.username});
 }
 
 class PasswordChange extends SignUpEvent {
-  final String password;
+  final Password password;
 
   PasswordChange({required this.password});
 }
 
 class ConfirmPasswordChange extends SignUpEvent {
-  final String confirmPassword;
+  final Password confirmPassword;
 
   ConfirmPasswordChange({required this.confirmPassword});
 }

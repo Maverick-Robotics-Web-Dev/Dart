@@ -1,5 +1,6 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/config/routes/routes.dart';
+import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
 import 'package:bee_viajes_turismo/presentation/widgets/widgets.dart';
 import 'package:flutter/gestures.dart';
@@ -9,13 +10,12 @@ import 'package:go_router/go_router.dart';
 
 class SignUpMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
-  final GlobalKey<FormState>? formKey;
 
-  const SignUpMobileScreen({super.key, required this.appTheme, this.formKey});
+  const SignUpMobileScreen({super.key, required this.appTheme});
 
   @override
   Widget build(BuildContext context) {
-    final SignUpBloc _bloc = BlocProvider.of<SignUpBloc>(context);
+    final SignUpBloc bloc = BlocProvider.of<SignUpBloc>(context);
 
     return Scaffold(
       body: CustomScrollView(
@@ -57,84 +57,108 @@ class SignUpMobileScreen extends StatelessWidget {
                     style: appTheme.textTheme.titleMedium,
                   ),
                   SizedBox(height: SpacingTokens.lg),
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        CustomTextFormField(
-                          hintText: 'Email',
-                          svgPath: "assets/icons/Message.svg",
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        SizedBox(height: SpacingTokens.md),
-                        CustomTextFormField(
-                          hintText: 'Password',
-                          svgPath: "assets/icons/Lock.svg",
-                          obscureText: true,
-                        ),
-                        SizedBox(height: SpacingTokens.md),
-                        CustomTextFormField(
-                          hintText: 'Password',
-                          svgPath: "assets/icons/Lock.svg",
-                          obscureText: true,
-                        ),
-                        SizedBox(height: SpacingTokens.sm),
-                        Row(
+                  BlocBuilder<SignUpBloc, SignUpState>(
+                    builder: (context, state) {
+                      return Form(
+                        child: Column(
                           children: [
-                            Transform.scale(
-                              scale: 1.2,
-                              child: Checkbox(
-                                value: false,
-                                onChanged: (value) {},
+                            CustomTextFormField(
+                              labelText: 'Email',
+                              hintText: 'Email',
+                              svgPath: "assets/icons/Message.svg",
+                              keyboardType: TextInputType.emailAddress,
+                              onChanged: (value) =>
+                                  bloc.add(EmailChange(email: value)),
+                            ),
+                            SizedBox(height: SpacingTokens.md),
+                            CustomTextFormField(
+                              labelText: 'Password',
+                              hintText: 'Password',
+                              svgPath: "assets/icons/Lock.svg",
+                              obscureText: true,
+                              errorText:
+                                  state.password.isPure ||
+                                      state.password.isValid
+                                  ? null
+                                  : 'Campo Requerido',
+                              onChanged: (value) => bloc.add(
+                                PasswordChange(
+                                  password: Password.dirty(value: value),
+                                ),
                               ),
                             ),
-                            Expanded(
-                              child: Text.rich(
-                                TextSpan(
-                                  text: "Acepto los",
-                                  style: appTheme.textTheme.titleMedium,
-                                  children: [
-                                    TextSpan(
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          // Navigator.pushNamed(
-                                          //   context,
-                                          //   'termsOfServicesScreenRoute',
-                                          // );
-                                        },
-                                      text: " Terminos y Condiciones ",
-                                      style: appTheme.textTheme.titleMedium,
-                                    ),
-                                  ],
+                            SizedBox(height: SpacingTokens.md),
+                            CustomTextFormField(
+                              labelText: 'Confirm Password',
+                              hintText: 'Confirm Password',
+                              svgPath: "assets/icons/Lock.svg",
+                              obscureText: true,
+                              onChanged: (value) => bloc.add(
+                                ConfirmPasswordChange(
+                                  confirmPassword: Password.dirty(value: value),
                                 ),
+                              ),
+                            ),
+                            SizedBox(height: SpacingTokens.sm),
+                            Row(
+                              children: [
+                                Transform.scale(
+                                  scale: 1.2,
+                                  child: Checkbox(
+                                    value: false,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: "Acepto los",
+                                      style: appTheme.textTheme.titleMedium,
+                                      children: [
+                                        TextSpan(
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              // Navigator.pushNamed(
+                                              //   context,
+                                              //   'termsOfServicesScreenRoute',
+                                              // );
+                                            },
+                                          text: " Terminos y Condiciones ",
+                                          style: appTheme.textTheme.titleMedium,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: SpacingTokens.xl),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(double.infinity, 60),
+                              ),
+                              child: Text(
+                                'Continuar',
+                                style: TextStyle(fontSize: FontTokens.md),
+                              ),
+                              onPressed: () {
+                                bloc.add(OnSubmit());
+                                // context.pushNamed(mainScreenRoute);
+                              },
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.pushNamed(signInScreenRoute);
+                              },
+                              child: Text(
+                                '¿Tienes una cuenta? Inica Sesión',
+                                style: appTheme.textTheme.titleMedium,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: SpacingTokens.xl),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 60),
-                          ),
-                          child: Text(
-                            'Continuar',
-                            style: TextStyle(fontSize: FontTokens.md),
-                          ),
-                          onPressed: () {
-                            // context.pushNamed(mainScreenRoute);
-                          },
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            context.pushNamed(signInScreenRoute);
-                          },
-                          child: Text(
-                            '¿Tienes una cuenta? Inica Sesión',
-                            style: appTheme.textTheme.titleMedium,
-                          ),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),
