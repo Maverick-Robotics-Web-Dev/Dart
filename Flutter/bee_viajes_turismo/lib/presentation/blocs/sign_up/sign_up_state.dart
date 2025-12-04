@@ -8,8 +8,8 @@ class SignUpState extends Equatable {
   final LastName lastname;
   final UserName username;
   final Password password;
-  final Password confirmPassword;
-  final String email;
+  final ConfirmPassword confirmPassword;
+  final Email email;
   final Address address;
   final String phone;
   final FormStatus formStatus;
@@ -20,8 +20,8 @@ class SignUpState extends Equatable {
     this.lastname = const LastName.pure(),
     this.username = const UserName.pure(),
     this.password = const Password.pure(),
-    this.confirmPassword = const Password.pure(),
-    this.email = '',
+    this.confirmPassword = const ConfirmPassword.pure(),
+    this.email = const Email.pure(),
     this.address = const Address(city: '', number: 0, street: '', zipcode: ''),
     this.phone = '',
     this.formStatus = FormStatus.invalid,
@@ -33,8 +33,8 @@ class SignUpState extends Equatable {
     LastName? lastname,
     UserName? username,
     Password? password,
-    Password? confirmPassword,
-    String? email,
+    ConfirmPassword? confirmPassword,
+    Email? email,
     Address? address,
     String? phone,
     FormStatus? formStatus,
@@ -58,6 +58,7 @@ class SignUpState extends Equatable {
     lastname,
     username,
     password,
+    confirmPassword,
     email,
     address,
     phone,

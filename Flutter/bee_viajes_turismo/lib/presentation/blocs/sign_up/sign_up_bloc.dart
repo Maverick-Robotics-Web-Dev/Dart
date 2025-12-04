@@ -4,6 +4,7 @@ import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_state.dart
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -68,6 +69,15 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       state.copyWith(
         formStatus: FormStatus.validating,
         password: Password.dirty(value: state.password.value),
+        confirmPassword: ConfirmPassword.dirty(
+          value: state.confirmPassword.value,
+        ),
+        email: Email.dirty(value: state.email.value),
+        isValid: Formz.validate([
+          state.password,
+          state.confirmPassword,
+          state.email,
+        ]),
       ),
     );
     print('SUBMIT: $state');

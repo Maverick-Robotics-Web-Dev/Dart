@@ -36,13 +36,13 @@ class PasswordChange extends SignUpEvent {
 }
 
 class ConfirmPasswordChange extends SignUpEvent {
-  final Password confirmPassword;
+  final ConfirmPassword confirmPassword;
 
   ConfirmPasswordChange({required this.confirmPassword});
 }
 
 class EmailChange extends SignUpEvent {
-  final String email;
+  final Email email;
 
   EmailChange({required this.email});
 }

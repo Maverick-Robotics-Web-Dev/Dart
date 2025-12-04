@@ -67,8 +67,10 @@ class SignUpMobileScreen extends StatelessWidget {
                               hintText: 'Email',
                               svgPath: "assets/icons/Message.svg",
                               keyboardType: TextInputType.emailAddress,
-                              onChanged: (value) =>
-                                  bloc.add(EmailChange(email: value)),
+                              errorText: state.email.errorMessage,
+                              onChanged: (value) => bloc.add(
+                                EmailChange(email: Email.dirty(value: value)),
+                              ),
                             ),
                             SizedBox(height: SpacingTokens.md),
                             CustomTextFormField(
@@ -76,11 +78,7 @@ class SignUpMobileScreen extends StatelessWidget {
                               hintText: 'Password',
                               svgPath: "assets/icons/Lock.svg",
                               obscureText: true,
-                              errorText:
-                                  state.password.isPure ||
-                                      state.password.isValid
-                                  ? null
-                                  : 'Campo Requerido',
+                              errorText: state.password.errorMessage,
                               onChanged: (value) => bloc.add(
                                 PasswordChange(
                                   password: Password.dirty(value: value),
@@ -93,9 +91,12 @@ class SignUpMobileScreen extends StatelessWidget {
                               hintText: 'Confirm Password',
                               svgPath: "assets/icons/Lock.svg",
                               obscureText: true,
+                              errorText: state.confirmPassword.errorMessage,
                               onChanged: (value) => bloc.add(
                                 ConfirmPasswordChange(
-                                  confirmPassword: Password.dirty(value: value),
+                                  confirmPassword: ConfirmPassword.dirty(
+                                    value: value,
+                                  ),
                                 ),
                               ),
                             ),

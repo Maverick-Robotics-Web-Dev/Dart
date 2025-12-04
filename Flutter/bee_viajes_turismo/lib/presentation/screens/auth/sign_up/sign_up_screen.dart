@@ -4,7 +4,7 @@ import 'package:bee_viajes_turismo/presentation/screens/auth/sign_up/sign_up_tab
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

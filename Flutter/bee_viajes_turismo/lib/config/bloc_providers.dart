@@ -7,4 +7,5 @@ List<BlocProvider> blocProviders = [
     create: (context) =>
         SignUpBloc()..add(SignUpInit(formStatus: FormStatus.invalid)),
   ),
+  BlocProvider<NotificationsBloc>(create: (context) => NotificationsBloc()),
 ];
