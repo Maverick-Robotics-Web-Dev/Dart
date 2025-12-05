@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "507651845062",
+    "project_id": "flutter-project-4719d",
+    "storage_bucket": "flutter-project-4719d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507651845062:android:a7ce3dc48005025c1ce0c7",
+        "android_client_info": {
+          "package_name": "com.example.bee_viajes_turismo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF0THqhtXGQ2uJH2qMME113d6ndAwQN6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507651845062:android:b318ceb6664f12041ce0c7",
+        "android_client_info": {
+          "package_name": "com.maverickdev.bee_viajes_turismo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF0THqhtXGQ2uJH2qMME113d6ndAwQN6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

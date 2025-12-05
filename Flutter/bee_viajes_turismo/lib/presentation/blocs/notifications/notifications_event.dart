@@ -1,8 +1,18 @@
-import 'package:equatable/equatable.dart';
+import 'package:bee_viajes_turismo/domain/entities/entities.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-sealed class NotificationsEvent extends Equatable {
+abstract class NotificationsEvent {
   const NotificationsEvent();
+}
 
-  @override
-  List<Object> get props => [];
+class NotificationStatusChanged extends NotificationsEvent {
+  final AuthorizationStatus status;
+
+  NotificationStatusChanged({required this.status});
+}
+
+class NotificationReceived extends NotificationsEvent {
+  final PushMessage pushMessage;
+
+  NotificationReceived({required this.pushMessage});
 }

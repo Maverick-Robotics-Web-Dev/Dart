@@ -11,25 +11,37 @@ class MainMobileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${bloc.state.status}'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              bloc.requestPermission();
-              // context.read<NotificationsBloc>().requestPermission();
-            },
-            icon: Icon(Icons.settings),
+    return BlocBuilder<NotificationsBloc, NotificationsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('${state.status}'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  bloc.requestPermission();
+                  // context.read<NotificationsBloc>().requestPermission();
+                },
+                icon: Icon(Icons.settings),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: 0,
-        itemBuilder: (context, index) {
-          return ListTile();
-        },
-      ),
+          body: ListView.builder(
+            itemCount: state.notifications.length,
+            itemBuilder: (context, index) {
+              final notification = state.notifications[index];
+
+              return ListTile(
+                title: Text(notification.title),
+                subtitle: Text(notification.body),
+                leading: notification.imageUrl != null
+                    ? Image.network(notification.imageUrl!)
+                    : null,
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
