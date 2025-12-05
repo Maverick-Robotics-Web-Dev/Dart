@@ -1,4 +1,4 @@
-package com.example.bee_viajes_turismo
+package com.maverickdev.bee_viajes_turismo
 
 import io.flutter.embedding.android.FlutterActivity
 
