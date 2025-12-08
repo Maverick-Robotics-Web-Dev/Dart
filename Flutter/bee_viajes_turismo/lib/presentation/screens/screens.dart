@@ -1,6 +1,7 @@
+export 'package:bee_viajes_turismo/presentation/screens/main/main_screen.dart';
 export 'package:bee_viajes_turismo/presentation/screens/auth/sign_up/sign_up_screen.dart';
 export 'package:bee_viajes_turismo/presentation/screens/auth/sign_in/sign_in_screen.dart';
-export 'package:bee_viajes_turismo/presentation/screens/main/main_screen.dart';
+export 'package:bee_viajes_turismo/presentation/screens/notification/notification_screen.dart';
 
 // class d {
 //   final SignUpScreen s;

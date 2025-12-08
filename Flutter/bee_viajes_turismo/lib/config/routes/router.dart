@@ -36,10 +36,13 @@ final appRouter = GoRouter(
     //   path: pathHomeScreenRoute,
     //   builder: (context, state) => HomeScreen(),
     // ),
-    // GoRoute(
-    //   path: pathNotificationScreenRoute,
-    //   builder: (context, state) => NotificationScreen(),
-    // ),
+    GoRoute(
+      name: notificationScreenRoute,
+      path: '$pathNotificationScreenRoute/:messageId',
+      builder: (context, state) => NotificationScreen(
+        pushMessageId: state.pathParameters['messageId'] ?? '',
+      ),
+    ),
     // GoRoute(
     //   path: pathOnSaleScreenRoute,
     //   builder: (context, state) => OnSaleScreen(),

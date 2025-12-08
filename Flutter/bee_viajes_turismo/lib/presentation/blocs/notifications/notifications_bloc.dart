@@ -22,8 +22,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   NotificationsBloc() : super(NotificationsState()) {
     on<NotificationStatusChanged>(_onNotificationStatusChanged);
     on<NotificationReceived>(_onNotificationReceived);
-    _onInitialStatusCheck();
-    _onForegroundMessage();
+    _initialStatusCheck();
+    _foregroundMessage();
   }
 
   void _onNotificationStatusChanged(
@@ -51,7 +51,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     );
   }
 
-  void _onInitialStatusCheck() async {
+  void _initialStatusCheck() async {
     final settings = await messaging.getNotificationSettings();
     add(NotificationStatusChanged(status: settings.authorizationStatus));
   }
@@ -64,7 +64,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     print('TOKEN:$token');
   }
 
-  void _handleRemoteMessage(RemoteMessage message) {
+  void handleRemoteMessage(RemoteMessage message) {
     if (message.notification == null) return;
 
     final notification = PushMessage(
@@ -82,8 +82,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     add(NotificationReceived(pushMessage: notification));
   }
 
-  void _onForegroundMessage() {
-    FirebaseMessaging.onMessage.listen(_handleRemoteMessage);
+  void _foregroundMessage() {
+    FirebaseMessaging.onMessage.listen(handleRemoteMessage);
   }
 
   void requestPermission() async {
@@ -98,5 +98,16 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     );
 
     add(NotificationStatusChanged(status: settings.authorizationStatus));
+  }
+
+  PushMessage? getMessageById(String pushMessageId) {
+    final exist = state.notifications.any(
+      (element) => element.messageId == pushMessageId,
+    );
+    if (!exist) return null;
+
+    return state.notifications.firstWhere(
+      (element) => element.messageId == pushMessageId,
+    );
   }
 }

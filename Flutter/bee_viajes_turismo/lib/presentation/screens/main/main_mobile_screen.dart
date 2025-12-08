@@ -1,6 +1,8 @@
+import 'package:bee_viajes_turismo/config/routes/routes.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MainMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
@@ -37,6 +39,11 @@ class MainMobileScreen extends StatelessWidget {
                 leading: notification.imageUrl != null
                     ? Image.network(notification.imageUrl!)
                     : null,
+                onTap: () {
+                  context.push(
+                    '$pathNotificationScreenRoute/${notification.messageId}',
+                  );
+                },
               );
             },
           ),
