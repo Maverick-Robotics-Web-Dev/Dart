@@ -16,6 +16,7 @@ dependencies:
   formz: ^0.8.0
   firebase_messaging: ^16.0.4
   firebase_core: ^4.2.1
+  flutter_local_notifications: ^19.5.0
 
 dev_dependencies:
   flutter_test:

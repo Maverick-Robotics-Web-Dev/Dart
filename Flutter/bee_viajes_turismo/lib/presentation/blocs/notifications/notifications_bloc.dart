@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/entities/entities.dart';
 import 'package:bee_viajes_turismo/firebase_options.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/notifications/notifications_event.dart';
@@ -18,6 +19,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  int pushNumberId = 0;
 
   NotificationsBloc() : super(NotificationsState()) {
     on<NotificationStatusChanged>(_onNotificationStatusChanged);
@@ -79,6 +81,13 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
           : message.notification!.apple?.imageUrl,
     );
 
+    LocalNotifications.showLocalNotification(
+      id: ++pushNumberId,
+      title: notification.title,
+      body: notification.body,
+      data: notification.data.toString(),
+    );
+
     add(NotificationReceived(pushMessage: notification));
   }
 
@@ -96,6 +105,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       provisional: false,
       sound: true,
     );
+
+    await LocalNotifications.requestPermissionLocalNotifications();
 
     add(NotificationStatusChanged(status: settings.authorizationStatus));
   }
