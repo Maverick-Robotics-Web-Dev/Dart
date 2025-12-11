@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/entities/entities.dart';
 import 'package:bee_viajes_turismo/firebase_options.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/notifications/notifications_event.dart';
@@ -13,15 +12,24 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
-
-  print("Handling a background message: ${message.messageId}");
 }
 
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   int pushNumberId = 0;
+  final Future<void> Function()? requestLocalNotificationPermissions;
+  final void Function({
+    required int id,
+    String? title,
+    String? body,
+    String? data,
+  })?
+  showLocalNotification;
 
-  NotificationsBloc() : super(NotificationsState()) {
+  NotificationsBloc({
+    this.requestLocalNotificationPermissions,
+    this.showLocalNotification,
+  }) : super(NotificationsState()) {
     on<NotificationStatusChanged>(_onNotificationStatusChanged);
     on<NotificationReceived>(_onNotificationReceived);
     _initialStatusCheck();
@@ -61,9 +69,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   void _getFCMToken() async {
     if (state.status != AuthorizationStatus.authorized) return;
 
-    final token = await messaging.getToken();
-
-    print('TOKEN:$token');
+    // final token = await messaging.getToken();
+    await messaging.getToken();
   }
 
   void handleRemoteMessage(RemoteMessage message) {
@@ -81,12 +88,14 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
           : message.notification!.apple?.imageUrl,
     );
 
-    LocalNotifications.showLocalNotification(
-      id: ++pushNumberId,
-      title: notification.title,
-      body: notification.body,
-      data: notification.data.toString(),
-    );
+    if (showLocalNotification != null) {
+      showLocalNotification!(
+        id: ++pushNumberId,
+        title: notification.title,
+        body: notification.body,
+        data: notification.messageId,
+      );
+    }
 
     add(NotificationReceived(pushMessage: notification));
   }
@@ -106,7 +115,9 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       sound: true,
     );
 
-    await LocalNotifications.requestPermissionLocalNotifications();
+    if (requestLocalNotificationPermissions != null) {
+      await requestLocalNotificationPermissions!();
+    }
 
     add(NotificationStatusChanged(status: settings.authorizationStatus));
   }

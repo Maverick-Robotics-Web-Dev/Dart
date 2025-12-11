@@ -4,7 +4,7 @@ enum LastNameError { empty, length }
 
 enum UserNameError { empty, length }
 
-enum PasswordError { empty, length }
+enum PasswordError { empty, length, format }
 
 enum ConfirmPasswordError { empty, length }
 

@@ -27,7 +27,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onNameChange(NameChange event, Emitter<SignUpState> emit) {
-    print('NAME: ${event.name.value}');
     // final name = Name.dirty(value: event.name.value);
     emit(state.copyWith(name: event.name));
   }

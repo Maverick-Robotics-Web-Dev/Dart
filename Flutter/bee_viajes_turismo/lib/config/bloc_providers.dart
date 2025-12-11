@@ -1,4 +1,6 @@
+import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_event.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,5 +9,12 @@ List<BlocProvider> blocProviders = [
     create: (context) =>
         SignUpBloc()..add(SignUpInit(formStatus: FormStatus.invalid)),
   ),
-  BlocProvider<NotificationsBloc>(create: (context) => NotificationsBloc()),
+  BlocProvider<NotificationsBloc>(
+    create: (context) => NotificationsBloc(
+      requestLocalNotificationPermissions:
+          LocalNotifications.requestPermissionLocalNotifications,
+      showLocalNotification: LocalNotifications.showLocalNotification,
+    ),
+  ),
+  BlocProvider<SignInBloc>(create: (context) => SignInBloc()),
 ];

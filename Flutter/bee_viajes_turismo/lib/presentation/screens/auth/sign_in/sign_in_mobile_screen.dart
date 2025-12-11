@@ -1,22 +1,24 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/config/routes/routes.dart';
+import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_event.dart';
 import 'package:bee_viajes_turismo/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class SignInMobileScreen extends StatefulWidget {
+class SignInMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
   final GlobalKey<FormState>? formKey;
 
   const SignInMobileScreen({super.key, required this.appTheme, this.formKey});
 
   @override
-  State<SignInMobileScreen> createState() => _SignInMobileScreenState();
-}
-
-class _SignInMobileScreenState extends State<SignInMobileScreen> {
-  @override
   Widget build(BuildContext context) {
+    final SignInBloc bloc = context.read<SignInBloc>();
+    final SignInBloc blocState = context.watch<SignInBloc>();
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -30,7 +32,7 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                   SizedBox(width: SpacingTokens.lg),
                   Text(
                     'BEE VIAJES Y TURISMO',
-                    style: widget.appTheme.textTheme.headlineMedium,
+                    style: appTheme.textTheme.headlineMedium,
                   ),
                 ],
               ),
@@ -52,23 +54,29 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                 children: [
                   Text(
                     '¡Bienvenido de Nuevo!',
-                    style: widget.appTheme.textTheme.headlineLarge,
+                    style: appTheme.textTheme.headlineLarge,
                   ),
                   SizedBox(height: SpacingTokens.sm),
                   Text(
                     'Inicia sesión con los datos que te registraste',
-                    style: widget.appTheme.textTheme.titleMedium,
+                    style: appTheme.textTheme.titleMedium,
                   ),
                   SizedBox(height: SpacingTokens.lg),
                   Form(
-                    key: widget.formKey,
+                    key: formKey,
                     child: Column(
                       children: [
                         CustomTextFormField(
                           labelText: 'Email',
                           hintText: 'Email',
                           svgPath: 'assets/icons/Message.svg',
+                          errorText: blocState.state.email.errorMessage,
                           keyboardType: TextInputType.emailAddress,
+                          onChanged: (value) {
+                            bloc.add(
+                              EmailChange(email: Email.dirty(value: value)),
+                            );
+                          },
                         ),
                         SizedBox(height: SpacingTokens.md),
                         CustomTextFormField(
@@ -76,13 +84,21 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                           hintText: 'Password',
                           svgPath: 'assets/icons/Lock.svg',
                           obscureText: true,
+                          errorText: blocState.state.password.errorMessage,
+                          onChanged: (value) {
+                            bloc.add(
+                              PasswordChange(
+                                password: Password.dirty(value: value),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(height: SpacingTokens.sm),
                         TextButton(
                           onPressed: () {},
                           child: Text(
                             '¿Olvidaste tu contraseña?',
-                            style: widget.appTheme.textTheme.titleMedium,
+                            style: appTheme.textTheme.titleMedium,
                           ),
                         ),
                         SizedBox(height: SpacingTokens.xxl),
@@ -95,14 +111,15 @@ class _SignInMobileScreenState extends State<SignInMobileScreen> {
                             style: TextStyle(fontSize: FontTokens.md),
                           ),
                           onPressed: () {
-                            context.pushNamed(mainScreenRoute);
+                            // context.pushNamed(mainScreenRoute);
+                            bloc.add(OnFormSubmit());
                           },
                         ),
                         SizedBox(height: SpacingTokens.xs),
                         TextButton(
                           child: Text(
                             '¿No tienes una cuenta? Registrate',
-                            style: widget.appTheme.textTheme.titleMedium,
+                            style: appTheme.textTheme.titleMedium,
                           ),
                           onPressed: () {
                             context.pushNamed(signUpScreenRoute);
