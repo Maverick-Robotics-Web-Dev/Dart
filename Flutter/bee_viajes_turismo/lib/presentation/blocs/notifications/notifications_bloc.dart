@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bee_viajes_turismo/domain/entities/entities.dart';
+import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/firebase_options.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/notifications/notifications_event.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/notifications/notifications_state.dart';

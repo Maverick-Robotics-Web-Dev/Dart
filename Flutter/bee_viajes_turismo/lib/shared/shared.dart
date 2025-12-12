@@ -1,2 +1,2 @@
-export 'package:bee_viajes_turismo/shared/enums/form_status.dart';
-export 'package:bee_viajes_turismo/shared/enums/errors.dart';
+export 'enums/form_status.dart';
+export 'enums/errors.dart';

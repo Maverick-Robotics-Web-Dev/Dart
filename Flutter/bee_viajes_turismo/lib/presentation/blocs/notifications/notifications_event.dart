@@ -1,4 +1,4 @@
-import 'package:bee_viajes_turismo/domain/entities/entities.dart';
+import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 abstract class NotificationsEvent {

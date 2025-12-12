@@ -1,4 +1,4 @@
-import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
+import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 
 abstract class SignInFormEvent {
   const SignInFormEvent();

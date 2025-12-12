@@ -1,5 +1,7 @@
-export 'package:bee_viajes_turismo/config/theme/app_theme.dart';
-export 'package:bee_viajes_turismo/config/theme/color_scheme.dart';
-export 'package:bee_viajes_turismo/config/theme/tokens.dart';
-export 'package:bee_viajes_turismo/config/routes/router.dart';
-export 'package:bee_viajes_turismo/config/local_notifications/local_notifications.dart';
+export 'theme/app_theme.dart';
+export 'theme/color_scheme.dart';
+export 'theme/tokens.dart';
+export 'routes/router.dart';
+export 'routes/routes.dart';
+export 'local_notifications/local_notifications.dart';
+export 'constanst/enviroment.dart';

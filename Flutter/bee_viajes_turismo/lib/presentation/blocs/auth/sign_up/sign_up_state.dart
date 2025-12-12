@@ -1,5 +1,5 @@
-import 'package:bee_viajes_turismo/domain/entities/entities.dart';
-import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
+import 'package:bee_viajes_turismo/domain/domain.dart';
+import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:equatable/equatable.dart';
 

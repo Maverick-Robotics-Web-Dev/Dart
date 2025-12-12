@@ -1,4 +1,4 @@
-import 'package:bee_viajes_turismo/domain/entities/user/address_entity.dart';
+import 'address_entity.dart';
 
 class CreateUserEntity {
   final String name;

@@ -1,9 +1,8 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
-import 'package:bee_viajes_turismo/config/routes/routes.dart';
-import 'package:bee_viajes_turismo/infrastructure/inputs/inputs.dart';
+import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_event.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_state.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_up/sign_up_event.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_up/sign_up_state.dart';
 import 'package:bee_viajes_turismo/presentation/widgets/widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

@@ -14,6 +14,7 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await NotificationsBloc.initializeFCM();
   await LocalNotifications.initializeLocalNotifications();
+  await Enviroment.initEnviroment();
 
   runApp(const MainApp());
 }
@@ -23,6 +24,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('API: ${Enviroment.apiUrl}');
+
     return MultiBlocProvider(
       providers: blocProviders,
       child: MaterialApp.router(

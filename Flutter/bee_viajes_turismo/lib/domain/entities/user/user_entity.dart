@@ -1,6 +1,6 @@
-import 'package:bee_viajes_turismo/domain/entities/user/address_entity.dart';
+import 'address_entity.dart';
 
-class UserEntity {
+class User {
   final int id;
   final String name;
   final String lastname;
@@ -9,8 +9,10 @@ class UserEntity {
   final String email;
   final Address address;
   final String phone;
+  final List<String> roles;
+  final String token;
 
-  UserEntity({
+  User({
     required this.address,
     required this.id,
     required this.email,
@@ -19,5 +21,11 @@ class UserEntity {
     required this.name,
     required this.lastname,
     required this.phone,
+    required this.roles,
+    required this.token,
   });
+
+  bool get isAdmin {
+    return roles.contains('admin');
+  }
 }
