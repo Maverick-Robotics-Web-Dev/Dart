@@ -12,22 +12,60 @@ class SignInBloc extends Bloc<SignInFormEvent, SignInFormState> {
   }
 
   void _onEmailChange(EmailChange event, Emitter<SignInFormState> emit) {
-    emit(state.copyWith(email: event.email));
+    final email = Email.dirty(value: event.email.value);
+
+    emit(
+      state.copyWith(
+        email: email,
+        // isValid: Formz.validate([email, state.password]),
+      ),
+    );
+    // emit(
+    //   state.copyWith(
+    //     email: event.email,
+    //     isValid: Formz.validate([state.email, state.password]),
+    //   ),
+    // );
   }
 
   void _onPasswordChange(PasswordChange event, Emitter<SignInFormState> emit) {
-    emit(state.copyWith(password: event.password));
+    final password = Password.dirty(value: event.password.value);
+
+    emit(
+      state.copyWith(
+        password: password,
+        // isValid: Formz.validate([state.email, password]),
+      ),
+    );
+    // emit(
+    //   state.copyWith(
+    //     password: event.password,
+    //     isValid: Formz.validate([state.email, state.password]),
+    //   ),
+    // );
   }
 
   void _onOnFormSubmit(OnFormSubmit event, Emitter<SignInFormState> emit) {
+    final email = Email.dirty(value: state.email.value);
+    final password = Password.dirty(value: state.password.value);
+
     emit(
       state.copyWith(
         isFormPosted: true,
-        email: Email.dirty(value: state.email.value),
-        password: Password.dirty(value: state.password.value),
-        isValid: Formz.validate([state.email, state.password]),
+        email: email,
+        password: password,
+        isValid: Formz.validate([email, password]),
       ),
     );
+
+    // emit(
+    //   state.copyWith(
+    //     isFormPosted: true,
+    //     email: state.email,
+    //     password: state.password,
+    //     isValid: Formz.validate([state.email, state.password]),
+    //   ),
+    // );
 
     if (!state.isValid) return;
     print('SUBMIT: $state');

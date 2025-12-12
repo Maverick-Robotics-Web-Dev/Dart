@@ -70,7 +70,9 @@ class SignInMobileScreen extends StatelessWidget {
                           labelText: 'Email',
                           hintText: 'Email',
                           svgPath: 'assets/icons/Message.svg',
-                          errorText: blocState.state.email.errorMessage,
+                          errorText: blocState.state.isFormPosted
+                              ? blocState.state.email.errorMessage
+                              : null,
                           keyboardType: TextInputType.emailAddress,
                           onChanged: (value) {
                             bloc.add(
@@ -84,7 +86,9 @@ class SignInMobileScreen extends StatelessWidget {
                           hintText: 'Password',
                           svgPath: 'assets/icons/Lock.svg',
                           obscureText: true,
-                          errorText: blocState.state.password.errorMessage,
+                          errorText: blocState.state.isFormPosted
+                              ? blocState.state.password.errorMessage
+                              : null,
                           onChanged: (value) {
                             bloc.add(
                               PasswordChange(
