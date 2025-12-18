@@ -1,11 +1,11 @@
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_in/sign_in_event.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_in/sign_in_state.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_event.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_state.dart';
 import 'package:formz/formz.dart';
 
-class SignInBloc extends Bloc<SignInFormEvent, SignInFormState> {
-  SignInBloc() : super(SignInFormState()) {
+class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
+  SignInFormBloc() : super(SignInFormState()) {
     on<EmailChange>(_onEmailChange);
     on<PasswordChange>(_onPasswordChange);
     on<OnFormSubmit>(_onOnFormSubmit);

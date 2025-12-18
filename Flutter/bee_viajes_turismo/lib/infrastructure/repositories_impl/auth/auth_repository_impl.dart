@@ -3,39 +3,39 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import '../../infrastructure.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
-  final AuthDataSource dataSource;
+  final AuthDataSource _dataSource;
 
   AuthRepositoryImpl({AuthDataSource? dataSource})
-    : dataSource = dataSource ?? AuthDatasourceImpl();
+    : _dataSource = dataSource ?? AuthDatasourceImpl();
 
   @override
-  Future<User> checkAuthStatus(String token) {
-    return dataSource.checkAuthStatus(token);
+  Future<User> checkAuthStatus({required String token}) {
+    return _dataSource.checkAuthStatus(token: token);
   }
 
   @override
-  Future<User> signIn(String email, String password) {
-    return dataSource.signIn(email, password);
+  Future<User> signIn({required String email, required String password}) {
+    return _dataSource.signIn(email: email, password: password);
   }
 
   @override
-  Future<User> signUp(
-    String name,
-    String lastname,
-    String username,
-    String password,
-    String email,
-    Address address,
-    String phone,
-  ) {
-    return dataSource.signUp(
-      name,
-      lastname,
-      username,
-      password,
-      email,
-      address,
-      phone,
+  Future<User> signUp({
+    required String name,
+    required String lastname,
+    required String username,
+    required String password,
+    required String email,
+    required Address address,
+    required String phone,
+  }) {
+    return _dataSource.signUp(
+      name: name,
+      lastname: lastname,
+      username: username,
+      password: password,
+      email: email,
+      address: address,
+      phone: phone,
     );
   }
 }

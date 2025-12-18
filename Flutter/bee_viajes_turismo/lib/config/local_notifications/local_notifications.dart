@@ -1,5 +1,4 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
-import 'package:bee_viajes_turismo/config/routes/routes.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotifications {

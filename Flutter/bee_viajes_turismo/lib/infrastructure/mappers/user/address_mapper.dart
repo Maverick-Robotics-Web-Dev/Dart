@@ -1,4 +1,4 @@
-import 'package:bee_viajes_turismo/infrastructure/models/user/geolocation_model.dart';
+import 'package:bee_viajes_turismo/infrastructure/mappers/user/geolocation_mapper.dart';
 
 class Address {
   final Geolocation? geolocation;

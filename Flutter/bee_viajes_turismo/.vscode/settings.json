@@ -4,5 +4,6 @@
     "titleBar.activeBackground": "#4D3549",
     "titleBar.activeForeground": "#FBF9FB"
   },
-  "cmake.ignoreCMakeListsMissing": true
+  "cmake.ignoreCMakeListsMissing": true,
+  "postman.settings.dotenv-detection-notification-visibility": false
 }

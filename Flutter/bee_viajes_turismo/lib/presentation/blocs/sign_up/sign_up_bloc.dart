@@ -1,6 +1,6 @@
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_up/sign_up_event.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_up/sign_up_state.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_event.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/sign_up/sign_up_state.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +40,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onPasswordChange(PasswordChange event, Emitter<SignUpState> emit) {
-    print('NAME: ${event.password.value}');
     emit(state.copyWith(password: event.password));
   }
 
@@ -79,6 +78,5 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         ]),
       ),
     );
-    print('SUBMIT: $state');
   }
 }

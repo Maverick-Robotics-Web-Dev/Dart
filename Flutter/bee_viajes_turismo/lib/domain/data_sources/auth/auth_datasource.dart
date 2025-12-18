@@ -2,16 +2,16 @@ import '../../entities/user/address_entity.dart';
 import '../../entities/user/user_entity.dart';
 
 abstract class AuthDataSource {
-  Future<User> signIn(String email, String password);
-  Future<User> signUp(
-    String name,
-    String lastname,
-    String username,
-    String password,
-    String email,
-    Address address,
-    String phone,
-  );
+  Future<User> signIn({required String email, required String password});
+  Future<User> signUp({
+    required String name,
+    required String lastname,
+    required String username,
+    required String password,
+    required String email,
+    required Address address,
+    required String phone,
+  });
 
-  Future<User> checkAuthStatus(String token);
+  Future<User> checkAuthStatus({required String token});
 }

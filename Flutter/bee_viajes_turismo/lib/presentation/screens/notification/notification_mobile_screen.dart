@@ -1,7 +1,8 @@
 import 'package:bee_viajes_turismo/domain/domain.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/notifications/notifications_bloc.dart';
 
 class NotificationMobileScreen extends StatelessWidget {
   final ThemeData appTheme;

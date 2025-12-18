@@ -1,5 +1,5 @@
 import 'package:bee_viajes_turismo/config/routes/routes.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/blocs.dart';
+import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/notifications/notifications_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

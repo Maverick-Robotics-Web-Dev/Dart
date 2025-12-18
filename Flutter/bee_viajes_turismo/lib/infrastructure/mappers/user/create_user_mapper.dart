@@ -1,7 +1,6 @@
-import 'package:bee_viajes_turismo/infrastructure/models/user/address_model.dart';
+import 'package:bee_viajes_turismo/infrastructure/mappers/user/address_mapper.dart';
 
-class UserModel {
-  final int id;
+class CreateUserModel {
   final String name;
   final String lastname;
   final String username;
@@ -10,9 +9,8 @@ class UserModel {
   final Address address;
   final String phone;
 
-  UserModel({
+  CreateUserModel({
     required this.address,
-    required this.id,
     required this.email,
     required this.username,
     required this.password,
@@ -21,18 +19,16 @@ class UserModel {
     required this.phone,
   });
 
-  UserModel copyWith({
+  CreateUserModel copyWith({
     Address? address,
-    int? id,
     String? email,
     String? username,
     String? password,
     String? name,
     String? lastname,
     String? phone,
-  }) => UserModel(
+  }) => CreateUserModel(
     address: address ?? this.address,
-    id: id ?? this.id,
     email: email ?? this.email,
     username: username ?? this.username,
     password: password ?? this.password,
@@ -41,20 +37,19 @@ class UserModel {
     phone: phone ?? this.phone,
   );
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    address: Address.fromJson(json["address"]),
-    id: json["id"],
-    email: json["email"],
-    username: json["username"],
-    password: json["password"],
-    name: json["name"],
-    lastname: json["name"],
-    phone: json["phone"],
-  );
+  factory CreateUserModel.fromJson(Map<String, dynamic> json) =>
+      CreateUserModel(
+        address: Address.fromJson(json["address"]),
+        email: json["email"],
+        username: json["username"],
+        password: json["password"],
+        name: json["name"],
+        lastname: json["name"],
+        phone: json["phone"],
+      );
 
   Map<String, dynamic> toJson() => {
     "address": address.toJson(),
-    "id": id,
     "email": email,
     "username": username,
     "password": password,

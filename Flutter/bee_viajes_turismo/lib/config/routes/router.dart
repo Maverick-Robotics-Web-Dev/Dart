@@ -1,4 +1,4 @@
-import 'package:bee_viajes_turismo/presentation/screens/screens.dart';
+import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_viajes_turismo/config/routes/routes.dart';
 
