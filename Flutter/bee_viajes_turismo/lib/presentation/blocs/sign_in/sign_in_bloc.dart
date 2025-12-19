@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_event.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_state.dart';
 import 'package:formz/formz.dart';
 
+import '../auth/auth_bloc.dart';
+import '../auth/auth_event.dart';
+
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
+  final AuthBloc authBloc = AuthBloc();
+
   SignInFormBloc() : super(SignInFormState()) {
     on<EmailChange>(_onEmailChange);
     on<PasswordChange>(_onPasswordChange);
@@ -68,5 +75,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     // );
 
     if (!state.isValid) return;
+    // print(state);
+    authBloc.add(SignIn(email: email.value, password: password.value));
   }
 }

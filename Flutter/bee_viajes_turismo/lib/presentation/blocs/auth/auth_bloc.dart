@@ -22,7 +22,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         email: event.email,
         password: event.password,
       );
-      _setLoggedUser(user);
+      // _setLoggedUser(user);
+      emit(state.copyWith(user: user, authStatus: AuthStatus.authenticated));
     } on WrongCredentials {
       emit(
         state.copyWith(
@@ -31,6 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           errorMessage: 'Wrong email or password.',
         ),
       );
+      print('WrongCredentials:${state.errorMessage}');
     } catch (e) {
       emit(
         state.copyWith(
@@ -52,7 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     state.copyWith(user: user, authStatus: AuthStatus.authenticated);
   }
 
-  void setSignOut(Emitter<AuthState> emit, {String errorMessage = ''}) {
+  void setSignOut({String errorMessage = ''}) {
     state.copyWith(
       user: null,
       authStatus: AuthStatus.notAuthenticated,
