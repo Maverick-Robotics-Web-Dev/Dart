@@ -10,15 +10,24 @@ class AuthDatasourceImpl extends AuthDataSource {
   Future<User> signIn({required String email, required String password}) async {
     try {
       final response = await dio.post(
-        '/auth/signin',
+        '/auth/login',
         data: {'email': email, 'password': password},
       );
 
       final user = UserMapper.fromJson(response.data);
 
       return user;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) throw WrongCredentials();
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw ConnectionTimeout();
+      }
+      throw CustomError(
+        message: e.response?.data['message'],
+        errorCode: e.response?.data['statusCode'],
+      );
     } catch (e) {
-      throw WrongCredentials();
+      throw CustomError(message: e.toString(), errorCode: 500);
     }
   }
 

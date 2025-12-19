@@ -68,6 +68,5 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     // );
 
     if (!state.isValid) return;
-    print('SUBMIT: $state');
   }
 }

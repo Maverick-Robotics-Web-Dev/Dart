@@ -1,19 +1,19 @@
 import 'address_entity.dart';
 
 class User {
-  final int id;
+  final String id;
   final String name;
-  final String lastname;
-  final String username;
-  final String password;
+  final String? lastname;
+  final String? username;
+  final String? password;
   final String email;
-  final Address address;
-  final String phone;
+  final Address? address;
+  final String? phone;
   final List<String> roles;
   final String token;
 
   User({
-    required this.address,
+    this.address,
     required this.id,
     required this.email,
     required this.username,

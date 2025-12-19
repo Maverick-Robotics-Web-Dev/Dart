@@ -9,7 +9,7 @@ class UserMapper {
     email: json['email'],
     username: json['username'],
     password: json['password'],
-    name: json['name'],
+    name: json['fullName'],
     lastname: json['name'],
     phone: json['phone'],
     roles: List<String>.from(json['roles'].map((role) => role)),

@@ -1,10 +1,10 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/auth/auth_event.dart';
 import '../../../blocs/auth/auth_state.dart';
 import '../../../blocs/sign_in/sign_in_bloc.dart';
@@ -20,14 +20,15 @@ class SignInMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SignInFormBloc bloc = context.read<SignInFormBloc>();
-    final AuthBloc authBloc = context.read<AuthBloc>();
+    final SignInFormBloc bloc = BlocProvider.of<SignInFormBloc>(context);
+    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
     // final SignInFormBloc blocState = context.watch<SignInFormBloc>();
 
     return MultiBlocListener(
       listeners: [
         BlocListener<SignInFormBloc, SignInFormState>(
           listener: (context, state) {
+            print('HOLA ${state.isValid}');
             if (state.isValid) {
               authBloc.add(
                 SignIn(
@@ -38,7 +39,22 @@ class SignInMobileScreen extends StatelessWidget {
             }
           },
         ),
-        BlocListener<AuthBloc, AuthState>(listener: listener),
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state.errorMessage.isNotEmpty) {
+              // ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+            }
+            // else {
+            //   ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            //   ScaffoldMessenger.of(
+            //     context,
+            //   ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+            // }
+          },
+        ),
       ],
       child: Scaffold(
         body: CustomScrollView(
@@ -88,7 +104,6 @@ class SignInMobileScreen extends StatelessWidget {
                     BlocBuilder<SignInFormBloc, SignInFormState>(
                       builder: (context, state) {
                         return Form(
-                          key: formKey,
                           child: Column(
                             children: [
                               CustomTextFormField(
