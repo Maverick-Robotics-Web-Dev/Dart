@@ -1,0 +1,229 @@
+Perfecto 🚀
+Vamos a conectar una API real usando Dio, manteniendo Clean Architecture + Formz + flutter_bloc.
+
+El ejemplo usará un endpoint real de login (tipo REST) y manejo correcto de errores.
+
+📦 Dependencias (pubspec.yaml)
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.3
+  formz: ^0.6.1
+  dio: ^5.4.0
+
+🧱 Arquitectura (actualizada)
+
+data/
+ ├── datasources/
+ │    └── auth_remote_datasource.dart
+ ├── models/
+ │    └── login_response_model.dart
+ ├── repositories/
+ │    └── auth_repository_impl.dart
+
+domain/
+ ├── repositories/
+ │    └── auth_repository.dart
+ └── usecases/
+      └── login_usecase.dart
+
+presentation/
+ └── blocs/
+      └── login_bloc.dart
+
+1️⃣ DATA LAYER
+🌐 Dio Client
+data/datasources/dio_client.dart
+
+import 'package:dio/dio.dart';
+
+class DioClient {
+  static Dio create() {
+    return Dio(
+      BaseOptions(
+        baseUrl: 'https://reqres.in/api', // API real de pruebas
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      ),
+    );
+  }
+}
+
+🔐 Remote Data Source
+auth_remote_datasource.dart
+
+import 'package:dio/dio.dart';
+
+abstract class AuthRemoteDataSource {
+  Future<String> login({
+    required String email,
+    required String password,
+  });
+}
+
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final Dio dio;
+
+  AuthRemoteDataSourceImpl(this.dio);
+
+  @override
+  Future<String> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await dio.post(
+        '/login',
+        data: {
+          'email': email,
+          'password': password,
+        },
+      );
+
+      return response.data['token'];
+    } on DioException catch (e) {
+      throw Exception(
+        e.response?.data['error'] ?? 'Error de autenticación',
+      );
+    }
+  }
+}
+
+📦 Modelo
+login_response_model.dart
+
+class LoginResponseModel {
+  final String token;
+
+  LoginResponseModel({required this.token});
+
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
+    return LoginResponseModel(
+      token: json['token'],
+    );
+  }
+}
+
+🗄️ Repositorio (implementación)
+auth_repository_impl.dart
+
+import '../../domain/repositories/auth_repository.dart';
+import '../datasources/auth_remote_datasource.dart';
+
+class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteDataSource remoteDataSource;
+
+  AuthRepositoryImpl(this.remoteDataSource);
+
+  @override
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    await remoteDataSource.login(
+      email: email,
+      password: password,
+    );
+  }
+}
+
+2️⃣ DOMAIN LAYER (sin cambios)
+auth_repository.dart
+
+abstract class AuthRepository {
+  Future<void> login({
+    required String email,
+    required String password,
+  });
+}
+
+login_usecase.dart
+
+class LoginUseCase {
+  final AuthRepository repository;
+
+  LoginUseCase(this.repository);
+
+  Future<void> call(String email, String password) {
+    return repository.login(
+      email: email,
+      password: password,
+    );
+  }
+}
+
+3️⃣ PRESENTATION LAYER (LoginBloc)
+
+👉 No cambia
+El BLoC no sabe si la data viene de Dio, Firebase o mock.
+
+Solo recibe éxito o error.
+
+try {
+  await loginUseCase(
+    state.email.value,
+    state.password.value,
+  );
+  emit(state.copyWith(status: FormzSubmissionStatus.success));
+} catch (e) {
+  emit(state.copyWith(
+    status: FormzSubmissionStatus.failure,
+    errorMessage: e.toString(),
+  ));
+}
+
+4️⃣ Inyección de dependencias
+main.dart
+
+void main() {
+  final dio = DioClient.create();
+  final remoteDataSource = AuthRemoteDataSourceImpl(dio);
+  final authRepository = AuthRepositoryImpl(remoteDataSource);
+  final loginUseCase = LoginUseCase(authRepository);
+
+  runApp(
+    BlocProvider(
+      create: (_) => LoginBloc(loginUseCase),
+      child: const MaterialApp(
+        home: LoginPage(),
+      ),
+    ),
+  );
+}
+
+🧪 API usada (real)
+
+ReqRes
+
+POST https://reqres.in/api/login
+
+Credenciales válidas:
+
+email: eve.holt@reqres.in
+password: cityslicka
+
+✅ Flujo completo
+
+UI
+ ↓
+LoginBloc (Formz valida)
+ ↓
+LoginUseCase
+ ↓
+AuthRepository
+ ↓
+AuthRemoteDataSource
+ ↓
+Dio → API real
+
+⭐ Buenas prácticas aplicadas
+
+✔ Dio aislado en Data layer
+✔ Manejo de errores con DioException
+✔ BLoC desacoplado
+✔ Fácil de testear (mock datasource)
+✔ Escalable a refresh token, interceptors, headers

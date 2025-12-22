@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(
           user: null,
           authStatus: AuthStatus.notAuthenticated,
-          errorMessage: 'Wrong email or password.',
+          errorMessage: 'Wrong email or password',
         ),
       );
       print('WrongCredentials:${state.errorMessage}');
@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(
           user: null,
           authStatus: AuthStatus.notAuthenticated,
-          errorMessage: 'An unknown error occurred.',
+          errorMessage: 'An unknown error occurred',
         ),
       );
     }
