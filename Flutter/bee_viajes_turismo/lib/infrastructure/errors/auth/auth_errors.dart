@@ -1,6 +1,4 @@
-class WrongCredentials implements Exception {
-  const WrongCredentials();
-}
+class WrongCredentials implements Exception {}
 
 class ConnectionTimeout implements Exception {}
 

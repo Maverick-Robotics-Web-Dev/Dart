@@ -23,7 +23,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     emit(
       state.copyWith(
         email: email,
-        // isValid: Formz.validate([email, state.password]),
+        isValid: Formz.validate([email, state.password]),
       ),
     );
   }
@@ -34,9 +34,14 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     emit(
       state.copyWith(
         password: password,
-        // isValid: Formz.validate([state.email, password]),
+        isValid: Formz.validate([state.email, password]),
       ),
     );
+    if (state.isValid) {
+      emit(state.copyWith(isFormPosted: true));
+      print('POSTED: ${state.isFormPosted}');
+      print('VALIDATED: ${Formz.validate([state.email, password])}');
+    }
   }
 
   void _onOnFormSubmit(OnFormSubmit event, Emitter<SignInFormState> emit) {

@@ -6,18 +6,18 @@ import 'package:equatable/equatable.dart';
 class AuthState extends Equatable {
   final AuthStatus authStatus;
   final User? user;
-  final WrongCredentials errorMessage;
+  final String errorMessage;
 
   const AuthState({
     this.authStatus = AuthStatus.checking,
     this.user,
-    this.errorMessage = const WrongCredentials(),
+    this.errorMessage = '',
   });
 
   AuthState copyWith({
     AuthStatus? authStatus,
     User? user,
-    WrongCredentials? errorMessage,
+    String? errorMessage,
   }) {
     return AuthState(
       authStatus: authStatus ?? this.authStatus,

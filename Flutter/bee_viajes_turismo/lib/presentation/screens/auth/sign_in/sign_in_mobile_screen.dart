@@ -40,21 +40,21 @@ class SignInMobileScreen extends StatelessWidget {
             },
           ),
 
-          BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state.errorMessage == 'Wrong email or password') {
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
-                // return;
-              }
-              // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              // ScaffoldMessenger.of(
-              //   context,
-              // ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
-            },
-          ),
+          // BlocListener<AuthBloc, AuthState>(
+          //   listener: (context, state) {
+          //     if (state.errorMessage == 'Wrong email or password') {
+          //       ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          //       ScaffoldMessenger.of(
+          //         context,
+          //       ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          //       // return;
+          //     }
+          //     // ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          //     // ScaffoldMessenger.of(
+          //     //   context,
+          //     // ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          //   },
+          // ),
         ],
         child: CustomScrollView(
           slivers: [
