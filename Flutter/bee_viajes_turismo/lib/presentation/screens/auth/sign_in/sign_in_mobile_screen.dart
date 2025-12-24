@@ -24,39 +24,18 @@ class SignInMobileScreen extends StatelessWidget {
     final AuthBloc authBloc = context.read<AuthBloc>();
     // final SignInFormBloc blocState = context.watch<SignInFormBloc>();
 
-    return Scaffold(
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<SignInFormBloc, SignInFormState>(
-            listener: (context, state) {
-              if (state.isValid) {
-                authBloc.add(
-                  SignIn(
-                    email: state.email.value,
-                    password: state.password.value,
-                  ),
-                );
-              }
-            },
-          ),
-
-          // BlocListener<AuthBloc, AuthState>(
-          //   listener: (context, state) {
-          //     if (state.errorMessage == 'Wrong email or password') {
-          //       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          //       ScaffoldMessenger.of(
-          //         context,
-          //       ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
-          //       // return;
-          //     }
-          //     // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          //     // ScaffoldMessenger.of(
-          //     //   context,
-          //     // ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
-          //   },
-          // ),
-        ],
-        child: CustomScrollView(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        print(state.errorMessage.isNotEmpty);
+        if (state.errorMessage.isNotEmpty) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
+      },
+      child: Scaffold(
+        body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
@@ -158,6 +137,14 @@ class SignInMobileScreen extends StatelessWidget {
                                 onPressed: () {
                                   // context.pushNamed(mainScreenRoute);
                                   bloc.add(OnFormSubmit());
+                                  if (state.isFormPosted) {
+                                    authBloc.add(
+                                      SignIn(
+                                        email: state.email.value,
+                                        password: state.password.value,
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                               SizedBox(height: SpacingTokens.xs),
