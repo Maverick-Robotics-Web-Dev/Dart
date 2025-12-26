@@ -10,3 +10,20 @@ class CustomError implements Exception {
 
   CustomError({required this.message, required this.errorCode});
 }
+
+abstract class Failure {
+  final String message;
+  Failure({required this.message});
+}
+
+class UnauthorizedFailure extends Failure {
+  UnauthorizedFailure({required super.message});
+}
+
+class NetworkFailure extends Failure {
+  NetworkFailure({required super.message});
+}
+
+class ServerFailure extends Failure {
+  ServerFailure({required super.message});
+}

@@ -24,21 +24,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       // _setLoggedUser(user);
       emit(state.copyWith(user: user, authStatus: AuthStatus.authenticated));
-    } on WrongCredentials {
+    } on Failure catch (e) {
       emit(
         state.copyWith(
           user: null,
           authStatus: AuthStatus.notAuthenticated,
-          errorMessage: 'Wrong email or password',
+          errorMessage: e,
         ),
       );
-      print('WrongCredentials:${state.errorMessage}');
+      print('WrongCredentials:${e.message}');
     } catch (e) {
       emit(
         state.copyWith(
           user: null,
           authStatus: AuthStatus.notAuthenticated,
-          errorMessage: 'An unknown error occurred',
+          errorMessage: e as Failure,
         ),
       );
     }
@@ -54,11 +54,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     state.copyWith(user: user, authStatus: AuthStatus.authenticated);
   }
 
-  void setSignOut({String errorMessage = ''}) {
-    state.copyWith(
-      user: null,
-      authStatus: AuthStatus.notAuthenticated,
-      errorMessage: errorMessage,
-    );
-  }
+  // void setSignOut({String errorMessage = ''}) {
+  //   state.copyWith(
+  //     user: null,
+  //     authStatus: AuthStatus.notAuthenticated,
+  //     errorMessage: errorMessage,
+  //   );
+  // }
 }

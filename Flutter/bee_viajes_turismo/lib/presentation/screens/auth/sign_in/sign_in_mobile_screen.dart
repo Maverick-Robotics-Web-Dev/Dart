@@ -26,12 +26,12 @@ class SignInMobileScreen extends StatelessWidget {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        print(state.errorMessage.isNotEmpty);
-        if (state.errorMessage.isNotEmpty) {
+        print(state.errorMessage);
+        if (state.errorMessage is Failure) {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage!.message)));
         }
       },
       child: Scaffold(

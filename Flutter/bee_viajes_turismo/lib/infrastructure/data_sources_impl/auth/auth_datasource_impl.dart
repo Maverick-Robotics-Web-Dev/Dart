@@ -1,7 +1,10 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:dio/dio.dart';
-import '../../infrastructure.dart';
+
+import '../../errors/auth/auth_errors.dart';
+import '../../mappers/errors/dioError_mapper.dart';
+import '../../mappers/user/user_mapper.dart';
 
 class AuthDatasourceImpl extends AuthDataSource {
   final dio = Dio(BaseOptions(baseUrl: Enviroment.apiUrl));
@@ -18,16 +21,9 @@ class AuthDatasourceImpl extends AuthDataSource {
 
       return user;
     } on DioException catch (e) {
-      if (e.response?.statusCode == 401) throw WrongCredentials();
-      if (e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionTimeout();
-      }
-      throw CustomError(
-        message: e.response?.data['message'],
-        errorCode: e.response?.data['statusCode'],
-      );
+      throw DioErrorMapper.mapDioError(e);
     } catch (e) {
-      throw CustomError(message: e.toString(), errorCode: 500);
+      throw ServerFailure(message: e.toString());
     }
   }
 
