@@ -24,16 +24,32 @@ class SignInMobileScreen extends StatelessWidget {
     final AuthBloc authBloc = context.read<AuthBloc>();
     // final SignInFormBloc blocState = context.watch<SignInFormBloc>();
 
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        print(state.errorMessage);
-        if (state.errorMessage is Failure) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage!.message)));
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<SignInFormBloc, SignInFormState>(
+          listener: (context, state) {
+            if (state.isValid) {
+              authBloc.add(
+                SignIn(
+                  email: state.email.value,
+                  password: state.password.value,
+                ),
+              );
+            }
+          },
+        ),
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state.errorMessage is Failure) {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.errorMessage!.message)),
+              );
+              bloc.add(OnFormReset());
+            }
+          },
+        ),
+      ],
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -135,16 +151,7 @@ class SignInMobileScreen extends StatelessWidget {
                                   style: TextStyle(fontSize: FontTokens.md),
                                 ),
                                 onPressed: () {
-                                  // context.pushNamed(mainScreenRoute);
                                   bloc.add(OnFormSubmit());
-                                  if (state.isFormPosted) {
-                                    authBloc.add(
-                                      SignIn(
-                                        email: state.email.value,
-                                        password: state.password.value,
-                                      ),
-                                    );
-                                  }
                                 },
                               ),
                               SizedBox(height: SpacingTokens.xs),

@@ -8,12 +8,14 @@ import 'auth_event.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository = AuthRepositoryImpl();
+  final sharedPrefService = SharedPrefServiceImpl();
 
   AuthBloc() : super(AuthState()) {
     on<SignIn>(_onSignIn);
     on<SignOut>(_onSignOut);
     on<SignUp>(_onSignUp);
-    on<CheckAuthStatus>(_onCheckAuthStatus);
+    // on<CheckAuthStatus>(_onCheckAuthStatus);
+    checkAuthStatus();
   }
 
   Future<void> _onSignIn(SignIn event, Emitter<AuthState> emit) async {
@@ -23,6 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       );
       // _setLoggedUser(user);
+      await sharedPrefService.setValue('token', user.token);
       emit(state.copyWith(user: user, authStatus: AuthStatus.authenticated));
     } on Failure catch (e) {
       emit(
@@ -32,7 +35,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           errorMessage: e,
         ),
       );
-      print('WrongCredentials:${e.message}');
     } catch (e) {
       emit(
         state.copyWith(
@@ -44,15 +46,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSignOut(SignOut event, Emitter<AuthState> emit) async {}
+  Future<void> _onSignOut(SignOut event, Emitter<AuthState> emit) async {
+    await authRepository.signOut();
+    emit(state.copyWith(user: null, authStatus: AuthStatus.notAuthenticated));
+  }
 
   void _onSignUp(SignUp event, Emitter<AuthState> emit) {}
 
-  void _onCheckAuthStatus(CheckAuthStatus event, Emitter<AuthState> emit) {}
+  // void _onCheckAuthStatus(CheckAuthStatus event, Emitter<AuthState> emit) {}
+  void checkAuthStatus() async {
+    final token = await sharedPrefService.getValue('token');
 
-  void _setLoggedUser(User user) {
-    state.copyWith(user: user, authStatus: AuthStatus.authenticated);
+    if (token == null) {
+      add(SignOut());
+      return;
+    }
+
+    try {
+      final user = await authRepository.checkAuthStatus(token: token);
+      add(CheckAuthStatus(user: user, authStatus: AuthStatus.authenticated));
+    } catch (e) {
+      add(SignOut());
+    }
   }
+
+  // void _setLoggedUser(User user) {
+  //   state.copyWith(user: user, authStatus: AuthStatus.authenticated);
+  // }
 
   // void setSignOut({String errorMessage = ''}) {
   //   state.copyWith(

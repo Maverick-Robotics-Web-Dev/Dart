@@ -37,3 +37,7 @@ class PasswordChange extends SignInFormEvent {
 class OnFormSubmit extends SignInFormEvent {
   OnFormSubmit();
 }
+
+class OnFormReset extends SignInFormEvent {
+  OnFormReset();
+}

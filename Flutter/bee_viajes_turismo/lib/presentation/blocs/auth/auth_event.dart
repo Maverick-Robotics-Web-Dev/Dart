@@ -1,3 +1,6 @@
+import 'package:bee_viajes_turismo/domain/domain.dart';
+import 'package:bee_viajes_turismo/shared/shared.dart';
+
 abstract class AuthEvent {
   const AuthEvent();
 }
@@ -21,5 +24,7 @@ class SignUp extends AuthEvent {
 }
 
 class CheckAuthStatus extends AuthEvent {
-  CheckAuthStatus();
+  final User user;
+  final AuthStatus authStatus;
+  CheckAuthStatus({required this.user, required this.authStatus});
 }

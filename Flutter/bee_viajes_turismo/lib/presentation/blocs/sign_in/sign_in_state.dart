@@ -1,5 +1,6 @@
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:equatable/equatable.dart';
+import 'package:formz/formz.dart';
 
 class SignInFormState extends Equatable {
   final bool isPosting;
@@ -7,6 +8,7 @@ class SignInFormState extends Equatable {
   final bool isValid;
   final Email email;
   final Password password;
+  final FormzSubmissionStatus formStatus;
 
   const SignInFormState({
     this.isPosting = false,
@@ -14,6 +16,7 @@ class SignInFormState extends Equatable {
     this.isValid = false,
     this.email = const Email.pure(),
     this.password = const Password.pure(),
+    this.formStatus = FormzSubmissionStatus.initial,
   });
 
   SignInFormState copyWith({
@@ -22,12 +25,14 @@ class SignInFormState extends Equatable {
     bool? isValid,
     Email? email,
     Password? password,
+    FormzSubmissionStatus? formStatus,
   }) => SignInFormState(
     isPosting: isPosting ?? this.isPosting,
     isFormPosted: isFormPosted ?? this.isFormPosted,
     isValid: isValid ?? this.isValid,
     email: email ?? this.email,
     password: password ?? this.password,
+    formStatus: formStatus ?? this.formStatus,
   );
 
   @override
@@ -39,9 +44,17 @@ class SignInFormState extends Equatable {
         isValid: $isValid
         email: $email
         password: $password
+        formStatus: $formStatus
 ''';
   }
 
   @override
-  List<Object> get props => [isPosting, isFormPosted, isValid, email, password];
+  List<Object> get props => [
+    isPosting,
+    isFormPosted,
+    isValid,
+    email,
+    password,
+    formStatus,
+  ];
 }

@@ -3,7 +3,7 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:dio/dio.dart';
 
 import '../../errors/auth/auth_errors.dart';
-import '../../mappers/errors/dioError_mapper.dart';
+import '../../mappers/errors/dioerror_mapper.dart';
 import '../../mappers/user/user_mapper.dart';
 
 class AuthDatasourceImpl extends AuthDataSource {
@@ -17,7 +17,7 @@ class AuthDatasourceImpl extends AuthDataSource {
         data: {'email': email, 'password': password},
       );
 
-      final user = UserMapper.fromJson(response.data);
+      final user = UserMapper.fromJsonToEntity(response.data);
 
       return user;
     } on DioException catch (e) {
@@ -28,9 +28,21 @@ class AuthDatasourceImpl extends AuthDataSource {
   }
 
   @override
-  Future<User> checkAuthStatus({required String token}) {
-    // TODO: implement checkAuthStatus
-    throw UnimplementedError();
+  Future<User> checkAuthStatus({required String token}) async {
+    try {
+      final response = await dio.get(
+        '/auth/check-status',
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
+      final user = UserMapper.fromJsonToEntity(response.data);
+
+      return user;
+    } on DioException catch (e) {
+      throw DioErrorMapper.mapDioError(e);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
   }
 
   @override

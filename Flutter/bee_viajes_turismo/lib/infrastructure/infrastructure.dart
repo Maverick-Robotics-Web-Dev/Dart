@@ -6,7 +6,7 @@ export 'inputs/password.dart';
 export 'inputs/user_name.dart';
 export 'mappers/user/create_user_mapper.dart';
 export 'mappers/user/user_mapper.dart';
-export 'mappers/errors/dioError_mapper.dart';
+export 'mappers/errors/dioerror_mapper.dart';
 export 'data_sources_impl/auth/auth_datasource_impl.dart';
 export 'repositories_impl/auth/auth_repository_impl.dart';
 export 'errors/auth/auth_errors.dart';

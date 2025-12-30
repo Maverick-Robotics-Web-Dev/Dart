@@ -1,12 +1,17 @@
 import 'package:bee_viajes_turismo/domain/domain.dart';
+import 'package:bee_viajes_turismo/shared/shared.dart';
 
 import '../../infrastructure.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthDataSource _dataSource;
+  final SharedPrefService _sharedPrefService;
 
-  AuthRepositoryImpl({AuthDataSource? dataSource})
-    : _dataSource = dataSource ?? AuthDatasourceImpl();
+  AuthRepositoryImpl({
+    AuthDataSource? dataSource,
+    SharedPrefService? sharedPrefService,
+  }) : _dataSource = dataSource ?? AuthDatasourceImpl(),
+       _sharedPrefService = sharedPrefService ?? SharedPrefServiceImpl();
 
   @override
   Future<User> checkAuthStatus({required String token}) {
@@ -37,5 +42,10 @@ class AuthRepositoryImpl extends AuthRepository {
       address: address,
       phone: phone,
     );
+  }
+
+  @override
+  Future<bool> signOut() async {
+    return _sharedPrefService.removeValue('token');
   }
 }

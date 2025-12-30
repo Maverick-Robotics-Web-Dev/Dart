@@ -3,7 +3,7 @@
 import 'package:bee_viajes_turismo/domain/domain.dart';
 
 class UserMapper {
-  static User fromJson(Map<String, dynamic> json) => User(
+  static User fromJsonToEntity(Map<String, dynamic> json) => User(
     address: json['address'],
     id: json['id'],
     email: json['email'],

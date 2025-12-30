@@ -14,4 +14,5 @@ abstract class AuthRepository {
   });
 
   Future<User> checkAuthStatus({required String token});
+  Future<bool> signOut();
 }

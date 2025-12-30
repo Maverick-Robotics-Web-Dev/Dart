@@ -13,33 +13,19 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     on<EmailChange>(_onEmailChange);
     on<PasswordChange>(_onPasswordChange);
     on<OnFormSubmit>(_onOnFormSubmit);
+    on<OnFormReset>(_onOnFormReset);
   }
 
   void _onEmailChange(EmailChange event, Emitter<SignInFormState> emit) {
     final email = Email.dirty(value: event.email.value);
 
-    emit(
-      state.copyWith(
-        email: email,
-        isValid: Formz.validate([email, state.password]),
-      ),
-    );
+    emit(state.copyWith(email: email));
   }
 
   void _onPasswordChange(PasswordChange event, Emitter<SignInFormState> emit) {
     final password = Password.dirty(value: event.password.value);
 
-    emit(
-      state.copyWith(
-        password: password,
-        isValid: Formz.validate([state.email, password]),
-      ),
-    );
-    if (state.isValid) {
-      emit(state.copyWith(isFormPosted: true));
-      print('POSTED: ${state.isFormPosted}');
-      print('VALIDATED: ${Formz.validate([state.email, password])}');
-    }
+    emit(state.copyWith(password: password));
   }
 
   void _onOnFormSubmit(OnFormSubmit event, Emitter<SignInFormState> emit) {
@@ -55,16 +41,10 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       ),
     );
 
-    // emit(
-    //   state.copyWith(
-    //     isFormPosted: true,
-    //     email: state.email,
-    //     password: state.password,
-    //     isValid: Formz.validate([state.email, state.password]),
-    //   ),
-    // );
-
     if (!state.isValid) return;
-    // print(state);
+  }
+
+  void _onOnFormReset(OnFormReset event, Emitter<SignInFormState> emit) {
+    emit(state.copyWith(isFormPosted: false, isValid: false));
   }
 }
