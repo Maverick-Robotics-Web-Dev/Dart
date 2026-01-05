@@ -13,7 +13,7 @@ class UserMapper {
     lastname: json['name'],
     phone: json['phone'],
     roles: List<String>.from(json['roles'].map((role) => role)),
-    token: json['token'],
+    token: json['token'] ?? '',
   );
 }
 // class UserModel {

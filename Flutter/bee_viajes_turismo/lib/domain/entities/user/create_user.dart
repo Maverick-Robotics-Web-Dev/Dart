@@ -1,4 +1,4 @@
-import 'address_entity.dart';
+import 'address.dart';
 
 class CreateUserEntity {
   final String name;

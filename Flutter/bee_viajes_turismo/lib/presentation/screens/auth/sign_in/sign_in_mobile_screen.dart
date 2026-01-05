@@ -133,6 +133,12 @@ class SignInMobileScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
+                                onFieldSubmitted: (_) => authBloc.add(
+                                  SignIn(
+                                    email: state.email.value,
+                                    password: state.password.value,
+                                  ),
+                                ),
                               ),
                               SizedBox(height: SpacingTokens.sm),
                               TextButton(

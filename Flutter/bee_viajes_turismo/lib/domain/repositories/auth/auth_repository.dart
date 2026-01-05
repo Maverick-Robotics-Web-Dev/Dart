@@ -1,5 +1,5 @@
-import '../../entities/user/address_entity.dart';
-import '../../entities/user/user_entity.dart';
+import '../../entities/user/address.dart';
+import '../../entities/user/user.dart';
 
 abstract class AuthRepository {
   Future<User> signIn({required String email, required String password});

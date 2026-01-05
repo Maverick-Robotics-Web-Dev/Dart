@@ -1,4 +1,4 @@
-import 'address_entity.dart';
+import 'address.dart';
 
 class User {
   final String id;

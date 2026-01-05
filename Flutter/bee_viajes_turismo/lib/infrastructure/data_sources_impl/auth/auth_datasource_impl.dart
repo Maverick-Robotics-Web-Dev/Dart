@@ -6,7 +6,7 @@ import '../../errors/auth/auth_errors.dart';
 import '../../mappers/errors/dioerror_mapper.dart';
 import '../../mappers/user/user_mapper.dart';
 
-class AuthDatasourceImpl extends AuthDataSource {
+class AuthDataSourceImpl extends AuthDataSource {
   final dio = Dio(BaseOptions(baseUrl: Enviroment.apiUrl));
 
   @override
@@ -55,7 +55,6 @@ class AuthDatasourceImpl extends AuthDataSource {
     required Address address,
     required String phone,
   }) {
-    // TODO: implement signUp
     throw UnimplementedError();
   }
 }

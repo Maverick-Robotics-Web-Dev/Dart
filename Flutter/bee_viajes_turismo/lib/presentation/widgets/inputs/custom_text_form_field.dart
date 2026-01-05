@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   final double? height;
   final double? width;
   final Function(String)? onChanged;
+  final Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
 
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.onChanged,
+    this.onFieldSubmitted,
     this.errorText,
     this.labelText,
     this.validator,
@@ -32,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
       validator: validator,
       obscureText: obscureText,
       keyboardType: keyboardType,

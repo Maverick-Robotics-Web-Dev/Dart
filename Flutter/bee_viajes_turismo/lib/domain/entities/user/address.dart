@@ -1,4 +1,4 @@
-import 'geolocation_entity.dart';
+import 'geolocation.dart';
 
 class Address {
   final Geolocation? geolocation;

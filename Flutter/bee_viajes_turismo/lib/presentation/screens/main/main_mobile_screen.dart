@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/auth/auth_event.dart';
-import '../../blocs/notifications/notifications_bloc.dart';
-import '../../blocs/notifications/notifications_state.dart';
+// import '../../blocs/notifications/notifications_bloc.dart';
 
 class MainMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
@@ -13,7 +12,7 @@ class MainMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
+    // final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
     final AuthBloc authBloc = context.read<AuthBloc>();
 
     return Scaffold(

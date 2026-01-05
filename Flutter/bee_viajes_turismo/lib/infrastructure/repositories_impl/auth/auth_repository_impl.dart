@@ -10,7 +10,7 @@ class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl({
     AuthDataSource? dataSource,
     SharedPrefService? sharedPrefService,
-  }) : _dataSource = dataSource ?? AuthDatasourceImpl(),
+  }) : _dataSource = dataSource ?? AuthDataSourceImpl(),
        _sharedPrefService = sharedPrefService ?? SharedPrefServiceImpl();
 
   @override
