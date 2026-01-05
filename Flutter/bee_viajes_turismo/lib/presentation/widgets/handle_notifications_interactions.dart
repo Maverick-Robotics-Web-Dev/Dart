@@ -40,7 +40,7 @@ class _HandleNotificationsInteractionsState
     final messageId = message.messageId
         ?.replaceAll(':', '')
         .replaceAll('%', '');
-    appRouter.push('$pathNotificationScreenRoute/$messageId');
+    GoRouterConfig.appRouter().push('$pathNotificationScreenRoute/$messageId');
   }
 
   @override

@@ -59,6 +59,8 @@ class LocalNotifications {
   }
 
   static void onDidReceiveNotificationResponse(NotificationResponse response) {
-    appRouter.push('$pathNotificationScreenRoute/${response.payload}');
+    GoRouterConfig.appRouter().push(
+      '$pathNotificationScreenRoute/${response.payload}',
+    );
   }
 }

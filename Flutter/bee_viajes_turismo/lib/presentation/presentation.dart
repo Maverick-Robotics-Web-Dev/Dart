@@ -3,6 +3,7 @@ export 'blocs/sign_up/sign_up_bloc.dart';
 export 'blocs/auth/auth_bloc.dart';
 export 'blocs/notifications/notifications_bloc.dart';
 export 'screens/main/main_screen.dart';
+export 'screens/auth/check_auth_status/check_auth_status_screen.dart';
 export 'screens/auth/sign_up/sign_up_screen.dart';
 export 'screens/auth/sign_in/sign_in_screen.dart';
 export 'screens/notification/notification_screen.dart';

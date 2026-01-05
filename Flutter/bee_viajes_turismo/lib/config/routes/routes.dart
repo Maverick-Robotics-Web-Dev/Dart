@@ -1,3 +1,4 @@
+const String splashScreenRoute = 'splash_screen';
 const String signInScreenRoute = 'sign_in_screen';
 const String signUpScreenRoute = 'sign_up_screen';
 const String signUpSetupScreenRoute = 'sign_up_setup_screen';
@@ -14,6 +15,7 @@ const String productBuyNowScreenRoute = 'product_buy_now_screen';
 const String productReviewsScreenRoute = 'product_reviews_screen';
 const String productAddReviewsScreenRoute = 'product_add_reviews_screen';
 //Paths
+const String pathSplashScreenRoute = '/splash_screen';
 const String pathSignInScreenRoute = '/sign_in_screen';
 const String pathSignUpScreenRoute = '/sign_up_screen';
 const String pathSignUpSetupScreenRoute = '/sign_up_setup_screen';

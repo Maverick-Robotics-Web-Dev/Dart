@@ -14,8 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignIn>(_onSignIn);
     on<SignOut>(_onSignOut);
     on<SignUp>(_onSignUp);
-    // on<CheckAuthStatus>(_onCheckAuthStatus);
-    checkAuthStatus();
+    on<CheckAuthStatus>(_onCheckAuthStatus);
   }
 
   Future<void> _onSignIn(SignIn event, Emitter<AuthState> emit) async {
@@ -26,13 +25,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       // _setLoggedUser(user);
       await sharedPrefService.setValue('token', user.token);
-      emit(state.copyWith(user: user, authStatus: AuthStatus.authenticated));
+      emit(
+        state.copyWith(
+          user: user,
+          authStatus: AuthStatus.authenticated,
+          errorMessage: '',
+        ),
+      );
     } on Failure catch (e) {
       emit(
         state.copyWith(
           user: null,
           authStatus: AuthStatus.notAuthenticated,
-          errorMessage: e,
+          errorMessage: e.message,
         ),
       );
     } catch (e) {
@@ -40,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(
           user: null,
           authStatus: AuthStatus.notAuthenticated,
-          errorMessage: e as Failure,
+          errorMessage: e.toString(),
         ),
       );
     }
@@ -48,25 +53,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onSignOut(SignOut event, Emitter<AuthState> emit) async {
     await authRepository.signOut();
-    emit(state.copyWith(user: null, authStatus: AuthStatus.notAuthenticated));
+    emit(
+      state.copyWith(
+        user: null,
+        authStatus: AuthStatus.notAuthenticated,
+        errorMessage: '',
+      ),
+    );
   }
 
   void _onSignUp(SignUp event, Emitter<AuthState> emit) {}
 
   // void _onCheckAuthStatus(CheckAuthStatus event, Emitter<AuthState> emit) {}
-  void checkAuthStatus() async {
-    final token = await sharedPrefService.getValue('token');
+  void _onCheckAuthStatus(
+    CheckAuthStatus event,
+    Emitter<AuthState> emit,
+  ) async {
+    final token = await sharedPrefService.getValue<String>('token');
 
     if (token == null) {
-      add(SignOut());
+      emit(state.copyWith(user: null, authStatus: AuthStatus.notAuthenticated));
       return;
     }
 
     try {
       final user = await authRepository.checkAuthStatus(token: token);
-      add(CheckAuthStatus(user: user, authStatus: AuthStatus.authenticated));
+      emit(state.copyWith(user: user, authStatus: AuthStatus.authenticated));
     } catch (e) {
-      add(SignOut());
+      emit(state.copyWith(user: null, authStatus: AuthStatus.notAuthenticated));
     }
   }
 

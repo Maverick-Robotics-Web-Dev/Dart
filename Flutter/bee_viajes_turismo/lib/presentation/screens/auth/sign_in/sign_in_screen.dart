@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bee_viajes_turismo/config/configs.dart';
-import 'package:bee_viajes_turismo/presentation/screens/auth/sign_in/sign_in_mobile_screen.dart';
-import 'package:bee_viajes_turismo/presentation/screens/auth/sign_in/sign_in_tablet_screen.dart';
+
+import 'sign_in_mobile_screen.dart';
+import 'sign_in_tablet_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

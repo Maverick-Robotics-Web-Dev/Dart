@@ -40,11 +40,12 @@ class SignInMobileScreen extends StatelessWidget {
         ),
         BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
-            if (state.errorMessage is Failure) {
+            if (state.errorMessage.isNotEmpty) {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage!.message)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+              authBloc.add(SignOut());
               bloc.add(OnFormReset());
             }
           },
@@ -146,13 +147,15 @@ class SignInMobileScreen extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: Size(double.infinity, 60),
                                 ),
+                                onPressed: state.isPosting
+                                    ? () {
+                                        bloc.add(OnFormSubmit());
+                                      }
+                                    : null,
                                 child: Text(
                                   'Iniciar Sesión',
                                   style: TextStyle(fontSize: FontTokens.md),
                                 ),
-                                onPressed: () {
-                                  bloc.add(OnFormSubmit());
-                                },
                               ),
                               SizedBox(height: SpacingTokens.xs),
                               TextButton(

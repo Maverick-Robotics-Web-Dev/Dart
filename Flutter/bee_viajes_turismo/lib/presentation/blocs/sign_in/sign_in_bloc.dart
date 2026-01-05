@@ -4,11 +4,7 @@ import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_event.dart
 import 'package:bee_viajes_turismo/presentation/blocs/sign_in/sign_in_state.dart';
 import 'package:formz/formz.dart';
 
-import '../auth/auth_bloc.dart';
-
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
-  final AuthBloc authBloc = AuthBloc();
-
   SignInFormBloc() : super(SignInFormState()) {
     on<EmailChange>(_onEmailChange);
     on<PasswordChange>(_onPasswordChange);
@@ -19,13 +15,23 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   void _onEmailChange(EmailChange event, Emitter<SignInFormState> emit) {
     final email = Email.dirty(value: event.email.value);
 
-    emit(state.copyWith(email: email));
+    emit(
+      state.copyWith(
+        email: email,
+        isPosting: Formz.validate([email, state.password]),
+      ),
+    );
   }
 
   void _onPasswordChange(PasswordChange event, Emitter<SignInFormState> emit) {
     final password = Password.dirty(value: event.password.value);
 
-    emit(state.copyWith(password: password));
+    emit(
+      state.copyWith(
+        password: password,
+        isPosting: Formz.validate([state.email, password]),
+      ),
+    );
   }
 
   void _onOnFormSubmit(OnFormSubmit event, Emitter<SignInFormState> emit) {

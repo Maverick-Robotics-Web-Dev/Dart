@@ -1,9 +1,10 @@
-import 'package:bee_viajes_turismo/config/routes/routes.dart';
-import 'package:bee_viajes_turismo/presentation/presentation.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/notifications/notifications_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_event.dart';
+import '../../blocs/notifications/notifications_bloc.dart';
+import '../../blocs/notifications/notifications_state.dart';
 
 class MainMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
@@ -13,43 +14,56 @@ class MainMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
+    final AuthBloc authBloc = context.read<AuthBloc>();
 
-    return BlocBuilder<NotificationsBloc, NotificationsState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('${state.status}'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  bloc.requestPermission();
-                  // context.read<NotificationsBloc>().requestPermission();
-                },
-                icon: Icon(Icons.settings),
-              ),
-            ],
-          ),
-          body: ListView.builder(
-            itemCount: state.notifications.length,
-            itemBuilder: (context, index) {
-              final notification = state.notifications[index];
-
-              return ListTile(
-                title: Text(notification.title),
-                subtitle: Text(notification.body),
-                leading: notification.imageUrl != null
-                    ? Image.network(notification.imageUrl!)
-                    : null,
-                onTap: () {
-                  context.push(
-                    '$pathNotificationScreenRoute/${notification.messageId}',
-                  );
-                },
-              );
-            },
-          ),
-        );
-      },
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            authBloc.add(SignOut());
+          },
+          child: const Text('Cerrar Sesion'),
+        ),
+      ),
     );
+
+    // return BlocBuilder<NotificationsBloc, NotificationsState>(
+    //   builder: (context, state) {
+    //     return Scaffold(
+    //       appBar: AppBar(
+    //         title: Text('${state.status}'),
+    //         actions: [
+    //           IconButton(
+    //             onPressed: () {
+    //               bloc.requestPermission();
+    //               // context.read<NotificationsBloc>().requestPermission();
+    //             },
+    //             icon: Icon(Icons.settings),
+    //           ),
+    //         ],
+    //       ),
+    //       body: ListView.builder(
+    //         itemCount: state.notifications.length,
+    //         itemBuilder: (context, index) {
+    //           final notification = state.notifications[index];
+
+    //           return ListTile(
+    //             title: Text(notification.title),
+    //             subtitle: Text(notification.body),
+    //             leading: notification.imageUrl != null
+    //                 ? Image.network(notification.imageUrl!)
+    //                 : null,
+    //             onTap: () {
+    //               authBloc.add(SignOut());
+    //               // context.push(
+    //               //   '$pathNotificationScreenRoute/${notification.messageId}',
+    //               // );
+    //             },
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }
