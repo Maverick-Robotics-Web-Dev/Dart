@@ -9,8 +9,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository productRepository = ProductRepositoryImpl();
 
   ProductBloc() : super(ProductState()) {
-    on<ProductEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<LoadProducts>(_onLoadProducts);
+  }
+
+  Future _onLoadProducts(LoadProducts event, Emitter<ProductState> emit) async {
+    if (state.isLastPage || state.isLoading) return;
+
+    emit(state.copyWith(isLoading: true));
+    final products = await productRepository.getProductsByPage(
+      limit: state.limit,
+      offset: state.offset,
+    );
+
+    if (products.isEmpty) {
+      emit(state.copyWith(isLastPage: true, isLoading: false));
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        isLoading: false,
+        isLastPage: false,
+        offset: state.offset + state.limit,
+        products: [...state.products, ...products],
+      ),
+    );
   }
 }

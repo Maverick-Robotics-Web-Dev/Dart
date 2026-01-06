@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
-import '../../blocs/auth/auth_event.dart';
+import '../product/product_screen.dart';
 // import '../../blocs/notifications/notifications_bloc.dart';
 
 class MainMobileScreen extends StatelessWidget {
@@ -15,16 +15,18 @@ class MainMobileScreen extends StatelessWidget {
     // final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
     final AuthBloc authBloc = context.read<AuthBloc>();
 
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            authBloc.add(SignOut());
-          },
-          child: const Text('Cerrar Sesion'),
-        ),
-      ),
-    );
+    return ProductScreen();
+
+    // return Scaffold(
+    //   body: Center(
+    //     child: ElevatedButton(
+    //       onPressed: () {
+    //         authBloc.add(SignOut());
+    //       },
+    //       child: const Text('Cerrar Sesion'),
+    //     ),
+    //   ),
+    // );
 
     // return BlocBuilder<NotificationsBloc, NotificationsState>(
     //   builder: (context, state) {

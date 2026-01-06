@@ -98,15 +98,13 @@ class GoRouterConfig {
         //   path: pathKidsScreenRoute,
         //   builder: (context, state) => KidsScreen(),
         // ),
-        // GoRoute(
-        //   name: 'product_screen',
-        //   path: pathProductScreenRoute,
-        //   builder: (context, state) {
-        //     final bool isProductAvailable = state.extra as bool;
-
-        //     return ProductScreen(isProductAvailable: isProductAvailable);
-        //   },
-        // ),
+        GoRoute(
+          name: productScreenRoute,
+          path: pathProductScreenRoute,
+          builder: (context, state) {
+            return ProductScreen();
+          },
+        ),
         // GoRoute(
         //   path: pathProductBuyNowScreenRoute,
         //   builder: (context, state) => ProductBuyNowScreen(),

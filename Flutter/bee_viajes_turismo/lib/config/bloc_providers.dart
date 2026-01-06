@@ -1,5 +1,6 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/auth/auth_event.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/product/product_event.dart';
 import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_up/sign_up_event.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
@@ -20,5 +21,8 @@ List<BlocProvider> blocProviders = [
   BlocProvider<SignInFormBloc>(create: (context) => SignInFormBloc()),
   BlocProvider<AuthBloc>(
     create: (context) => AuthBloc()..add(CheckAuthStatus()),
+  ),
+  BlocProvider<ProductBloc>(
+    create: (context) => ProductBloc()..add(LoadProducts()),
   ),
 ];
