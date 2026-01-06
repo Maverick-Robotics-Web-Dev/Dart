@@ -7,9 +7,9 @@ import 'package:go_router/go_router.dart';
 import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/auth/auth_event.dart';
 import '../../../blocs/auth/auth_state.dart';
-import '../../../blocs/sign_in/sign_in_bloc.dart';
-import '../../../blocs/sign_in/sign_in_event.dart';
-import '../../../blocs/sign_in/sign_in_state.dart';
+import '../../../blocs/auth/sign_in/sign_in_bloc.dart';
+import '../../../blocs/auth/sign_in/sign_in_event.dart';
+import '../../../blocs/auth/sign_in/sign_in_state.dart';
 import '../../../widgets/inputs/custom_text_form_field.dart';
 
 class SignInMobileScreen extends StatelessWidget {

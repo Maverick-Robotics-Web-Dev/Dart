@@ -1,15 +1,13 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/domain.dart';
+import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:dio/dio.dart';
 
 import '../../mappers/product/product_mapper.dart';
 
 class ProductDataSourceImpl extends ProductDataSource {
   final dio = Dio(BaseOptions(baseUrl: Enviroment.apiUrl));
-
-  final String accessToken;
-
-  ProductDataSourceImpl({required this.accessToken});
+  final SharedPrefService _sharedPrefService = SharedPrefServiceImpl();
 
   @override
   Future<Product> createUpdateProduct({

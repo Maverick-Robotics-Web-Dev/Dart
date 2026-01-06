@@ -1,29 +1,32 @@
 import 'package:bee_viajes_turismo/domain/domain.dart';
 
-class ProductRepositoryImpl extends ProductRepository {
-  final ProductDataSource dataSource;
+import '../../data_sources_impl/product/product_datasource_impl.dart';
 
-  ProductRepositoryImpl({required this.dataSource});
+class ProductRepositoryImpl extends ProductRepository {
+  final ProductDataSource _dataSource;
+
+  ProductRepositoryImpl({ProductDataSource? dataSource})
+    : _dataSource = dataSource ?? ProductDataSourceImpl();
 
   @override
   Future<Product> createUpdateProduct({
     required Map<String, dynamic> productData,
   }) {
-    return dataSource.createUpdateProduct(productData: productData);
+    return _dataSource.createUpdateProduct(productData: productData);
   }
 
   @override
   Future<Product> getProductById({required String id}) {
-    return dataSource.getProductById(id: id);
+    return _dataSource.getProductById(id: id);
   }
 
   @override
   Future<List<Product>> getProductsByPage({int limit = 10, int offset = 0}) {
-    return dataSource.getProductsByPage(limit: limit, offset: offset);
+    return _dataSource.getProductsByPage(limit: limit, offset: offset);
   }
 
   @override
   Future<List<Product>> searchProductByTerm({required String term}) {
-    return dataSource.searchProductByTerm(term: term);
+    return _dataSource.searchProductByTerm(term: term);
   }
 }

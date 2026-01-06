@@ -14,4 +14,5 @@ abstract class AuthDataSource {
   });
 
   Future<User> checkAuthStatus({required String token});
+  Future<bool> signOut();
 }

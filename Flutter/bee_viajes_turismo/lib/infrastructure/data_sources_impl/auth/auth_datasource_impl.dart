@@ -1,5 +1,6 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/domain.dart';
+import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:dio/dio.dart';
 
 import '../../errors/auth/auth_errors.dart';
@@ -8,6 +9,7 @@ import '../../mappers/user/user_mapper.dart';
 
 class AuthDataSourceImpl extends AuthDataSource {
   final dio = Dio(BaseOptions(baseUrl: Enviroment.apiUrl));
+  final SharedPrefService _sharedPrefService = SharedPrefServiceImpl();
 
   @override
   Future<User> signIn({required String email, required String password}) async {
@@ -56,5 +58,10 @@ class AuthDataSourceImpl extends AuthDataSource {
     required String phone,
   }) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> signOut() {
+    return _sharedPrefService.removeValue('token');
   }
 }

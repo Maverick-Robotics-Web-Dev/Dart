@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../blocs/sign_up/sign_up_bloc.dart';
-import '../../../blocs/sign_up/sign_up_event.dart';
-import '../../../blocs/sign_up/sign_up_state.dart';
+import '../../../blocs/auth/sign_up/sign_up_bloc.dart';
+import '../../../blocs/auth/sign_up/sign_up_event.dart';
+import '../../../blocs/auth/sign_up/sign_up_state.dart';
 import '../../../widgets/inputs/custom_text_form_field.dart';
 
 class SignUpMobileScreen extends StatelessWidget {
