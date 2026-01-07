@@ -8,6 +8,7 @@ export 'screens/auth/check_auth_status/check_auth_status_screen.dart';
 export 'screens/auth/sign_up/sign_up_screen.dart';
 export 'screens/auth/sign_in/sign_in_screen.dart';
 export 'screens/notification/notification_screen.dart';
+export 'screens/product/products_screen.dart';
 export 'screens/product/product_screen.dart';
 export 'widgets/inputs/custom_text_form_field.dart';
 export 'widgets/handle_notifications_interactions.dart';

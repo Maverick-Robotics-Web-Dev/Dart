@@ -99,10 +99,19 @@ class GoRouterConfig {
         //   builder: (context, state) => KidsScreen(),
         // ),
         GoRoute(
-          name: productScreenRoute,
-          path: pathProductScreenRoute,
+          name: productsScreenRoute,
+          path: pathProductsScreenRoute,
           builder: (context, state) {
-            return ProductScreen();
+            return ProductsScreen();
+          },
+        ),
+        GoRoute(
+          name: productScreenRoute,
+          path: '$pathProductScreenRoute/:id',
+          builder: (context, state) {
+            return ProductScreen(
+              productId: state.pathParameters['id'] ?? 'no-id',
+            );
           },
         ),
         // GoRoute(
