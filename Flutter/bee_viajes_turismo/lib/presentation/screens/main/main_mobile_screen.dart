@@ -1,3 +1,4 @@
+import 'package:bee_viajes_turismo/presentation/screens/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,8 @@ class MainMobileScreen extends StatelessWidget {
     // final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
     final AuthBloc authBloc = context.read<AuthBloc>();
 
-    return ProductsScreen();
+    // return ProductsScreen();
+    return ProductScreen();
 
     // return Scaffold(
     //   body: Center(

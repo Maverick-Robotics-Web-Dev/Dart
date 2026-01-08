@@ -3,9 +3,9 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:dio/dio.dart';
 
-import '../../errors/auth/auth_errors.dart';
 import '../../mappers/errors/dioerror_mapper.dart';
 import '../../mappers/user/user_mapper.dart';
+import '../../errors/server/sever_errors.dart';
 
 class AuthDataSourceImpl extends AuthDataSource {
   final dio = Dio(BaseOptions(baseUrl: Enviroment.apiUrl));

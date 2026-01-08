@@ -12,4 +12,6 @@ export 'data_sources_impl/auth/auth_datasource_impl.dart';
 export 'data_sources_impl/product/product_datasource_impl.dart';
 export 'repositories_impl/auth/auth_repository_impl.dart';
 export 'repositories_impl/product/product_repository_impl.dart';
+export 'errors/server/sever_errors.dart';
 export 'errors/auth/auth_errors.dart';
+export 'errors/product/product_errors.dart';

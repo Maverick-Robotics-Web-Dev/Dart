@@ -10,8 +10,19 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository productRepository = ProductRepositoryImpl();
 
   ProductBloc({required this.productId}) : super(ProductState(id: productId)) {
-    on<ProductEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<LoadProduct>(_onLoadProduct);
+  }
+
+  Future<void> _onLoadProduct(
+    LoadProduct event,
+    Emitter<ProductState> emit,
+  ) async {
+    try {
+      final product = await productRepository.getProductById(id: productId);
+      print('PRODUCT: $product');
+      emit(state.copyWith(isLoading: false, product: product));
+    } catch (e) {
+      print('ERROR MINE: $e');
+    }
   }
 }

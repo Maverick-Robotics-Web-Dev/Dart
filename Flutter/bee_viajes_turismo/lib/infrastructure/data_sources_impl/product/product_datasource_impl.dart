@@ -3,6 +3,8 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:dio/dio.dart';
 
+import '../../errors/server/sever_errors.dart';
+import '../../mappers/errors/dioerror_mapper.dart';
 import '../../mappers/product/product_mapper.dart';
 
 class ProductDataSourceImpl extends ProductDataSource {
@@ -18,9 +20,22 @@ class ProductDataSourceImpl extends ProductDataSource {
   }
 
   @override
-  Future<Product> getProductById({required String id}) {
-    // TODO: implement getProductById
-    throw UnimplementedError();
+  Future<Product> getProductById({required String id}) async {
+    try {
+      final token = await _sharedPrefService.getValue<String>('token');
+
+      final response = await dio.get(
+        '/products/$id',
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+
+      final product = ProductMapper.fromJsonToEntity(response.data);
+      return product;
+    } on DioException catch (e) {
+      throw DioErrorMapper.mapDioError(e);
+    } catch (e) {
+      throw ServerFailure(message: e.toString());
+    }
   }
 
   @override

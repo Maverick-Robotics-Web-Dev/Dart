@@ -1,3 +1,4 @@
+import 'package:bee_viajes_turismo/presentation/blocs/product/product_event.dart';
 import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -111,8 +112,9 @@ class GoRouterConfig {
           builder: (context, state) {
             final id = state.pathParameters['id'];
             return BlocProvider(
-              create: (context) => ProductBloc(productId: id ?? 'no-id'),
-              child: ProductScreen(productId: id ?? 'no-id'),
+              create: (context) =>
+                  ProductBloc(productId: id ?? 'no-id')..add(LoadProduct()),
+              child: ProductScreen(),
             );
           },
         ),

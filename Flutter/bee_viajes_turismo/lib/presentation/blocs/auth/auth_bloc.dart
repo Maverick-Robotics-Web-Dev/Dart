@@ -32,7 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           errorMessage: '',
         ),
       );
-    } on Failure catch (e) {
+    } on AuthFailure catch (e) {
       emit(
         state.copyWith(
           user: null,

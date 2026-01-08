@@ -5,9 +5,7 @@ import 'product_mobile_screen.dart';
 import 'product_tablet_screen.dart';
 
 class ProductScreen extends StatelessWidget {
-  final String productId;
-
-  const ProductScreen({super.key, required this.productId});
+  const ProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +17,7 @@ class ProductScreen extends StatelessWidget {
               constraints.maxWidth > ScreenSizes.lg) {
             return ProductTabletScreen(appTheme: apptheme);
           } else {
-            return ProductMobileScreen(
-              appTheme: apptheme,
-              productId: productId,
-            );
+            return ProductMobileScreen(appTheme: apptheme);
           }
         },
       ),
