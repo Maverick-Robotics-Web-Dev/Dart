@@ -15,7 +15,12 @@ void main() async {
   await LocalNotifications.initializeLocalNotifications();
   await Enviroment.initEnviroment();
 
-  runApp(MultiBlocProvider(providers: blocProviders, child: const MainApp()));
+  runApp(
+    MultiBlocProvider(
+      providers: AppBlocProviders.blocProviders,
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

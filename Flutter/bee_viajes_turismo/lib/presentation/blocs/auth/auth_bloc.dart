@@ -64,7 +64,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void _onSignUp(SignUp event, Emitter<AuthState> emit) {}
 
-  // void _onCheckAuthStatus(CheckAuthStatus event, Emitter<AuthState> emit) {}
   void _onCheckAuthStatus(
     CheckAuthStatus event,
     Emitter<AuthState> emit,
@@ -86,13 +85,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   // void _setLoggedUser(User user) {
   //   state.copyWith(user: user, authStatus: AuthStatus.authenticated);
-  // }
-
-  // void setSignOut({String errorMessage = ''}) {
-  //   state.copyWith(
-  //     user: null,
-  //     authStatus: AuthStatus.notAuthenticated,
-  //     errorMessage: errorMessage,
-  //   );
   // }
 }

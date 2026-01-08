@@ -2,36 +2,30 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 
 class ProductState extends Equatable {
-  final bool isLastPage;
-  final int limit;
-  final int offset;
+  final String id;
+  final Product? product;
   final bool isLoading;
-  final List<Product> products;
+  final bool isSaving;
 
   const ProductState({
-    this.isLastPage = false,
-    this.limit = 10,
-    this.offset = 0,
-    this.isLoading = false,
-    this.products = const [],
+    required this.id,
+    this.product,
+    this.isLoading = true,
+    this.isSaving = false,
   });
 
   ProductState copyWith({
-    bool? isLastPage,
-    int? limit,
-    int? offset,
+    String? id,
+    Product? product,
     bool? isLoading,
-    List<Product>? products,
-  }) {
-    return ProductState(
-      isLastPage: isLastPage ?? this.isLastPage,
-      limit: limit ?? this.limit,
-      offset: offset ?? this.offset,
-      isLoading: isLoading ?? this.isLoading,
-      products: products ?? this.products,
-    );
-  }
+    bool? isSaving,
+  }) => ProductState(
+    id: id ?? this.id,
+    product: product ?? this.product,
+    isLoading: isLoading ?? this.isLoading,
+    isSaving: isSaving ?? this.isSaving,
+  );
 
   @override
-  List<Object> get props => [isLastPage, limit, offset, isLoading, products];
+  List<Object?> get props => [id, product, isLoading, isSaving];
 }

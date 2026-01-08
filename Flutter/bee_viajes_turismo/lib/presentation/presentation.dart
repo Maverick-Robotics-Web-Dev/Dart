@@ -2,6 +2,7 @@ export 'blocs/auth/sign_in/sign_in_bloc.dart';
 export 'blocs/auth/sign_up/sign_up_bloc.dart';
 export 'blocs/auth/auth_bloc.dart';
 export 'blocs/notifications/notifications_bloc.dart';
+export 'blocs/product/products_bloc.dart';
 export 'blocs/product/product_bloc.dart';
 export 'screens/main/main_screen.dart';
 export 'screens/auth/check_auth_status/check_auth_status_screen.dart';

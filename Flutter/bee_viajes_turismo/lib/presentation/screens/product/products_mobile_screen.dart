@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../blocs/product/product_bloc.dart';
+import '../../blocs/product/products_bloc.dart';
 // import '../../blocs/product/product_event.dart';
-import '../../blocs/product/product_state.dart';
+import '../../blocs/product/products_state.dart';
 import 'widgets/product_card.dart';
 
 class ProductsMobileScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _ProductsMobileScreenState extends State<ProductsMobileScreen> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded)),
         ],
       ),
-      body: BlocBuilder<ProductBloc, ProductState>(
+      body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
