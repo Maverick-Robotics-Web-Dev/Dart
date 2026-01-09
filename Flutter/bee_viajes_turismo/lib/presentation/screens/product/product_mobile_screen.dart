@@ -1,4 +1,5 @@
 import 'package:bee_viajes_turismo/presentation/blocs/product/product_event.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +37,7 @@ class ProductMobileScreen extends StatelessWidget {
       // ),
       body: BlocProvider(
         create: (context) =>
-            ProductBloc(productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed')
+            ProductBloc(productId: '019c88d5-0246-47b3-85cb-623b3819a688')
               ..add(LoadProduct()),
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
@@ -49,6 +50,14 @@ class ProductMobileScreen extends StatelessWidget {
                           height: 250,
                           width: 600,
                           child: ImageGallery(images: state.product!.images),
+                        ),
+                        SizedBox(height: 10),
+                        Center(
+                          child: Text(
+                            state.product!.title,
+                            style: TextStyle(fontSize: 26),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),
@@ -85,12 +94,9 @@ class ImageGallery extends StatelessWidget {
               ),
             ]
           : images.map((e) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  child: Image.network(e, fit: BoxFit.cover),
-                ),
+              return ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                child: Image.network(e, fit: BoxFit.cover),
               );
             }).toList(),
     );
