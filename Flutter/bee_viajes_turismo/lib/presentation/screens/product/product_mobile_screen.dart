@@ -1,5 +1,5 @@
+import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/product/product_event.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +37,7 @@ class ProductMobileScreen extends StatelessWidget {
       // ),
       body: BlocProvider(
         create: (context) =>
-            ProductBloc(productId: '019c88d5-0246-47b3-85cb-623b3819a688')
+            ProductBloc(productId: '2d79d411-744c-42b9-bb76-b7d6f07af6e1')
               ..add(LoadProduct()),
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
@@ -47,10 +47,12 @@ class ProductMobileScreen extends StatelessWidget {
                   : ListView(
                       children: [
                         SizedBox(
-                          height: 250,
+                          height: 300,
                           width: 600,
                           child: ImageGallery(images: state.product!.images),
                         ),
+                        SizedBox(height: 12),
+                        Dots(images: state.product!.images),
                         SizedBox(height: 10),
                         Center(
                           child: Text(
@@ -80,25 +82,55 @@ class ImageGallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
+    return PageView.builder(
       scrollDirection: Axis.horizontal,
-      controller: PageController(viewportFraction: 0.7),
-      children: images.isEmpty
-          ? [
-              ClipRRect(
+      itemCount: images.length,
+      itemBuilder: (context, index) {
+        return images.isEmpty
+            ? ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: Image.asset(
                   'assets/img/no-image.jpg',
                   fit: BoxFit.cover,
                 ),
-              ),
-            ]
-          : images.map((e) {
-              return ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                child: Image.network(e, fit: BoxFit.cover),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: SpacingTokens.lg,
+                ),
+                child: ClipRRect(
+                  child: Image.network(images[index], fit: BoxFit.fill),
+                ),
               );
-            }).toList(),
+      },
+    );
+  }
+}
+
+class Dots extends StatelessWidget {
+  final List<String> images;
+
+  const Dots({super.key, required this.images});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        images.length,
+        (index) => AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          // width: _currentIndex == index ? 14 : 8,
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(
+            // color: _currentIndex == index ? Colors.blue : Colors.grey,
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
     );
   }
 }
