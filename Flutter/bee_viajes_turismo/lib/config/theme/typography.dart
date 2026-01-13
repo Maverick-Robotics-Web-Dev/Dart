@@ -49,7 +49,7 @@ class AppTypography {
 
     titleMedium: TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
       color: AppColorScheme.light.onSurface,
     ),
 

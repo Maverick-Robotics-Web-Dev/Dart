@@ -8,37 +8,45 @@ class CustomTextFormField extends StatelessWidget {
   final String? labelText;
   final String? hintText;
   final String? errorText;
+  final String? initialValue;
   final double? height;
   final double? width;
+  final int? maxLines;
+  final TextInputType? keyboardType;
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
-  final TextInputType? keyboardType;
 
   const CustomTextFormField({
     super.key,
-    this.hintText,
+    this.obscureText = false,
     this.svgPath,
+    this.labelText,
+    this.hintText,
+    this.errorText,
+    this.initialValue,
     this.height = 24,
     this.width = 24,
-    this.obscureText = false,
+    this.maxLines,
     this.keyboardType,
     this.onChanged,
     this.onFieldSubmitted,
-    this.errorText,
-    this.labelText,
     this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
+    final apptheme = Theme.of(context);
     return TextFormField(
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
       validator: validator,
       obscureText: obscureText,
+      initialValue: initialValue,
       keyboardType: keyboardType,
+      maxLines: maxLines,
       decoration: InputDecoration(
+        floatingLabelStyle: apptheme.textTheme.titleMedium,
         fillColor: AppColorScheme.light.onPrimary,
         label: labelText != null ? Text(labelText!) : null,
         hintText: hintText,

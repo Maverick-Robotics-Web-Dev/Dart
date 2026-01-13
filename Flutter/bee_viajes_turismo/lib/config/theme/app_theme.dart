@@ -21,9 +21,15 @@ class AppTheme {
       headlineLarge: AppTypography.textThemeLight.headlineLarge,
       headlineMedium: AppTypography.textThemeLight.headlineMedium,
       headlineSmall: AppTypography.textThemeLight.headlineSmall,
+      titleLarge: AppTypography.textThemeLight.titleLarge,
+      titleMedium: AppTypography.textThemeLight.titleMedium,
+      titleSmall: AppTypography.textThemeLight.titleSmall,
       bodyLarge: AppTypography.textThemeLight.bodyLarge,
       bodyMedium: AppTypography.textThemeLight.bodyMedium,
+      bodySmall: AppTypography.textThemeLight.bodySmall,
       labelLarge: AppTypography.textThemeLight.labelLarge,
+      labelMedium: AppTypography.textThemeLight.labelMedium,
+      labelSmall: AppTypography.textThemeLight.labelSmall,
     ),
     // Botones
     elevatedButtonTheme: ElevatedButtonThemeData(
