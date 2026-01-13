@@ -1,14 +1,18 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/product/product_event.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/product/product_bloc.dart';
-import '../../blocs/product/product_state.dart';
+import '../../blocs/products/product_bloc.dart';
+import '../../blocs/products/product_form/product_form_bloc.dart';
+import '../../blocs/products/product_form/product_form_event.dart';
+import '../../blocs/products/product_form/product_form_state.dart';
+import '../../blocs/products/product_state.dart';
 import '../../widgets/full_screen_loader.dart';
 
 class ProductMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
+  final int _currentIndex = 0;
 
   const ProductMobileScreen({super.key, required this.appTheme});
 
@@ -37,7 +41,7 @@ class ProductMobileScreen extends StatelessWidget {
       // ),
       body: BlocProvider(
         create: (context) =>
-            ProductBloc(productId: '2d79d411-744c-42b9-bb76-b7d6f07af6e1')
+            ProductBloc(productId: '019c88d5-0246-47b3-85cb-623b3819a688')
               ..add(LoadProduct()),
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
@@ -82,9 +86,14 @@ class ImageGallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<ProductFormBloc>();
+
     return PageView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: images.length,
+      onPageChanged: (index) {
+        bloc.add(PageChanged(index: index));
+      },
       itemBuilder: (context, index) {
         return images.isEmpty
             ? ClipRRect(
@@ -114,23 +123,26 @@ class Dots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        images.length,
-        (index) => AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          // width: _currentIndex == index ? 14 : 8,
-          width: 8,
-          height: 8,
-          decoration: BoxDecoration(
-            // color: _currentIndex == index ? Colors.blue : Colors.grey,
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
+    return BlocBuilder<ProductFormBloc, ProductFormState>(
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(images.length, (index) {
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              // width: state.currentIndex == index ? 14 : 8,
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(
+                color: state.currentIndex == index ? Colors.black : Colors.grey,
+                // color: Colors.grey,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/auth/auth_event.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/product/products_event.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/products/products_event.dart';
 import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/auth/sign_up/sign_up_event.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
@@ -26,6 +26,7 @@ class AppBlocProviders {
     BlocProvider<ProductsBloc>(
       create: (context) => ProductsBloc()..add(LoadProducts()),
     ),
+    BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
   ];
 
   static List<BlocProvider> paramProviders(String productId) => [];
