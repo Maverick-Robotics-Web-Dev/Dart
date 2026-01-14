@@ -27,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
     this.initialValue,
     this.height = 24,
     this.width = 24,
-    this.maxLines,
+    this.maxLines = 1,
     this.keyboardType,
     this.onChanged,
     this.onFieldSubmitted,

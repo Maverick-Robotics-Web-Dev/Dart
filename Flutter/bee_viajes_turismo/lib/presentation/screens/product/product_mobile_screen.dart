@@ -39,8 +39,8 @@ class ProductMobileScreen extends StatelessWidget {
       // ),
       body: BlocProvider(
         create: (context) => ProductBloc(
-          // productId: '019c88d5-0246-47b3-85cb-623b3819a688'
-          productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
+          productId: '019c88d5-0246-47b3-85cb-623b3819a688',
+          // productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
         )..add(LoadProduct()),
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
