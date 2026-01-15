@@ -6,10 +6,9 @@ import 'product_event.dart';
 import 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final String productId;
   final ProductRepository productRepository = ProductRepositoryImpl();
 
-  ProductBloc({required this.productId}) : super(ProductState(id: productId)) {
+  ProductBloc() : super(ProductState.initial()) {
     on<LoadProduct>(_onLoadProduct);
   }
 
@@ -18,7 +17,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     try {
-      final product = await productRepository.getProductById(id: productId);
+      final product = await productRepository.getProductById(
+        id: event.productId,
+      );
       print('PRODUCT: $product');
       emit(state.copyWith(isLoading: false, product: product));
     } catch (e) {

@@ -113,7 +113,7 @@ class GoRouterConfig {
             final id = state.pathParameters['id'];
             return BlocProvider(
               create: (context) =>
-                  ProductBloc(productId: id ?? 'no-id')..add(LoadProduct()),
+                  ProductBloc()..add(LoadProduct(productId: id ?? 'no-id')),
               child: ProductScreen(),
             );
           },

@@ -13,3 +13,7 @@ enum EmailError { empty, format }
 enum TitleError { empty }
 
 enum PriceError { empty, value }
+
+enum SlugError { empty, format }
+
+enum StockError { empty, value }

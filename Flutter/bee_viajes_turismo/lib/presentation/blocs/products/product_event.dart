@@ -3,5 +3,7 @@ abstract class ProductEvent {
 }
 
 class LoadProduct extends ProductEvent {
-  LoadProduct();
+  final String productId;
+
+  LoadProduct({required this.productId});
 }

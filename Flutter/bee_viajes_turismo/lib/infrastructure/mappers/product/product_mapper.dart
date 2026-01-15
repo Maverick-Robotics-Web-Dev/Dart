@@ -23,4 +23,18 @@ class ProductMapper {
     ),
     user: UserMapper.fromJsonToEntity(json['user']),
   );
+
+  static Product empty() => Product(
+    id: '',
+    title: '',
+    price: 0,
+    description: '',
+    slug: '',
+    stock: 0,
+    sizes: [],
+    gender: '',
+    tags: [],
+    images: [],
+    user: UserMapper.empty(),
+  );
 }

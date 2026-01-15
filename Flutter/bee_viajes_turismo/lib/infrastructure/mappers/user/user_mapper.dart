@@ -15,6 +15,18 @@ class UserMapper {
     roles: List<String>.from(json['roles'].map((role) => role)),
     token: json['token'] ?? '',
   );
+
+  static User empty() => User(
+    id: '',
+    email: '',
+    username: '',
+    password: '',
+    name: '',
+    lastname: '',
+    phone: '',
+    roles: [],
+    token: '',
+  );
 }
 // class UserModel {
 //   final int id;

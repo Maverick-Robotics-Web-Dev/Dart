@@ -4,8 +4,8 @@ import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/products/product_form/product_form_event.dart';
-import '../../blocs/products/product_form/product_form_state.dart';
+import '../../blocs/products/forms/product_form_event.dart';
+import '../../blocs/products/forms/product_form_state.dart';
 import '../../blocs/products/product_state.dart';
 import '../../presentation.dart';
 
@@ -38,12 +38,18 @@ class ProductMobileScreen extends StatelessWidget {
       //   },
       // ),
       body: BlocProvider(
-        create: (context) => ProductBloc(
-          productId: '019c88d5-0246-47b3-85cb-623b3819a688',
-          // productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
-        )..add(LoadProduct()),
+        create: (context) => ProductBloc()
+          ..add(
+            LoadProduct(
+              // productId: '019c88d5-0246-47b3-85cb-623b3819a688',
+              productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
+            ),
+          ),
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
+            context.read<ProductFormBloc>().add(
+              LoadForm(product: state.product),
+            );
             return Center(
               child: state.isLoading
                   ? FullScreenLoader()
