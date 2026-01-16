@@ -26,7 +26,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onTitleChanged(TitleChanged event, Emitter<ProductFormState> emit) {
-    final title = Title.dirty(value: event.title.value);
+    final title = ProducName.dirty(value: event.title.value);
 
     emit(
       state.copyWith(
@@ -122,7 +122,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
       'description': state.description,
       'slug': state.slug.value,
       'stock': state.inStock.value,
-      'sizes': state.size,
+      'sizes': state.sizes,
       'gender': state.gender,
       'tags': state.tags.split(','),
       'images': state.images
@@ -139,10 +139,10 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     emit(
       ProductFormState(
         id: event.product.id,
-        title: Title.dirty(value: event.product.title),
+        title: ProducName.dirty(value: event.product.title),
         slug: Slug.dirty(value: event.product.slug),
         price: Price.dirty(value: event.product.price),
-        size: event.product.sizes,
+        sizes: event.product.sizes,
         gender: event.product.gender,
         inStock: Stock.dirty(value: event.product.stock),
         description: event.product.description,

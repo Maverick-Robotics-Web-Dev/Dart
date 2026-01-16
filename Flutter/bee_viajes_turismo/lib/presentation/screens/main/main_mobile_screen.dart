@@ -16,7 +16,10 @@ class MainMobileScreen extends StatelessWidget {
     final AuthBloc authBloc = context.read<AuthBloc>();
 
     // return ProductsScreen();
-    return ProductScreen();
+    return ProductScreen(
+      // productId: '019c88d5-0246-47b3-85cb-623b3819a688',
+      productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
+    );
 
     // return Scaffold(
     //   body: Center(

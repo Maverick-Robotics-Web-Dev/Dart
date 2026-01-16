@@ -3,6 +3,7 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 
 import '../../blocs/products/forms/product_form_event.dart';
 import '../../blocs/products/forms/product_form_state.dart';
@@ -11,11 +12,20 @@ import '../../presentation.dart';
 
 class ProductMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
+  final String productId;
 
-  const ProductMobileScreen({super.key, required this.appTheme});
+  const ProductMobileScreen({
+    super.key,
+    required this.appTheme,
+    required this.productId,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<ProductBloc>()
+      ..add(LoadProduct(productId: productId));
+    final formBloc = context.read<ProductFormBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Editar Producto', style: appTheme.textTheme.headlineSmall),
@@ -37,49 +47,39 @@ class ProductMobileScreen extends StatelessWidget {
       //     );
       //   },
       // ),
-      body: BlocProvider(
-        create: (context) => ProductBloc()
-          ..add(
-            LoadProduct(
-              // productId: '019c88d5-0246-47b3-85cb-623b3819a688',
-              productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
-            ),
-          ),
-        child: BlocBuilder<ProductBloc, ProductState>(
-          builder: (context, state) {
-            context.read<ProductFormBloc>().add(
-              LoadForm(product: state.product),
-            );
-            return Center(
-              child: state.isLoading
-                  ? FullScreenLoader()
-                  : ListView(
-                      children: [
-                        SizedBox(
-                          height: 300,
-                          width: 600,
-                          child: ImageGallery(images: state.product!.images),
-                        ),
-                        SizedBox(height: 12),
-                        Dots(images: state.product!.images),
-                        SizedBox(height: 10),
-                        Center(
-                          child: Text(
-                            state.product!.title,
-                            style: appTheme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
+      body: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          formBloc.add(LoadForm(product: state.product));
+          return Center(
+            child: state.isLoading
+                ? FullScreenLoader()
+                : BlocBuilder<ProductFormBloc, ProductFormState>(
+                    builder: (context, state) {
+                      return ListView(
+                        children: [
+                          SizedBox(
+                            height: 300,
+                            width: 600,
+                            child: ImageGallery(images: state.images),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        ProductInformation(
-                          appTheme: appTheme,
-                          product: state.product!,
-                        ),
-                      ],
-                    ),
-            );
-          },
-        ),
+                          SizedBox(height: 12),
+                          Dots(images: state.images),
+                          SizedBox(height: 10),
+                          Center(
+                            child: Text(
+                              state.title.value,
+                              style: appTheme.textTheme.headlineSmall,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ProductInformation(appTheme: appTheme),
+                        ],
+                      );
+                    },
+                  ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -159,60 +159,92 @@ class Dots extends StatelessWidget {
 
 class ProductInformation extends StatelessWidget {
   final ThemeData appTheme;
-  final Product product;
 
-  const ProductInformation({
-    super.key,
-    required this.product,
-    required this.appTheme,
-  });
+  const ProductInformation({super.key, required this.appTheme});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Generales', style: appTheme.textTheme.bodyLarge),
-          SizedBox(height: 15),
-          CustomTextFormField(labelText: 'Nombre', initialValue: product.title),
-          SizedBox(height: 16),
-          CustomTextFormField(labelText: 'Slug', initialValue: product.slug),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            labelText: 'Precio',
-            initialValue: product.price.toString(),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+    final formBloc = context.read<ProductFormBloc>();
+    return BlocBuilder<ProductFormBloc, ProductFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Generales', style: appTheme.textTheme.bodyLarge),
+              SizedBox(height: 15),
+              CustomTextFormField(
+                labelText: 'Nombre',
+                initialValue: state.title.value,
+                errorText: state.title.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(
+                    TitleChanged(title: ProducName.dirty(value: value)),
+                  );
+                },
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                labelText: 'Slug',
+                initialValue: state.slug.value,
+                errorText: state.slug.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(SlugChanged(slug: Slug.dirty(value: value)));
+                },
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                labelText: 'Precio',
+                initialValue: state.price.value.toString(),
+                errorText: state.price.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(
+                    PriceChanged(
+                      price: Price.dirty(value: double.tryParse(value) ?? -1),
+                    ),
+                  );
+                },
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+              ),
+              SizedBox(height: 15),
+              Text('Extras', style: appTheme.textTheme.bodyLarge),
+              SizeSelector(selectedSizes: state.sizes),
+              SizedBox(height: 5),
+              GenderSelector(selectedGender: state.gender),
+              SizedBox(height: 15),
+              CustomTextFormField(
+                labelText: 'Existencias',
+                initialValue: state.inStock.value.toString(),
+                errorText: state.inStock.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(
+                    InStockChanged(
+                      inStock: Stock.dirty(value: double.tryParse(value) ?? -1),
+                    ),
+                  );
+                },
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                maxLines: 6,
+                labelText: 'Descripción',
+                keyboardType: TextInputType.multiline,
+                initialValue: state.description,
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                maxLines: 2,
+                labelText: 'Tags (Separados por coma)',
+                keyboardType: TextInputType.multiline,
+                initialValue: state.tags.join(', '),
+              ),
+              SizedBox(height: 100),
+            ],
           ),
-          SizedBox(height: 15),
-          Text('Extras', style: appTheme.textTheme.bodyLarge),
-          SizeSelector(selectedSizes: product.sizes),
-          SizedBox(height: 5),
-          GenderSelector(selectedGender: product.gender),
-          SizedBox(height: 15),
-          CustomTextFormField(
-            labelText: 'Existencias',
-            initialValue: product.stock.toString(),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-          ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            maxLines: 6,
-            labelText: 'Descripción',
-            keyboardType: TextInputType.multiline,
-            initialValue: product.description,
-          ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            maxLines: 2,
-            labelText: 'Tags (Separados por coma)',
-            keyboardType: TextInputType.multiline,
-            initialValue: product.tags.join(', '),
-          ),
-          SizedBox(height: 100),
-        ],
-      ),
+        );
+      },
     );
   }
 }

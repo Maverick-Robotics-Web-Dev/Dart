@@ -7,7 +7,7 @@ export 'inputs/user_name.dart';
 export 'inputs/price.dart';
 export 'inputs/slug.dart';
 export 'inputs/stock.dart';
-export 'inputs/title.dart';
+export 'inputs/product_name.dart';
 export 'mappers/user/create_user_mapper.dart';
 export 'mappers/user/user_mapper.dart';
 export 'mappers/product/product_mapper.dart';

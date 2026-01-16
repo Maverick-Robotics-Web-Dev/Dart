@@ -12,7 +12,7 @@ class PageChanged extends ProductFormEvent {
 }
 
 class TitleChanged extends ProductFormEvent {
-  final Title title;
+  final ProducName title;
 
   TitleChanged({required this.title});
 }

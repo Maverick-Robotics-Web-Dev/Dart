@@ -4,10 +4,10 @@ import 'package:equatable/equatable.dart';
 class ProductFormState extends Equatable {
   final bool isValid;
   final String? id;
-  final Title title;
+  final ProducName title;
   final Slug slug;
   final Price price;
-  final List<String> size;
+  final List<String> sizes;
   final String gender;
   final Stock inStock;
   final String description;
@@ -18,10 +18,10 @@ class ProductFormState extends Equatable {
   const ProductFormState({
     this.isValid = false,
     this.id,
-    this.title = const Title.pure(),
+    this.title = const ProducName.pure(),
     this.slug = const Slug.pure(),
     this.price = const Price.pure(),
-    this.size = const [],
+    this.sizes = const [],
     this.gender = '',
     this.inStock = const Stock.pure(),
     this.description = '',
@@ -33,7 +33,7 @@ class ProductFormState extends Equatable {
   ProductFormState copyWith({
     bool? isValid,
     String? id,
-    Title? title,
+    ProducName? title,
     Slug? slug,
     Price? price,
     List<String>? size,
@@ -54,7 +54,7 @@ class ProductFormState extends Equatable {
     title,
     slug,
     price,
-    size,
+    sizes,
     gender,
     inStock,
     description,

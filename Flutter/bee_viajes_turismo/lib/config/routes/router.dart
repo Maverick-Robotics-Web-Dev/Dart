@@ -111,11 +111,12 @@ class GoRouterConfig {
           path: '$pathProductScreenRoute/:id',
           builder: (context, state) {
             final id = state.pathParameters['id'];
-            return BlocProvider(
-              create: (context) =>
-                  ProductBloc()..add(LoadProduct(productId: id ?? 'no-id')),
-              child: ProductScreen(),
-            );
+            // return BlocProvider(
+            //   create: (context) =>
+            //       ProductBloc()..add(LoadProduct(productId: id ?? 'no-id')),
+            //   child: ProductScreen(),
+            // );
+            return ProductScreen(productId: id ?? 'no-id');
           },
         ),
         // GoRoute(
