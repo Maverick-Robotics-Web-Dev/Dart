@@ -27,6 +27,7 @@ class AppBlocProviders {
       create: (context) => ProductsBloc()..add(LoadProducts()),
     ),
     BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
+    BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
   ];
 
   static List<BlocProvider> paramProviders(String productId) => [];

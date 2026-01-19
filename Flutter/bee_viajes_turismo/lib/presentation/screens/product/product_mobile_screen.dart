@@ -1,5 +1,4 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
-import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,6 +48,7 @@ class ProductMobileScreen extends StatelessWidget {
       // ),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
+          print('PRODUCT MOBILE SCREEN STATE: ${state.product.description}');
           formBloc.add(LoadForm(product: state.product));
           return Center(
             child: state.isLoading
@@ -209,9 +209,19 @@ class ProductInformation extends StatelessWidget {
               ),
               SizedBox(height: 15),
               Text('Extras', style: appTheme.textTheme.bodyLarge),
-              SizeSelector(selectedSizes: state.sizes),
+              SizeSelector(
+                selectedSizes: state.sizes,
+                onSizesChanged: (value) {
+                  formBloc.add(SizeChanged(size: value));
+                },
+              ),
               SizedBox(height: 5),
-              GenderSelector(selectedGender: state.gender),
+              GenderSelector(
+                selectedGender: state.gender,
+                onGenderChanged: (value) {
+                  formBloc.add(GenderChanged(gender: value));
+                },
+              ),
               SizedBox(height: 15),
               CustomTextFormField(
                 labelText: 'Existencias',
@@ -232,13 +242,19 @@ class ProductInformation extends StatelessWidget {
                 labelText: 'Descripción',
                 keyboardType: TextInputType.multiline,
                 initialValue: state.description,
+                onChanged: (value) {
+                  formBloc.add(DescriptionChanged(description: value));
+                },
               ),
               SizedBox(height: 16),
               CustomTextFormField(
                 maxLines: 2,
                 labelText: 'Tags (Separados por coma)',
                 keyboardType: TextInputType.multiline,
-                initialValue: state.tags.join(', '),
+                initialValue: '${state.tags},',
+                onChanged: (value) {
+                  formBloc.add(TagsChanged(tags: value));
+                },
               ),
               SizedBox(height: 100),
             ],
@@ -252,12 +268,18 @@ class ProductInformation extends StatelessWidget {
 class SizeSelector extends StatelessWidget {
   final List<String> selectedSizes;
   final List<String> sizes = const ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+  final void Function(List<String> selectedSizes) onSizesChanged;
 
-  const SizeSelector({super.key, required this.selectedSizes});
+  const SizeSelector({
+    super.key,
+    required this.selectedSizes,
+    required this.onSizesChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SegmentedButton(
+      emptySelectionAllowed: true,
       showSelectedIcon: false,
       segments: sizes.map((size) {
         return ButtonSegment(
@@ -267,7 +289,7 @@ class SizeSelector extends StatelessWidget {
       }).toList(),
       selected: Set.from(selectedSizes),
       onSelectionChanged: (newSelection) {
-        print(newSelection);
+        onSizesChanged(List.from(newSelection));
       },
       multiSelectionEnabled: true,
     );
@@ -278,13 +300,19 @@ class GenderSelector extends StatelessWidget {
   final String selectedGender;
   final List<String> genders = const ['men', 'women', 'kid'];
   final List<IconData> genderIcons = const [Icons.man, Icons.woman, Icons.boy];
+  final void Function(String selectedGender) onGenderChanged;
 
-  const GenderSelector({super.key, required this.selectedGender});
+  const GenderSelector({
+    super.key,
+    required this.selectedGender,
+    required this.onGenderChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SegmentedButton(
+        emptySelectionAllowed: true,
         multiSelectionEnabled: false,
         showSelectedIcon: false,
         style: const ButtonStyle(visualDensity: VisualDensity.compact),
@@ -297,7 +325,7 @@ class GenderSelector extends StatelessWidget {
         }).toList(),
         selected: {selectedGender},
         onSelectionChanged: (newSelection) {
-          print(newSelection);
+          onGenderChanged(newSelection.first);
         },
       ),
     );

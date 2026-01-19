@@ -1,4 +1,3 @@
-import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter/material.dart';

@@ -20,7 +20,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final product = await productRepository.getProductById(
         id: event.productId,
       );
-      print('PRODUCT: $product');
       emit(state.copyWith(isLoading: false, product: product));
     } catch (e) {
       print('ERROR MINE: $e');
