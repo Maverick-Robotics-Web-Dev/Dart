@@ -19,6 +19,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     on<TagsChanged>(_onTagsChanged);
     on<ImagesChanged>(_onImagesChanged);
     on<LoadForm>(_onLoadForm);
+    on<OnSubmitForm>(_onFormSubmit);
   }
 
   void _onPageChanged(PageChanged event, Emitter<ProductFormState> emit) {
@@ -90,7 +91,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onSizeChanged(SizeChanged event, Emitter<ProductFormState> emit) {
-    emit(state.copyWith(size: event.size));
+    emit(state.copyWith(sizes: event.size));
   }
 
   void _onGenderChanged(GenderChanged event, Emitter<ProductFormState> emit) {
@@ -112,7 +113,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     emit(state.copyWith(images: event.images));
   }
 
-  bool onFormSubmit() {
+  bool _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
     if (!state.isValid) return false;
 
     final productData = {
@@ -132,12 +133,33 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
           )
           .toList(),
     };
+    print('PRODUCT FORM DATA: $productData');
     return true;
   }
 
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
+    // emit(
+    //   ProductFormState(
+    //     id: event.product.id,
+    //     title: ProducName.dirty(value: event.product.title),
+    //     slug: Slug.dirty(value: event.product.slug),
+    //     price: Price.dirty(value: event.product.price),
+    //     sizes: event.product.sizes,
+    //     gender: event.product.gender,
+    //     inStock: Stock.dirty(value: event.product.stock),
+    //     description: event.product.description,
+    //     tags: event.product.tags.join(', '),
+    //     images: event.product.images,
+    //     isValid: Formz.validate([
+    //       ProducName.dirty(value: event.product.title),
+    //       Slug.dirty(value: event.product.slug),
+    //       Price.dirty(value: event.product.price),
+    //       Stock.dirty(value: event.product.stock),
+    //     ]),
+    //   ),
+    // );
     emit(
-      ProductFormState(
+      state.copyWith(
         id: event.product.id,
         title: ProducName.dirty(value: event.product.title),
         slug: Slug.dirty(value: event.product.slug),
@@ -148,6 +170,12 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         description: event.product.description,
         tags: event.product.tags.join(', '),
         images: event.product.images,
+        isValid: Formz.validate([
+          ProducName.dirty(value: event.product.title),
+          Slug.dirty(value: event.product.slug),
+          Price.dirty(value: event.product.price),
+          Stock.dirty(value: event.product.stock),
+        ]),
       ),
     );
   }

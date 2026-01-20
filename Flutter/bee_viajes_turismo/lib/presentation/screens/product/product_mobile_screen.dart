@@ -33,56 +33,50 @@ class ProductMobileScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
         ],
       ),
-      // body: BlocBuilder<ProductBloc, ProductState>(
-      //   builder: (context, state) {
-      //     return Center(
-      //       child: state.isLoading
-      //           ? FullScreenLoader()
-      //           : ListView(
-      //               children: [
-      //                 SizedBox(height: 250, width: 600, child: ImageGallery()),
-      //               ],
-      //             ),
-      //     );
-      //   },
-      // ),
-      body: BlocBuilder<ProductBloc, ProductState>(
-        builder: (context, state) {
-          print('PRODUCT MOBILE SCREEN STATE: ${state.product.description}');
-          formBloc.add(LoadForm(product: state.product));
-          return Center(
-            child: state.isLoading
-                ? FullScreenLoader()
-                : BlocBuilder<ProductFormBloc, ProductFormState>(
-                    builder: (context, state) {
-                      return ListView(
-                        children: [
-                          SizedBox(
-                            height: 300,
-                            width: 600,
-                            child: ImageGallery(images: state.images),
-                          ),
-                          SizedBox(height: 12),
-                          Dots(images: state.images),
-                          SizedBox(height: 10),
-                          Center(
-                            child: Text(
-                              state.title.value,
-                              style: appTheme.textTheme.headlineSmall,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          ProductInformation(appTheme: appTheme),
-                        ],
-                      );
-                    },
-                  ),
-          );
+      body: BlocListener<ProductBloc, ProductState>(
+        listener: (context, state) {
+          if (!state.isLoading) {
+            formBloc.add(LoadForm(product: state.product));
+          }
         },
+        child: BlocBuilder<ProductBloc, ProductState>(
+          builder: (context, state) {
+            return Center(
+              child: state.isLoading
+                  ? FullScreenLoader()
+                  : BlocBuilder<ProductFormBloc, ProductFormState>(
+                      builder: (context, state) {
+                        return ListView(
+                          children: [
+                            SizedBox(
+                              height: 300,
+                              width: 600,
+                              child: ImageGallery(images: state.images),
+                            ),
+                            SizedBox(height: 12),
+                            Dots(images: state.images),
+                            SizedBox(height: 10),
+                            Center(
+                              child: Text(
+                                state.title.value,
+                                style: appTheme.textTheme.headlineSmall,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            ProductInformation(appTheme: appTheme),
+                          ],
+                        );
+                      },
+                    ),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          formBloc.add(OnSubmitForm());
+        },
         child: Icon(Icons.save_as_outlined),
       ),
     );

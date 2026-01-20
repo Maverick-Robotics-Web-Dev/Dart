@@ -71,8 +71,6 @@ class LoadForm extends ProductFormEvent {
   LoadForm({required this.product});
 }
 
-class OnSubmit extends ProductFormEvent {
-  final Map<String, dynamic> productData;
-
-  OnSubmit({required this.productData});
+class OnSubmitForm extends ProductFormEvent {
+  OnSubmitForm();
 }

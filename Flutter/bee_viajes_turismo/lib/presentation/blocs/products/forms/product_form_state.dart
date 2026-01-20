@@ -36,7 +36,7 @@ class ProductFormState extends Equatable {
     ProducName? title,
     Slug? slug,
     Price? price,
-    List<String>? size,
+    List<String>? sizes,
     String? gender,
     Stock? inStock,
     String? description,
@@ -44,7 +44,20 @@ class ProductFormState extends Equatable {
     List<String>? images,
     int? currentIndex,
   }) {
-    return ProductFormState(currentIndex: currentIndex ?? this.currentIndex);
+    return ProductFormState(
+      isValid: isValid ?? this.isValid,
+      id: id ?? this.id,
+      title: title ?? this.title,
+      slug: slug ?? this.slug,
+      price: price ?? this.price,
+      sizes: sizes ?? this.sizes,
+      gender: gender ?? this.gender,
+      inStock: inStock ?? this.inStock,
+      description: description ?? this.description,
+      tags: tags ?? this.tags,
+      images: images ?? this.images,
+      currentIndex: currentIndex ?? this.currentIndex,
+    );
   }
 
   @override
