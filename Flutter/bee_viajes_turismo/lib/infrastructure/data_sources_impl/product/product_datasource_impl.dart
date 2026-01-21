@@ -14,9 +14,39 @@ class ProductDataSourceImpl extends ProductDataSource {
   @override
   Future<Product> createUpdateProduct({
     required Map<String, dynamic> productData,
-  }) {
-    // TODO: implement createUpdateProduct
-    throw UnimplementedError();
+  }) async {
+    try {
+      final String? productId = productData['id'];
+      final String? token = await _sharedPrefService.getValue<String>('token');
+      final String method = (productId == null) ? 'POST' : 'PATCH';
+      final String url = (productId == null) ? '/post' : '/products/$productId';
+
+      // final String method;
+      // final String url;
+
+      // if (productId == null) {
+      //   method = 'POST';
+      //   url = '/post';
+      // } else {
+      //   method = 'PATCH';
+      //   url = '/products/$productId';
+      // }
+      productData.remove('id');
+
+      final response = await dio.request(
+        url,
+        data: productData,
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+          method: method,
+        ),
+      );
+
+      final product = ProductMapper.fromJsonToEntity(response.data);
+      return product;
+    } catch (e) {
+      throw Exception();
+    }
   }
 
   @override

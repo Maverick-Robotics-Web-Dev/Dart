@@ -7,3 +7,9 @@ class LoadProduct extends ProductEvent {
 
   LoadProduct({required this.productId});
 }
+
+class CreateUpdateProduct extends ProductEvent {
+  final Map<String, dynamic> productData;
+
+  CreateUpdateProduct({required this.productData});
+}

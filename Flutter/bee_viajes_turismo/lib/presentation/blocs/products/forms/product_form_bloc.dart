@@ -115,25 +115,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
 
   bool _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
     if (!state.isValid) return false;
-
-    final productData = {
-      'id': state.id,
-      'title': state.title.value,
-      'price': state.price.value,
-      'description': state.description,
-      'slug': state.slug.value,
-      'stock': state.inStock.value,
-      'sizes': state.sizes,
-      'gender': state.gender,
-      'tags': state.tags.split(','),
-      'images': state.images
-          .map(
-            (image) =>
-                image.replaceAll('${Enviroment.apiUrl}/files/product/', ''),
-          )
-          .toList(),
-    };
-    print('PRODUCT FORM DATA: $productData');
+    emit(state.copyWith(isFormPosted: true));
     return true;
   }
 

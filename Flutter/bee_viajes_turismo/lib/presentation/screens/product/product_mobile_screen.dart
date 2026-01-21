@@ -1,4 +1,5 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
+import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,12 +34,37 @@ class ProductMobileScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
         ],
       ),
-      body: BlocListener<ProductBloc, ProductState>(
-        listener: (context, state) {
-          if (!state.isLoading) {
-            formBloc.add(LoadForm(product: state.product));
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<ProductBloc, ProductState>(
+            listener: (context, state) {
+              if (!state.isLoading) {
+                formBloc.add(LoadForm(product: state.product));
+              }
+            },
+          ),
+          BlocListener<ProductFormBloc, ProductFormState>(
+            listener: (context, state) {
+              print('state isFormPosted: ${state.isFormPosted}');
+              if (state.isFormPosted) {
+                final Map<String, dynamic> product = {
+                  'id': state.id!,
+                  'title': state.title.value,
+                  'price': state.price.value,
+                  'description': state.description,
+                  'slug': state.slug.value,
+                  'stock': state.inStock.value,
+                  'sizes': state.sizes,
+                  'gender': state.gender,
+                  'tags': state.tags.split(','),
+                  'images': state.images,
+                };
+                print('PRODUCT TO SUBMIT: $product');
+                bloc.add(CreateUpdateProduct(productData: product));
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
             return Center(

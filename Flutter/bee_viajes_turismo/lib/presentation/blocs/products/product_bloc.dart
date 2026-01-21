@@ -10,6 +10,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   ProductBloc() : super(ProductState.initial()) {
     on<LoadProduct>(_onLoadProduct);
+    on<CreateUpdateProduct>(_onCreateUpdateProduct);
   }
 
   Future<void> _onLoadProduct(
@@ -21,6 +22,19 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         id: event.productId,
       );
       emit(state.copyWith(isLoading: false, product: product));
+    } catch (e) {
+      print('ERROR MINE: $e');
+    }
+  }
+
+  Future<void> _onCreateUpdateProduct(
+    CreateUpdateProduct event,
+    Emitter<ProductState> emit,
+  ) async {
+    try {
+      await productRepository.createUpdateProduct(
+        productData: event.productData,
+      );
     } catch (e) {
       print('ERROR MINE: $e');
     }

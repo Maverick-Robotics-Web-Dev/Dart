@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class ProductFormState extends Equatable {
   final bool isValid;
+  final bool isFormPosted;
   final String? id;
   final ProducName title;
   final Slug slug;
@@ -17,6 +18,7 @@ class ProductFormState extends Equatable {
 
   const ProductFormState({
     this.isValid = false,
+    this.isFormPosted = false,
     this.id,
     this.title = const ProducName.pure(),
     this.slug = const Slug.pure(),
@@ -32,6 +34,7 @@ class ProductFormState extends Equatable {
 
   ProductFormState copyWith({
     bool? isValid,
+    bool? isFormPosted,
     String? id,
     ProducName? title,
     Slug? slug,
@@ -46,6 +49,7 @@ class ProductFormState extends Equatable {
   }) {
     return ProductFormState(
       isValid: isValid ?? this.isValid,
+      isFormPosted: isFormPosted ?? this.isFormPosted,
       id: id ?? this.id,
       title: title ?? this.title,
       slug: slug ?? this.slug,
@@ -63,6 +67,7 @@ class ProductFormState extends Equatable {
   @override
   List<Object?> get props => [
     isValid,
+    isFormPosted,
     id,
     title,
     slug,
