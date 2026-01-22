@@ -8,6 +8,7 @@ import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import '../../blocs/products/forms/product_form_event.dart';
 import '../../blocs/products/forms/product_form_state.dart';
 import '../../blocs/products/product_state.dart';
+import '../../blocs/products/products_event.dart';
 import '../../presentation.dart';
 
 class ProductMobileScreen extends StatelessWidget {
@@ -22,88 +23,130 @@ class ProductMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<ProductBloc>()
-      ..add(LoadProduct(productId: productId));
-    final formBloc = context.read<ProductFormBloc>();
+    // final bloc = context.read<ProductBloc>()
+    //   ..add(LoadProduct(productId: productId));
+    // final formBloc = context.read<ProductFormBloc>();
+    // final productsBloc = context.read<ProductsBloc>();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Editar Producto', style: appTheme.textTheme.headlineSmall),
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
-        ],
-      ),
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<ProductBloc, ProductState>(
-            listener: (context, state) {
-              if (!state.isLoading) {
-                formBloc.add(LoadForm(product: state.product));
-              }
-            },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductBloc>(
+          create: (context) =>
+              ProductBloc()..add(LoadProduct(productId: productId)),
+        ),
+        BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Editar Producto',
+            style: appTheme.textTheme.headlineSmall,
           ),
-          BlocListener<ProductFormBloc, ProductFormState>(
-            listener: (context, state) {
-              print('state isFormPosted: ${state.isFormPosted}');
-              if (state.isFormPosted) {
-                final Map<String, dynamic> product = {
-                  'id': state.id!,
-                  'title': state.title.value,
-                  'price': state.price.value,
-                  'description': state.description,
-                  'slug': state.slug.value,
-                  'stock': state.inStock.value,
-                  'sizes': state.sizes,
-                  'gender': state.gender,
-                  'tags': state.tags.split(','),
-                  'images': state.images,
-                };
-                print('PRODUCT TO SUBMIT: $product');
-                bloc.add(CreateUpdateProduct(productData: product));
-              }
-            },
-          ),
-        ],
-        child: BlocBuilder<ProductBloc, ProductState>(
-          builder: (context, state) {
-            return Center(
-              child: state.isLoading
-                  ? FullScreenLoader()
-                  : BlocBuilder<ProductFormBloc, ProductFormState>(
-                      builder: (context, state) {
-                        return ListView(
-                          children: [
-                            SizedBox(
-                              height: 300,
-                              width: 600,
-                              child: ImageGallery(images: state.images),
-                            ),
-                            SizedBox(height: 12),
-                            Dots(images: state.images),
-                            SizedBox(height: 10),
-                            Center(
-                              child: Text(
-                                state.title.value,
-                                style: appTheme.textTheme.headlineSmall,
-                                textAlign: TextAlign.center,
+          centerTitle: true,
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
+          ],
+        ),
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<ProductBloc, ProductState>(
+              listener: (context, state) {
+                if (!state.isLoading) {
+                  context.read<ProductFormBloc>().add(
+                    LoadForm(product: state.product),
+                  );
+                }
+                // if (state.isSaving) {
+                //   formBloc.add(OnFormReset());
+                //   productsBloc.add(LoadProducts());
+                //   Navigator.pop(context);
+                // }
+              },
+            ),
+            BlocListener<ProductFormBloc, ProductFormState>(
+              listener: (context, state) {
+                print('state isFormPosted: ${state.isFormPosted}');
+                if (state.isFormPosted) {
+                  final Map<String, dynamic> product = {
+                    'id': state.id!,
+                    'title': state.title.value,
+                    'price': state.price.value,
+                    'description': state.description,
+                    'slug': state.slug.value,
+                    'stock': state.inStock.value,
+                    'sizes': state.sizes,
+                    'gender': state.gender,
+                    'tags': state.tags,
+                    'images': state.images,
+                  };
+                  print('PRODUCT TO SUBMIT: $product');
+                  context.read<ProductBloc>().add(
+                    CreateUpdateProduct(productData: product),
+                  );
+                  context.read<ProductFormBloc>().add(OnFormReset());
+                }
+              },
+            ),
+          ],
+          child: BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              return Center(
+                child: state.isLoading
+                    ? FullScreenLoader()
+                    : BlocBuilder<ProductFormBloc, ProductFormState>(
+                        builder: (context, state) {
+                          return ListView(
+                            children: [
+                              SizedBox(
+                                height: 300,
+                                width: 600,
+                                child: ImageGallery(images: state.images),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            ProductInformation(appTheme: appTheme),
-                          ],
-                        );
-                      },
-                    ),
+                              SizedBox(height: 12),
+                              Dots(images: state.images),
+                              SizedBox(height: 10),
+                              Center(
+                                child: Text(
+                                  state.title.value,
+                                  style: appTheme.textTheme.headlineSmall,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              ProductInformation(appTheme: appTheme),
+                            ],
+                          );
+                        },
+                      ),
+              );
+            },
+          ),
+        ),
+        floatingActionButton: BlocBuilder<ProductFormBloc, ProductFormState>(
+          builder: (context, state) {
+            return FloatingActionButton(
+              onPressed: () {
+                context.read<ProductFormBloc>().add(OnSubmitForm());
+                // final Map<String, dynamic> product = {
+                //   'id': state.id!,
+                //   'title': state.title.value,
+                //   'price': state.price.value,
+                //   'description': state.description,
+                //   'slug': state.slug.value,
+                //   'stock': state.inStock.value,
+                //   'sizes': state.sizes,
+                //   'gender': state.gender,
+                //   'tags': state.tags.split(','),
+                //   'images': state.images,
+                // };
+                // context.read<ProductBloc>().add(
+                //   CreateUpdateProduct(productData: product),
+                // );
+              },
+              child: Icon(Icons.save_as_outlined),
             );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          formBloc.add(OnSubmitForm());
-        },
-        child: Icon(Icons.save_as_outlined),
       ),
     );
   }
@@ -232,7 +275,7 @@ class ProductInformation extends StatelessWidget {
               SizeSelector(
                 selectedSizes: state.sizes,
                 onSizesChanged: (value) {
-                  formBloc.add(SizeChanged(size: value));
+                  formBloc.add(SizeChanged(sizes: value));
                 },
               ),
               SizedBox(height: 5),
@@ -271,9 +314,9 @@ class ProductInformation extends StatelessWidget {
                 maxLines: 2,
                 labelText: 'Tags (Separados por coma)',
                 keyboardType: TextInputType.multiline,
-                initialValue: '${state.tags},',
+                initialValue: state.tags.join(','),
                 onChanged: (value) {
-                  formBloc.add(TagsChanged(tags: value));
+                  formBloc.add(TagsChanged(tags: List.from(value.split(','))));
                 },
               ),
               SizedBox(height: 100),

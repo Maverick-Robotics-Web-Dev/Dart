@@ -1,8 +1,6 @@
-import 'package:bee_viajes_turismo/presentation/screens/product/product_screen.dart';
+import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../blocs/auth/auth_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 // import '../../blocs/notifications/notifications_bloc.dart';
 
 class MainMobileScreen extends StatelessWidget {
@@ -13,13 +11,9 @@ class MainMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final NotificationsBloc bloc = BlocProvider.of<NotificationsBloc>(context);
-    final AuthBloc authBloc = context.read<AuthBloc>();
+    // final AuthBloc authBloc = context.read<AuthBloc>();
 
-    // return ProductsScreen();
-    return ProductScreen(
-      // productId: '019c88d5-0246-47b3-85cb-623b3819a688',
-      productId: '1ebe1ab5-a6a7-48d6-97e1-1dbb99ae6fed',
-    );
+    return ProductsScreen();
 
     // return Scaffold(
     //   body: Center(

@@ -23,11 +23,11 @@ class AppBlocProviders {
     BlocProvider<AuthBloc>(
       create: (context) => AuthBloc()..add(CheckAuthStatus()),
     ),
-    BlocProvider<ProductsBloc>(
-      create: (context) => ProductsBloc()..add(LoadProducts()),
-    ),
-    BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
-    BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
+    // BlocProvider<ProductsBloc>(
+    //   create: (context) => ProductsBloc()..add(LoadProducts()),
+    // ),
+    // BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
+    // BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
   ];
 
   static List<BlocProvider> paramProviders(String productId) => [];

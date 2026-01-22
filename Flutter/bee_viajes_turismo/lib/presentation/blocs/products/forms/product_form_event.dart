@@ -30,9 +30,9 @@ class PriceChanged extends ProductFormEvent {
 }
 
 class SizeChanged extends ProductFormEvent {
-  final List<String> size;
+  final List<String> sizes;
 
-  SizeChanged({required this.size});
+  SizeChanged({required this.sizes});
 }
 
 class GenderChanged extends ProductFormEvent {
@@ -54,7 +54,7 @@ class DescriptionChanged extends ProductFormEvent {
 }
 
 class TagsChanged extends ProductFormEvent {
-  final String tags;
+  final List<String> tags;
 
   TagsChanged({required this.tags});
 }
@@ -73,4 +73,8 @@ class LoadForm extends ProductFormEvent {
 
 class OnSubmitForm extends ProductFormEvent {
   OnSubmitForm();
+}
+
+class OnFormReset extends ProductFormEvent {
+  OnFormReset();
 }

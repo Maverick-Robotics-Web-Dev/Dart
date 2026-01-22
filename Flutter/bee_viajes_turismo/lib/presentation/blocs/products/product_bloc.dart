@@ -32,11 +32,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     try {
-      await productRepository.createUpdateProduct(
+      final product = await productRepository.createUpdateProduct(
         productData: event.productData,
       );
+      emit(state.copyWith(isSaving: true));
     } catch (e) {
-      print('ERROR MINE: $e');
+      print('ERROR MINE: ${e.toString()}');
     }
   }
 }

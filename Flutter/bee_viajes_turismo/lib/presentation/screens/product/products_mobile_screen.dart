@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../blocs/products/products_bloc.dart';
 // import '../../blocs/product/product_event.dart';
+import '../../blocs/products/products_event.dart';
 import '../../blocs/products/products_state.dart';
 import 'widgets/product_card.dart';
 
@@ -41,39 +42,49 @@ class _ProductsMobileScreenState extends State<ProductsMobileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Products'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded)),
-        ],
-      ),
-      body: BlocBuilder<ProductsBloc, ProductsState>(
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: MasonryGridView.count(
-              // controller: scrollController,
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 35,
-              itemCount: state.products.length,
-              itemBuilder: (context, index) {
-                final product = state.products[index];
-                return GestureDetector(
-                  onTap: () =>
-                      context.push('$pathProductScreenRoute/${product.id}'),
-                  child: ProductCard(product: product),
-                );
-              },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductsBloc>(
+          create: (context) => ProductsBloc()..add(LoadProducts()),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Products'),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.search_rounded),
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: const Text('Nuevo producto'),
-        icon: const Icon(Icons.add),
-        onPressed: () {},
+          ],
+        ),
+        body: BlocBuilder<ProductsBloc, ProductsState>(
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: MasonryGridView.count(
+                // controller: scrollController,
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 35,
+                itemCount: state.products.length,
+                itemBuilder: (context, index) {
+                  final product = state.products[index];
+                  return GestureDetector(
+                    onTap: () =>
+                        context.push('$pathProductScreenRoute/${product.id}'),
+                    child: ProductCard(product: product),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          label: const Text('Nuevo producto'),
+          icon: const Icon(Icons.add),
+          onPressed: () {},
+        ),
       ),
     );
   }

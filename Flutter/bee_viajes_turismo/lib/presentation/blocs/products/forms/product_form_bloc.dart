@@ -20,6 +20,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     on<ImagesChanged>(_onImagesChanged);
     on<LoadForm>(_onLoadForm);
     on<OnSubmitForm>(_onFormSubmit);
+    on<OnFormReset>(_onOnFormReset);
   }
 
   void _onPageChanged(PageChanged event, Emitter<ProductFormState> emit) {
@@ -91,7 +92,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onSizeChanged(SizeChanged event, Emitter<ProductFormState> emit) {
-    emit(state.copyWith(sizes: event.size));
+    emit(state.copyWith(sizes: event.sizes));
   }
 
   void _onGenderChanged(GenderChanged event, Emitter<ProductFormState> emit) {
@@ -113,10 +114,14 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     emit(state.copyWith(images: event.images));
   }
 
-  bool _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
-    if (!state.isValid) return false;
-    emit(state.copyWith(isFormPosted: true));
-    return true;
+  void _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
+    if (state.isValid) {
+      emit(state.copyWith(isFormPosted: true));
+    }
+  }
+
+  void _onOnFormReset(OnFormReset event, Emitter<ProductFormState> emit) {
+    emit(state.copyWith(isFormPosted: false, isValid: false));
   }
 
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
@@ -150,7 +155,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         gender: event.product.gender,
         inStock: Stock.dirty(value: event.product.stock),
         description: event.product.description,
-        tags: event.product.tags.join(', '),
+        tags: event.product.tags,
         images: event.product.images,
         isValid: Formz.validate([
           ProducName.dirty(value: event.product.title),

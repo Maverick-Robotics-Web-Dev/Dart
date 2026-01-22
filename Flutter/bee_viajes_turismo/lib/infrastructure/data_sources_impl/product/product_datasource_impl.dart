@@ -19,7 +19,9 @@ class ProductDataSourceImpl extends ProductDataSource {
       final String? productId = productData['id'];
       final String? token = await _sharedPrefService.getValue<String>('token');
       final String method = (productId == null) ? 'POST' : 'PATCH';
-      final String url = (productId == null) ? '/post' : '/products/$productId';
+      final String url = (productId == null)
+          ? '/products'
+          : '/products/$productId';
 
       // final String method;
       // final String url;
@@ -31,7 +33,6 @@ class ProductDataSourceImpl extends ProductDataSource {
       //   method = 'PATCH';
       //   url = '/products/$productId';
       // }
-      productData.remove('id');
 
       final response = await dio.request(
         url,
@@ -44,8 +45,10 @@ class ProductDataSourceImpl extends ProductDataSource {
 
       final product = ProductMapper.fromJsonToEntity(response.data);
       return product;
+    } on DioException catch (e) {
+      throw DioErrorMapper.mapDioError(e);
     } catch (e) {
-      throw Exception();
+      throw ServerFailure(message: e.toString());
     }
   }
 
