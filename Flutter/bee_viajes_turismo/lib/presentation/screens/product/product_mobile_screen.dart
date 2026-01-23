@@ -35,6 +35,7 @@ class ProductMobileScreen extends StatelessWidget {
               ProductBloc()..add(LoadProduct(productId: productId)),
         ),
         BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
+        BlocProvider<ProductsBloc>(create: (context) => ProductsBloc()),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -76,14 +77,15 @@ class ProductMobileScreen extends StatelessWidget {
                     'stock': state.inStock.value,
                     'sizes': state.sizes,
                     'gender': state.gender,
-                    'tags': state.tags,
+                    'tags': List<String>.from(state.tags.split(',')),
                     'images': state.images,
                   };
                   print('PRODUCT TO SUBMIT: $product');
                   context.read<ProductBloc>().add(
                     CreateUpdateProduct(productData: product),
                   );
-                  context.read<ProductFormBloc>().add(OnFormReset());
+                  context.read<ProductsBloc>().add(LoadProducts());
+                  // context.read<ProductFormBloc>().add(OnFormReset());
                 }
               },
             ),
@@ -314,9 +316,9 @@ class ProductInformation extends StatelessWidget {
                 maxLines: 2,
                 labelText: 'Tags (Separados por coma)',
                 keyboardType: TextInputType.multiline,
-                initialValue: state.tags.join(','),
+                initialValue: '${state.tags},',
                 onChanged: (value) {
-                  formBloc.add(TagsChanged(tags: List.from(value.split(','))));
+                  formBloc.add(TagsChanged(tags: value));
                 },
               ),
               SizedBox(height: 100),

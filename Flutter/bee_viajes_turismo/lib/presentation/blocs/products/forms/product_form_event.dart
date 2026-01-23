@@ -54,7 +54,7 @@ class DescriptionChanged extends ProductFormEvent {
 }
 
 class TagsChanged extends ProductFormEvent {
-  final List<String> tags;
+  final String tags;
 
   TagsChanged({required this.tags});
 }

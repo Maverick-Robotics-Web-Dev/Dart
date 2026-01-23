@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       limit: state.limit,
       offset: state.offset,
     );
+    print('LOADED PRODUCTS: ${products.map((e) => e.title)}');
 
     if (products.isEmpty) {
       emit(state.copyWith(isLastPage: true, isLoading: false));
@@ -33,8 +36,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       state.copyWith(
         isLoading: false,
         isLastPage: false,
-        offset: state.offset + state.limit,
-        products: [...state.products, ...products],
+        offset: state.offset,
+        products: products,
       ),
     );
   }

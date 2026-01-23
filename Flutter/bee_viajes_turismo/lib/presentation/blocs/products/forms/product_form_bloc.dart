@@ -121,32 +121,12 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onOnFormReset(OnFormReset event, Emitter<ProductFormState> emit) {
-    emit(state.copyWith(isFormPosted: false, isValid: false));
+    emit(state.copyWith(isFormPosted: false));
   }
 
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
-    // emit(
-    //   ProductFormState(
-    //     id: event.product.id,
-    //     title: ProducName.dirty(value: event.product.title),
-    //     slug: Slug.dirty(value: event.product.slug),
-    //     price: Price.dirty(value: event.product.price),
-    //     sizes: event.product.sizes,
-    //     gender: event.product.gender,
-    //     inStock: Stock.dirty(value: event.product.stock),
-    //     description: event.product.description,
-    //     tags: event.product.tags.join(', '),
-    //     images: event.product.images,
-    //     isValid: Formz.validate([
-    //       ProducName.dirty(value: event.product.title),
-    //       Slug.dirty(value: event.product.slug),
-    //       Price.dirty(value: event.product.price),
-    //       Stock.dirty(value: event.product.stock),
-    //     ]),
-    //   ),
-    // );
     emit(
-      state.copyWith(
+      ProductFormState(
         id: event.product.id,
         title: ProducName.dirty(value: event.product.title),
         slug: Slug.dirty(value: event.product.slug),
@@ -155,7 +135,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         gender: event.product.gender,
         inStock: Stock.dirty(value: event.product.stock),
         description: event.product.description,
-        tags: event.product.tags,
+        tags: event.product.tags.join(', '),
         images: event.product.images,
         isValid: Formz.validate([
           ProducName.dirty(value: event.product.title),
@@ -165,5 +145,25 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         ]),
       ),
     );
+    // emit(
+    //   state.copyWith(
+    //     id: event.product.id,
+    //     title: ProducName.dirty(value: event.product.title),
+    //     slug: Slug.dirty(value: event.product.slug),
+    //     price: Price.dirty(value: event.product.price),
+    //     sizes: event.product.sizes,
+    //     gender: event.product.gender,
+    //     inStock: Stock.dirty(value: event.product.stock),
+    //     description: event.product.description,
+    //     tags: event.product.tags.join(','),
+    //     images: event.product.images,
+    //     isValid: Formz.validate([
+    //       ProducName.dirty(value: event.product.title),
+    //       Slug.dirty(value: event.product.slug),
+    //       Price.dirty(value: event.product.price),
+    //       Stock.dirty(value: event.product.stock),
+    //     ]),
+    //   ),
+    // );
   }
 }

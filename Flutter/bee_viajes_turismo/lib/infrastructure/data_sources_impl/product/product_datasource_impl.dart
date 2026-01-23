@@ -33,6 +33,7 @@ class ProductDataSourceImpl extends ProductDataSource {
       //   method = 'PATCH';
       //   url = '/products/$productId';
       // }
+      productData.remove('id');
 
       final response = await dio.request(
         url,
@@ -46,6 +47,7 @@ class ProductDataSourceImpl extends ProductDataSource {
       final product = ProductMapper.fromJsonToEntity(response.data);
       return product;
     } on DioException catch (e) {
+      print('DIO ERROR: ${e.response}');
       throw DioErrorMapper.mapDioError(e);
     } catch (e) {
       throw ServerFailure(message: e.toString());
@@ -83,6 +85,7 @@ class ProductDataSourceImpl extends ProductDataSource {
     for (final product in response.data ?? []) {
       products.add(ProductMapper.fromJsonToEntity(product));
     }
+    print('RESPONSE DATA: ${products.map((e) => e.title)}');
     return products;
   }
 

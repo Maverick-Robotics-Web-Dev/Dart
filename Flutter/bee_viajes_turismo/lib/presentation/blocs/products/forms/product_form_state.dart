@@ -12,7 +12,7 @@ class ProductFormState extends Equatable {
   final String gender;
   final Stock inStock;
   final String description;
-  final List<String> tags;
+  final String tags;
   final List<String> images;
   final int currentIndex;
 
@@ -27,7 +27,7 @@ class ProductFormState extends Equatable {
     this.gender = '',
     this.inStock = const Stock.pure(),
     this.description = '',
-    this.tags = const [],
+    this.tags = '',
     this.images = const [],
     this.currentIndex = 0,
   });
@@ -43,7 +43,7 @@ class ProductFormState extends Equatable {
     String? gender,
     Stock? inStock,
     String? description,
-    List<String>? tags,
+    String? tags,
     List<String>? images,
     int? currentIndex,
   }) {
