@@ -13,3 +13,7 @@ class CreateUpdateProduct extends ProductEvent {
 
   CreateUpdateProduct({required this.productData});
 }
+
+class LoadProducts extends ProductEvent {
+  LoadProducts();
+}

@@ -10,6 +10,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   ProductBloc() : super(ProductState.initial()) {
     on<LoadProduct>(_onLoadProduct);
+    on<LoadProducts>(_onLoadProducts);
     on<CreateUpdateProduct>(_onCreateUpdateProduct);
   }
 
@@ -35,9 +36,40 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final product = await productRepository.createUpdateProduct(
         productData: event.productData,
       );
-      emit(state.copyWith(isSaving: true));
+
+      final isProductInList = state.products.any((p) => p.id == product.id);
+      final updatedProducts = state.products
+          .map((p) => p.id == product.id ? product : p)
+          .toList();
+
+      emit(state.copyWith(products: updatedProducts));
     } catch (e) {
       print('ERROR MINE: ${e.toString()}');
     }
+  }
+
+  Future _onLoadProducts(LoadProducts event, Emitter<ProductState> emit) async {
+    if (state.isLastPage || state.isLoading) return;
+
+    emit(state.copyWith(isLoading: true));
+    final products = await productRepository.getProductsByPage(
+      limit: state.limit,
+      offset: state.offset,
+    );
+    print('LOADED PRODUCTS: ${products.map((e) => e.title)}');
+
+    if (products.isEmpty) {
+      emit(state.copyWith(isLastPage: true, isLoading: false));
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        isLoading: false,
+        isLastPage: false,
+        offset: state.offset,
+        products: products,
+      ),
+    );
   }
 }

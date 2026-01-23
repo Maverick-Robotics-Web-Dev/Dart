@@ -1,3 +1,4 @@
+import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:bee_viajes_turismo/presentation/presentation.dart';
 import 'package:bee_viajes_turismo/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -107,15 +108,15 @@ class GoRouterConfig {
         ),
         GoRoute(
           name: productScreenRoute,
-          path: '$pathProductScreenRoute/:id',
+          path: pathProductScreenRoute,
           builder: (context, state) {
-            final id = state.pathParameters['id'];
+            final product = state.extra as Product?;
             // return BlocProvider(
             //   create: (context) =>
             //       ProductBloc()..add(LoadProduct(productId: id ?? 'no-id')),
             //   child: ProductScreen(),
             // );
-            return ProductScreen(productId: id ?? 'no-id');
+            return ProductScreen(product: product);
           },
         ),
         // GoRoute(

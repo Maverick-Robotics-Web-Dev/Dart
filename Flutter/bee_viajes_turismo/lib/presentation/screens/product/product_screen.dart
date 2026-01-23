@@ -1,13 +1,14 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
+import 'package:bee_viajes_turismo/domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import 'product_mobile_screen.dart';
 import 'product_tablet_screen.dart';
 
 class ProductScreen extends StatelessWidget {
-  final String productId;
+  final Product? product;
 
-  const ProductScreen({super.key, required this.productId});
+  const ProductScreen({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class ProductScreen extends StatelessWidget {
               constraints.maxWidth > ScreenSizes.lg) {
             return ProductTabletScreen(appTheme: apptheme);
           } else {
-            return ProductMobileScreen(appTheme: apptheme,productId: productId,);
+            return ProductMobileScreen(appTheme: apptheme, product: product);
           }
         },
       ),

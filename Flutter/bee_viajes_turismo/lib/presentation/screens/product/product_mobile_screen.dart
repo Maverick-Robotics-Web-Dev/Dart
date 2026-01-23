@@ -8,18 +8,13 @@ import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import '../../blocs/products/forms/product_form_event.dart';
 import '../../blocs/products/forms/product_form_state.dart';
 import '../../blocs/products/product_state.dart';
-import '../../blocs/products/products_event.dart';
 import '../../presentation.dart';
 
 class ProductMobileScreen extends StatelessWidget {
   final ThemeData appTheme;
-  final String productId;
+  final Product? product;
 
-  const ProductMobileScreen({
-    super.key,
-    required this.appTheme,
-    required this.productId,
-  });
+  const ProductMobileScreen({super.key, required this.appTheme, this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +26,12 @@ class ProductMobileScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(
-          create: (context) =>
-              ProductBloc()..add(LoadProduct(productId: productId)),
+          create: (context) => ProductBloc()..add(LoadProducts()),
         ),
-        BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
-        BlocProvider<ProductsBloc>(create: (context) => ProductsBloc()),
+        BlocProvider<ProductFormBloc>(
+          create: (context) =>
+              ProductFormBloc()..add(LoadForm(product: product!)),
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -52,6 +48,9 @@ class ProductMobileScreen extends StatelessWidget {
           listeners: [
             BlocListener<ProductBloc, ProductState>(
               listener: (context, state) {
+                print(
+                  'PRODUCT STATE: {loading: ${state.isLoading},lastpage: ${state.isLastPage}}',
+                );
                 if (!state.isLoading) {
                   context.read<ProductFormBloc>().add(
                     LoadForm(product: state.product),
@@ -66,7 +65,6 @@ class ProductMobileScreen extends StatelessWidget {
             ),
             BlocListener<ProductFormBloc, ProductFormState>(
               listener: (context, state) {
-                print('state isFormPosted: ${state.isFormPosted}');
                 if (state.isFormPosted) {
                   final Map<String, dynamic> product = {
                     'id': state.id!,
@@ -84,7 +82,7 @@ class ProductMobileScreen extends StatelessWidget {
                   context.read<ProductBloc>().add(
                     CreateUpdateProduct(productData: product),
                   );
-                  context.read<ProductsBloc>().add(LoadProducts());
+                  // context.read<ProductBloc>().add(LoadProducts());
                   // context.read<ProductFormBloc>().add(OnFormReset());
                 }
               },
