@@ -66,9 +66,9 @@ class ImagesChanged extends ProductFormEvent {
 }
 
 class LoadForm extends ProductFormEvent {
-  final Product product;
+  final Product? product;
 
-  LoadForm({required this.product});
+  LoadForm({this.product});
 }
 
 class OnSubmitForm extends ProductFormEvent {

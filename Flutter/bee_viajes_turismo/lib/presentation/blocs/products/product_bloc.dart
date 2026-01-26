@@ -33,6 +33,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     try {
+      final list = [...state.products];
+      print('PRODUCT LIST BEFORE: $list');
       final product = await productRepository.createUpdateProduct(
         productData: event.productData,
       );
@@ -56,7 +58,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       limit: state.limit,
       offset: state.offset,
     );
-    print('LOADED PRODUCTS: ${products.map((e) => e.title)}');
+    // print('LOADED PRODUCTS: ${products.map((e) => e.title)}');
 
     if (products.isEmpty) {
       emit(state.copyWith(isLastPage: true, isLoading: false));
@@ -69,6 +71,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         isLastPage: false,
         offset: state.offset,
         products: products,
+        // products: [...state.products, ...products]
       ),
     );
   }

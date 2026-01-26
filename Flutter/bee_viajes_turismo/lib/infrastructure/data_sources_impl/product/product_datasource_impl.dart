@@ -85,7 +85,6 @@ class ProductDataSourceImpl extends ProductDataSource {
     for (final product in response.data ?? []) {
       products.add(ProductMapper.fromJsonToEntity(product));
     }
-    print('RESPONSE DATA: ${products.map((e) => e.title)}');
     return products;
   }
 

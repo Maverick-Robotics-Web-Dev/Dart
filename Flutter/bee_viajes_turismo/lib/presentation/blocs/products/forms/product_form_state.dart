@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 class ProductFormState extends Equatable {
   final bool isValid;
   final bool isFormPosted;
+  final bool isLoading;
   final String? id;
   final ProducName title;
   final Slug slug;
@@ -17,24 +18,42 @@ class ProductFormState extends Equatable {
   final int currentIndex;
 
   const ProductFormState({
-    this.isValid = false,
-    this.isFormPosted = false,
+    required this.isValid,
+    required this.isFormPosted,
+    required this.isLoading,
     this.id,
-    this.title = const ProducName.pure(),
-    this.slug = const Slug.pure(),
-    this.price = const Price.pure(),
-    this.sizes = const [],
-    this.gender = '',
-    this.inStock = const Stock.pure(),
-    this.description = '',
-    this.tags = '',
-    this.images = const [],
-    this.currentIndex = 0,
+    required this.title,
+    required this.slug,
+    required this.price,
+    required this.sizes,
+    required this.gender,
+    required this.inStock,
+    required this.description,
+    required this.tags,
+    required this.images,
+    required this.currentIndex,
   });
+
+  factory ProductFormState.initial() => ProductFormState(
+    isValid: false,
+    isFormPosted: false,
+    isLoading: false,
+    title: const ProducName.pure(),
+    slug: const Slug.pure(),
+    price: const Price.pure(),
+    sizes: const [],
+    gender: '',
+    inStock: const Stock.pure(),
+    description: '',
+    tags: '',
+    images: const [],
+    currentIndex: 0,
+  );
 
   ProductFormState copyWith({
     bool? isValid,
     bool? isFormPosted,
+    bool? isLoading,
     String? id,
     ProducName? title,
     Slug? slug,
@@ -50,6 +69,7 @@ class ProductFormState extends Equatable {
     return ProductFormState(
       isValid: isValid ?? this.isValid,
       isFormPosted: isFormPosted ?? this.isFormPosted,
+      isLoading: isLoading ?? this.isLoading,
       id: id ?? this.id,
       title: title ?? this.title,
       slug: slug ?? this.slug,
@@ -68,6 +88,7 @@ class ProductFormState extends Equatable {
   List<Object?> get props => [
     isValid,
     isFormPosted,
+    isLoading,
     id,
     title,
     slug,

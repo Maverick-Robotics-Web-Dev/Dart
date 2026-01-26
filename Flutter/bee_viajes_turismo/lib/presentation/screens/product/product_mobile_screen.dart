@@ -18,6 +18,7 @@ class ProductMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('PRODUCT RECEIVED IN SCREEN: ${product?.title}');
     // final bloc = context.read<ProductBloc>()
     //   ..add(LoadProduct(productId: productId));
     // final formBloc = context.read<ProductFormBloc>();
@@ -25,12 +26,10 @@ class ProductMobileScreen extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ProductBloc>(
-          create: (context) => ProductBloc()..add(LoadProducts()),
-        ),
+        BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
         BlocProvider<ProductFormBloc>(
           create: (context) =>
-              ProductFormBloc()..add(LoadForm(product: product!)),
+              ProductFormBloc()..add(LoadForm(product: product)),
         ),
       ],
       child: Scaffold(
@@ -48,14 +47,11 @@ class ProductMobileScreen extends StatelessWidget {
           listeners: [
             BlocListener<ProductBloc, ProductState>(
               listener: (context, state) {
-                print(
-                  'PRODUCT STATE: {loading: ${state.isLoading},lastpage: ${state.isLastPage}}',
-                );
-                if (!state.isLoading) {
-                  context.read<ProductFormBloc>().add(
-                    LoadForm(product: state.product),
-                  );
-                }
+                // if (!state.isLoading) {
+                //   context.read<ProductFormBloc>().add(
+                //     LoadForm(product: state.product),
+                //   );
+                // }
                 // if (state.isSaving) {
                 //   formBloc.add(OnFormReset());
                 //   productsBloc.add(LoadProducts());
@@ -65,7 +61,7 @@ class ProductMobileScreen extends StatelessWidget {
             ),
             BlocListener<ProductFormBloc, ProductFormState>(
               listener: (context, state) {
-                if (state.isFormPosted) {
+                if (state.isFormPosted == true) {
                   final Map<String, dynamic> product = {
                     'id': state.id!,
                     'title': state.title.value,
@@ -78,45 +74,42 @@ class ProductMobileScreen extends StatelessWidget {
                     'tags': List<String>.from(state.tags.split(',')),
                     'images': state.images,
                   };
-                  print('PRODUCT TO SUBMIT: $product');
+                  // print('PRODUCT TO SUBMIT: $product');
                   context.read<ProductBloc>().add(
                     CreateUpdateProduct(productData: product),
                   );
                   // context.read<ProductBloc>().add(LoadProducts());
+                  Navigator.pop(context);
                   // context.read<ProductFormBloc>().add(OnFormReset());
                 }
               },
             ),
           ],
-          child: BlocBuilder<ProductBloc, ProductState>(
+          child: BlocBuilder<ProductFormBloc, ProductFormState>(
             builder: (context, state) {
               return Center(
                 child: state.isLoading
                     ? FullScreenLoader()
-                    : BlocBuilder<ProductFormBloc, ProductFormState>(
-                        builder: (context, state) {
-                          return ListView(
-                            children: [
-                              SizedBox(
-                                height: 300,
-                                width: 600,
-                                child: ImageGallery(images: state.images),
-                              ),
-                              SizedBox(height: 12),
-                              Dots(images: state.images),
-                              SizedBox(height: 10),
-                              Center(
-                                child: Text(
-                                  state.title.value,
-                                  style: appTheme.textTheme.headlineSmall,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              ProductInformation(appTheme: appTheme),
-                            ],
-                          );
-                        },
+                    : ListView(
+                        children: [
+                          SizedBox(
+                            height: 300,
+                            width: 600,
+                            child: ImageGallery(images: state.images),
+                          ),
+                          SizedBox(height: 12),
+                          Dots(images: state.images),
+                          SizedBox(height: 10),
+                          Center(
+                            child: Text(
+                              state.title.value,
+                              style: appTheme.textTheme.headlineSmall,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ProductInformation(appTheme: appTheme),
+                        ],
                       ),
               );
             },
@@ -230,6 +223,7 @@ class ProductInformation extends StatelessWidget {
     final formBloc = context.read<ProductFormBloc>();
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       builder: (context, state) {
+        print('BUILDING FORM WITH STATE: ${state.title.value}');
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -314,7 +308,7 @@ class ProductInformation extends StatelessWidget {
                 maxLines: 2,
                 labelText: 'Tags (Separados por coma)',
                 keyboardType: TextInputType.multiline,
-                initialValue: '${state.tags},',
+                initialValue: state.tags,
                 onChanged: (value) {
                   formBloc.add(TagsChanged(tags: value));
                 },

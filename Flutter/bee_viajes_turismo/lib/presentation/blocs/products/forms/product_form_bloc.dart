@@ -7,7 +7,7 @@ import 'product_form_event.dart';
 import 'product_form_state.dart';
 
 class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
-  ProductFormBloc() : super(ProductFormState()) {
+  ProductFormBloc() : super(ProductFormState.initial()) {
     on<PageChanged>(_onPageChanged);
     on<TitleChanged>(_onTitleChanged);
     on<SlugChanged>(_onSlugChanged);
@@ -115,7 +115,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
-    if (state.isValid) {
+    if (state.isValid == true) {
       emit(state.copyWith(isFormPosted: true));
     }
   }
@@ -125,45 +125,31 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
+    print('LOAD FORM PRODUCT: ${event.product}');
+    print('LOADING FORM WITH PRODUCT: ${event.product?.title}');
+    emit(state.copyWith(isLoading: true));
+    if (event.product == null) return;
+
     emit(
-      ProductFormState(
-        id: event.product.id,
-        title: ProducName.dirty(value: event.product.title),
-        slug: Slug.dirty(value: event.product.slug),
-        price: Price.dirty(value: event.product.price),
-        sizes: event.product.sizes,
-        gender: event.product.gender,
-        inStock: Stock.dirty(value: event.product.stock),
-        description: event.product.description,
-        tags: event.product.tags.join(', '),
-        images: event.product.images,
+      state.copyWith(
+        id: event.product?.id,
+        title: ProducName.dirty(value: event.product?.title ?? ''),
+        slug: Slug.dirty(value: event.product!.slug),
+        price: Price.dirty(value: event.product!.price),
+        sizes: event.product!.sizes,
+        gender: event.product!.gender,
+        inStock: Stock.dirty(value: event.product!.stock),
+        description: event.product!.description,
+        tags: event.product!.tags.join(','),
+        images: event.product!.images,
         isValid: Formz.validate([
-          ProducName.dirty(value: event.product.title),
-          Slug.dirty(value: event.product.slug),
-          Price.dirty(value: event.product.price),
-          Stock.dirty(value: event.product.stock),
+          ProducName.dirty(value: event.product!.title),
+          Slug.dirty(value: event.product!.slug),
+          Price.dirty(value: event.product!.price),
+          Stock.dirty(value: event.product!.stock),
         ]),
       ),
     );
-    // emit(
-    //   state.copyWith(
-    //     id: event.product.id,
-    //     title: ProducName.dirty(value: event.product.title),
-    //     slug: Slug.dirty(value: event.product.slug),
-    //     price: Price.dirty(value: event.product.price),
-    //     sizes: event.product.sizes,
-    //     gender: event.product.gender,
-    //     inStock: Stock.dirty(value: event.product.stock),
-    //     description: event.product.description,
-    //     tags: event.product.tags.join(','),
-    //     images: event.product.images,
-    //     isValid: Formz.validate([
-    //       ProducName.dirty(value: event.product.title),
-    //       Slug.dirty(value: event.product.slug),
-    //       Price.dirty(value: event.product.price),
-    //       Stock.dirty(value: event.product.stock),
-    //     ]),
-    //   ),
-    // );
+    emit(state.copyWith(isLoading: false));
   }
 }
