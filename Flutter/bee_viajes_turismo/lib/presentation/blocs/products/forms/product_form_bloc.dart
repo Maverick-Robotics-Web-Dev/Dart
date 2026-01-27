@@ -1,4 +1,3 @@
-import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -125,10 +124,8 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
-    print('LOAD FORM PRODUCT: ${event.product}');
-    print('LOADING FORM WITH PRODUCT: ${event.product?.title}');
     emit(state.copyWith(isLoading: true));
-    if (event.product == null) return;
+    // if (event.product == null) return;
 
     emit(
       state.copyWith(
@@ -150,6 +147,9 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         ]),
       ),
     );
-    emit(state.copyWith(isLoading: false));
+    if (state.title.isValid) {
+      print('FORM LOADED SUCCESSFULLY');
+      emit(state.copyWith(isLoading: false));
+    }
   }
 }

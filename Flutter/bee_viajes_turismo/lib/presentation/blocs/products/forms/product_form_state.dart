@@ -18,10 +18,10 @@ class ProductFormState extends Equatable {
   final int currentIndex;
 
   const ProductFormState({
+    this.id,
     required this.isValid,
     required this.isFormPosted,
     required this.isLoading,
-    this.id,
     required this.title,
     required this.slug,
     required this.price,

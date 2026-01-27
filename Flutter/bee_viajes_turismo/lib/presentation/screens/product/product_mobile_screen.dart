@@ -61,7 +61,8 @@ class ProductMobileScreen extends StatelessWidget {
             ),
             BlocListener<ProductFormBloc, ProductFormState>(
               listener: (context, state) {
-                if (state.isFormPosted == true) {
+                print('FORM STATE: ${state.isLoading}');
+                if (state.isFormPosted) {
                   final Map<String, dynamic> product = {
                     'id': state.id!,
                     'title': state.title.value,
