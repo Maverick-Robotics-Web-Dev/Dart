@@ -16,6 +16,7 @@ class ProductFormState extends Equatable {
   final String tags;
   final List<String> images;
   final int currentIndex;
+  final bool isEdit;
 
   const ProductFormState({
     this.id,
@@ -32,6 +33,7 @@ class ProductFormState extends Equatable {
     required this.tags,
     required this.images,
     required this.currentIndex,
+    required this.isEdit,
   });
 
   factory ProductFormState.initial() => ProductFormState(
@@ -48,6 +50,7 @@ class ProductFormState extends Equatable {
     tags: '',
     images: const [],
     currentIndex: 0,
+    isEdit: false,
   );
 
   ProductFormState copyWith({
@@ -65,6 +68,7 @@ class ProductFormState extends Equatable {
     String? tags,
     List<String>? images,
     int? currentIndex,
+    bool? isEdit,
   }) {
     return ProductFormState(
       isValid: isValid ?? this.isValid,
@@ -81,6 +85,7 @@ class ProductFormState extends Equatable {
       tags: tags ?? this.tags,
       images: images ?? this.images,
       currentIndex: currentIndex ?? this.currentIndex,
+      isEdit: isEdit ?? this.isEdit,
     );
   }
 
@@ -100,5 +105,6 @@ class ProductFormState extends Equatable {
     tags,
     images,
     currentIndex,
+    isEdit,
   ];
 }

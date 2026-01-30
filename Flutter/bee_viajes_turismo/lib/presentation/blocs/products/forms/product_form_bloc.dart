@@ -124,26 +124,28 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
-    emit(state.copyWith(isLoading: true));
-    // if (event.product == null) return;
+    final product = event.product;
+
+    if (product == null) return;
 
     emit(
       state.copyWith(
-        id: event.product?.id,
-        title: ProducName.dirty(value: event.product?.title ?? ''),
-        slug: Slug.dirty(value: event.product!.slug),
-        price: Price.dirty(value: event.product!.price),
-        sizes: event.product!.sizes,
-        gender: event.product!.gender,
-        inStock: Stock.dirty(value: event.product!.stock),
-        description: event.product!.description,
-        tags: event.product!.tags.join(','),
-        images: event.product!.images,
+        isEdit: true,
+        id: product.id,
+        title: ProducName.dirty(value: product.title),
+        slug: Slug.dirty(value: product.slug),
+        price: Price.dirty(value: product.price),
+        sizes: product.sizes,
+        gender: product.gender,
+        inStock: Stock.dirty(value: product.stock),
+        description: product.description,
+        tags: product.tags.join(','),
+        images: product.images,
         isValid: Formz.validate([
-          ProducName.dirty(value: event.product!.title),
-          Slug.dirty(value: event.product!.slug),
-          Price.dirty(value: event.product!.price),
-          Stock.dirty(value: event.product!.stock),
+          ProducName.dirty(value: product.title),
+          Slug.dirty(value: product.slug),
+          Price.dirty(value: product.price),
+          Stock.dirty(value: product.stock),
         ]),
       ),
     );
