@@ -4,7 +4,7 @@ import 'package:bee_viajes_turismo/domain/domain.dart';
 import '../user/user_mapper.dart';
 
 class ProductMapper {
-  static Product fromJsonToEntity(Map<String, dynamic> json) => Product(
+  static Product fromJson(Map<String, dynamic> json) => Product(
     id: json['id'],
     title: json['title'],
     price: double.parse(json['price'].toString()),
@@ -21,8 +21,21 @@ class ProductMapper {
             : '${Enviroment.apiUrl}/files/product/$image',
       ),
     ),
-    user: UserMapper.fromJsonToEntity(json['user']),
+    user: UserMapper.fromJson(json['user']),
   );
+
+  static Map<String, dynamic> toJson(Product product) => {
+    'id': product.id,
+    'title': product.title,
+    'price': product.price,
+    'description': product.description,
+    'slug': product.slug,
+    'stock': product.stock,
+    'sizes': product.sizes,
+    'gender': product.gender,
+    'tags': product.tags,
+    'images': product.images,
+  };
 
   static Product empty() => Product(
     id: '',

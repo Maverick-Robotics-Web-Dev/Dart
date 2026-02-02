@@ -27,10 +27,7 @@ class ProductMobileScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
-        BlocProvider<ProductFormBloc>(
-          create: (context) =>
-              ProductFormBloc()..add(LoadForm(product: product)),
-        ),
+        BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -89,29 +86,31 @@ class ProductMobileScreen extends StatelessWidget {
           child: BlocBuilder<ProductFormBloc, ProductFormState>(
             builder: (context, state) {
               return Center(
-                child: state.isLoading
-                    ? FullScreenLoader()
-                    : ListView(
-                        children: [
-                          SizedBox(
-                            height: 300,
-                            width: 600,
-                            child: ImageGallery(images: state.images),
+                child:
+                    // state.isLoading
+                    // ? FullScreenLoader()
+                    // :
+                    ListView(
+                      children: [
+                        SizedBox(
+                          height: 300,
+                          width: 600,
+                          child: ImageGallery(images: product!.images),
+                        ),
+                        SizedBox(height: 12),
+                        Dots(images: state.images),
+                        SizedBox(height: 10),
+                        Center(
+                          child: Text(
+                            state.title.value,
+                            style: appTheme.textTheme.headlineSmall,
+                            textAlign: TextAlign.center,
                           ),
-                          SizedBox(height: 12),
-                          Dots(images: state.images),
-                          SizedBox(height: 10),
-                          Center(
-                            child: Text(
-                              state.title.value,
-                              style: appTheme.textTheme.headlineSmall,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          ProductInformation(appTheme: appTheme),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 10),
+                        ProductInformation(appTheme: appTheme),
+                      ],
+                    ),
               );
             },
           ),
@@ -216,109 +215,103 @@ class Dots extends StatelessWidget {
 
 class ProductInformation extends StatelessWidget {
   final ThemeData appTheme;
+  final Product? product;
 
-  const ProductInformation({super.key, required this.appTheme});
+  const ProductInformation({super.key, required this.appTheme, this.product});
 
   @override
   Widget build(BuildContext context) {
     final formBloc = context.read<ProductFormBloc>();
-    return BlocBuilder<ProductFormBloc, ProductFormState>(
-      builder: (context, state) {
-        print('BUILDING FORM WITH STATE: ${state.title.value}');
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Generales', style: appTheme.textTheme.bodyLarge),
-              SizedBox(height: 15),
-              CustomTextFormField(
-                labelText: 'Nombre',
-                initialValue: state.title.value,
-                errorText: state.title.errorMessage,
-                onChanged: (value) {
-                  formBloc.add(
-                    TitleChanged(title: ProducName.dirty(value: value)),
-                  );
-                },
-              ),
-              SizedBox(height: 16),
-              CustomTextFormField(
-                labelText: 'Slug',
-                initialValue: state.slug.value,
-                errorText: state.slug.errorMessage,
-                onChanged: (value) {
-                  formBloc.add(SlugChanged(slug: Slug.dirty(value: value)));
-                },
-              ),
-              SizedBox(height: 16),
-              CustomTextFormField(
-                labelText: 'Precio',
-                initialValue: state.price.value.toString(),
-                errorText: state.price.errorMessage,
-                onChanged: (value) {
-                  formBloc.add(
-                    PriceChanged(
-                      price: Price.dirty(value: double.tryParse(value) ?? -1),
-                    ),
-                  );
-                },
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-              SizedBox(height: 15),
-              Text('Extras', style: appTheme.textTheme.bodyLarge),
-              SizeSelector(
-                selectedSizes: state.sizes,
-                onSizesChanged: (value) {
-                  formBloc.add(SizeChanged(sizes: value));
-                },
-              ),
-              SizedBox(height: 5),
-              GenderSelector(
-                selectedGender: state.gender,
-                onGenderChanged: (value) {
-                  formBloc.add(GenderChanged(gender: value));
-                },
-              ),
-              SizedBox(height: 15),
-              CustomTextFormField(
-                labelText: 'Existencias',
-                initialValue: state.inStock.value.toString(),
-                errorText: state.inStock.errorMessage,
-                onChanged: (value) {
-                  formBloc.add(
-                    InStockChanged(
-                      inStock: Stock.dirty(value: double.tryParse(value) ?? -1),
-                    ),
-                  );
-                },
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-              ),
-              SizedBox(height: 16),
-              CustomTextFormField(
-                maxLines: 6,
-                labelText: 'Descripción',
-                keyboardType: TextInputType.multiline,
-                initialValue: state.description,
-                onChanged: (value) {
-                  formBloc.add(DescriptionChanged(description: value));
-                },
-              ),
-              SizedBox(height: 16),
-              CustomTextFormField(
-                maxLines: 2,
-                labelText: 'Tags (Separados por coma)',
-                keyboardType: TextInputType.multiline,
-                initialValue: state.tags,
-                onChanged: (value) {
-                  formBloc.add(TagsChanged(tags: value));
-                },
-              ),
-              SizedBox(height: 100),
-            ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Generales', style: appTheme.textTheme.bodyLarge),
+          SizedBox(height: 15),
+          CustomTextFormField(
+            labelText: 'Nombre',
+            initialValue: product?.title,
+            // errorText: state.title.errorMessage,
+            onChanged: (value) {
+              formBloc.add(TitleChanged(title: ProducName.dirty(value: value)));
+            },
           ),
-        );
-      },
+          SizedBox(height: 16),
+          CustomTextFormField(
+            labelText: 'Slug',
+            initialValue: state.slug.value,
+            errorText: state.slug.errorMessage,
+            onChanged: (value) {
+              formBloc.add(SlugChanged(slug: Slug.dirty(value: value)));
+            },
+          ),
+          SizedBox(height: 16),
+          CustomTextFormField(
+            labelText: 'Precio',
+            initialValue: state.price.value.toString(),
+            errorText: state.price.errorMessage,
+            onChanged: (value) {
+              formBloc.add(
+                PriceChanged(
+                  price: Price.dirty(value: double.tryParse(value) ?? -1),
+                ),
+              );
+            },
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+          ),
+          SizedBox(height: 15),
+          Text('Extras', style: appTheme.textTheme.bodyLarge),
+          SizeSelector(
+            selectedSizes: state.sizes,
+            onSizesChanged: (value) {
+              formBloc.add(SizeChanged(sizes: value));
+            },
+          ),
+          SizedBox(height: 5),
+          GenderSelector(
+            selectedGender: state.gender,
+            onGenderChanged: (value) {
+              formBloc.add(GenderChanged(gender: value));
+            },
+          ),
+          SizedBox(height: 15),
+          CustomTextFormField(
+            labelText: 'Existencias',
+            initialValue: state.inStock.value.toString(),
+            errorText: state.inStock.errorMessage,
+            onChanged: (value) {
+              formBloc.add(
+                InStockChanged(
+                  inStock: Stock.dirty(value: double.tryParse(value) ?? -1),
+                ),
+              );
+            },
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+          ),
+          SizedBox(height: 16),
+          CustomTextFormField(
+            maxLines: 6,
+            labelText: 'Descripción',
+            keyboardType: TextInputType.multiline,
+            initialValue: state.description,
+            onChanged: (value) {
+              formBloc.add(DescriptionChanged(description: value));
+            },
+          ),
+          SizedBox(height: 16),
+          CustomTextFormField(
+            maxLines: 2,
+            labelText: 'Tags (Separados por coma)',
+            keyboardType: TextInputType.multiline,
+            initialValue: state.tags,
+            onChanged: (value) {
+              formBloc.add(TagsChanged(tags: value));
+            },
+          ),
+          SizedBox(height: 100),
+        ],
+      ),
     );
   }
 }

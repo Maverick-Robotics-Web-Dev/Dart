@@ -44,7 +44,7 @@ class ProductDataSourceImpl extends ProductDataSource {
         ),
       );
 
-      final product = ProductMapper.fromJsonToEntity(response.data);
+      final product = ProductMapper.fromJson(response.data);
       return product;
     } on DioException catch (e) {
       print('DIO ERROR: ${e.response}');
@@ -64,7 +64,7 @@ class ProductDataSourceImpl extends ProductDataSource {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
 
-      final product = ProductMapper.fromJsonToEntity(response.data);
+      final product = ProductMapper.fromJson(response.data);
       return product;
     } on DioException catch (e) {
       throw DioErrorMapper.mapDioError(e);
@@ -83,7 +83,7 @@ class ProductDataSourceImpl extends ProductDataSource {
     final List<Product> products = [];
 
     for (final product in response.data ?? []) {
-      products.add(ProductMapper.fromJsonToEntity(product));
+      products.add(ProductMapper.fromJson(product));
     }
     return products;
   }

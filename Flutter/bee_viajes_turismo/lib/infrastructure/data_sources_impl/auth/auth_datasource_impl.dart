@@ -19,7 +19,7 @@ class AuthDataSourceImpl extends AuthDataSource {
         data: {'email': email, 'password': password},
       );
 
-      final user = UserMapper.fromJsonToEntity(response.data);
+      final user = UserMapper.fromJson(response.data);
 
       return user;
     } on DioException catch (e) {
@@ -37,7 +37,7 @@ class AuthDataSourceImpl extends AuthDataSource {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
 
-      final user = UserMapper.fromJsonToEntity(response.data);
+      final user = UserMapper.fromJson(response.data);
 
       return user;
     } on DioException catch (e) {
