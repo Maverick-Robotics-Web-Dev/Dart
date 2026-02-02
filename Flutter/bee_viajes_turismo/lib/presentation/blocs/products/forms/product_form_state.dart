@@ -39,7 +39,7 @@ class ProductFormState extends Equatable {
   factory ProductFormState.initial() => ProductFormState(
     isValid: false,
     isFormPosted: false,
-    isLoading: false,
+    isLoading: true,
     title: const ProducName.pure(),
     slug: const Slug.pure(),
     price: const Price.pure(),

@@ -27,7 +27,10 @@ class ProductMobileScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
-        BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
+        BlocProvider<ProductFormBloc>(
+          create: (context) =>
+              ProductFormBloc()..add(LoadForm(product: product)),
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -40,57 +43,12 @@ class ProductMobileScreen extends StatelessWidget {
             IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
           ],
         ),
-        body: MultiBlocListener(
-          listeners: [
-            BlocListener<ProductBloc, ProductState>(
-              listener: (context, state) {
-                // if (!state.isLoading) {
-                //   context.read<ProductFormBloc>().add(
-                //     LoadForm(product: state.product),
-                //   );
-                // }
-                // if (state.isSaving) {
-                //   formBloc.add(OnFormReset());
-                //   productsBloc.add(LoadProducts());
-                //   Navigator.pop(context);
-                // }
-              },
-            ),
-            BlocListener<ProductFormBloc, ProductFormState>(
-              listener: (context, state) {
-                print('FORM STATE: ${state.isLoading}');
-                if (state.isFormPosted) {
-                  final Map<String, dynamic> product = {
-                    'id': state.id!,
-                    'title': state.title.value,
-                    'price': state.price.value,
-                    'description': state.description,
-                    'slug': state.slug.value,
-                    'stock': state.inStock.value,
-                    'sizes': state.sizes,
-                    'gender': state.gender,
-                    'tags': List<String>.from(state.tags.split(',')),
-                    'images': state.images,
-                  };
-                  // print('PRODUCT TO SUBMIT: $product');
-                  context.read<ProductBloc>().add(
-                    CreateUpdateProduct(productData: product),
-                  );
-                  // context.read<ProductBloc>().add(LoadProducts());
-                  Navigator.pop(context);
-                  // context.read<ProductFormBloc>().add(OnFormReset());
-                }
-              },
-            ),
-          ],
-          child: BlocBuilder<ProductFormBloc, ProductFormState>(
-            builder: (context, state) {
-              return Center(
-                child:
-                    // state.isLoading
-                    // ? FullScreenLoader()
-                    // :
-                    ListView(
+        body: BlocBuilder<ProductFormBloc, ProductFormState>(
+          builder: (context, state) {
+            return Center(
+              child: state.isLoading == true
+                  ? FullScreenLoader()
+                  : ListView(
                       children: [
                         SizedBox(
                           height: 300,
@@ -111,9 +69,8 @@ class ProductMobileScreen extends StatelessWidget {
                         ProductInformation(appTheme: appTheme),
                       ],
                     ),
-              );
-            },
-          ),
+            );
+          },
         ),
         floatingActionButton: BlocBuilder<ProductFormBloc, ProductFormState>(
           builder: (context, state) {
@@ -215,103 +172,109 @@ class Dots extends StatelessWidget {
 
 class ProductInformation extends StatelessWidget {
   final ThemeData appTheme;
-  final Product? product;
 
-  const ProductInformation({super.key, required this.appTheme, this.product});
+  const ProductInformation({super.key, required this.appTheme});
 
   @override
   Widget build(BuildContext context) {
     final formBloc = context.read<ProductFormBloc>();
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Generales', style: appTheme.textTheme.bodyLarge),
-          SizedBox(height: 15),
-          CustomTextFormField(
-            labelText: 'Nombre',
-            initialValue: product?.title,
-            // errorText: state.title.errorMessage,
-            onChanged: (value) {
-              formBloc.add(TitleChanged(title: ProducName.dirty(value: value)));
-            },
+    return BlocBuilder<ProductFormBloc, ProductFormState>(
+      builder: (context, state) {
+        print('STATE: ${state}');
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Generales', style: appTheme.textTheme.bodyLarge),
+              SizedBox(height: 15),
+              CustomTextFormField(
+                labelText: 'Nombre',
+                initialValue: state.title.value,
+                errorText: state.title.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(
+                    TitleChanged(title: ProducName.dirty(value: value)),
+                  );
+                },
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                labelText: 'Slug',
+                initialValue: state.slug.value,
+                errorText: state.slug.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(SlugChanged(slug: Slug.dirty(value: value)));
+                },
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                labelText: 'Precio',
+                initialValue: state.price.value.toString(),
+                errorText: state.price.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(
+                    PriceChanged(
+                      price: Price.dirty(value: double.tryParse(value) ?? -1),
+                    ),
+                  );
+                },
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+              ),
+              SizedBox(height: 15),
+              Text('Extras', style: appTheme.textTheme.bodyLarge),
+              SizeSelector(
+                selectedSizes: state.sizes,
+                onSizesChanged: (value) {
+                  formBloc.add(SizeChanged(sizes: value));
+                },
+              ),
+              SizedBox(height: 5),
+              GenderSelector(
+                selectedGender: state.gender,
+                onGenderChanged: (value) {
+                  formBloc.add(GenderChanged(gender: value));
+                },
+              ),
+              SizedBox(height: 15),
+              CustomTextFormField(
+                labelText: 'Existencias',
+                initialValue: state.inStock.value.toString(),
+                errorText: state.inStock.errorMessage,
+                onChanged: (value) {
+                  formBloc.add(
+                    InStockChanged(
+                      inStock: Stock.dirty(value: double.tryParse(value) ?? -1),
+                    ),
+                  );
+                },
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                maxLines: 6,
+                labelText: 'Descripción',
+                keyboardType: TextInputType.multiline,
+                initialValue: state.description,
+                onChanged: (value) {
+                  formBloc.add(DescriptionChanged(description: value));
+                },
+              ),
+              SizedBox(height: 16),
+              CustomTextFormField(
+                maxLines: 2,
+                labelText: 'Tags (Separados por coma)',
+                keyboardType: TextInputType.multiline,
+                initialValue: state.tags,
+                onChanged: (value) {
+                  formBloc.add(TagsChanged(tags: value));
+                },
+              ),
+              SizedBox(height: 100),
+            ],
           ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            labelText: 'Slug',
-            initialValue: state.slug.value,
-            errorText: state.slug.errorMessage,
-            onChanged: (value) {
-              formBloc.add(SlugChanged(slug: Slug.dirty(value: value)));
-            },
-          ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            labelText: 'Precio',
-            initialValue: state.price.value.toString(),
-            errorText: state.price.errorMessage,
-            onChanged: (value) {
-              formBloc.add(
-                PriceChanged(
-                  price: Price.dirty(value: double.tryParse(value) ?? -1),
-                ),
-              );
-            },
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-          ),
-          SizedBox(height: 15),
-          Text('Extras', style: appTheme.textTheme.bodyLarge),
-          SizeSelector(
-            selectedSizes: state.sizes,
-            onSizesChanged: (value) {
-              formBloc.add(SizeChanged(sizes: value));
-            },
-          ),
-          SizedBox(height: 5),
-          GenderSelector(
-            selectedGender: state.gender,
-            onGenderChanged: (value) {
-              formBloc.add(GenderChanged(gender: value));
-            },
-          ),
-          SizedBox(height: 15),
-          CustomTextFormField(
-            labelText: 'Existencias',
-            initialValue: state.inStock.value.toString(),
-            errorText: state.inStock.errorMessage,
-            onChanged: (value) {
-              formBloc.add(
-                InStockChanged(
-                  inStock: Stock.dirty(value: double.tryParse(value) ?? -1),
-                ),
-              );
-            },
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-          ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            maxLines: 6,
-            labelText: 'Descripción',
-            keyboardType: TextInputType.multiline,
-            initialValue: state.description,
-            onChanged: (value) {
-              formBloc.add(DescriptionChanged(description: value));
-            },
-          ),
-          SizedBox(height: 16),
-          CustomTextFormField(
-            maxLines: 2,
-            labelText: 'Tags (Separados por coma)',
-            keyboardType: TextInputType.multiline,
-            initialValue: state.tags,
-            onChanged: (value) {
-              formBloc.add(TagsChanged(tags: value));
-            },
-          ),
-          SizedBox(height: 100),
-        ],
-      ),
+        );
+      },
     );
   }
 }

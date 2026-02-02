@@ -126,11 +126,12 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
     final product = event.product;
 
+    print('LOADING: ${state.isLoading}');
+
     if (product == null) return;
 
     emit(
       state.copyWith(
-        isEdit: true,
         id: product.id,
         title: ProducName.dirty(value: product.title),
         slug: Slug.dirty(value: product.slug),
@@ -149,9 +150,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         ]),
       ),
     );
-    if (state.title.isValid) {
-      print('FORM LOADED SUCCESSFULLY');
-      emit(state.copyWith(isLoading: false));
-    }
+    print('FORM LOADED SUCCESSFULLY: ${state.isLoading}');
+    emit(state.copyWith(isLoading: false));
   }
 }
