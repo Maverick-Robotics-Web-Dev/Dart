@@ -47,7 +47,6 @@ class ProductDataSourceImpl extends ProductDataSource {
       final product = ProductMapper.fromJson(response.data);
       return product;
     } on DioException catch (e) {
-      print('DIO ERROR: ${e.response}');
       throw DioErrorMapper.mapDioError(e);
     } catch (e) {
       throw ServerFailure(message: e.toString());

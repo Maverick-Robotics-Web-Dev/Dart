@@ -18,7 +18,8 @@ class ProductMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('PRODUCT RECEIVED IN SCREEN: ${product?.title}');
+    final bool isEdit = product != null;
+    // print('PRODUCT RECEIVED IN SCREEN: ${product?.title}');
     // final bloc = context.read<ProductBloc>()
     //   ..add(LoadProduct(productId: productId));
     // final formBloc = context.read<ProductFormBloc>();
@@ -27,15 +28,12 @@ class ProductMobileScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
-        BlocProvider<ProductFormBloc>(
-          create: (context) =>
-              ProductFormBloc()..add(LoadForm(product: product)),
-        ),
+        BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
       ],
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Editar Producto',
+            isEdit ? 'Editar Producto' : 'Nuevo Producto',
             style: appTheme.textTheme.headlineSmall,
           ),
           centerTitle: true,
@@ -46,29 +44,31 @@ class ProductMobileScreen extends StatelessWidget {
         body: BlocBuilder<ProductFormBloc, ProductFormState>(
           builder: (context, state) {
             return Center(
-              child: state.isLoading == true
-                  ? FullScreenLoader()
-                  : ListView(
-                      children: [
-                        SizedBox(
-                          height: 300,
-                          width: 600,
-                          child: ImageGallery(images: product!.images),
+              child:
+                  // state.isLoading == true
+                  // ? FullScreenLoader()
+                  // :
+                  ListView(
+                    children: [
+                      SizedBox(
+                        height: 300,
+                        width: 600,
+                        child: ImageGallery(images: product!.images),
+                      ),
+                      SizedBox(height: 12),
+                      Dots(images: state.images),
+                      SizedBox(height: 10),
+                      Center(
+                        child: Text(
+                          isEdit ? product!.title : 'Nuevo Producto',
+                          style: appTheme.textTheme.headlineSmall,
+                          textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 12),
-                        Dots(images: state.images),
-                        SizedBox(height: 10),
-                        Center(
-                          child: Text(
-                            state.title.value,
-                            style: appTheme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        ProductInformation(appTheme: appTheme),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 10),
+                      ProductInformation(appTheme: appTheme, product: product),
+                    ],
+                  ),
             );
           },
         ),
@@ -77,18 +77,19 @@ class ProductMobileScreen extends StatelessWidget {
             return FloatingActionButton(
               onPressed: () {
                 context.read<ProductFormBloc>().add(OnSubmitForm());
-                // final Map<String, dynamic> product = {
-                //   'id': state.id!,
-                //   'title': state.title.value,
-                //   'price': state.price.value,
-                //   'description': state.description,
-                //   'slug': state.slug.value,
-                //   'stock': state.inStock.value,
-                //   'sizes': state.sizes,
-                //   'gender': state.gender,
-                //   'tags': state.tags.split(','),
-                //   'images': state.images,
-                // };
+                final Map<String, dynamic> product = {
+                  'id': state.id,
+                  'title': state.title.value,
+                  'price': state.price.value,
+                  'description': state.description,
+                  'slug': state.slug.value,
+                  'stock': state.inStock.value,
+                  'sizes': state.sizes,
+                  'gender': state.gender,
+                  'tags': state.tags.split(','),
+                  'images': state.images,
+                };
+                print('PRODUCT: $product');
                 // context.read<ProductBloc>().add(
                 //   CreateUpdateProduct(productData: product),
                 // );
@@ -172,15 +173,16 @@ class Dots extends StatelessWidget {
 
 class ProductInformation extends StatelessWidget {
   final ThemeData appTheme;
+  final Product? product;
 
-  const ProductInformation({super.key, required this.appTheme});
+  const ProductInformation({super.key, required this.appTheme, this.product});
 
   @override
   Widget build(BuildContext context) {
     final formBloc = context.read<ProductFormBloc>();
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       builder: (context, state) {
-        print('STATE: ${state}');
+        // print('STATE: $state');
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -190,18 +192,20 @@ class ProductInformation extends StatelessWidget {
               SizedBox(height: 15),
               CustomTextFormField(
                 labelText: 'Nombre',
-                initialValue: state.title.value,
+                initialValue: product?.title,
                 errorText: state.title.errorMessage,
                 onChanged: (value) {
                   formBloc.add(
-                    TitleChanged(title: ProducName.dirty(value: value)),
+                    TitleChanged(
+                      title: ProducName.dirty(value: product?.title ?? value),
+                    ),
                   );
                 },
               ),
               SizedBox(height: 16),
               CustomTextFormField(
                 labelText: 'Slug',
-                initialValue: state.slug.value,
+                initialValue: product?.slug,
                 errorText: state.slug.errorMessage,
                 onChanged: (value) {
                   formBloc.add(SlugChanged(slug: Slug.dirty(value: value)));
@@ -210,7 +214,7 @@ class ProductInformation extends StatelessWidget {
               SizedBox(height: 16),
               CustomTextFormField(
                 labelText: 'Precio',
-                initialValue: state.price.value.toString(),
+                initialValue: product?.price.toString(),
                 errorText: state.price.errorMessage,
                 onChanged: (value) {
                   formBloc.add(
@@ -224,14 +228,14 @@ class ProductInformation extends StatelessWidget {
               SizedBox(height: 15),
               Text('Extras', style: appTheme.textTheme.bodyLarge),
               SizeSelector(
-                selectedSizes: state.sizes,
+                selectedSizes: product?.sizes ?? [],
                 onSizesChanged: (value) {
                   formBloc.add(SizeChanged(sizes: value));
                 },
               ),
               SizedBox(height: 5),
               GenderSelector(
-                selectedGender: state.gender,
+                selectedGender: product?.gender ?? '',
                 onGenderChanged: (value) {
                   formBloc.add(GenderChanged(gender: value));
                 },
@@ -239,7 +243,7 @@ class ProductInformation extends StatelessWidget {
               SizedBox(height: 15),
               CustomTextFormField(
                 labelText: 'Existencias',
-                initialValue: state.inStock.value.toString(),
+                initialValue: product?.stock.toString(),
                 errorText: state.inStock.errorMessage,
                 onChanged: (value) {
                   formBloc.add(
@@ -255,7 +259,7 @@ class ProductInformation extends StatelessWidget {
                 maxLines: 6,
                 labelText: 'Descripción',
                 keyboardType: TextInputType.multiline,
-                initialValue: state.description,
+                initialValue: product?.description,
                 onChanged: (value) {
                   formBloc.add(DescriptionChanged(description: value));
                 },
@@ -265,7 +269,7 @@ class ProductInformation extends StatelessWidget {
                 maxLines: 2,
                 labelText: 'Tags (Separados por coma)',
                 keyboardType: TextInputType.multiline,
-                initialValue: state.tags,
+                initialValue: product?.tags.join(','),
                 onChanged: (value) {
                   formBloc.add(TagsChanged(tags: value));
                 },

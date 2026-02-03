@@ -126,7 +126,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   void _onLoadForm(LoadForm event, Emitter<ProductFormState> emit) {
     final product = event.product;
 
-    print('LOADING: ${state.isLoading}');
+    // print('LOADING: ${state.isLoading}');
 
     if (product == null) return;
 
@@ -150,7 +150,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
         ]),
       ),
     );
-    print('FORM LOADED SUCCESSFULLY: ${state.isLoading}');
     emit(state.copyWith(isLoading: false));
+    // print('FORM LOADED SUCCESSFULLY: ${state.isLoading}');
   }
 }

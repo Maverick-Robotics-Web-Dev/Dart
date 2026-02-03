@@ -35,7 +35,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ) async {
     try {
       final list = [...state.products];
-      print('PRODUCT LIST BEFORE: $list');
+      // print('PRODUCT LIST BEFORE: $list');
       final product = await productRepository.createUpdateProduct(
         productData: event.productData,
       );
