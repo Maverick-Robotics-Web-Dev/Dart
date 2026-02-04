@@ -114,9 +114,27 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
-    if (state.isValid == true) {
-      emit(state.copyWith(isFormPosted: true));
-    }
+    // if (state.isValid == true) {
+    print('OBJECT STATE: $state');
+    emit(
+      state.copyWith(
+        title: ProducName.dirty(value: state.title.value),
+        slug: Slug.dirty(value: state.slug.value),
+        price: Price.dirty(value: state.price.value),
+        inStock: Stock.dirty(value: state.inStock.value),
+        isValid: Formz.validate([
+          // state.title,
+          // state.slug,
+          // state.price,
+          // state.inStock,
+          ProducName.dirty(value: state.title.value),
+          Slug.dirty(value: state.slug.value),
+          Price.dirty(value: state.price.value),
+          Stock.dirty(value: state.inStock.value),
+        ]),
+      ),
+    );
+    // }
   }
 
   void _onOnFormReset(OnFormReset event, Emitter<ProductFormState> emit) {

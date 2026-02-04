@@ -1,13 +1,11 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/domain.dart';
-import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
 
 import '../../blocs/products/forms/product_form_event.dart';
 import '../../blocs/products/forms/product_form_state.dart';
-import '../../blocs/products/product_state.dart';
 import '../../presentation.dart';
 
 class ProductMobileScreen extends StatelessWidget {
@@ -76,20 +74,40 @@ class ProductMobileScreen extends StatelessWidget {
           builder: (context, state) {
             return FloatingActionButton(
               onPressed: () {
+                print('BEFORE ISVALID: ${state.isValid}');
                 context.read<ProductFormBloc>().add(OnSubmitForm());
-                final Map<String, dynamic> product = {
-                  'id': state.id,
-                  'title': state.title.value,
-                  'price': state.price.value,
-                  'description': state.description,
-                  'slug': state.slug.value,
-                  'stock': state.inStock.value,
-                  'sizes': state.sizes,
-                  'gender': state.gender,
-                  'tags': state.tags.split(','),
-                  'images': state.images,
+                if (state.isValid) {
+                  print('AFTER ISVALID: ${!state.isValid}');
+                }
+                final Map<String, dynamic> productData = {
+                  'id': state.id ?? product?.id,
+                  'title': state.title.value.isEmpty
+                      ? product?.title
+                      : state.title.value,
+                  'price': state.price.value == 0
+                      ? product?.price
+                      : state.price.value,
+                  'description': state.description.isEmpty
+                      ? product?.description
+                      : state.description,
+                  'slug': state.slug.value.isEmpty
+                      ? product?.slug
+                      : state.slug.value,
+                  'stock': state.inStock.value == 0
+                      ? product?.stock
+                      : state.inStock.value,
+                  'sizes': state.sizes.isEmpty ? product?.sizes : state.sizes,
+                  'gender': state.gender.isEmpty
+                      ? product?.gender
+                      : state.gender,
+                  'tags': state.tags.isEmpty
+                      ? product?.tags
+                      : state.tags.split(','),
+                  'images': state.images.isEmpty
+                      ? product?.images
+                      : state.images,
                 };
-                print('PRODUCT: $product');
+                print('PRODUCT: $productData');
                 // context.read<ProductBloc>().add(
                 //   CreateUpdateProduct(productData: product),
                 // );
@@ -196,9 +214,7 @@ class ProductInformation extends StatelessWidget {
                 errorText: state.title.errorMessage,
                 onChanged: (value) {
                   formBloc.add(
-                    TitleChanged(
-                      title: ProducName.dirty(value: product?.title ?? value),
-                    ),
+                    TitleChanged(title: ProducName.dirty(value: value)),
                   );
                 },
               ),
