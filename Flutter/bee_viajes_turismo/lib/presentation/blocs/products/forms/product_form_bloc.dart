@@ -114,27 +114,34 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
-    // if (state.isValid == true) {
-    print('OBJECT STATE: $state');
-    emit(
-      state.copyWith(
-        title: ProducName.dirty(value: state.title.value),
-        slug: Slug.dirty(value: state.slug.value),
-        price: Price.dirty(value: state.price.value),
-        inStock: Stock.dirty(value: state.inStock.value),
-        isValid: Formz.validate([
-          // state.title,
-          // state.slug,
-          // state.price,
-          // state.inStock,
-          ProducName.dirty(value: state.title.value),
-          Slug.dirty(value: state.slug.value),
-          Price.dirty(value: state.price.value),
-          Stock.dirty(value: state.inStock.value),
-        ]),
-      ),
-    );
-    // }
+    print('STATE OBJECT:${state.isValid}');
+    final name = state.title.value.isEmpty
+        ? state.title
+        : ProducName.dirty(value: state.title.value);
+    final validate = Formz.validate([name]);
+    print('NAME: $name\nVALID: $validate');
+    // emit(
+    //   state.copyWith(
+    //     title: ProducName.dirty(value: event.product.title),
+    //     slug: Slug.dirty(value: event.product.slug),
+    //     price: Price.dirty(value: event.product.price),
+    //     inStock: Stock.dirty(value: event.product.stock),
+    //     isValid: Formz.validate([
+    //       // state.title,
+    //       // state.slug,
+    //       // state.price,
+    //       // state.inStock,
+    //       ProducName.dirty(value: event.product.title),
+    //       Slug.dirty(value: event.product.slug),
+    //       Price.dirty(value: event.product.price),
+    //       Stock.dirty(value: event.product.stock),
+    //     ]),
+    //   ),
+    // );
+    print('OBJECT STATE: ${state.isValid}');
+    // if (!state.isValid) return;
+    // emit(state.copyWith(isFormPosted: true));
+    // print('OBJECT POSTED: ${state.isFormPosted}');
   }
 
   void _onOnFormReset(OnFormReset event, Emitter<ProductFormState> emit) {

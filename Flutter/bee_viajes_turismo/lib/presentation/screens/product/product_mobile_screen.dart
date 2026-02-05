@@ -74,10 +74,9 @@ class ProductMobileScreen extends StatelessWidget {
           builder: (context, state) {
             return FloatingActionButton(
               onPressed: () {
-                print('BEFORE ISVALID: ${state.isValid}');
-                context.read<ProductFormBloc>().add(OnSubmitForm());
+                print('BEFORE VALIDATED: ${state.isFormPosted}');
                 if (state.isValid) {
-                  print('AFTER ISVALID: ${!state.isValid}');
+                  print('AFTER VALIDATED: ${state.isFormPosted}');
                 }
                 final Map<String, dynamic> productData = {
                   'id': state.id ?? product?.id,
@@ -107,7 +106,11 @@ class ProductMobileScreen extends StatelessWidget {
                       ? product?.images
                       : state.images,
                 };
-                print('PRODUCT: $productData');
+                context.read<ProductFormBloc>().add(
+                  OnSubmitForm(product: ProductMapper.fromJson(productData)),
+                );
+
+                // print('PRODUCT: $productData');
                 // context.read<ProductBloc>().add(
                 //   CreateUpdateProduct(productData: product),
                 // );

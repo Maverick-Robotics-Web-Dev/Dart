@@ -21,7 +21,9 @@ class ProductMapper {
             : '${Enviroment.apiUrl}/files/product/$image',
       ),
     ),
-    user: UserMapper.fromJson(json['user']),
+    user: json['user'] != null
+        ? UserMapper.fromJson(json['user'])
+        : UserMapper.empty(),
   );
 
   static Map<String, dynamic> toJson(Product product) => {

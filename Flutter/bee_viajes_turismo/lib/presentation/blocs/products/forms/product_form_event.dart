@@ -72,7 +72,8 @@ class LoadForm extends ProductFormEvent {
 }
 
 class OnSubmitForm extends ProductFormEvent {
-  OnSubmitForm();
+  final Product product;
+  OnSubmitForm({required this.product});
 }
 
 class OnFormReset extends ProductFormEvent {
