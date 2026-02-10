@@ -12,7 +12,7 @@ class PageChanged extends ProductFormEvent {
 }
 
 class TitleChanged extends ProductFormEvent {
-  final ProducName title;
+  final String title;
 
   TitleChanged({required this.title});
 }
@@ -72,8 +72,8 @@ class LoadForm extends ProductFormEvent {
 }
 
 class OnSubmitForm extends ProductFormEvent {
-  final Product product;
-  OnSubmitForm({required this.product});
+  final Product? product;
+  OnSubmitForm({this.product});
 }
 
 class OnFormReset extends ProductFormEvent {

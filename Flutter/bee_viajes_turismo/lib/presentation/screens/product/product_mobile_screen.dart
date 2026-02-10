@@ -28,96 +28,128 @@ class ProductMobileScreen extends StatelessWidget {
         BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
         BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
       ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            isEdit ? 'Editar Producto' : 'Nuevo Producto',
-            style: appTheme.textTheme.headlineSmall,
-          ),
-          centerTitle: true,
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
-          ],
-        ),
-        body: BlocBuilder<ProductFormBloc, ProductFormState>(
-          builder: (context, state) {
-            return Center(
-              child:
-                  // state.isLoading == true
-                  // ? FullScreenLoader()
-                  // :
-                  ListView(
-                    children: [
-                      SizedBox(
-                        height: 300,
-                        width: 600,
-                        child: ImageGallery(images: product!.images),
-                      ),
-                      SizedBox(height: 12),
-                      Dots(images: state.images),
-                      SizedBox(height: 10),
-                      Center(
-                        child: Text(
-                          isEdit ? product!.title : 'Nuevo Producto',
-                          style: appTheme.textTheme.headlineSmall,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      ProductInformation(appTheme: appTheme, product: product),
-                    ],
-                  ),
-            );
-          },
-        ),
-        floatingActionButton: BlocBuilder<ProductFormBloc, ProductFormState>(
-          builder: (context, state) {
-            return FloatingActionButton(
-              onPressed: () {
-                print('BEFORE VALIDATED: ${state.isFormPosted}');
-                if (state.isValid) {
-                  print('AFTER VALIDATED: ${state.isFormPosted}');
-                }
-                final Map<String, dynamic> productData = {
-                  'id': state.id ?? product?.id,
-                  'title': state.title.value.isEmpty
-                      ? product?.title
-                      : state.title.value,
-                  'price': state.price.value == 0
-                      ? product?.price
-                      : state.price.value,
-                  'description': state.description.isEmpty
-                      ? product?.description
-                      : state.description,
-                  'slug': state.slug.value.isEmpty
-                      ? product?.slug
-                      : state.slug.value,
-                  'stock': state.inStock.value == 0
-                      ? product?.stock
-                      : state.inStock.value,
-                  'sizes': state.sizes.isEmpty ? product?.sizes : state.sizes,
-                  'gender': state.gender.isEmpty
-                      ? product?.gender
-                      : state.gender,
-                  'tags': state.tags.isEmpty
-                      ? product?.tags
-                      : state.tags.split(','),
-                  'images': state.images.isEmpty
-                      ? product?.images
-                      : state.images,
-                };
-                context.read<ProductFormBloc>().add(
-                  OnSubmitForm(product: ProductMapper.fromJson(productData)),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<ProductFormBloc, ProductFormState>(
+            listener: (context, state) {
+              if (state.isValid) {
+                print('AFTER VALIDATED: ${state.isValid}');
+                print(
+                  'PRODUCT OBJECT: ${state.title.value} --> ${state.slug.value}',
                 );
+              }
+            },
+          ),
+        ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              isEdit ? 'Editar Producto' : 'Nuevo Producto',
+              style: appTheme.textTheme.headlineSmall,
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.camera_alt_outlined),
+              ),
+            ],
+          ),
+          body: BlocBuilder<ProductFormBloc, ProductFormState>(
+            builder: (context, state) {
+              return Center(
+                child:
+                    // state.isLoading == true
+                    // ? FullScreenLoader()
+                    // :
+                    ListView(
+                      children: [
+                        SizedBox(
+                          height: 300,
+                          width: 600,
+                          child: ImageGallery(images: product!.images),
+                        ),
+                        SizedBox(height: 12),
+                        Dots(images: state.images),
+                        SizedBox(height: 10),
+                        Center(
+                          child: Text(
+                            isEdit ? product!.title : 'Nuevo Producto',
+                            style: appTheme.textTheme.headlineSmall,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        ProductInformation(
+                          appTheme: appTheme,
+                          product: product,
+                        ),
+                      ],
+                    ),
+              );
+            },
+          ),
+          floatingActionButton: BlocBuilder<ProductFormBloc, ProductFormState>(
+            builder: (context, state) {
+              final bloc = context.read<ProductFormBloc>();
 
-                // print('PRODUCT: $productData');
-                // context.read<ProductBloc>().add(
-                //   CreateUpdateProduct(productData: product),
-                // );
-              },
-              child: Icon(Icons.save_as_outlined),
-            );
-          },
+              return FloatingActionButton(
+                onPressed: () {
+                  print('BEFORE VALIDATED: ${state.isValid}');
+                  // if (state.isValid) {
+                  //   print('AFTER VALIDATED: ${state.isFormPosted}');
+                  // }
+                  final Map<String, dynamic> productData = {
+                    'id': state.id ?? product?.id,
+                    'title': state.title.value.isEmpty
+                        ? product?.title
+                        : state.title.value,
+                    'price': state.price.value == 0
+                        ? product?.price
+                        : state.price.value,
+                    'description': state.description.isEmpty
+                        ? product?.description
+                        : state.description,
+                    'slug': state.slug.value.isEmpty
+                        ? product?.slug
+                        : state.slug.value,
+                    'stock': state.inStock.value == 0
+                        ? product?.stock
+                        : state.inStock.value,
+                    'sizes': state.sizes.isEmpty ? product?.sizes : state.sizes,
+                    'gender': state.gender.isEmpty
+                        ? product?.gender
+                        : state.gender,
+                    'tags': state.tags.isEmpty
+                        ? product?.tags
+                        : state.tags.split(','),
+                    'images': state.images.isEmpty
+                        ? product?.images
+                        : state.images,
+                  };
+                  // if (product?.id != null && product != null) {
+                  //   bloc.add(TitleChanged(title: product!.title));
+                  // }
+
+                  bloc.add(OnSubmitForm(product: product));
+
+                  // if (state.isValid) {
+                  //   print('AFTER VALIDATED: ${state.isValid}');
+                  // }
+
+                  // context.read<ProductFormBloc>().add(
+                  //   OnSubmitForm(product: ProductMapper.fromJson(productData)),
+                  // );
+
+                  // print('PRODUCT: $productData');
+                  // context.read<ProductBloc>().add(
+                  //   CreateUpdateProduct(productData: product),
+                  // );
+                },
+                child: Icon(Icons.save_as_outlined),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -216,9 +248,7 @@ class ProductInformation extends StatelessWidget {
                 initialValue: product?.title,
                 errorText: state.title.errorMessage,
                 onChanged: (value) {
-                  formBloc.add(
-                    TitleChanged(title: ProducName.dirty(value: value)),
-                  );
+                  formBloc.add(TitleChanged(title: value));
                 },
               ),
               SizedBox(height: 16),

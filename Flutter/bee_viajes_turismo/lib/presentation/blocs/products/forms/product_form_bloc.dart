@@ -27,7 +27,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onTitleChanged(TitleChanged event, Emitter<ProductFormState> emit) {
-    final title = ProducName.dirty(value: event.title.value);
+    final title = ProducName.dirty(value: event.title);
 
     emit(
       state.copyWith(
@@ -114,31 +114,26 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   }
 
   void _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
-    print('STATE OBJECT:${state.isValid}');
-    final name = state.title.value.isEmpty
-        ? state.title
-        : ProducName.dirty(value: state.title.value);
-    final validate = Formz.validate([name]);
-    print('NAME: $name\nVALID: $validate');
-    // emit(
-    //   state.copyWith(
-    //     title: ProducName.dirty(value: event.product.title),
-    //     slug: Slug.dirty(value: event.product.slug),
-    //     price: Price.dirty(value: event.product.price),
-    //     inStock: Stock.dirty(value: event.product.stock),
-    //     isValid: Formz.validate([
-    //       // state.title,
-    //       // state.slug,
-    //       // state.price,
-    //       // state.inStock,
-    //       ProducName.dirty(value: event.product.title),
-    //       Slug.dirty(value: event.product.slug),
-    //       Price.dirty(value: event.product.price),
-    //       Stock.dirty(value: event.product.stock),
-    //     ]),
-    //   ),
-    // );
-    print('OBJECT STATE: ${state.isValid}');
+    final product = event.product;
+    final title = state.title.value.isEmpty
+        ? ProducName.dirty(value: product!.title)
+        : state.title;
+    final slug = state.slug.value.isEmpty
+        ? Slug.dirty(value: product!.slug)
+        : state.slug;
+    final status = Formz.validate([title, slug]);
+    print('VALIDATE: $status');
+
+    emit(
+      state.copyWith(
+        title: title,
+        slug: slug,
+        // price: Price.dirty(value: event.product.price),
+        // inStock: Stock.dirty(value: event.product.stock),
+        isValid: status,
+      ),
+    );
+    // print('OBJECT STATE: ${state.isValid}');
     // if (!state.isValid) return;
     // emit(state.copyWith(isFormPosted: true));
     // print('OBJECT POSTED: ${state.isFormPosted}');
