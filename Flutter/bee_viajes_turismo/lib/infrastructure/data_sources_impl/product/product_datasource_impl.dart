@@ -33,7 +33,9 @@ class ProductDataSourceImpl extends ProductDataSource {
       //   method = 'PATCH';
       //   url = '/products/$productId';
       // }
+      print(productData);
       productData.remove('id');
+      print('REMOVE ID: $productData');
 
       final response = await dio.request(
         url,
@@ -45,6 +47,7 @@ class ProductDataSourceImpl extends ProductDataSource {
       );
 
       final product = ProductMapper.fromJson(response.data);
+      // final product = ProductMapper.fromJson(productData);
       return product;
     } on DioException catch (e) {
       throw DioErrorMapper.mapDioError(e);

@@ -1,5 +1,6 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
 import 'package:bee_viajes_turismo/domain/domain.dart';
+import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
@@ -33,9 +34,49 @@ class ProductMobileScreen extends StatelessWidget {
           BlocListener<ProductFormBloc, ProductFormState>(
             listener: (context, state) {
               if (state.isValid) {
-                print('AFTER VALIDATED: ${state.isValid}');
-                print(
-                  'PRODUCT OBJECT: ${state.title.value} --> ${state.slug.value}',
+                // final Map<String, dynamic> productData = {
+                //   'title': state.title.value.isEmpty
+                //       ? product?.title
+                //       : state.title.value,
+                //   'price': state.price.value == 0
+                //       ? product?.price
+                //       : state.price.value,
+                //   'description': state.description.isEmpty
+                //       ? product?.description
+                //       : state.description,
+                //   'slug': state.slug.value.isEmpty
+                //       ? product?.slug
+                //       : state.slug.value,
+                //   'stock': state.inStock.value == 0
+                //       ? product?.stock
+                //       : state.inStock.value,
+                //   'sizes': state.sizes.isEmpty ? product?.sizes : state.sizes,
+                //   'gender': state.gender.isEmpty
+                //       ? product?.gender
+                //       : state.gender,
+                //   'tags': state.tags.isEmpty
+                //       ? product?.tags
+                //       : state.tags.split(','),
+                //   'images': state.images.isEmpty
+                //       ? product?.images
+                //       : state.images,
+                // };
+                final p = ProductMapper.toJson(
+                  Product(
+                    id: state.id ?? product?.id ?? '',
+                    title: product?.title ?? state.title.value,
+                    price: product?.price ?? state.price.value,
+                    description: product?.description ?? state.description,
+                    slug: product?.slug ?? state.slug.value,
+                    stock: product?.stock ?? state.inStock.value,
+                    sizes: product?.sizes ?? state.sizes,
+                    gender: product?.gender ?? state.gender,
+                    tags: product?.tags ?? state.tags.split(','),
+                    images: product?.images ?? state.images,
+                  ),
+                );
+                context.read<ProductBloc>().add(
+                  CreateUpdateProduct(productData: p),
                 );
               }
             },
@@ -95,56 +136,7 @@ class ProductMobileScreen extends StatelessWidget {
 
               return FloatingActionButton(
                 onPressed: () {
-                  print('BEFORE VALIDATED: ${state.isValid}');
-                  // if (state.isValid) {
-                  //   print('AFTER VALIDATED: ${state.isFormPosted}');
-                  // }
-                  final Map<String, dynamic> productData = {
-                    'id': state.id ?? product?.id,
-                    'title': state.title.value.isEmpty
-                        ? product?.title
-                        : state.title.value,
-                    'price': state.price.value == 0
-                        ? product?.price
-                        : state.price.value,
-                    'description': state.description.isEmpty
-                        ? product?.description
-                        : state.description,
-                    'slug': state.slug.value.isEmpty
-                        ? product?.slug
-                        : state.slug.value,
-                    'stock': state.inStock.value == 0
-                        ? product?.stock
-                        : state.inStock.value,
-                    'sizes': state.sizes.isEmpty ? product?.sizes : state.sizes,
-                    'gender': state.gender.isEmpty
-                        ? product?.gender
-                        : state.gender,
-                    'tags': state.tags.isEmpty
-                        ? product?.tags
-                        : state.tags.split(','),
-                    'images': state.images.isEmpty
-                        ? product?.images
-                        : state.images,
-                  };
-                  // if (product?.id != null && product != null) {
-                  //   bloc.add(TitleChanged(title: product!.title));
-                  // }
-
                   bloc.add(OnSubmitForm(product: product));
-
-                  // if (state.isValid) {
-                  //   print('AFTER VALIDATED: ${state.isValid}');
-                  // }
-
-                  // context.read<ProductFormBloc>().add(
-                  //   OnSubmitForm(product: ProductMapper.fromJson(productData)),
-                  // );
-
-                  // print('PRODUCT: $productData');
-                  // context.read<ProductBloc>().add(
-                  //   CreateUpdateProduct(productData: product),
-                  // );
                 },
                 child: Icon(Icons.save_as_outlined),
               );

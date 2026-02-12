@@ -115,21 +115,31 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
 
   void _onFormSubmit(OnSubmitForm event, Emitter<ProductFormState> emit) {
     final product = event.product;
+
     final title = state.title.value.isEmpty
         ? ProducName.dirty(value: product!.title)
         : state.title;
+
     final slug = state.slug.value.isEmpty
         ? Slug.dirty(value: product!.slug)
         : state.slug;
-    final status = Formz.validate([title, slug]);
-    print('VALIDATE: $status');
+
+    final price = state.price.value == 0
+        ? Price.dirty(value: product!.price)
+        : state.price;
+
+    final stock = state.inStock.value == 0
+        ? Stock.dirty(value: product!.stock)
+        : state.inStock;
+
+    final status = Formz.validate([title, slug, price, stock]);
 
     emit(
       state.copyWith(
         title: title,
         slug: slug,
-        // price: Price.dirty(value: event.product.price),
-        // inStock: Stock.dirty(value: event.product.stock),
+        price: price,
+        inStock: stock,
         isValid: status,
       ),
     );
