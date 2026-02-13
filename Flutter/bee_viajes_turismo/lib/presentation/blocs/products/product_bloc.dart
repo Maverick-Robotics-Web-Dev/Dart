@@ -34,18 +34,28 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     try {
-      final list = [...state.products];
+      // final list = state.products;
       // print('PRODUCT LIST BEFORE: $list');
+      emit(state.copyWith(isLoading: true));
       final product = await productRepository.createUpdateProduct(
         productData: event.productData,
       );
 
-      final isProductInList = state.products.any((p) => p.id == product.id);
-      final updatedProducts = state.products
-          .map((p) => p.id == product.id ? product : p)
-          .toList();
+      // final updateProducts = await productRepository.getProductsByPage(
+      //   limit: state.limit,
+      //   offset: state.offset,
+      // );
 
-      emit(state.copyWith(products: updatedProducts));
+      // print('UPDATED PRODUCTS: ${updateProducts.map((e) => e.title)}');
+
+      emit(state.copyWith(isLoading: false));
+
+      // final isProductInList = state.products.any((p) => p.id == product.id);
+      // final updatedProducts = state.products
+      //     .map((p) => p.id == product.id ? product : p)
+      //     .toList();
+
+      // emit(state.copyWith(products: updatedProducts));
     } catch (e) {
       print('ERROR MINE: ${e.toString()}');
     }

@@ -4,6 +4,7 @@ import 'package:bee_viajes_turismo/presentation/blocs/products/product_event.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bee_viajes_turismo/infrastructure/infrastructure.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../blocs/products/forms/product_form_event.dart';
 import '../../blocs/products/forms/product_form_state.dart';
@@ -27,6 +28,7 @@ class ProductMobileScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
+        // BlocProvider.value(value: context.read<ProductBloc>()),
         BlocProvider<ProductFormBloc>(create: (context) => ProductFormBloc()),
       ],
       child: MultiBlocListener(
@@ -34,50 +36,40 @@ class ProductMobileScreen extends StatelessWidget {
           BlocListener<ProductFormBloc, ProductFormState>(
             listener: (context, state) {
               if (state.isValid) {
-                // final Map<String, dynamic> productData = {
-                //   'title': state.title.value.isEmpty
-                //       ? product?.title
-                //       : state.title.value,
-                //   'price': state.price.value == 0
-                //       ? product?.price
-                //       : state.price.value,
-                //   'description': state.description.isEmpty
-                //       ? product?.description
-                //       : state.description,
-                //   'slug': state.slug.value.isEmpty
-                //       ? product?.slug
-                //       : state.slug.value,
-                //   'stock': state.inStock.value == 0
-                //       ? product?.stock
-                //       : state.inStock.value,
-                //   'sizes': state.sizes.isEmpty ? product?.sizes : state.sizes,
-                //   'gender': state.gender.isEmpty
-                //       ? product?.gender
-                //       : state.gender,
-                //   'tags': state.tags.isEmpty
-                //       ? product?.tags
-                //       : state.tags.split(','),
-                //   'images': state.images.isEmpty
-                //       ? product?.images
-                //       : state.images,
-                // };
                 final p = ProductMapper.toJson(
                   Product(
                     id: state.id ?? product?.id ?? '',
-                    title: product?.title ?? state.title.value,
-                    price: product?.price ?? state.price.value,
-                    description: product?.description ?? state.description,
-                    slug: product?.slug ?? state.slug.value,
-                    stock: product?.stock ?? state.inStock.value,
-                    sizes: product?.sizes ?? state.sizes,
-                    gender: product?.gender ?? state.gender,
-                    tags: product?.tags ?? state.tags.split(','),
-                    images: product?.images ?? state.images,
+                    title: state.title.value.isEmpty
+                        ? product!.title
+                        : state.title.value,
+                    price: state.price.value == 0
+                        ? product!.price
+                        : state.price.value,
+                    description: state.description.isEmpty
+                        ? product!.description
+                        : state.description,
+                    slug: state.slug.value.isEmpty
+                        ? product!.slug
+                        : state.slug.value,
+                    stock: state.inStock.value == 0
+                        ? product!.stock
+                        : state.inStock.value,
+                    sizes: state.sizes.isEmpty ? product!.sizes : state.sizes,
+                    gender: state.gender.isEmpty
+                        ? product!.gender
+                        : state.gender,
+                    tags: state.tags.isEmpty
+                        ? product!.tags
+                        : state.tags.split(','),
+                    images: state.images.isEmpty
+                        ? product!.images
+                        : state.images,
                   ),
                 );
                 context.read<ProductBloc>().add(
                   CreateUpdateProduct(productData: p),
                 );
+                context.pop(true);
               }
             },
           ),

@@ -70,8 +70,18 @@ class _ProductsMobileScreenState extends State<ProductsMobileScreen> {
                 itemBuilder: (context, index) {
                   final product = state.products[index];
                   return GestureDetector(
-                    onTap: () =>
-                        context.push(pathProductScreenRoute, extra: product),
+                    onTap: () async {
+                      final result = await context.push(
+                        pathProductScreenRoute,
+                        extra: product,
+                      );
+                      if (result == true) {
+                        print('RESULT: $result');
+                        if (context.mounted) {
+                          context.read<ProductBloc>().add(LoadProducts());
+                        }
+                      }
+                    },
                     child: ProductCard(product: product),
                   );
                 },
