@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../blocs/products/forms/product_form_event.dart';
 import '../../blocs/products/forms/product_form_state.dart';
+import '../../blocs/products/product_state.dart';
 import '../../presentation.dart';
 
 class ProductMobileScreen extends StatelessWidget {
@@ -69,7 +70,14 @@ class ProductMobileScreen extends StatelessWidget {
                 context.read<ProductBloc>().add(
                   CreateUpdateProduct(productData: p),
                 );
+              }
+            },
+          ),
+          BlocListener<ProductBloc, ProductState>(
+            listener: (context, state) {
+              if (state.isSaving) {
                 context.pop(true);
+                // context.read<ProductBloc>().add(LoadProducts());
               }
             },
           ),

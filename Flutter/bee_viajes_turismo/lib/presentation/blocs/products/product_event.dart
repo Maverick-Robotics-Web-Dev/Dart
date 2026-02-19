@@ -17,3 +17,7 @@ class CreateUpdateProduct extends ProductEvent {
 class LoadProducts extends ProductEvent {
   LoadProducts();
 }
+
+class RefreshProducts extends ProductEvent {
+  RefreshProducts();
+}

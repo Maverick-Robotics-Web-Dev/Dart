@@ -11,6 +11,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc() : super(ProductState.initial()) {
     on<LoadProduct>(_onLoadProduct);
     on<LoadProducts>(_onLoadProducts);
+    // on<RefreshProducts>(_onLoadProducts);
     on<CreateUpdateProduct>(_onCreateUpdateProduct);
   }
 
@@ -47,8 +48,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       // );
 
       // print('UPDATED PRODUCTS: ${updateProducts.map((e) => e.title)}');
-
-      emit(state.copyWith(isLoading: false));
+      // add(LoadProducts());
+      emit(state.copyWith(isLoading: false, isSaving: true));
 
       // final isProductInList = state.products.any((p) => p.id == product.id);
       // final updatedProducts = state.products

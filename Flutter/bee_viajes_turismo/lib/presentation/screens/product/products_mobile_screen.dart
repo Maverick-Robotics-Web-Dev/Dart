@@ -1,4 +1,5 @@
 import 'package:bee_viajes_turismo/config/configs.dart';
+import 'package:bee_viajes_turismo/presentation/widgets/full_screen_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -59,7 +60,11 @@ class _ProductsMobileScreenState extends State<ProductsMobileScreen> {
         ),
         body: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
-            return Padding(
+            return
+            // state.isLoading
+            //     ? FullScreenLoader()
+            //     :
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: MasonryGridView.count(
                 // controller: scrollController,
@@ -71,6 +76,7 @@ class _ProductsMobileScreenState extends State<ProductsMobileScreen> {
                   final product = state.products[index];
                   return GestureDetector(
                     onTap: () async {
+                      // context.push(pathProductScreenRoute, extra: product);
                       final result = await context.push(
                         pathProductScreenRoute,
                         extra: product,
@@ -79,6 +85,9 @@ class _ProductsMobileScreenState extends State<ProductsMobileScreen> {
                         print('RESULT: $result');
                         if (context.mounted) {
                           context.read<ProductBloc>().add(LoadProducts());
+                          // print(
+                          //   'PRODUCT UPDATED: ${state.products.map((e) => e.title)}',
+                          // );
                         }
                       }
                     },
